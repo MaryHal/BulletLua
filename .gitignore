@@ -1,0 +1,27 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+.clang_complete
+project.el
+
+example/bin/linux_Test32
+example/bin/linux_Test64
+example/bin/windows_Test32
+example/bin/windows_Test64
+data/
+obj/
+
+ext/sol/

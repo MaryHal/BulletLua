@@ -1,0 +1,114 @@
+#include "BulletLuaManager.hpp"
+
+float BulletLuaManager::rank = 0.8;
+
+BulletLuaManager::BulletLuaManager()
+{
+    blocks.push_back(new BulletLua[BLOCK_SIZE]);
+
+    // Throw all bullets into free stack
+    for (unsigned int i = 0; i < BLOCK_SIZE; ++i)
+    {
+        freeBullets.push(&blocks.back()[i]);
+    }
+}
+
+BulletLuaManager::~BulletLuaManager()
+{
+    for (auto iter = blocks.begin(); iter != blocks.end(); ++iter)
+    {
+        delete [] *iter;
+    }
+}
+
+void BulletLuaManager::createBullet(const std::string& filename, Bullet* origin, Bullet* target)
+{
+    BulletLua* b = getFreeBullet();
+    b->set(filename, origin, target, this);
+    bullets.push_back(b);
+}
+
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target)
+{
+    BulletLua* b = getFreeBullet();
+    b->set(lua, func, origin, target, this);
+    bullets.push_back(b);
+}
+
+bool BulletLuaManager::checkCollision(Bullet& b)
+{
+    return collision.checkCollision(b);
+}
+
+void BulletLuaManager::tick()
+{
+    // Reset containers inside collision detection object.
+    // Since bullets are dynamic and are most likely unpredictable,
+    // this must be called every frame.
+    collision.reset();
+
+    for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
+    {
+        BulletLua* bullet = *iter;
+
+        if (bullet->isDead())
+        {
+            freeBullets.push(bullet);
+            iter = bullets.erase(iter);
+        }
+        else
+        {
+            bullet->run();
+
+            collision.addBullet(&bullet->getMover());
+        }
+    }
+}
+
+unsigned int BulletLuaManager::bulletCount() const
+{
+    return bullets.size();
+}
+
+unsigned int BulletLuaManager::freeCount() const
+{
+    return freeBullets.size();
+}
+
+unsigned int BulletLuaManager::blockCount() const
+{
+    return blocks.size();
+}
+
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
+                  double x, double y, double d, double s, Bullet* target)
+{
+    BulletLua* b = getFreeBullet();
+    b->set(lua, func, x, y, d, s, target, this);
+    bullets.push_back(b);
+}
+
+BulletLua* BulletLuaManager::getFreeBullet()
+{
+    if (freeBullets.empty())
+        increaseCapacity();
+
+    BulletLua* bullet = freeBullets.top();
+    freeBullets.pop();
+
+    return bullet;
+}
+
+void BulletLuaManager::increaseCapacity(unsigned int blockSize)
+{
+    blocks.push_back(new BulletLua[blockSize]);
+
+    // Throw all bullets into free stack
+    for (unsigned int i = 0; i < blockSize; ++i)
+    {
+        freeBullets.push(&blocks.back()[i]);
+    }
+
+    // vertexCount += blockSize * 4;
+    // vertices.resize(vertexCount);
+}
