@@ -27,13 +27,10 @@ function homeIn()
     local turn = getTurn()
     if (turn == 20) then
         setSpeed(1)
-    end
-    if (turn == 25) then
+    elseif (turn == 25) then
         setDirAim()
         setSpeed(10)
-    end
-
-    if (turn == 50) then
+    elseif (turn == 50) then
         vanish()
     end
 end
