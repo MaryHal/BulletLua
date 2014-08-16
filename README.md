@@ -63,7 +63,62 @@ Then to run a script...
         manager.draw();
     }
 
-A moderately complex example can be found in the `example` directory.
+A moderately complex example (using [SFML](http://www.sfml-dev.org/) can be found in the `example` directory.
 
 An example BulletLua script can be found in `example/bin/test.lua`. More examples to come.
 
+C++ Functions visible in BulletLua scripts
+
+    -- Get Position components.
+    getPosX()
+    getPosY()
+
+    -- Get Position as a tuple.
+    getPosition()
+
+    -- Get Velocity compenents.
+    getVelX()
+    getVelY()
+
+    -- Get Bullet Speed and Direction. Since BulletLua stores velocity as x and y components,
+    -- there's minor calculation for using these functions.
+    getSpeed()
+    getDir()
+
+    -- Get the amount of frames since this bullet's creation.
+    getTurn()
+
+    -- Get the current barrage "difficulty", From [0.0, 1.0]
+    getRank()
+
+    -- Set Bullet Position.
+    setPos(double x, double y)
+
+    -- Set Bullet Velocity.
+    setVel(double vx, double vy)
+
+    -- Set Bullet Direction
+    setDir(double dir)
+
+    -- Set Bullet Direction (relatively), adds to current direction.
+    setDirRel(double dir)
+
+    -- Set the current bullet to aim at the "player"
+    setDirAim()
+
+    -- Set Speed
+    setSpeed(double s)
+    setSpeedRel(double s)
+
+    -- Switch current running function
+    setFunction(const std::string& funcName)
+
+    -- Shoot a bullet at (x, y) moving in direction d at speed s running function funcName.
+    fire(double x, double y, double d, double s, const std::string& funcName)
+    fire(double d, double s, const std::string& funcName)
+
+    -- Fade out the current bullet. Kill it slowly.
+    vanish()
+
+    -- Immediately destroy the bullet.
+    kill()
