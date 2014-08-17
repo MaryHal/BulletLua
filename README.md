@@ -128,7 +128,7 @@ C++ Functions visible in BulletLua scripts:
 
 An example BulletLua script can be found in `example/bin/test.lua`. More examples to come.
 
-![test.lua](./result.gif)
+![test.lua](./result3.gif)
 
 ```
     -- BulletLua Test Script
