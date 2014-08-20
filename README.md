@@ -5,7 +5,7 @@ This C++ project aims to create a sane scriptable interface to define bullet pat
 
 Bullet Barrage Examples:
 
-[![Pattern1](https://www.youtube.com/watch?v=yCOYrMgnNGE/0.jpg)](http://youtu.be/yCOYrMgnNGE?t=18m01s)
+[![Pattern1](https://www.youtube.com/watch?v=yCOYrMgnNGE/0.jpg)](http://youtu.be/yCOYrMgnNGE?t=11m39s)
 
 [![Pattern2](https://www.youtube.com/watch?v=v4m08AeGFWU/0.jpg)](http://youtu.be/v4m08AeGFWU?t=33m22s)
 
