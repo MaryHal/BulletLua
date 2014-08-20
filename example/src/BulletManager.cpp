@@ -78,6 +78,11 @@ void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     target.draw(vertices, states);
 }
 
+unsigned int BulletManager::getVertexCount() const
+{
+    return vertexCount;
+}
+
 void BulletManager::increaseCapacity(unsigned int blockSize)
 {
     BulletLuaManager::increaseCapacity(blockSize);

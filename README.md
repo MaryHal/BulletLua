@@ -11,6 +11,11 @@ Bullet Barrage Examples:
 
 BulletLua is not quite mature enough at the moment to recreate the complex patterns in the videos above, but it's getting there.
 
+![test.lua](./result3.gif)
+
+![test2.lua](./result4.gif)
+
+
 Usage
 =========
 This project depends on [Lua](http://www.lua.org/), so make sure your compiler can find correct files (library, header files, etc).
@@ -127,8 +132,6 @@ C++ Functions visible in BulletLua scripts:
 ```
 
 An example BulletLua script can be found in `example/bin/test.lua`. More examples to come.
-
-![test.lua](./result3.gif)
 
 ```
     -- BulletLua Test Script

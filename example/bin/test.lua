@@ -15,7 +15,7 @@ end
 function explode()
     local turn = getTurn()
     if (turn == 60) then
-        for d = 0, 360, 360/40 do
+        for d = 0, 360 - 360/40, 360/40 do
             fire(d, 4.0, "homeIn")
         end
 
@@ -28,9 +28,9 @@ function homeIn()
     if (turn == 20) then
         setSpeed(1)
     elseif (turn == 25) then
-        setDirAim()
+        aimTarget()
         setSpeed(10)
-    elseif (turn == 50) then
+    elseif (turn == 25) then
         vanish()
     end
 end

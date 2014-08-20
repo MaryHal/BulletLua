@@ -21,6 +21,7 @@ example/bin/linux_Test32
 example/bin/linux_Test64
 example/bin/windows_Test32
 example/bin/windows_Test64
+example/run
 data/
 obj/
 

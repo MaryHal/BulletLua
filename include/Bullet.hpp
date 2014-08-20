@@ -12,6 +12,7 @@ struct Bullet
 
         bool dying;
         int life;
+        int wait;
 
         Bullet(float x, float y, float vx, float vy);
 

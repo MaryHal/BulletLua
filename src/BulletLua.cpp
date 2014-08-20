@@ -20,6 +20,21 @@ BulletLua::BulletLua()
 {
 }
 
+void BulletLua::reset()
+{
+    mTarget = nullptr;
+
+    mMover.dead = true;
+    mMover.dying = false;
+    mMover.life = 255;
+
+    luaState = nullptr;
+    funcName = "";
+    turn = 0;
+
+    mOwner = nullptr;
+}
+
 void BulletLua::set(const std::string& filename,
                     Bullet* origin, Bullet* target,
                     BulletLuaManager* owner)
@@ -186,6 +201,13 @@ void BulletLua::initLua()
                                return c->mMover.vy;
                            });
 
+    luaState->set_function("getVelocity",
+                           []()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               return std::make_tuple(c->mMover.vx, c->mMover.vy);
+                           });
+
     luaState->set_function("getSpeed",
                            []()
                            {
@@ -243,11 +265,18 @@ void BulletLua::initLua()
                                c->mMover.setDirectionRelative(Math::degToRad(dir));
                            });
 
-    luaState->set_function("setDirAim",
+    luaState->set_function("aimTarget",
                            []()
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setDirectionAim(c->mTarget->x, c->mTarget->y);
+                           });
+
+    luaState->set_function("aimPoint",
+                           [](float x, float y)
+                           {
+                               BulletLua* c = BulletLua::current;
+                               c->mMover.setDirectionAim(x, y);
                            });
 
     luaState->set_function("setSpeed",
@@ -312,4 +341,3 @@ void BulletLua::setFunctionName(const std::string& funcName)
 {
     this->funcName = funcName;
 }
-

@@ -21,6 +21,8 @@ class BulletLua
     public:
         BulletLua();
 
+        void reset();
+
         void set(const std::string& filename,
                  Bullet* origin, Bullet* target,
                  BulletLuaManager* owner);

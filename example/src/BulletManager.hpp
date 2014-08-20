@@ -18,10 +18,7 @@ class BulletManager : public BulletLuaManager,
         virtual void tick();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-        unsigned int getVertexCount() const
-        {
-            return vertexCount;
-        }
+        unsigned int getVertexCount() const;
 
     private:
         virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);

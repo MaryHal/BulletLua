@@ -3,7 +3,7 @@
 #include "Math.hpp"
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : x(x), y(y), vx(vx), vy(vy), dead(true), dying(true), life(0)
+    : x(x), y(y), vx(vx), vy(vy), dead(true), dying(true), life(0), wait(0)
 {
 }
 

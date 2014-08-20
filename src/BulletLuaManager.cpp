@@ -4,6 +4,7 @@ float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager()
 {
+    // increaseCapacity();
     blocks.push_back(new BulletLua[BLOCK_SIZE]);
 
     // Throw all bullets into free stack
@@ -35,6 +36,14 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
     bullets.push_back(b);
 }
 
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
+                  double x, double y, double d, double s, Bullet* target)
+{
+    BulletLua* b = getFreeBullet();
+    b->set(lua, func, x, y, d, s, target, this);
+    bullets.push_back(b);
+}
+
 bool BulletLuaManager::checkCollision(Bullet& b)
 {
     return collision.checkCollision(b);
@@ -59,9 +68,17 @@ void BulletLuaManager::tick()
         else
         {
             bullet->run();
-
             collision.addBullet(&bullet->getMover());
         }
+    }
+}
+
+void BulletLuaManager::clear()
+{
+    while (!bullets.empty())
+    {
+        freeBullets.push(bullets.front());
+        bullets.pop_front();
     }
 }
 
@@ -78,14 +95,6 @@ unsigned int BulletLuaManager::freeCount() const
 unsigned int BulletLuaManager::blockCount() const
 {
     return blocks.size();
-}
-
-void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                  double x, double y, double d, double s, Bullet* target)
-{
-    BulletLua* b = getFreeBullet();
-    b->set(lua, func, x, y, d, s, target, this);
-    bullets.push_back(b);
 }
 
 BulletLua* BulletLuaManager::getFreeBullet()

@@ -33,6 +33,9 @@ class BulletLuaManager
         // Draw function.
         // void draw()
 
+        // Move all bullets to the free stack
+        void clear();
+
         unsigned int bulletCount() const;
         unsigned int freeCount() const;
         unsigned int blockCount() const;
