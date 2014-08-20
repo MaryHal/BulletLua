@@ -28,7 +28,7 @@ class BulletLuaManager
         // Child Bullets
         void createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target);
         void createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                          double x, double y, double d, double s, Bullet* target);
+                          float x, float y, float d, float s, Bullet* target);
 
         bool checkCollision(Bullet& b);
         virtual void tick();
@@ -37,6 +37,7 @@ class BulletLuaManager
 
         // Move all bullets to the free stack
         void clear();
+        void vanishAll();
 
         unsigned int bulletCount() const;
         unsigned int freeCount() const;

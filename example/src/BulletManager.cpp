@@ -35,7 +35,7 @@ void BulletManager::tick()
         else
         {
             bullet->run();
-            const Bullet* b = &bullet->getMover();
+            const Bullet* b = bullet;
             float rad = std::sqrt(8*8 + 8*8);
             float dir = b->getDirection();
 
@@ -66,7 +66,7 @@ void BulletManager::tick()
             vertices.append(v3);
             vertices.append(v4);
 
-            collision.addBullet(&bullet->getMover());
+            collision.addBullet(bullet);
         }
     }
 }

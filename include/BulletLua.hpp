@@ -13,7 +13,7 @@ namespace sol
     class state;
 };
 
-class BulletLua
+class BulletLua : public Bullet
 {
     private:
         static BulletLua* current;
@@ -34,7 +34,7 @@ class BulletLua
 
         void set(std::shared_ptr<sol::state> lua,
                  const std::string& func,
-                 double x, double y, double d, double s,
+                 float x, float y, float d, float s,
                  Bullet* target,
                  BulletLuaManager* owner);
 
@@ -43,7 +43,6 @@ class BulletLua
         bool isDead() const;
 
         void run();
-        const Bullet& getMover() const;
 
         void __debugRun(const std::string& code);
 
@@ -52,7 +51,6 @@ class BulletLua
         void setFunctionName(const std::string& funcName);
 
     private:
-        Bullet mMover;
         Bullet* mTarget;
 
         std::shared_ptr<sol::state> luaState;

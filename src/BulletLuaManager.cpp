@@ -38,7 +38,7 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
 }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                  double x, double y, double d, double s, Bullet* target)
+                  float x, float y, float d, float s, Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, x, y, d, s, target, this);
@@ -69,7 +69,7 @@ void BulletLuaManager::tick()
         else
         {
             bullet->run();
-            collision.addBullet(&bullet->getMover());
+            collision.addBullet(bullet);
         }
     }
 }
@@ -80,6 +80,14 @@ void BulletLuaManager::clear()
     {
         freeBullets.push(bullets.front());
         bullets.pop_front();
+    }
+}
+
+void BulletLuaManager::vanishAll()
+{
+    for (BulletLua* b : bullets)
+    {
+        b->vanish();
     }
 }
 
