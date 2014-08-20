@@ -4,9 +4,16 @@
 #include "BulletManager.hpp"
 
 #include <cstdio>
+#include <cstring>
 
 int main(int argc, char* argv[])
 {
+    bool capture = false;
+    if (argc > 1 && strcmp(argv[1], "-c") == 0)
+    {
+        capture = true;
+    }
+
     sf::RenderWindow window(sf::VideoMode(320, 240), "BulletLua Example", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
@@ -20,7 +27,7 @@ int main(int argc, char* argv[])
     BulletManager manager;
     manager.setTexture(bulletTexture);
 
-    manager.createBullet("test2.lua", &origin, &destination);
+    manager.createBullet("test.lua", &origin, &destination);
 
     // Run the program as long as the window is open
     int frame = 0;
@@ -39,12 +46,14 @@ int main(int argc, char* argv[])
         window.clear(sf::Color(246, 246, 246));
 
         manager.tick();
+        // printf("%d\n", manager.bulletCount());
         /* manager.checkCollision(&destination); */
         window.draw(manager);
 
         window.display();
 
         // Save frame to file
+        if (capture)
         {
             char buffer[32];
             sprintf(buffer, "ss/frame%03d.png", frame);

@@ -11,9 +11,12 @@ Bullet Barrage Examples:
 
 BulletLua is not quite mature enough at the moment to recreate the complex patterns in the videos above, but it's getting there.
 
+
 ![test.lua](./result3.gif)
 
 ![test2.lua](./result4.gif)
+
+![test3.lua](./result5.gif)
 
 
 Usage
