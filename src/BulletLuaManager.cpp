@@ -3,6 +3,7 @@
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager()
+    : rng(rd()), dist(0, 1)
 {
     // increaseCapacity();
     blocks.push_back(new BulletLua[BLOCK_SIZE]);
@@ -95,6 +96,11 @@ unsigned int BulletLuaManager::freeCount() const
 unsigned int BulletLuaManager::blockCount() const
 {
     return blocks.size();
+}
+
+float BulletLuaManager::genRand()
+{
+    return dist(rng);
 }
 
 BulletLua* BulletLuaManager::getFreeBullet()

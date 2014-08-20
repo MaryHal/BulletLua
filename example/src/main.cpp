@@ -46,7 +46,6 @@ int main(int argc, char* argv[])
         window.clear(sf::Color(246, 246, 246));
 
         manager.tick();
-        // printf("%d\n", manager.bulletCount());
         /* manager.checkCollision(&destination); */
         window.draw(manager);
 

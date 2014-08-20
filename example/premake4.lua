@@ -15,7 +15,7 @@ solution "Pattern"
         ---------------------------------------
         -- Link static libraries and config
         libdirs { "../lib" }
-        links { "sfml-graphics", "sfml-window", "sfml-system", "lua", "bulletlua_d" }
+        links { "sfml-graphics", "sfml-window", "sfml-system", "lua", "bulletlua" }
 
         configuration "linux"
             targetprefix "linux_"

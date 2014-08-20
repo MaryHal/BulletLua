@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include <random>
+
 class BulletLuaManager
 {
     public:
@@ -40,6 +42,8 @@ class BulletLuaManager
         unsigned int freeCount() const;
         unsigned int blockCount() const;
 
+        float genRand();
+
     protected:
         BulletLua* getFreeBullet();
 
@@ -53,6 +57,11 @@ class BulletLuaManager
         std::list<BulletLua*> blocks;
 
         SpacialPartition collision;
+
+        typedef std::mt19937 RNG;
+        std::random_device rd;
+        RNG rng;
+        std::uniform_real_distribution<float> dist;
 };
 
 #endif /* _BulletLuaManager_hpp_ */

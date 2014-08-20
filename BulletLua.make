@@ -22,7 +22,7 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua_d.a
+  TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
@@ -66,7 +66,7 @@ endif
 ifeq ($(config),debug32)
   OBJDIR     = obj/x32/Debug
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua_d.a
+  TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
@@ -110,7 +110,7 @@ endif
 ifeq ($(config),debug64)
   OBJDIR     = obj/x64/Debug
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua_d.a
+  TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)

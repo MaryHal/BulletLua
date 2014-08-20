@@ -235,6 +235,12 @@ void BulletLua::initLua()
                                return BulletLuaManager::rank;
                            });
 
+    luaState->set_function("genRand",
+                           [&]()
+                           {
+                               return mOwner->genRand();
+                           });
+
     luaState->set_function("setPos",
                            [](double x, double y)
                            {
@@ -300,16 +306,16 @@ void BulletLua::initLua()
                                c->setFunctionName(funcName);
                            });
 
-    luaState->set_function("fire",
-                           [](double x, double y, double d, double s,
-                              const std::string& funcName)
-                           {
-                               BulletLua* c = BulletLua::current;
-                               c->mOwner->createBullet(c->luaState, funcName,
-                                                       x, y,
-                                                       Math::degToRad(d), s,
-                                                       c->mTarget);
-                           });
+    // luaState->set_function("fire",
+    //                        [](double x, double y, double d, double s,
+    //                           const std::string& funcName)
+    //                        {
+    //                            BulletLua* c = BulletLua::current;
+    //                            c->mOwner->createBullet(c->luaState, funcName,
+    //                                                    x, y,
+    //                                                    Math::degToRad(d), s,
+    //                                                    c->mTarget);
+    //                        });
 
     luaState->set_function("fire",
                            [](double d, double s,
@@ -320,6 +326,22 @@ void BulletLua::initLua()
                                                        c->mMover.x, c->mMover.y,
                                                        Math::degToRad(d), s,
                                                        c->mTarget);
+                           });
+
+    luaState->set_function("fireCircle",
+                           [](int segments, double s,
+                              const std::string& funcName)
+                           {
+                               BulletLua* c = BulletLua::current;
+
+                               float segRad = Math::PI * 2 / segments;
+                               for (int i = 0; i < segments; ++i)
+                               {
+                                   c->mOwner->createBullet(c->luaState, funcName,
+                                                           c->mMover.x, c->mMover.y,
+                                                           segRad * i, s,
+                                                           c->mTarget);
+                               }
                            });
 
     luaState->set_function("vanish",

@@ -15,9 +15,7 @@ end
 function explode()
     local turn = getTurn()
     if (turn == 60) then
-        for d = 0, 360, 360/40 do
-            fire(d, 4.0, "homeIn")
-        end
+        fireCircle(40, 4.0, "homeIn")
 
         kill()
     end
