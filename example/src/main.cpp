@@ -38,7 +38,6 @@ int main(int argc, char* argv[])
 
     // Run the program as long as the window is open
     int frame = 0;
-    sf::Image image;
     while (window.isOpen())
     {
         // Check all the window's events that were triggered since the last iteration of the loop
@@ -72,7 +71,7 @@ int main(int argc, char* argv[])
             char buffer[32];
             sprintf(buffer, "ss/frame%03d.png", frame);
 
-            image = window.capture();
+            sf::Image image = window.capture();
             image.saveToFile(buffer);
 
             frame++;
