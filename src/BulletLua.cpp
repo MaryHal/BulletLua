@@ -45,7 +45,7 @@ void BulletLua::set(const std::string& filename,
     this->vx = origin->vx;
     this->vy = origin->vy;
 
-    target = target;
+    this->target = target;
 
     dead = false;
     dying = false;
@@ -72,6 +72,8 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     this->vx = origin->vx;
     this->vy = origin->vy;
 
+    this->target = target;
+
     dead = false;
     dying = false;
     life = 255;
@@ -96,7 +98,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     /* this->vx = vx; */
     /* this->vy = vy; */
 
-    target = target;
+    this->target = target;
 
     dead = false;
     dying = false;
@@ -270,7 +272,7 @@ void BulletLua::initLua()
                                c->setDirectionRelative(Math::degToRad(dir));
                            });
 
-    luaState->set_function("aitarget",
+    luaState->set_function("aimTarget",
                            []()
                            {
                                BulletLua* c = BulletLua::current;

@@ -5,13 +5,19 @@
 
 #include <cstdio>
 #include <cstring>
+#include <string>
 
 int main(int argc, char* argv[])
 {
     bool capture = false;
-    if (argc > 1 && strcmp(argv[1], "-c") == 0)
+    std::string filename = "script/test.lua";
+
+    for (int i = 1; i < argc; i++)
     {
-        capture = true;
+        if (strcmp(argv[i], "-c") == 0)
+            capture = true;
+        else
+            filename = argv[i];
     }
 
     sf::RenderWindow window(sf::VideoMode(320, 240), "BulletLua Example", sf::Style::Close);
@@ -27,7 +33,8 @@ int main(int argc, char* argv[])
     BulletManager manager;
     manager.setTexture(bulletTexture);
 
-    manager.createBullet("test3.lua", &origin, &destination);
+    printf("Running Script: %s\n", filename.c_str());
+    manager.createBullet(filename, &origin, &destination);
 
     // Run the program as long as the window is open
     int frame = 0;
@@ -50,10 +57,10 @@ int main(int argc, char* argv[])
         destination.y = mousePos.y;
 
         manager.tick();
-        if (manager.checkCollision(destination))
-        {
-            manager.vanishAll();
-        }
+        // if (manager.checkCollision(destination))
+        // {
+        //     manager.vanishAll();
+        // }
 
         window.draw(manager);
 
