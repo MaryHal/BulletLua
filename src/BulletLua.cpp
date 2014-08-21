@@ -14,7 +14,7 @@ BulletLua* BulletLua::current = nullptr;
 
 BulletLua::BulletLua()
     : Bullet(0.0, 0.0, 0.0, 0.0),
-      mTarget(nullptr),
+      target(nullptr),
       funcName(""),
       turn(0)
 {
@@ -22,7 +22,7 @@ BulletLua::BulletLua()
 
 void BulletLua::reset()
 {
-    mTarget = nullptr;
+    target = nullptr;
 
     dead = true;
     dying = false;
@@ -45,7 +45,7 @@ void BulletLua::set(const std::string& filename,
     this->vx = origin->vx;
     this->vy = origin->vy;
 
-    mTarget = target;
+    target = target;
 
     dead = false;
     dying = false;
@@ -96,7 +96,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     /* this->vx = vx; */
     /* this->vy = vy; */
 
-    mTarget = target;
+    target = target;
 
     dead = false;
     dying = false;
@@ -270,11 +270,11 @@ void BulletLua::initLua()
                                c->setDirectionRelative(Math::degToRad(dir));
                            });
 
-    luaState->set_function("aimTarget",
+    luaState->set_function("aitarget",
                            []()
                            {
                                BulletLua* c = BulletLua::current;
-                               c->setDirectionAim(c->mTarget->x, c->mTarget->y);
+                               c->setDirectionAim(c->target->x, c->target->y);
                            });
 
     luaState->set_function("aimPoint",
@@ -313,7 +313,7 @@ void BulletLua::initLua()
     //                            c->mOwner->createBullet(c->luaState, funcName,
     //                                                    x, y,
     //                                                    Math::degToRad(d), s,
-    //                                                    c->mTarget);
+    //                                                    c->target);
     //                        });
 
     luaState->set_function("fire",
@@ -324,7 +324,7 @@ void BulletLua::initLua()
                                c->mOwner->createBullet(c->luaState, funcName,
                                                        c->x, c->y,
                                                        Math::degToRad(d), s,
-                                                       c->mTarget);
+                                                       c->target);
                            });
 
     luaState->set_function("fireCircle",
@@ -339,7 +339,7 @@ void BulletLua::initLua()
                                    c->mOwner->createBullet(c->luaState, funcName,
                                                            c->x, c->y,
                                                            segRad * i, s,
-                                                           c->mTarget);
+                                                           c->target);
                                }
                            });
 

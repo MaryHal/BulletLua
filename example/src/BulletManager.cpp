@@ -1,11 +1,10 @@
 #include "BulletManager.hpp"
 
 BulletManager::BulletManager()
-    : vertices(sf::Quads),
-    vertexCount(0)
 {
     // Superclass constructor(BulletLuaManager) has no arguments, so it's called implicitly
     vertexCount = 4 * BLOCK_SIZE;
+    vertices.setPrimitiveType(sf::Quads);
     vertices.resize(vertexCount);
 }
 

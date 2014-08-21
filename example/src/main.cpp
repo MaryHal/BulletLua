@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     BulletManager manager;
     manager.setTexture(bulletTexture);
 
-    manager.createBullet("test.lua", &origin, &destination);
+    manager.createBullet("test3.lua", &origin, &destination);
 
     // Run the program as long as the window is open
     int frame = 0;
@@ -45,8 +45,16 @@ int main(int argc, char* argv[])
 
         window.clear(sf::Color(246, 246, 246));
 
+        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+        destination.x = mousePos.x;
+        destination.y = mousePos.y;
+
         manager.tick();
-        /* manager.checkCollision(&destination); */
+        if (manager.checkCollision(destination))
+        {
+            manager.vanishAll();
+        }
+
         window.draw(manager);
 
         window.display();

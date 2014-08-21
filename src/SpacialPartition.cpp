@@ -1,4 +1,5 @@
 #include "SpacialPartition.hpp"
+#include "Rect.hpp"
 
 #include <cstring>
 
@@ -6,6 +7,11 @@ SpacialPartition::SpacialPartition()
 {
     reset();
 }
+
+// SpacialPartition::SpacialPartition(int width, int height)
+// {
+//     reset();
+// }
 
 void SpacialPartition::addBullet(const Bullet* bullet)
 {
@@ -16,13 +22,13 @@ void SpacialPartition::addBullet(const Bullet* bullet)
         return;
 
     space[x][y][bulletCount[x][y]] = bullet;
-    bulletCount[x][y]++;
+    ++bulletCount[x][y];
 }
 
 // Call once per frame
 void SpacialPartition::reset()
 {
-    std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
+    // std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
     std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
 }
 
@@ -31,8 +37,8 @@ bool SpacialPartition::checkCollision(Bullet& b)
     int x = b.x / tileSize;
     int y = b.y / tileSize;
 
-    sf::FloatRect thisBullet(b.x, b.y, 4, 4);
-    sf::FloatRect thatBullet(0.0f, 0.0f, 4, 4);
+    Rect thisBullet(b.x, b.y, 4, 4);
+    Rect thatBullet(0.0f, 0.0f, 4, 4);
 
     for (int i = 0; i < bulletCount[x][y]; i++)
     {

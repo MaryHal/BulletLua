@@ -51,7 +51,7 @@ class BulletLua : public Bullet
         void setFunctionName(const std::string& funcName);
 
     private:
-        Bullet* mTarget;
+        Bullet* target;
 
         std::shared_ptr<sol::state> luaState;
         std::string funcName;
@@ -62,4 +62,3 @@ class BulletLua : public Bullet
 };
 
 #endif // _BulletLua_hpp_
-

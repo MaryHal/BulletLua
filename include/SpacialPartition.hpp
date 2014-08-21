@@ -3,10 +3,12 @@
 
 #include "Bullet.hpp"
 
+// Simple collision detection
 class SpacialPartition
 {
     public:
         SpacialPartition();
+        // SpacialPartition(int width, int height);
 
         void addBullet(const Bullet* bullet);
         void reset();
@@ -19,6 +21,7 @@ class SpacialPartition
         static constexpr int HEIGHT = 480 / tileSize + 3;
         static constexpr int CAP = 1000;
 
+        // Out of bounds error waiting to happen...
         const Bullet* space[WIDTH][HEIGHT][CAP];
         int bulletCount[WIDTH][HEIGHT];
 };

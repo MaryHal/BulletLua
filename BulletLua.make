@@ -155,6 +155,7 @@ OBJECTS := \
 	$(OBJDIR)/BulletLuaManager.o \
 	$(OBJDIR)/SpacialPartition.o \
 	$(OBJDIR)/Bullet.o \
+	$(OBJDIR)/Rect.o \
 	$(OBJDIR)/Math.o \
 	$(OBJDIR)/BulletLua.o \
 
@@ -224,6 +225,9 @@ $(OBJDIR)/SpacialPartition.o: src/SpacialPartition.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Bullet.o: src/Bullet.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Rect.o: src/Rect.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Math.o: src/Math.cpp
