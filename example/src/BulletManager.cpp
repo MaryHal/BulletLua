@@ -34,31 +34,38 @@ void BulletManager::tick()
         else
         {
             bullet->run();
+
             const Bullet* b = bullet;
             float rad = std::sqrt(8*8 + 8*8);
             float dir = b->getDirection();
 
             sf::Color color(255, 255, 255, b->life);
+            sf::Vector2f texCoords[] = {
+                {0.0f, 0.0f},
+                {32.0f, 0.0f},
+                {32.0f, 32.0f},
+                {0.0f, 32.0f}
+            };
 
             sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4),
                                        b->y + -rad * cos(dir - 3.1415f/4)),
                           color,
-                          sf::Vector2f(0.0f, 0.0f));
+                          texCoords[0]);
 
             sf::Vertex v2(sf::Vector2f(b->x +  rad * sin(dir + 3.1415f/4),
                                        b->y + -rad * cos(dir + 3.1415f/4)),
                           color,
-                          sf::Vector2f(32.0f, 0.0f));
+                          texCoords[1]);
 
             sf::Vertex v3(sf::Vector2f(b->x +  rad * sin(dir + 3 * 3.1415f/4),
                                        b->y + -rad * cos(dir + 3 * 3.1415f/4)),
                           color,
-                          sf::Vector2f(32.0f, 32.0f));
+                          texCoords[2]);
 
             sf::Vertex v4(sf::Vector2f(b->x +  rad * sin(dir + 5 * 3.1415f/4),
                                        b->y + -rad * cos(dir + 5 * 3.1415f/4)),
                           color,
-                          sf::Vector2f(0.0f, 32.0f));
+                          texCoords[3]);
 
             vertices.append(v1);
             vertices.append(v2);

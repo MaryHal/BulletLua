@@ -22,12 +22,11 @@ function main()
 end
 
 function curve()
-   if (getSpeed() > 1.5) then
-      -- setSpeedRel(0.05)
-   else
-      setSpeedRel(0.06)
+   if (getSpeed() <= 1.5) then
+      setSpeedRelative(0.06)
    end
-   setDirRel(3)
+
+   setDirectionRelative(3)
 
    if (getTurn() > 200) then
       vanish()
@@ -35,8 +34,7 @@ function curve()
 end
 
 function curve2()
-   -- setSpeedRel(0.05)
-   setDirRel(3)
+   setDirectionRelative(3)
 
    if (getTurn() > 200) then
       vanish()

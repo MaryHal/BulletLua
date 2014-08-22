@@ -14,6 +14,8 @@ struct Bullet
 
         Bullet(float x, float y, float vx, float vy);
 
+        void setBullet(float x, float y, float vx, float vy);
+
         void setSpeedAndDirection(float speed, float dir);
 
         void setSpeed(float speed);

@@ -148,11 +148,10 @@ void BulletLua::run()
         // Fade out over 30 frames
         life -= 255/30;
         if (life < 0)
+        {
             life = 0;
-    }
-    if (life == 0)
-    {
-        dead = true;
+            dead = true;
+        }
     }
 
     turn++;
@@ -169,37 +168,11 @@ void BulletLua::initLua()
     // luaState->open_libraries(sol::lib::base);
     luaState->open_libraries(sol::lib::math);
 
-    luaState->set_function("getPosX",
-                           []()
-                           {
-                               return BulletLua::current->x;
-                           });
-
-    luaState->set_function("getPosY",
-                           []()
-                           {
-                               return BulletLua::current->y;
-                           });
-
     luaState->set_function("getPosition",
                            []()
                            {
                                BulletLua* c = BulletLua::current;
                                return std::make_tuple(c->x, c->y);
-                           });
-
-    luaState->set_function("getVelX",
-                           []()
-                           {
-                               BulletLua* c = BulletLua::current;
-                               return c->vx;
-                           });
-
-    luaState->set_function("getVelY",
-                           []()
-                           {
-                               BulletLua* c = BulletLua::current;
-                               return c->vy;
                            });
 
     luaState->set_function("getVelocity",
@@ -216,7 +189,7 @@ void BulletLua::initLua()
                                return c->getSpeed();
                            });
 
-    luaState->set_function("getDir",
+    luaState->set_function("getDirection",
                            []()
                            {
                                BulletLua* c = BulletLua::current;
@@ -260,7 +233,7 @@ void BulletLua::initLua()
                                return mOwner->randInt(min, max);
                            });
 
-    luaState->set_function("setPos",
+    luaState->set_function("setPosition",
                            [](float x, float y)
                            {
                                BulletLua* c = BulletLua::current;
@@ -268,7 +241,7 @@ void BulletLua::initLua()
                                c->y = y;
                            });
 
-    luaState->set_function("setVel",
+    luaState->set_function("setVelocity",
                            [](float vx, float vy)
                            {
                                BulletLua* c = BulletLua::current;
@@ -276,14 +249,14 @@ void BulletLua::initLua()
                                c->vy = vy;
                            });
 
-    luaState->set_function("setDir",
+    luaState->set_function("setDirection",
                            [](float dir)
                            {
                                BulletLua* c = BulletLua::current;
                                c->setDirection(Math::degToRad(dir));
                            });
 
-    luaState->set_function("setDirRel",
+    luaState->set_function("setDirectionRelative",
                            [](float dir)
                            {
                                BulletLua* c = BulletLua::current;
@@ -311,7 +284,7 @@ void BulletLua::initLua()
                                c->setSpeed(s);
                            });
 
-    luaState->set_function("setSpeedRel",
+    luaState->set_function("setSpeedRelative",
                            [](float s)
                            {
                                BulletLua* c = BulletLua::current;
