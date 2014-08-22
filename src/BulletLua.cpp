@@ -236,10 +236,28 @@ void BulletLua::initLua()
                                return BulletLuaManager::rank;
                            });
 
-    luaState->set_function("genRand",
+    luaState->set_function("randFloat",
                            [&]()
                            {
-                               return mOwner->genRand();
+                               return mOwner->randFloat();
+                           });
+
+    luaState->set_function("randFloatRange",
+                           [&](float min, float max)
+                           {
+                               return mOwner->randFloat(min, max);
+                           });
+
+    luaState->set_function("randInt",
+                           [&](int max)
+                           {
+                               return mOwner->randInt(max);
+                           });
+
+    luaState->set_function("randIntRange",
+                           [&](int min, int max)
+                           {
+                               return mOwner->randInt(min, max);
                            });
 
     luaState->set_function("setPos",

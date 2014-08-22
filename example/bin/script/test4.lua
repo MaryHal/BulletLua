@@ -5,8 +5,8 @@ function main()
    setDir(0)
 
    if (math.fmod(turn, 40) == 0) then
-      setPos(genRand() * 120 + 100, 248)
-      fire(genRand() * 30 - 15, genRand() * 1 + 4.5, "launch")
+      setPos(randIntRange(100, 220), 248)
+      fire(randIntRange(-15, 15), randFloat() + 4.5, "launch")
    end
 end
 
@@ -15,7 +15,7 @@ function launch()
    setSpeedRel(-0.07)
    if (turn == 60) then
       for d = 0, 360, 360/40 do
-         fire(d, genRand() * 3 + 2, "fade")
+         fire(d, randFloatRange(2, 5), "fade")
          kill()
       end
    end

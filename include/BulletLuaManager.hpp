@@ -43,7 +43,11 @@ class BulletLuaManager
         unsigned int freeCount() const;
         unsigned int blockCount() const;
 
-        float genRand();
+        float randFloat();
+        float randFloat(float min, float max);
+
+        int randInt(int max);
+        int randInt(int min, int max);
 
     protected:
         BulletLua* getFreeBullet();
@@ -62,7 +66,6 @@ class BulletLuaManager
         typedef std::mt19937 RNG;
         std::random_device rd;
         RNG rng;
-        std::uniform_real_distribution<float> dist;
 };
 
 #endif /* _BulletLuaManager_hpp_ */

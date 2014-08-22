@@ -3,7 +3,7 @@
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager()
-    : rng(rd()), dist(0, 1)
+    : rng(rd())
 {
     // increaseCapacity();
     blocks.push_back(new BulletLua[BLOCK_SIZE]);
@@ -106,8 +106,25 @@ unsigned int BulletLuaManager::blockCount() const
     return blocks.size();
 }
 
-float BulletLuaManager::genRand()
+float BulletLuaManager::randFloat()
 {
+    return randFloat(0.0f, 1.0f);
+}
+
+float BulletLuaManager::randFloat(float min, float max)
+{
+    std::uniform_real_distribution<float> dist(min, max);
+    return dist(rng);
+}
+
+int BulletLuaManager::randInt(int max)
+{
+    return randInt(0, max);
+}
+
+int BulletLuaManager::randInt(int min, int max)
+{
+    std::uniform_int_distribution<int> dist(min, max);
     return dist(rng);
 }
 
