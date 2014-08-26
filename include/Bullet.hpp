@@ -3,6 +3,9 @@
 
 struct Bullet
 {
+    private:
+        static constexpr float tolerance = 0.0001f;
+
     public:
         float x, y;
         float vx, vy;
@@ -29,6 +32,9 @@ struct Bullet
 
         void vanish();
         void kill();
+
+        bool isDead() const;
+        bool isDying() const;
 };
 
 #endif // _Bullet_hpp_

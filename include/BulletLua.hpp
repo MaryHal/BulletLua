@@ -15,7 +15,7 @@ namespace sol
 
 class BulletLua : public Bullet
 {
-    private:
+    public:
         static BulletLua* current;
 
     public:
@@ -38,10 +38,7 @@ class BulletLua : public Bullet
                  Bullet* target,
                  BulletLuaManager* owner);
 
-        std::shared_ptr<sol::state> getLuaState();
         int getTurn() const;
-        bool isDead() const;
-
         void run();
 
         void __debugRun(const std::string& code);

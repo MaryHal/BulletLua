@@ -1,5 +1,5 @@
 #include "SpacialPartition.hpp"
-#include "Rect.hpp"
+#include "Utils/Rect.hpp"
 
 #include <cstring>
 

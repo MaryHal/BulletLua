@@ -3,7 +3,6 @@
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager()
-    : rng(rd())
 {
     // increaseCapacity();
     blocks.push_back(new BulletLua[BLOCK_SIZE]);
@@ -23,22 +22,29 @@ BulletLuaManager::~BulletLuaManager()
     }
 }
 
-void BulletLuaManager::createBullet(const std::string& filename, Bullet* origin, Bullet* target)
+void BulletLuaManager::createBullet(const std::string& filename,
+                                    Bullet* origin,
+                                    Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(filename, origin, target, this);
     bullets.push_back(b);
 }
 
-void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target)
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
+                                    const std::string& func,
+                                    Bullet* origin,
+                                    Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, origin, target, this);
     bullets.push_back(b);
 }
 
-void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                  float x, float y, float d, float s, Bullet* target)
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
+                                    const std::string& func,
+                                    float x, float y, float d, float s,
+                                    Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, x, y, d, s, target, this);
@@ -54,7 +60,7 @@ void BulletLuaManager::tick()
 {
     // Reset containers inside collision detection object.
     // Since bullets are dynamic and are most likely unpredictable,
-    // this must be called every frame.
+    // we must repopulate the containers each frame.
     collision.reset();
 
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
@@ -104,28 +110,6 @@ unsigned int BulletLuaManager::freeCount() const
 unsigned int BulletLuaManager::blockCount() const
 {
     return blocks.size();
-}
-
-float BulletLuaManager::randFloat()
-{
-    return randFloat(0.0f, 1.0f);
-}
-
-float BulletLuaManager::randFloat(float min, float max)
-{
-    std::uniform_real_distribution<float> dist(min, max);
-    return dist(rng);
-}
-
-int BulletLuaManager::randInt(int max)
-{
-    return randInt(0, max);
-}
-
-int BulletLuaManager::randInt(int min, int max)
-{
-    std::uniform_int_distribution<int> dist(min, max);
-    return dist(rng);
 }
 
 BulletLua* BulletLuaManager::getFreeBullet()

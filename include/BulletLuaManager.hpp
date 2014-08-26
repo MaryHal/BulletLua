@@ -15,7 +15,10 @@
 class BulletLuaManager
 {
     public:
+        // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         static float rank;
+
+        // Amount of bullets to allocate at once.
         static constexpr unsigned int BLOCK_SIZE = 2048;
 
     public:
@@ -23,15 +26,24 @@ class BulletLuaManager
         ~BulletLuaManager();
 
         // Root Bullet
-        void createBullet(const std::string& filename, Bullet* origin, Bullet* target);
+        void createBullet(const std::string& filename,
+                          Bullet* origin,
+                          Bullet* target);
 
         // Child Bullets
-        void createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target);
-        void createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                          float x, float y, float d, float s, Bullet* target);
+        void createBullet(std::shared_ptr<sol::state> lua,
+                          const std::string& func,
+                          Bullet* origin,
+                          Bullet* target);
+
+        void createBullet(std::shared_ptr<sol::state> lua,
+                          const std::string& func,
+                          float x, float y, float d, float s,
+                          Bullet* target);
 
         bool checkCollision(Bullet& b);
         virtual void tick();
+
         // Draw function.
         // void draw()
 
@@ -43,16 +55,10 @@ class BulletLuaManager
         unsigned int freeCount() const;
         unsigned int blockCount() const;
 
-        float randFloat();
-        float randFloat(float min, float max);
-
-        int randInt(int max);
-        int randInt(int min, int max);
-
     protected:
         BulletLua* getFreeBullet();
 
-        // Allocate a block of BLOCK_SIZE Bullets and add it to freeBullets
+        // Allocate a block of BLOCK_SIZE(default) Bullets and add it to freeBullets
         virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
 
     protected:
@@ -62,10 +68,6 @@ class BulletLuaManager
         std::list<BulletLua*> blocks;
 
         SpacialPartition collision;
-
-        typedef std::mt19937 RNG;
-        std::random_device rd;
-        RNG rng;
 };
 
 #endif /* _BulletLuaManager_hpp_ */

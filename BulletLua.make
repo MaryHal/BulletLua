@@ -155,9 +155,10 @@ OBJECTS := \
 	$(OBJDIR)/BulletLuaManager.o \
 	$(OBJDIR)/SpacialPartition.o \
 	$(OBJDIR)/Bullet.o \
+	$(OBJDIR)/BulletLua.o \
 	$(OBJDIR)/Rect.o \
 	$(OBJDIR)/Math.o \
-	$(OBJDIR)/BulletLua.o \
+	$(OBJDIR)/Rng.o \
 
 RESOURCES := \
 
@@ -227,13 +228,16 @@ $(OBJDIR)/SpacialPartition.o: src/SpacialPartition.cpp
 $(OBJDIR)/Bullet.o: src/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Rect.o: src/Rect.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Math.o: src/Math.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletLua.o: src/BulletLua.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Rect.o: src/Utils/Rect.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Math.o: src/Utils/Math.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Rng.o: src/Utils/Rng.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

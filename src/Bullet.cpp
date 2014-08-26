@@ -1,6 +1,6 @@
 #include "Bullet.hpp"
 
-#include "Math.hpp"
+#include "Utils/Math.hpp"
 
 Bullet::Bullet(float x, float y, float vx, float vy)
     : x(x), y(y), vx(vx), vy(vy), dead(true), dying(true), life(0), wait(0)
@@ -66,3 +66,12 @@ void Bullet::kill()
     dead = true;
 }
 
+bool Bullet::isDead() const
+{
+    return dead;
+}
+
+bool Bullet::isDying() const
+{
+    return dying;
+}
