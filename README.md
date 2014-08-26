@@ -79,19 +79,13 @@ Lua Binding
 C++ Functions visible in BulletLua scripts:
 
 ```
-    -- Get Position components.
-    getPosX()
-    getPosY()
+    -- Get Position (as a tuple).
+    x, y = getPosition()
 
-    -- Get Position as a tuple.
-    getPosition()
+    -- Get Velocity Components (as a tuple).
+    vx, vy = getVelocity()
 
-    -- Get Velocity compenents.
-    getVelX()
-    getVelY()
-
-    -- Get Bullet Speed and Direction. Since BulletLua stores velocity as x and y components,
-    -- there's minor calculation for using these functions.
+    -- Get Bullet Speed and Direction.
     getSpeed()
     getDir()
 
@@ -101,31 +95,44 @@ C++ Functions visible in BulletLua scripts:
     -- Get the current barrage "difficulty", From [0.0, 1.0]
     getRank()
 
+    -- Generate random floating point numbers
+    randFloat()
+    randFloat(float min, float max)
+
+    -- Generate random integers
+    randInt(int max)
+    randInt(int min, int max)
+
     -- Set Bullet Position.
-    setPos(double x, double y)
+    setPosition(float x, float y)
 
     -- Set Bullet Velocity.
-    setVel(double vx, double vy)
+    setVelocity(float vx, float vy)
 
     -- Set Bullet Direction
-    setDir(double dir)
+    setDirection(double dir)
 
     -- Set Bullet Direction (relatively), adds to current direction.
-    setDirRel(double dir)
+    setDirectionRelative(double dir)
 
     -- Set the current bullet to aim at the "player"
-    setDirAim()
+    aimTarget()
+
+    -- Set the current bullet to aim at a point
+    aimPoint(float x, float y)
 
     -- Set Speed
-    setSpeed(double s)
-    setSpeedRel(double s)
+    setSpeed(float s)
+    setSpeedRelative(float s)
 
     -- Switch current running function
     setFunction(const std::string& funcName)
 
     -- Shoot a bullet at (x, y) moving in direction d at speed s running function funcName.
-    fire(double x, double y, double d, double s, const std::string& funcName)
     fire(double d, double s, const std::string& funcName)
+
+    -- Shoot (segments) bullets in a circle at speed s running function funcName.
+    fireCircle(int segments, float s, const std::string& funcName)
 
     -- Fade out the current bullet. Kill it slowly.
     vanish()
