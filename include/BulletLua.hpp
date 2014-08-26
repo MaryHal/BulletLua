@@ -15,7 +15,7 @@ namespace sol
 
 class BulletLua : public Bullet
 {
-    public:
+    private:
         static BulletLua* current;
 
     public:
@@ -44,8 +44,8 @@ class BulletLua : public Bullet
         void __debugRun(const std::string& code);
 
     private:
-        void initLua();
         void setFunctionName(const std::string& funcName);
+        void initLua();
 
     private:
         Bullet* target;
