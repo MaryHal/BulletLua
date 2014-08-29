@@ -21,19 +21,17 @@ BulletLua::BulletLua()
 {
 }
 
-void BulletLua::reset()
+void BulletLua::makeReusable(Bullet* target, BulletLuaManager* owner)
 {
-    target = nullptr;
+    this->target = target;
 
-    dead = true;
-    dying = false;
-    life = 255;
+    this->dead  = false;
+    this->dying = false;
+    this->life = 255;
 
-    luaState = nullptr;
-    funcName = "";
-    turn = 0;
+    this->turn = 0;
 
-    mOwner = nullptr;
+    this->mOwner = owner;
 }
 
 void BulletLua::set(const std::string& filename,
@@ -46,45 +44,39 @@ void BulletLua::set(const std::string& filename,
     this->vx = origin->vx;
     this->vy = origin->vy;
 
-    this->target = target;
+    makeReusable(target, owner);
 
-    dead = false;
-    dying = false;
-    life = 255;
-
+    // Load Lua file/functions
+    funcName = "main";
     luaState = std::make_shared<sol::state>();
     luaState->open_file(filename);
-    funcName = "main";
-    turn = 0;
-
-    mOwner = owner;
 
     initLua();
 }
 
-void BulletLua::set(std::shared_ptr<sol::state> lua,
-                    const std::string& func,
-                    Bullet* origin, Bullet* target,
-                    BulletLuaManager* owner)
-{
-    // Copy Movers
-    this->x = origin->x;
-    this->y = origin->y;
-    this->vx = origin->vx;
-    this->vy = origin->vy;
+// void BulletLua::set(std::shared_ptr<sol::state> lua,
+//                     const std::string& func,
+//                     Bullet* origin, Bullet* target,
+//                     BulletLuaManager* owner)
+// {
+//     // Copy Movers
+//     this->x = origin->x;
+//     this->y = origin->y;
+//     this->vx = origin->vx;
+//     this->vy = origin->vy;
 
-    this->target = target;
+//     this->target = target;
 
-    dead = false;
-    dying = false;
-    life = 255;
+//     dead = false;
+//     dying = false;
+//     life = 255;
 
-    luaState = lua;
-    funcName = func;
-    turn = 0;
+//     luaState = lua;
+//     funcName = func;
+//     turn = 0;
 
-    mOwner = owner;
-}
+//     mOwner = owner;
+// }
 
 void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
@@ -99,17 +91,10 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     /* this->vx = vx; */
     /* this->vy = vy; */
 
-    this->target = target;
-
-    dead = false;
-    dying = false;
-    life = 255;
+    makeReusable(target, owner);
 
     luaState = lua;
     funcName = func;
-    turn = 0;
-
-    mOwner = owner;
 }
 
 int BulletLua::getTurn() const

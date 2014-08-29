@@ -3,9 +3,10 @@
 BulletManager::BulletManager()
 {
     // Superclass constructor(BulletLuaManager) has no arguments, so it's called implicitly
-    vertexCount = 4 * BLOCK_SIZE;
+
+    // Calculate and create room for initial set of vertices.
     vertices.setPrimitiveType(sf::Quads);
-    vertices.resize(vertexCount);
+    increaseVertexCount();
 }
 
 BulletManager::~BulletManager()
@@ -93,6 +94,11 @@ void BulletManager::increaseCapacity(unsigned int blockSize)
 {
     BulletLuaManager::increaseCapacity(blockSize);
 
+    increaseVertexCount(blockSize);
+}
+
+void BulletManager::increaseVertexCount(unsigned int blockSize)
+{
     vertexCount += blockSize * 4;
     vertices.resize(vertexCount);
 }

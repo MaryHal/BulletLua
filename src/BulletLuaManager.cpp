@@ -4,14 +4,8 @@ float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager()
 {
-    // increaseCapacity();
-    blocks.push_back(new BulletLua[BLOCK_SIZE]);
-
-    // Throw all bullets into free stack
-    for (unsigned int i = 0; i < BLOCK_SIZE; ++i)
-    {
-        freeBullets.push(&blocks.back()[i]);
-    }
+    // This only calls this class' version of this function, not any subclass'.
+    increaseCapacity();
 }
 
 BulletLuaManager::~BulletLuaManager()
@@ -31,15 +25,15 @@ void BulletLuaManager::createBullet(const std::string& filename,
     bullets.push_back(b);
 }
 
-void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
-                                    const std::string& func,
-                                    Bullet* origin,
-                                    Bullet* target)
-{
-    BulletLua* b = getFreeBullet();
-    b->set(lua, func, origin, target, this);
-    bullets.push_back(b);
-}
+// void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
+//                                     const std::string& func,
+//                                     Bullet* origin,
+//                                     Bullet* target)
+// {
+//     BulletLua* b = getFreeBullet();
+//     b->set(lua, func, origin, target, this);
+//     bullets.push_back(b);
+// }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
                                     const std::string& func,
@@ -133,6 +127,7 @@ void BulletLuaManager::increaseCapacity(unsigned int blockSize)
         freeBullets.push(&blocks.back()[i]);
     }
 
-    // vertexCount += blockSize * 4;
-    // vertices.resize(vertexCount);
+    // Subclasses should override this method if their extensions depends on block size.
+    // E.g. allocation of vertices or bookkeeping of vertices in a VBO.
+    // Keep in mind that this original version will be called in the default constructor.
 }

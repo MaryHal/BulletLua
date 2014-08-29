@@ -21,16 +21,16 @@ class BulletLua : public Bullet
     public:
         BulletLua();
 
-        void reset();
+        void makeReusable(Bullet* target, BulletLuaManager* owner);
 
         void set(const std::string& filename,
                  Bullet* origin, Bullet* target,
                  BulletLuaManager* owner);
 
-        void set(std::shared_ptr<sol::state> lua,
-                 const std::string& func,
-                 Bullet* origin, Bullet* target,
-                 BulletLuaManager* owner);
+        // void set(std::shared_ptr<sol::state> lua,
+        //          const std::string& func,
+        //          Bullet* origin, Bullet* target,
+        //          BulletLuaManager* owner);
 
         void set(std::shared_ptr<sol::state> lua,
                  const std::string& func,

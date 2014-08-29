@@ -22,6 +22,7 @@ class BulletManager : public BulletLuaManager,
 
     private:
         virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+        void increaseVertexCount(unsigned int blockSize=BLOCK_SIZE);
 
     private:
         sf::Texture* bulletTexture;

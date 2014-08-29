@@ -31,10 +31,10 @@ class BulletLuaManager
                           Bullet* target);
 
         // Child Bullets
-        void createBullet(std::shared_ptr<sol::state> lua,
-                          const std::string& func,
-                          Bullet* origin,
-                          Bullet* target);
+        // void createBullet(std::shared_ptr<sol::state> lua,
+        //                   const std::string& func,
+        //                   Bullet* origin,
+        //                   Bullet* target);
 
         void createBullet(std::shared_ptr<sol::state> lua,
                           const std::string& func,
@@ -58,8 +58,10 @@ class BulletLuaManager
     protected:
         BulletLua* getFreeBullet();
 
-        // Allocate a block of BLOCK_SIZE(default) Bullets and add it to freeBullets
         virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+
+        // Allocate a block of BLOCK_SIZE(default) Bullets and add it to freeBullets
+        void allocateBlock(unsigned int blockSize);
 
     protected:
         std::list<BulletLua*> bullets;
