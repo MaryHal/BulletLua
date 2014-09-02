@@ -15,10 +15,13 @@ SpacialPartition::SpacialPartition()
 
 void SpacialPartition::addBullet(const Bullet* bullet)
 {
+    if (bullet->dying || bullet->dead)
+        return;
+
     int x = bullet->x / tileSize;
     int y = bullet->y / tileSize;
 
-    if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return;
 
     space[x][y][bulletCount[x][y]] = bullet;
@@ -36,6 +39,11 @@ bool SpacialPartition::checkCollision(Bullet& b)
 {
     int x = b.x / tileSize;
     int y = b.y / tileSize;
+
+    // If the position of the bullet passed as an argument is outside our defined space,
+    // don't bother
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+        return false;
 
     Rect thisBullet(b.x, b.y, 4, 4);
     Rect thatBullet(0.0f, 0.0f, 4, 4);

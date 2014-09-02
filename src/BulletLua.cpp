@@ -107,8 +107,11 @@ void BulletLua::run()
     BulletLua::current = this;
 
     // Run lua function
-    if (!funcName.empty())
-        luaState->get<sol::function>(funcName).call();
+    if (!dying && !dead)
+    {
+        if (!funcName.empty())
+            luaState->get<sol::function>(funcName).call();
+    }
 
     x += vx;
     y += vy;

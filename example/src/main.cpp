@@ -20,12 +20,12 @@ int main(int argc, char* argv[])
             filename = argv[i];
     }
 
-    sf::RenderWindow window(sf::VideoMode(320, 240), "BulletLua Example", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
-    Bullet origin(160.0f, 120.0f, 0.0f, 0.0f);
-    Bullet destination(160.0f, 200.0f, 0.0f, 0.0f);
+    Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
+    Bullet destination(320.0f, 240.0f, 0.0f, 0.0f);
 
     sf::Texture bulletTexture;
     bulletTexture.loadFromFile("bullet2.png");
@@ -44,6 +44,14 @@ int main(int argc, char* argv[])
         sf::Event event;
         while (window.pollEvent(event))
         {
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Space)
+                {
+                    manager.clear();
+                    manager.createBullet(filename, &origin, &destination);
+                }
+            }
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
@@ -56,10 +64,10 @@ int main(int argc, char* argv[])
         destination.y = mousePos.y;
 
         manager.tick();
-        // if (manager.checkCollision(destination))
-        // {
-        //     manager.vanishAll();
-        // }
+        if (manager.checkCollision(destination))
+        {
+            manager.vanishAll();
+        }
 
         window.draw(manager);
 

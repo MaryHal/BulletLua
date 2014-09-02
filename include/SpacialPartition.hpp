@@ -16,10 +16,10 @@ class SpacialPartition
         bool checkCollision(Bullet& b);
 
     private:
-        static constexpr unsigned int tileSize = 100;
+        static constexpr unsigned int tileSize = 50;
         static constexpr int WIDTH  = 640 / tileSize + 3;
         static constexpr int HEIGHT = 480 / tileSize + 3;
-        static constexpr int CAP = 1000;
+        static constexpr int CAP = 100;
 
         // Out of bounds error waiting to happen...
         const Bullet* space[WIDTH][HEIGHT][CAP];

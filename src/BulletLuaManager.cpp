@@ -109,7 +109,9 @@ unsigned int BulletLuaManager::blockCount() const
 BulletLua* BulletLuaManager::getFreeBullet()
 {
     if (freeBullets.empty())
+    {
         increaseCapacity();
+    }
 
     BulletLua* bullet = freeBullets.top();
     freeBullets.pop();

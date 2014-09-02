@@ -4,13 +4,10 @@
 #include "BulletLua.hpp"
 #include "SpacialPartition.hpp"
 
-#include <vector>
 #include <list>
 #include <stack>
 
 #include <string>
-
-#include <random>
 
 class BulletLuaManager
 {
@@ -30,12 +27,13 @@ class BulletLuaManager
                           Bullet* origin,
                           Bullet* target);
 
-        // Child Bullets
+        // Create Child Bullet
         // void createBullet(std::shared_ptr<sol::state> lua,
         //                   const std::string& func,
         //                   Bullet* origin,
         //                   Bullet* target);
 
+        // Create Child Bullet
         void createBullet(std::shared_ptr<sol::state> lua,
                           const std::string& func,
                           float x, float y, float d, float s,
@@ -56,12 +54,10 @@ class BulletLuaManager
         unsigned int blockCount() const;
 
     protected:
+        // Returns an unused bullet. Allocates more data blocks if there none are available
         BulletLua* getFreeBullet();
 
         virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
-
-        // Allocate a block of BLOCK_SIZE(default) Bullets and add it to freeBullets
-        void allocateBlock(unsigned int blockSize);
 
     protected:
         std::list<BulletLua*> bullets;
