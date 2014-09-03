@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
     }
 
     sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Close);
+    window.setPosition({100, 100});
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
