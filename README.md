@@ -78,7 +78,6 @@ Lua Binding
 
 C++ Functions visible in BulletLua scripts:
 
-```
     -- Get Position (as a tuple).
     x, y = getPosition()
 
@@ -139,14 +138,12 @@ C++ Functions visible in BulletLua scripts:
 
     -- Immediately destroy the bullet.
     kill()
-```
 
 An example BulletLua script can be found in `example/bin/script/test.lua`. More examples to come.
 
 
 This script should produce something similar to the first gif above:
 
-```
     -- BulletLua Test Script
 
     dir = 0
@@ -181,47 +178,44 @@ This script should produce something similar to the first gif above:
             vanish()
         end
     end
-```
 
 Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters. [TODO: demonstration of this barrage]
 
-```
-gwait = 20
+    gwait = 20
 
-function bind(f,...)
-   local args = {...}
-   return function(...)
-      return f(unpack(args),...)
-   end
-end
+    function bind(f,...)
+       local args = {...}
+       return function(...)
+          return f(unpack(args),...)
+       end
+    end
 
-function main()
-   circle = bind(fireCircle, 40)
-   setPosition(320, 240)
-   setFunction(bind(go, 10))
-end
+    function main()
+       circle = bind(fireCircle, 40)
+       setPosition(320, 240)
+       setFunction(bind(go, 10))
+    end
 
-function go(wait)
-   local turn = getTurn()
-   if (math.fmod(turn, wait) == 0) then
-      -- speeds = {4, 5, 6}
-      circle(21 - gwait, curve)
+    function go(wait)
+       local turn = getTurn()
+       if (math.fmod(turn, wait) == 0) then
+          -- speeds = {4, 5, 6}
+          circle(21 - gwait, curve)
 
-      setFunction(bind(go, gwait))
-      gwait = gwait - 1
-      if gwait < 18 then
-         gwait = 20
-      end
-   end
-end
+          setFunction(bind(go, gwait))
+          gwait = gwait - 1
+          if gwait < 18 then
+             gwait = 20
+          end
+       end
+    end
 
-function curve()
-   local turn = getTurn()
-   setDirectionRelative(5)
-   setSpeedRelative(0.1)
+    function curve()
+       local turn = getTurn()
+       setDirectionRelative(5)
+       setSpeedRelative(0.1)
 
-   if (turn > 180) then
-      vanish()
-   end
-end
-```
+       if (turn > 180) then
+          vanish()
+       end
+    end
