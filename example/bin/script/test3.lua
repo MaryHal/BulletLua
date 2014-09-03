@@ -16,7 +16,7 @@ function main()
       fire(270, 3, curve2)
    end
 
-   if (turn >= 300) then
+   if (turn >= 200) then
       vanish()
    end
 end
@@ -28,7 +28,7 @@ function curve()
 
    setDirectionRelative(3)
 
-   if (getTurn() > 200) then
+   if (getTurn() > 104) then
       vanish()
    end
 end
@@ -36,7 +36,7 @@ end
 function curve2()
    setDirectionRelative(3)
 
-   if (getTurn() > 200) then
+   if (getTurn() > 104) then
       vanish()
    end
 end

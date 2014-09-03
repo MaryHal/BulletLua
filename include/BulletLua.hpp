@@ -25,12 +25,12 @@ class BulletLua : public Bullet
                  BulletLuaManager* owner);
 
         // void set(std::shared_ptr<sol::state> lua,
-        //          const std::string& func,
+        //          const sol::function& func,
         //          Bullet* origin, Bullet* target,
         //          BulletLuaManager* owner);
 
         void set(std::shared_ptr<sol::state> lua,
-                 const std::string& func,
+                 const sol::function& func,
                  float x, float y, float d, float s,
                  Bullet* target,
                  BulletLuaManager* owner);
@@ -41,14 +41,14 @@ class BulletLua : public Bullet
         void __debugRun(const std::string& code);
 
     private:
-        void setFunctionName(const std::string& funcName);
+        void setFunction(const sol::function& func);
         void initLua();
 
     private:
         Bullet* target;
 
         std::shared_ptr<sol::state> luaState;
-        std::string funcName;
+        sol::function func;
 
         int turn;
 

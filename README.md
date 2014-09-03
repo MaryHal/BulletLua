@@ -40,7 +40,7 @@ A Makefile is provided, a simple
 
 in the terminal should be enough to build the project. I use [premake](http://industriousone.com/what-premake) to generate my makefiles, which can also output other project types. So look into that if you wish to build this outside the terminal.
 
-Link the library generated in the `lib` directory and also make sure the headers can be found, and you're halfway there.
+Link the library generated in the `lib` directory and make sure the headers in the `include` directory can be found by your project, and you're already halfway there.
 
 Because there are so many use cases out there, BulletLua does not do any drawing of sprites. It simply runs lua scripts, manages the generated bullets, and provides a simple method for collision detection. As such, you'll need to produce your own code to draw the bullets. This can be as simple as creating a class to inherit from BulletLuaManager and creating a draw method. Example:
 

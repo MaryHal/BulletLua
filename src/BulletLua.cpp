@@ -148,6 +148,7 @@ void BulletLua::initLua()
 {
     // luaState->open_libraries(sol::lib::base);
     luaState->open_libraries(sol::lib::math);
+    luaState->open_libraries(sol::lib::table);
 
     luaState->set_function("getPosition",
                            []()
