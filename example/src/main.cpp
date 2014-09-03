@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
             filename = argv[i];
     }
 
-    sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
