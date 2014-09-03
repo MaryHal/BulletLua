@@ -7,7 +7,7 @@ function main()
     local rank = getRank()
 
     if (math.fmod(turn, 15) == 0) then
-        fire(dir, 1.5, "explode")
+        fire(dir, 1.5, explode)
         dir = dir + 34
     end
 end
@@ -15,7 +15,7 @@ end
 function explode()
     local turn = getTurn()
     if (turn == 60) then
-        fireCircle(40, 4.0, "homeIn")
+        fireCircle(40, 4.0, homeIn)
 
         kill()
     end

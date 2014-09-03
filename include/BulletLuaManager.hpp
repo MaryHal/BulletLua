@@ -29,13 +29,13 @@ class BulletLuaManager
 
         // Create Child Bullet
         // void createBullet(std::shared_ptr<sol::state> lua,
-        //                   const std::string& func,
+        //                   const sol::function& func,
         //                   Bullet* origin,
         //                   Bullet* target);
 
         // Create Child Bullet
         void createBullet(std::shared_ptr<sol::state> lua,
-                          const std::string& func,
+                          const sol::function& func,
                           float x, float y, float d, float s,
                           Bullet* target);
 

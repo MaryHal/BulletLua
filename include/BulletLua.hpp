@@ -4,14 +4,11 @@
 #include <string>
 #include <memory>
 
+#include <sol.hpp>
+
 #include "Bullet.hpp"
 
 class BulletLuaManager;
-
-namespace sol
-{
-    class state;
-};
 
 class BulletLua : public Bullet
 {

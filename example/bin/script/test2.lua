@@ -10,8 +10,8 @@ function main()
     local turn = getTurn()
     local rank = getRank()
 
-    fire(dir1, 0.8, "fade")
-    fire(dir2, 0.8, "fade")
+    fire(dir1, 0.8, fade)
+    fire(dir2, 0.8, fade)
     dir1 = dir1 + offset1
     dir2 = dir2 + offset2
 

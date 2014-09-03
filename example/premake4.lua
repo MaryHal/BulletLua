@@ -6,7 +6,7 @@ solution "Pattern"
         language "C++"
         buildoptions { "-std=c++11" }
 
-        includedirs { "../include" }
+        includedirs { "../include", "../ext/sol/" }
         files { "src/**" }
 
         targetdir "bin"

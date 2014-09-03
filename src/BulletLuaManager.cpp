@@ -26,7 +26,7 @@ void BulletLuaManager::createBullet(const std::string& filename,
 }
 
 // void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
-//                                     const std::string& func,
+//                                     const sol::function& func,
 //                                     Bullet* origin,
 //                                     Bullet* target)
 // {
@@ -36,7 +36,7 @@ void BulletLuaManager::createBullet(const std::string& filename,
 // }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
-                                    const std::string& func,
+                                    const sol::function& func,
                                     float x, float y, float d, float s,
                                     Bullet* target)
 {

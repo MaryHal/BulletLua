@@ -1,8 +1,6 @@
 #include "BulletLua.hpp"
 #include "BulletLuaManager.hpp"
 
-#include <sol.hpp>
-
 #include "Utils/Math.hpp"
 #include "Utils/Rng.hpp"
 
@@ -16,7 +14,6 @@ BulletLua* BulletLua::current = nullptr;
 BulletLua::BulletLua()
     : Bullet(0.0, 0.0, 0.0, 0.0),
       target(nullptr),
-      funcName(""),
       turn(0)
 {
 }
@@ -47,15 +44,16 @@ void BulletLua::set(const std::string& filename,
     makeReusable(target, owner);
 
     // Load Lua file/functions
-    funcName = "main";
     luaState = std::make_shared<sol::state>();
     luaState->open_file(filename);
+
+    func = luaState->get<sol::function>("main");
 
     initLua();
 }
 
 // void BulletLua::set(std::shared_ptr<sol::state> lua,
-//                     const std::string& func,
+//                     const sol::function& func,
 //                     Bullet* origin, Bullet* target,
 //                     BulletLuaManager* owner)
 // {
@@ -72,14 +70,14 @@ void BulletLua::set(const std::string& filename,
 //     life = 255;
 
 //     luaState = lua;
-//     funcName = func;
+//     this->func = func;
 //     turn = 0;
 
 //     mOwner = owner;
 // }
 
 void BulletLua::set(std::shared_ptr<sol::state> lua,
-                    const std::string& func,
+                    const sol::function& func,
                     float x, float y, float d, float s,
                     Bullet* target,
                     BulletLuaManager* owner)
@@ -94,7 +92,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     makeReusable(target, owner);
 
     luaState = lua;
-    funcName = func;
+    this->func = func;
 }
 
 int BulletLua::getTurn() const
@@ -109,8 +107,7 @@ void BulletLua::run()
     // Run lua function
     if (!dying && !dead)
     {
-        if (!funcName.empty())
-            luaState->get<sol::function>(funcName).call();
+        func.call();
     }
 
     x += vx;
@@ -142,9 +139,9 @@ void BulletLua::__debugRun(const std::string& code)
     luaState->script(code);
 }
 
-void BulletLua::setFunctionName(const std::string& funcName)
+void BulletLua::setFunction(const sol::function& func)
 {
-    this->funcName = funcName;
+    this->func = func;
 }
 
 void BulletLua::initLua()
@@ -276,18 +273,18 @@ void BulletLua::initLua()
                            });
 
     luaState->set_function("setFunction",
-                           [](const std::string& funcName)
+                           [](const sol::function& func)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->setFunctionName(funcName);
+                               c->setFunction(func);
                            });
 
     luaState->set_function("fire",
                            [](float d, float s,
-                              const std::string& funcName)
+                              const sol::function& func)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mOwner->createBullet(c->luaState, funcName,
+                               c->mOwner->createBullet(c->luaState, func,
                                                        c->x, c->y,
                                                        Math::degToRad(d), s,
                                                        c->target);
@@ -295,13 +292,13 @@ void BulletLua::initLua()
 
     luaState->set_function("fireCircle",
                            [](int segments, float s,
-                              const std::string& funcName)
+                              const sol::function& func)
                            {
                                BulletLua* c = BulletLua::current;
                                float segRad = Math::PI * 2 / segments;
                                for (int i = 0; i < segments; ++i)
                                {
-                                   c->mOwner->createBullet(c->luaState, funcName,
+                                   c->mOwner->createBullet(c->luaState, func,
                                                            c->x, c->y,
                                                            segRad * i, s,
                                                            c->target);
