@@ -126,13 +126,13 @@ C++ Functions visible in BulletLua scripts:
     setSpeedRelative(float s)
 
     -- Switch current running function
-    setFunction(const std::string& funcName)
+    setFunction(const sol::function& funcName)
 
-    -- Shoot a bullet at (x, y) moving in direction d at speed s running function funcName.
-    fire(double d, double s, const std::string& funcName)
+    -- Shoot a bullet at (x, y) moving in direction (d) at speed (s) running function (func).
+    fire(double d, double s, const sol::function& funcName)
 
-    -- Shoot (segments) bullets in a circle at speed s running function funcName.
-    fireCircle(int segments, float s, const std::string& funcName)
+    -- Shoot (segments) bullets in a circle at speed (s) running function (func).
+    fireCircle(int segments, float s, const sol::function& funcName)
 
     -- Fade out the current bullet. Kill it slowly.
     vanish()
@@ -141,7 +141,7 @@ C++ Functions visible in BulletLua scripts:
     kill()
 ```
 
-An example BulletLua script can be found in `example/bin/test.lua`. More examples to come.
+An example BulletLua script can be found in `example/bin/script/test.lua`. More examples to come.
 
 ```
     -- BulletLua Test Script
@@ -153,7 +153,7 @@ An example BulletLua script can be found in `example/bin/test.lua`. More example
         local rank = getRank()
 
         if (math.fmod(turn, 15) == 0) then
-            fire(dir, 1.5, "explode")
+            fire(dir, 1.5, explode)
             dir = dir + 34
         end
     end
@@ -161,9 +161,7 @@ An example BulletLua script can be found in `example/bin/test.lua`. More example
     function explode()
         local turn = getTurn()
         if (turn == 60) then
-            for d = 0, 360, 360/40 do
-                fire(d, 4.0, "homeIn")
-            end
+            fireCircle(40, 4.0, homeIn)
 
             kill()
         end
@@ -174,7 +172,7 @@ An example BulletLua script can be found in `example/bin/test.lua`. More example
         if (turn == 20) then
             setSpeed(1)
         elseif (turn == 25) then
-            setDirAim()
+            aimTarget()
             setSpeed(10)
         elseif (turn == 50) then
             vanish()
