@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     }
 
     sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Close);
-    window.setPosition({100, 100});
+    window.setPosition({32, 32});
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
@@ -38,8 +38,7 @@ int main(int argc, char* argv[])
     manager.createBullet(filename, &origin, &destination);
 
     // Run the program as long as the window is open
-    // sf::Clock clock;
-    // float lastTime = 0;
+    sf::Clock clock;
     int frame = 0;
     while (window.isOpen())
     {
@@ -74,10 +73,9 @@ int main(int argc, char* argv[])
 
         window.draw(manager);
 
-        // float currentTime = clock.restart().asSeconds();
-        // float fps = 1.f / (currentTime - lastTime);
-        // lastTime = currentTime;
-        // printf("%.2f\n", fps);
+        float currentTime = clock.restart().asSeconds();
+        float fps = 1.f / currentTime;
+        printf("%.2f\n", fps);
 
         window.display();
 

@@ -105,7 +105,7 @@ void BulletLua::run()
     BulletLua::current = this;
 
     // Run lua function
-    if (!dying && !dead)
+    if (!dead)
     {
         func.call();
     }
@@ -290,6 +290,9 @@ void BulletLua::initLua()
                               const sol::function& func)
                            {
                                BulletLua* c = BulletLua::current;
+                               if (c->dying)
+                                   return;
+
                                c->mOwner->createBullet(c->luaState, func,
                                                        c->x, c->y,
                                                        Math::degToRad(d), s,
@@ -301,6 +304,9 @@ void BulletLua::initLua()
                               const sol::function& func)
                            {
                                BulletLua* c = BulletLua::current;
+                               if (c->dying)
+                                   return;
+
                                float segRad = Math::PI * 2 / segments;
                                for (int i = 0; i < segments; ++i)
                                {
