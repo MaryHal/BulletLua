@@ -1,6 +1,9 @@
 #include "BulletManager.hpp"
 
 BulletManager::BulletManager()
+    : bulletTexture(nullptr),
+      vertices(),
+      vertexCount(0)
 {
     // Superclass constructor(BulletLuaManager) has no arguments, so it's called implicitly
 
@@ -41,37 +44,31 @@ void BulletManager::tick()
             float dir = b->getDirection();
 
             sf::Color color(255, 255, 255, b->life);
-            sf::Vector2f texCoords[] = {
+            sf::Vector2f texCoords[4] = {
                 {0.0f, 0.0f},
                 {32.0f, 0.0f},
                 {32.0f, 32.0f},
                 {0.0f, 32.0f}
             };
 
-            sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4),
-                                       b->y + -rad * cos(dir - 3.1415f/4)),
-                          color,
-                          texCoords[0]);
+            sf::Vector2f position[4] = {
+                {b->x +  rad * (float)sin(dir - 3.1415f/4),
+                 b->y + -rad * (float)cos(dir - 3.1415f/4)},
 
-            sf::Vertex v2(sf::Vector2f(b->x +  rad * sin(dir + 3.1415f/4),
-                                       b->y + -rad * cos(dir + 3.1415f/4)),
-                          color,
-                          texCoords[1]);
+                {b->x +  rad * (float)sin(dir + 3.1415f/4),
+                 b->y + -rad * (float)cos(dir + 3.1415f/4)},
 
-            sf::Vertex v3(sf::Vector2f(b->x +  rad * sin(dir + 3 * 3.1415f/4),
-                                       b->y + -rad * cos(dir + 3 * 3.1415f/4)),
-                          color,
-                          texCoords[2]);
+                {b->x +  rad * (float)sin(dir + 3 * 3.1415f/4),
+                 b->y + -rad * (float)cos(dir + 3 * 3.1415f/4)},
 
-            sf::Vertex v4(sf::Vector2f(b->x +  rad * sin(dir + 5 * 3.1415f/4),
-                                       b->y + -rad * cos(dir + 5 * 3.1415f/4)),
-                          color,
-                          texCoords[3]);
+                {b->x +  rad * (float)sin(dir + 5 * 3.1415f/4),
+                 b->y + -rad * (float)cos(dir + 5 * 3.1415f/4)},
+            };
 
-            vertices.append(v1);
-            vertices.append(v2);
-            vertices.append(v3);
-            vertices.append(v4);
+            vertices.append({position[0], color, texCoords[0]});
+            vertices.append({position[1], color, texCoords[1]});
+            vertices.append({position[2], color, texCoords[2]});
+            vertices.append({position[3], color, texCoords[3]});
 
             collision.addBullet(bullet);
         }

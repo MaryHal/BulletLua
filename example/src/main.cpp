@@ -38,6 +38,8 @@ int main(int argc, char* argv[])
     manager.createBullet(filename, &origin, &destination);
 
     // Run the program as long as the window is open
+    // sf::Clock clock;
+    // float lastTime = 0;
     int frame = 0;
     while (window.isOpen())
     {
@@ -71,6 +73,11 @@ int main(int argc, char* argv[])
         }
 
         window.draw(manager);
+
+        // float currentTime = clock.restart().asSeconds();
+        // float fps = 1.f / (currentTime - lastTime);
+        // lastTime = currentTime;
+        // printf("%.2f\n", fps);
 
         window.display();
 
