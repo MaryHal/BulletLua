@@ -1,3 +1,4 @@
+cycles = 0
 gwait = 20
 
 function bind(f,...)
@@ -24,6 +25,11 @@ function go(wait)
       if gwait < 18 then
          gwait = 20
       end
+
+      cycles = cycles + 1
+   end
+   if (cycles == 15) then
+      vanish()
    end
 end
 

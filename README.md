@@ -179,8 +179,11 @@ This script should produce something similar to the first gif above:
         end
     end
 
-Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters. [TODO: demonstration of this barrage]
+Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters.
 
+![test6.lua](./result6.gif)
+
+    cycles = 0
     gwait = 20
 
     function bind(f,...)
@@ -207,6 +210,11 @@ Right now, BulletLua associates a single function with a bullet and runs that fu
           if gwait < 18 then
              gwait = 20
           end
+
+          cycles = cycles + 1
+       end
+       if (cycles == 15) then
+          vanish()
        end
     end
 
