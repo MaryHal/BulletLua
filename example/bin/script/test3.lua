@@ -3,6 +3,8 @@
 function main()
    local turn = getTurn()
 
+   setPosition(320, 200)
+
    d = math.fmod(turn, 6)
    if (d == 0) then
       fire(0, 1, curve)
@@ -16,7 +18,7 @@ function main()
       fire(270, 3, curve2)
    end
 
-   if (turn >= 200) then
+   if (turn >= 300) then
       vanish()
    end
 end
@@ -28,7 +30,7 @@ function curve()
 
    setDirectionRelative(3)
 
-   if (getTurn() > 104) then
+   if (getTurn() > 200) then
       vanish()
    end
 end
@@ -36,7 +38,7 @@ end
 function curve2()
    setDirectionRelative(3)
 
-   if (getTurn() > 104) then
+   if (getTurn() > 200) then
       vanish()
    end
 end

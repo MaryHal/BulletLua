@@ -25,6 +25,13 @@ int main(int argc, char* argv[])
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
+    sf::Font font;
+    font.loadFromFile("DroidSansFallback.ttf");
+
+    sf::Text infoText("", font, 11);
+    infoText.setColor(sf::Color(30, 30, 30, 255));
+    infoText.setPosition(8.0f, 8.0f);
+
     Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
     Bullet destination(320.0f, 240.0f, 0.0f, 0.0f);
 
@@ -38,8 +45,15 @@ int main(int argc, char* argv[])
     manager.createBullet(filename, &origin, &destination);
 
     // Run the program as long as the window is open
-    sf::Clock clock;
+    sf::Time updateTime;
+    std::size_t frameCount = 0;
+    unsigned int fps = 0;
+
+    sf::Clock frameClock;
+    frameClock.restart();
+
     int frame = 0;
+
     while (window.isOpen())
     {
         // Check all the window's events that were triggered since the last iteration of the loop
@@ -71,11 +85,28 @@ int main(int argc, char* argv[])
             manager.vanishAll();
         }
 
-        window.draw(manager);
+        sf::Time elapsedTime = frameClock.restart();
+        updateTime += elapsedTime;
+        frameCount += 1;
 
-        float currentTime = clock.restart().asSeconds();
-        float fps = 1.f / currentTime;
-        printf("%.2f\n", fps);
+        // Calculate FPS
+        if (updateTime >= sf::seconds(1.0f))
+        {
+            fps = frameCount;
+            updateTime -= sf::seconds(1.0f);
+            frameCount = 0;
+        }
+
+        // Setup string for infoText
+        char infoBuffer[128];
+        sprintf(infoBuffer,
+                "fps: %d\nBulletCount: %d\nFreeCount: %d\nBlockCount: %d",
+                fps, manager.bulletCount(), manager.freeCount(), manager.blockCount());
+        infoText.setString(infoBuffer);
+
+        // Draw everything
+        window.draw(manager);
+        window.draw(infoText);
 
         window.display();
 
