@@ -1,3 +1,5 @@
+-- BulletLua Test Script 5
+
 cycles = 0
 gwait = 20
 
@@ -17,7 +19,6 @@ end
 function go(wait)
    local turn = getTurn()
    if (math.fmod(turn, wait) == 0) then
-      -- speeds = {4, 5, 6}
       circle(21 - gwait, curve)
 
       setFunction(bind(go, gwait))

@@ -141,6 +141,8 @@ C++ Functions visible in BulletLua scripts:
 
 An example BulletLua script can be found in `example/bin/script/test.lua`. More examples to come.
 
+Examples
+=========
 
 This script should produce something similar to the first gif above:
 
@@ -179,9 +181,11 @@ This script should produce something similar to the first gif above:
         end
     end
 
-Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters.
+Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters. This example (`example/bin/script/test5.lua`) should show some simple `bind` usage.
 
-![test6.lua](./result6.gif)
+![test5.lua](./result6.gif)
+
+    -- BulletLua Test Script 5
 
     cycles = 0
     gwait = 20
