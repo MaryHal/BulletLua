@@ -113,6 +113,7 @@ int main(int argc, char* argv[])
         // Save frame to file
         if (capture)
         {
+            // Build filename
             char buffer[32];
             sprintf(buffer, "ss/frame%03d.png", frame);
 

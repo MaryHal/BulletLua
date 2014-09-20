@@ -21,7 +21,8 @@ BulletLua is not quite mature enough at the moment to recreate the complex patte
 
 Usage
 =========
-This project depends on [Lua](http://www.lua.org/), so make sure your compiler can find correct files (library, header files, etc).
+This project depends on [Lua](http://www.lua.org/), so make sure your compiler can find the correct Lua files (static library, header files, etc).
+
 For ease of use, [sol](https://github.com/Rapptz/sol.git) is used as a modern C++ binding to Lua. Remember to
 
     git submodule update --init --recursive
@@ -38,11 +39,11 @@ A Makefile is provided, a simple
 
     make config=release
 
-in the terminal should be enough to build the project. I use [premake](http://industriousone.com/what-premake) to generate my makefiles, which can also output other project types. So look into that if you wish to build this outside the terminal.
+in the terminal should be enough to build the project. I use [premake](http://industriousone.com/what-premake) to generate my makefiles, though it can also be used to generate other types of project files (such as for Visual Studio). So look into that if you wish to build this outside the terminal.
 
 Link the library generated in the `lib` directory and make sure the headers in the `include` directory can be found by your project, and you're already halfway there.
 
-Because there are so many use cases out there, BulletLua does not do any drawing of sprites. It simply runs lua scripts, manages the generated bullets, and provides a simple method for collision detection. As such, you'll need to produce your own code to draw the bullets. This can be as simple as creating a class to inherit from BulletLuaManager and creating a draw method. Example:
+Because there are so many use cases out there, BulletLua doesn't actually draw any sprites. It simply runs lua scripts, manages the generated bullets, and provides a simple method for collision detection. As such, you'll need to produce your own code to draw the bullets. This can be as simple as creating a class to inherit from BulletLuaManager and creating a draw method. Example:
 
     class BulletManager : public BulletLuaManager
     {
@@ -71,7 +72,7 @@ Then to run a script...
         manager.draw();
     }
 
-A moderately complex example (using [SFML](http://www.sfml-dev.org/) can be found in the `example` directory.
+A moderately complex example (using [SFML](http://www.sfml-dev.org/)) can be found in the `example` directory.
 
 Lua Binding
 =========
@@ -181,7 +182,7 @@ This script should produce something similar to the first gif above:
         end
     end
 
-Right now, BulletLua associates a single function with a bullet and runs that function every frames. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward some arguments to it. So effectively, you can transform any function with parameters into a function with no parameters. This example (`example/bin/script/test5.lua`) should show some simple `bind` usage.
+Right now, BulletLua associates a bullet with a function and runs that function every frame. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward an argument to it. So effectively, you can transform any function with parameters into a (new) function with no parameters. This example (`example/bin/script/test5.lua`) should show a simple use of `bind`.
 
 ![test5.lua](./result6.gif)
 
