@@ -2,7 +2,8 @@
 
 float BulletLuaManager::rank = 0.8;
 
-BulletLuaManager::BulletLuaManager()
+BulletLuaManager::BulletLuaManager(const Rect& area)
+    : collision(area)
 {
     // This only calls this class' version of this function, not any subclass'.
     increaseCapacity();
@@ -68,7 +69,7 @@ void BulletLuaManager::tick()
         }
         else
         {
-            bullet->run();
+            bullet->run(collision);
             collision.addBullet(bullet);
         }
     }

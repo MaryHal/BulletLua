@@ -19,7 +19,7 @@ class BulletLuaManager
         static constexpr unsigned int BLOCK_SIZE = 2048;
 
     public:
-        BulletLuaManager();
+        BulletLuaManager(const Rect& area);
         ~BulletLuaManager();
 
         // Root Bullet

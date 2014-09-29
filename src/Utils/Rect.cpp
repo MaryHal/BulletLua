@@ -1,4 +1,4 @@
-#include "Rect.hpp"
+#include "Utils/Rect.hpp"
 
 #include <algorithm>
 
@@ -13,7 +13,7 @@ Rect::Rect(float left, float top, float width, float height)
 {
 }
 
-bool Rect::intersects(const Rect& that)
+bool Rect::intersects(const Rect& that) const
 {
     // Normalize coordinates/sizes
     float r1MinX = std::min(left, left + width);
@@ -21,7 +21,6 @@ bool Rect::intersects(const Rect& that)
     float r1MinY = std::min(top,  top  + height);
     float r1MaxY = std::max(top,  top  + height);
 
-    // Compute the min and max of the second rectangle on both axes
     float r2MinX = std::min(that.left, that.left + that.width);
     float r2MaxX = std::max(that.left, that.left + that.width);
     float r2MinY = std::min(that.top,  that.top  + that.height);

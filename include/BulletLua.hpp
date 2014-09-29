@@ -9,6 +9,7 @@
 #include "Bullet.hpp"
 
 class BulletLuaManager;
+class SpacialPartition;
 
 class BulletLua : public Bullet
 {
@@ -36,7 +37,7 @@ class BulletLua : public Bullet
                  BulletLuaManager* owner);
 
         int getTurn() const;
-        void run();
+        void run(const SpacialPartition& collision);
 
         void __debugRun(const std::string& code);
 

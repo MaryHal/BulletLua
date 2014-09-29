@@ -4,6 +4,8 @@
 #include "Utils/Math.hpp"
 #include "Utils/Rng.hpp"
 
+#include "SpacialPartition.hpp"
+
 // This pointer should point to the currently "processing" bullet.
 // The reason for this is that the lambda functions generated for our lua state
 // are generated at compile time. This means that while many objects can
@@ -100,7 +102,7 @@ int BulletLua::getTurn() const
     return turn;
 }
 
-void BulletLua::run()
+void BulletLua::run(const SpacialPartition& collision)
 {
     BulletLua::current = this;
 
@@ -113,8 +115,7 @@ void BulletLua::run()
     x += vx;
     y += vy;
 
-    if (x < -100.0 || x > 700.0 ||
-        y < -100.0 || y > 600.0)
+    if (collision.checkOutOfBounds(*this))
     {
         dead = true;
     }

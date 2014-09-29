@@ -12,7 +12,7 @@ class Rect
         Rect();
         Rect(float left, float top, float width, float height);
 
-        bool intersects(const Rect& that);
+        bool intersects(const Rect& that) const;
 };
 
 inline bool operator==(const Rect& r1, const Rect& r2);

@@ -38,7 +38,8 @@ int main(int argc, char* argv[])
     sf::Texture bulletTexture;
     bulletTexture.loadFromFile("bullet2.png");
 
-    BulletManager manager;
+    // Create a new bullet manager and make it govern the window + 100px padding
+    BulletManager manager({-100, -100, 840, 680});
     manager.setTexture(bulletTexture);
 
     printf("Running Script: %s\n", filename.c_str());

@@ -1,9 +1,9 @@
 #include "SpacialPartition.hpp"
-#include "Utils/Rect.hpp"
 
 #include <cstring>
 
-SpacialPartition::SpacialPartition()
+SpacialPartition::SpacialPartition(const Rect& area)
+    : screenArea(area)
 {
     reset();
 }
@@ -18,6 +18,7 @@ void SpacialPartition::addBullet(const Bullet* bullet)
     if (bullet->dying || bullet->dead)
         return;
 
+    // Abuse integer division to determine which array cell this bullet belongs to.
     int x = bullet->x / tileSize;
     int y = bullet->y / tileSize;
 
@@ -35,7 +36,13 @@ void SpacialPartition::reset()
     std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
 }
 
-bool SpacialPartition::checkCollision(Bullet& b)
+bool SpacialPartition::checkOutOfBounds(const Bullet& b) const
+{
+    Rect thisBullet(b.x, b.y, 4, 4);
+    return !screenArea.intersects(thisBullet);
+}
+
+bool SpacialPartition::checkCollision(const Bullet& b) const
 {
     int x = b.x / tileSize;
     int y = b.y / tileSize;

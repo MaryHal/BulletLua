@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Utils/Rect.hpp"
 #include "BulletLuaManager.hpp"
 
 class BulletManager : public BulletLuaManager,
@@ -10,7 +11,7 @@ class BulletManager : public BulletLuaManager,
                       public sf::Transformable
 {
     public:
-        BulletManager();
+        BulletManager(const Rect& area);
         ~BulletManager();
 
         void setTexture(sf::Texture& tex);

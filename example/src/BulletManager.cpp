@@ -1,7 +1,8 @@
 #include "BulletManager.hpp"
 
-BulletManager::BulletManager()
-    : bulletTexture(nullptr),
+BulletManager::BulletManager(const Rect& area)
+    : BulletLuaManager(area),
+      bulletTexture(nullptr),
       vertices(),
       vertexCount(0)
 {
@@ -37,7 +38,7 @@ void BulletManager::tick()
         }
         else
         {
-            bullet->run();
+            bullet->run(collision);
 
             const Bullet* b = bullet;
             float rad = std::sqrt(8*8 + 8*8);
