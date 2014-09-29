@@ -232,3 +232,10 @@ Right now, BulletLua associates a bullet with a function and runs that function 
           vanish()
        end
     end
+
+Future Plans
+=========
+
+* Be able to desribe collision detection area.
+* More robust collision detection.
+* Be able to agnostically define different types of bullets.
