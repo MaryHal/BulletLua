@@ -52,6 +52,7 @@ void BulletManager::tick()
                 {0.0f, 32.0f}
             };
 
+            // Rotate coordinates around center
             sf::Vector2f position[4] = {
                 {b->x +  rad * (float)sin(dir - 3.1415f/4),
                  b->y + -rad * (float)cos(dir - 3.1415f/4)},

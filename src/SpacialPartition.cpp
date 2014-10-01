@@ -25,8 +25,11 @@ void SpacialPartition::addBullet(const Bullet* bullet)
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return;
 
-    space[x][y][bulletCount[x][y]] = bullet;
-    ++bulletCount[x][y];
+    if (bulletCount[x][y] < CAP)
+    {
+        space[x][y][bulletCount[x][y]] = bullet;
+        ++bulletCount[x][y];
+    }
 }
 
 // Call once per frame

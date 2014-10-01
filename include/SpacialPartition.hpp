@@ -4,7 +4,7 @@
 #include "Bullet.hpp"
 #include "Utils/Rect.hpp"
 
-// Simple collision detection
+// Very simple collision detection
 class SpacialPartition
 {
     public:
@@ -22,8 +22,8 @@ class SpacialPartition
 
     private:
         static constexpr unsigned int tileSize = 50;
-        static constexpr int WIDTH  = 640 / tileSize + 3;
-        static constexpr int HEIGHT = 480 / tileSize + 3;
+        static constexpr int WIDTH  = 640 / tileSize;
+        static constexpr int HEIGHT = 480 / tileSize;
         static constexpr int CAP = 100;
 
         // Out of bounds error waiting to happen...
