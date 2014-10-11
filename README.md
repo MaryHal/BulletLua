@@ -233,6 +233,8 @@ Right now, BulletLua associates a bullet with a function and runs that function 
        end
     end
 
+A second, perhaps more useful, example of `bind` can be found in `example/bin/script/test6.lua`
+
 Future Plans
 =========
 

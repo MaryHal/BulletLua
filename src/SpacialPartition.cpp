@@ -55,7 +55,7 @@ bool SpacialPartition::checkCollision(const Bullet& b) const
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return false;
 
-    Rect thisBullet(b.x, b.y, 4, 4);
+    Rect thisBullet(b.x - 2, b.y - 2, 4, 4);
     Rect thatBullet(0.0f, 0.0f, 4, 4);
 
     for (int i = 0; i < bulletCount[x][y]; i++)
