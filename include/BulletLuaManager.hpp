@@ -20,7 +20,7 @@ class BulletLuaManager
 
     public:
         BulletLuaManager(const Rect& area);
-        ~BulletLuaManager();
+        virtual ~BulletLuaManager();
 
         // Root Bullet
         void createBullet(const std::string& filename,
