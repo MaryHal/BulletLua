@@ -41,8 +41,9 @@ targetDir = 0
 
 function main()
    turn = getTurn()
+   rank = getRank()
 
-   if (math.fmod(turn, 75) == 0) then
+   if (math.fmod(turn, math.floor(75 - 30 * rank)) == 0) then
       fire(randFloatRange(0, 90), 1.5, launch)
    end
 end
