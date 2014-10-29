@@ -2,7 +2,7 @@
 
 #include <cstring>
 
-SpacialPartition::SpacialPartition(const Rect& area)
+SpacialPartition::SpacialPartition(const BulletLuaUtils::Rect& area)
     : screenArea(area)
 {
     reset();
@@ -41,7 +41,7 @@ void SpacialPartition::reset()
 
 bool SpacialPartition::checkOutOfBounds(const Bullet& b) const
 {
-    Rect thisBullet(b.x, b.y, 4, 4);
+    BulletLuaUtils::Rect thisBullet(b.x, b.y, 4, 4);
     return !screenArea.intersects(thisBullet);
 }
 
@@ -55,8 +55,8 @@ bool SpacialPartition::checkCollision(const Bullet& b) const
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return false;
 
-    Rect thisBullet(b.x - 2, b.y - 2, 4, 4);
-    Rect thatBullet(0.0f, 0.0f, 4, 4);
+    BulletLuaUtils::Rect thisBullet(b.x - 2, b.y - 2, 4, 4);
+    BulletLuaUtils::Rect thatBullet(0.0f, 0.0f, 4, 4);
 
     for (int i = 0; i < bulletCount[x][y]; i++)
     {

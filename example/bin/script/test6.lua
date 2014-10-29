@@ -8,20 +8,30 @@ function bind(f,...)
 end
 
 function twirl(dir)
+   turn = getTurn()
+
    setDirectionRelative(dir * 2)
-   setSpeedRelative(0.075)
+   setSpeedRelative(0.08)
+
+   if (turn == 90) then
+      vanish()
+   end
 end
 
 twirlcw  = bind(twirl, 1)
 twirlccw = bind(twirl, -1)
 
 function burst()
-   for initialDirection = 1, 360/12 do
-      fire(initialDirection * 12, 3, twirlcw)
-      fire(initialDirection * 12, 3, twirlccw)
+   divs = 15
+   for initialDirection = 1, 360/divs do
+      fire(initialDirection * divs, 3.7, twirlcw)
+      fire(initialDirection * divs, 3.7, twirlccw)
 
-      fire(initialDirection * 12, 2.3, twirlcw)
-      fire(initialDirection * 12, 2.3, twirlccw)
+      fire(initialDirection * divs, 3.0, twirlcw)
+      fire(initialDirection * divs, 3.0, twirlccw)
+
+      fire(initialDirection * divs, 2.3, twirlcw)
+      fire(initialDirection * divs, 2.3, twirlccw)
    end
    kill()
 end
@@ -33,17 +43,20 @@ function launch()
       setDirectionRelative(3)
       setSpeedRelative(0.05)
    elseif (turn == 60) then
-      setFunction(burst)
+      burst()
    end
 end
 
-targetDir = 0
+shotCount = 0
+initialDirections = {0, 40, 80, 120, 160}
 
 function main()
    turn = getTurn()
-   rank = getRank()
 
-   if (math.fmod(turn, math.floor(75 - 30 * rank)) == 0) then
-      fire(randFloatRange(0, 90), 1.5, launch)
+   if (math.fmod(turn, 120) == 0) then
+      -- Cycle between directions
+      direction = initialDirections[math.fmod(shotCount, #initialDirections) + 1]
+      shotCount = shotCount + 1
+      fire(direction, 1.5, launch)
    end
 end

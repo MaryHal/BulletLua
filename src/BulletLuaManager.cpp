@@ -2,7 +2,7 @@
 
 float BulletLuaManager::rank = 0.8;
 
-BulletLuaManager::BulletLuaManager(const Rect& area)
+BulletLuaManager::BulletLuaManager(const BulletLuaUtils::Rect& area)
     : collision(area)
 {
     // This only calls this class' version of this function, not any subclass'.

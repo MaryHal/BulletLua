@@ -8,7 +8,7 @@
 class SpacialPartition
 {
     public:
-        SpacialPartition(const Rect& area);
+        SpacialPartition(const BulletLuaUtils::Rect& area);
         // SpacialPartition(int width, int height);
 
         void addBullet(const Bullet* bullet);
@@ -30,7 +30,7 @@ class SpacialPartition
         const Bullet* space[WIDTH][HEIGHT][CAP];
         int bulletCount[WIDTH][HEIGHT];
 
-        Rect screenArea;
+        BulletLuaUtils::Rect screenArea;
 };
 
 #endif // _SpacialPartition_hpp_

@@ -200,25 +200,25 @@ void BulletLua::initLua()
     luaState->set_function("randFloat",
                            []()
                            {
-                               return Random::genFloat();
+                               return BulletLuaUtils::Random::genFloat();
                            });
 
     luaState->set_function("randFloatRange",
                            [](float min, float max)
                            {
-                               return Random::genFloat(min, max);
+                               return BulletLuaUtils::Random::genFloat(min, max);
                            });
 
     luaState->set_function("randInt",
                            [](int max)
                            {
-                               return Random::genInt(max);
+                               return BulletLuaUtils::Random::genInt(max);
                            });
 
     luaState->set_function("randIntRange",
                            [](int min, int max)
                            {
-                               return Random::genInt(min, max);
+                               return BulletLuaUtils::Random::genInt(min, max);
                            });
 
     luaState->set_function("setPosition",
