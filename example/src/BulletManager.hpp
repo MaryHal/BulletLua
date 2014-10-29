@@ -11,7 +11,7 @@ class BulletManager : public BulletLuaManager,
                       public sf::Transformable
 {
     public:
-        BulletManager(const Rect& area);
+        BulletManager(const BulletLuaUtils::Rect& area);
         ~BulletManager() final;
 
         void setTexture(sf::Texture& tex);

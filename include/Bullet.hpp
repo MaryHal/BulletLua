@@ -3,6 +3,9 @@
 
 struct Bullet
 {
+    public:
+        static constexpr float zero = 0.0001;
+
     private:
         static constexpr float tolerance = 0.0001f;
 

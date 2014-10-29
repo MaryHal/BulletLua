@@ -1,6 +1,6 @@
 #include "BulletManager.hpp"
 
-BulletManager::BulletManager(const Rect& area)
+BulletManager::BulletManager(const BulletLuaUtils::Rect& area)
     : BulletLuaManager(area),
       bulletTexture(nullptr),
       vertices(),
