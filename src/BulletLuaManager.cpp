@@ -65,6 +65,14 @@ void BulletLuaManager::tick()
             freeBullets.push(*iter);
             iter = bullets.erase(iter);
         }
+
+        // If the next bullet is dead, we are at the end of the list, so iter will be
+        // invalid.
+        if ((*iter)->isDead())
+        {
+            break;
+        }
+
         (*iter)->run(collision);
         collision.addBullet(*iter);
     }

@@ -35,6 +35,13 @@ void BulletManager::tick()
             iter = bullets.erase(iter);
         }
 
+        // If the next bullet is dead, we are at the end of the list, so iter will be
+        // invalid.
+        if ((*iter)->isDead())
+        {
+            break;
+        }
+
         (*iter)->run(collision);
 
         const Bullet* b = *iter;
