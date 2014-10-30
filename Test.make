@@ -20,15 +20,15 @@ ifndef AR
 endif
 
 ifeq ($(config),debug)
-  OBJDIR     = obj/Debug
-  TARGETDIR  = bin
+  OBJDIR     = obj/Debug/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -L../lib
+  LDFLAGS   += -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -42,15 +42,15 @@ ifeq ($(config),debug)
 endif
 
 ifeq ($(config),release)
-  OBJDIR     = obj/Release
-  TARGETDIR  = bin
+  OBJDIR     = obj/Release/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -L../lib
+  LDFLAGS   += -s -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -64,15 +64,15 @@ ifeq ($(config),release)
 endif
 
 ifeq ($(config),debug32)
-  OBJDIR     = obj/x32/Debug
-  TARGETDIR  = bin
+  OBJDIR     = obj/x32/Debug/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += -DDEBUG
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m32 -L/usr/lib32 -L../lib
+  LDFLAGS   += -m32 -L/usr/lib32 -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -86,15 +86,15 @@ ifeq ($(config),debug32)
 endif
 
 ifeq ($(config),release32)
-  OBJDIR     = obj/x32/Release
-  TARGETDIR  = bin
+  OBJDIR     = obj/x32/Release/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += 
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m32 -L/usr/lib32 -L../lib
+  LDFLAGS   += -s -m32 -L/usr/lib32 -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -108,15 +108,15 @@ ifeq ($(config),release32)
 endif
 
 ifeq ($(config),debug64)
-  OBJDIR     = obj/x64/Debug
-  TARGETDIR  = bin
+  OBJDIR     = obj/x64/Debug/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m64 -L/usr/lib64 -L../lib
+  LDFLAGS   += -m64 -L/usr/lib64 -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -130,15 +130,15 @@ ifeq ($(config),debug64)
 endif
 
 ifeq ($(config),release64)
-  OBJDIR     = obj/x64/Release
-  TARGETDIR  = bin
+  OBJDIR     = obj/x64/Release/Test
+  TARGETDIR  = example/bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += -I../include -I../ext/sol
+  INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m64 -L/usr/lib64 -L../lib
+  LDFLAGS   += -s -m64 -L/usr/lib64 -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -171,7 +171,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 	@:
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking test
+	@echo Linking Test
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -192,7 +192,7 @@ else
 endif
 
 clean:
-	@echo Cleaning test
+	@echo Cleaning Test
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -214,10 +214,10 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/main.o: src/main.cpp
+$(OBJDIR)/main.o: example/src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/BulletManager.o: src/BulletManager.cpp
+$(OBJDIR)/BulletManager.o: example/src/BulletManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

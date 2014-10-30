@@ -6,7 +6,7 @@ ifndef config
 endif
 export config
 
-PROJECTS := BulletLua
+PROJECTS := BulletLua Test
 
 .PHONY: all clean help $(PROJECTS)
 
@@ -16,8 +16,13 @@ BulletLua:
 	@echo "==== Building BulletLua ($(config)) ===="
 	@${MAKE} --no-print-directory -C . -f BulletLua.make
 
+Test: 
+	@echo "==== Building Test ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f Test.make
+
 clean:
 	@${MAKE} --no-print-directory -C . -f BulletLua.make clean
+	@${MAKE} --no-print-directory -C . -f Test.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -34,5 +39,6 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   BulletLua"
+	@echo "   Test"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

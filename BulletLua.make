@@ -20,7 +20,7 @@ ifndef AR
 endif
 
 ifeq ($(config),debug)
-  OBJDIR     = obj/Debug
+  OBJDIR     = obj/Debug/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
@@ -42,7 +42,7 @@ ifeq ($(config),debug)
 endif
 
 ifeq ($(config),release)
-  OBJDIR     = obj/Release
+  OBJDIR     = obj/Release/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += 
@@ -64,7 +64,7 @@ ifeq ($(config),release)
 endif
 
 ifeq ($(config),debug32)
-  OBJDIR     = obj/x32/Debug
+  OBJDIR     = obj/x32/Debug/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
@@ -86,7 +86,7 @@ ifeq ($(config),debug32)
 endif
 
 ifeq ($(config),release32)
-  OBJDIR     = obj/x32/Release
+  OBJDIR     = obj/x32/Release/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += 
@@ -108,7 +108,7 @@ ifeq ($(config),release32)
 endif
 
 ifeq ($(config),debug64)
-  OBJDIR     = obj/x64/Debug
+  OBJDIR     = obj/x64/Debug/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += -DDEBUG
@@ -130,7 +130,7 @@ ifeq ($(config),debug64)
 endif
 
 ifeq ($(config),release64)
-  OBJDIR     = obj/x64/Release
+  OBJDIR     = obj/x64/Release/BulletLua
   TARGETDIR  = lib
   TARGET     = $(TARGETDIR)/libbulletlua.a
   DEFINES   += 
