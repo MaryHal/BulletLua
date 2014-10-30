@@ -183,6 +183,13 @@ void BulletLua::initLua()
                                BulletLua* c = BulletLua::current;
                                return Math::radToDeg(c->getDirection());
                            });
+    
+    luaState->set_function("getLife",
+                           []()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               return c->life;
+                           });
 
     luaState->set_function("getTurn",
                            []()

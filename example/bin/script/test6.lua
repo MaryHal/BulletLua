@@ -1,4 +1,4 @@
--- BulletLua Test Script 5
+-- BulletLua Test Script 6
 
 function bind(f,...)
    local args = {...}
@@ -42,6 +42,11 @@ function launch()
    if (turn < 60) then
       setDirectionRelative(3)
       setSpeedRelative(0.05)
+
+      -- vx, vy = getVelocity()
+      -- s = getSpeed()
+      -- d = getDirection()
+      -- print (turn, vx, vy, s, d)
    elseif (turn == 60) then
       burst()
    end

@@ -29,51 +29,47 @@ void BulletManager::tick()
 
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
-        BulletLua* bullet = *iter;
-
-        if (bullet->isDead())
+        if ((*iter)->isDead())
         {
-            freeBullets.push(bullet);
+            freeBullets.push(*iter);
             iter = bullets.erase(iter);
         }
-        else
-        {
-            bullet->run(collision);
 
-            const Bullet* b = bullet;
-            float rad = std::sqrt(8*8 + 8*8);
-            float dir = b->getDirection();
+        (*iter)->run(collision);
 
-            sf::Color color(255, 255, 255, b->life);
-            sf::Vector2f texCoords[4] = {
-                {0.0f, 0.0f},
-                {32.0f, 0.0f},
-                {32.0f, 32.0f},
-                {0.0f, 32.0f}
-            };
+        const Bullet* b = *iter;
+        float rad = std::sqrt(8*8 + 8*8);
+        float dir = b->getDirection();
 
-            // Rotate coordinates around center
-            sf::Vector2f position[4] = {
-                {b->x +  rad * (float)sin(dir - 3.1415f/4),
-                 b->y + -rad * (float)cos(dir - 3.1415f/4)},
+        sf::Color color(255, 255, 255, b->life);
+        sf::Vector2f texCoords[4] = {
+            {0.0f, 0.0f},
+            {32.0f, 0.0f},
+            {32.0f, 32.0f},
+            {0.0f, 32.0f}
+        };
 
-                {b->x +  rad * (float)sin(dir + 3.1415f/4),
-                 b->y + -rad * (float)cos(dir + 3.1415f/4)},
+        // Rotate coordinates around center
+        sf::Vector2f position[4] = {
+            {b->x +  rad * (float)sin(dir - 3.1415f/4),
+             b->y + -rad * (float)cos(dir - 3.1415f/4)},
 
-                {b->x +  rad * (float)sin(dir + 3 * 3.1415f/4),
-                 b->y + -rad * (float)cos(dir + 3 * 3.1415f/4)},
+            {b->x +  rad * (float)sin(dir + 3.1415f/4),
+             b->y + -rad * (float)cos(dir + 3.1415f/4)},
 
-                {b->x +  rad * (float)sin(dir + 5 * 3.1415f/4),
-                 b->y + -rad * (float)cos(dir + 5 * 3.1415f/4)},
-            };
+            {b->x +  rad * (float)sin(dir + 3 * 3.1415f/4),
+             b->y + -rad * (float)cos(dir + 3 * 3.1415f/4)},
 
-            vertices.append({position[0], color, texCoords[0]});
-            vertices.append({position[1], color, texCoords[1]});
-            vertices.append({position[2], color, texCoords[2]});
-            vertices.append({position[3], color, texCoords[3]});
+            {b->x +  rad * (float)sin(dir + 5 * 3.1415f/4),
+             b->y + -rad * (float)cos(dir + 5 * 3.1415f/4)},
+        };
 
-            collision.addBullet(bullet);
-        }
+        vertices.append({position[0], color, texCoords[0]});
+        vertices.append({position[1], color, texCoords[1]});
+        vertices.append({position[2], color, texCoords[2]});
+        vertices.append({position[3], color, texCoords[3]});
+
+        collision.addBullet(*iter);
     }
 }
 

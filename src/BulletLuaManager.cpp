@@ -60,18 +60,13 @@ void BulletLuaManager::tick()
 
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
-        BulletLua* bullet = *iter;
-
-        if (bullet->isDead())
+        if ((*iter)->isDead())
         {
-            freeBullets.push(bullet);
+            freeBullets.push(*iter);
             iter = bullets.erase(iter);
         }
-        else
-        {
-            bullet->run(collision);
-            collision.addBullet(bullet);
-        }
+        (*iter)->run(collision);
+        collision.addBullet(*iter);
     }
 }
 
