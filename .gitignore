@@ -26,3 +26,4 @@ data/
 obj/
 
 ext/sol/
+/example/bin/Test

@@ -22,132 +22,48 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug/BulletLua
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
+  TARGET     = $(TARGETDIR)/libbulletlua.so
   DEFINES   += -DDEBUG
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -fPIC -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -Lext/libbulletml/lib
+  LDFLAGS   += -shared -Lext/libbulletml/lib
   LIBS      += -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
+  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp lib/libbulletlua.so example/bin
   endef
 endif
 
 ifeq ($(config),release)
   OBJDIR     = obj/Release/BulletLua
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
+  TARGET     = $(TARGETDIR)/libbulletlua.so
   DEFINES   += 
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -fPIC -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -Lext/libbulletml/lib
+  LDFLAGS   += -s -shared -Lext/libbulletml/lib
   LIBS      += -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
+  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),debug32)
-  OBJDIR     = obj/x32/Debug/BulletLua
-  TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
-  DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m32 -L/usr/lib32 -Lext/libbulletml/lib
-  LIBS      += -llua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),release32)
-  OBJDIR     = obj/x32/Release/BulletLua
-  TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
-  DEFINES   += 
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m32 -L/usr/lib32 -Lext/libbulletml/lib
-  LIBS      += -llua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),debug64)
-  OBJDIR     = obj/x64/Debug/BulletLua
-  TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
-  DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m64 -L/usr/lib64 -Lext/libbulletml/lib
-  LIBS      += -llua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),release64)
-  OBJDIR     = obj/x64/Release/BulletLua
-  TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libbulletlua.a
-  DEFINES   += 
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m64 -L/usr/lib64 -Lext/libbulletml/lib
-  LIBS      += -llua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(AR) -rcs $(TARGET) $(OBJECTS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp lib/libbulletlua.so example/bin
   endef
 endif
 

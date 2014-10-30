@@ -1,10 +1,11 @@
 solution "BulletLua"
     configurations { "Debug", "Release" }
-    platforms { "native", "x32", "x64" }
+    -- platforms { "native", "x32", "x64" }
 
+    -- Main Library
     project "BulletLua"
         language "C++"
-        kind "StaticLib"
+        kind "SharedLib"
         buildoptions { "-std=c++11" }
 
         includedirs { "include", "ext/sol" }
@@ -13,20 +14,26 @@ solution "BulletLua"
         targetdir "lib"
         targetname "bulletlua"
 
+        -- Hacky workaround (combined with the linker options in the next project)
+        -- so the Test application can conveniently find this shared library file.
+        postbuildcommands { "cp lib/libbulletlua.so example/bin" }
+
         ---------------------------------------
-        -- Link static libraries and config
+        -- Link libraries
         libdirs { "ext/libbulletml/lib" }
         links { "lua" }
 
         ---------------------------------------
         -- Build rules
         configuration "Debug"
-        defines "DEBUG"
-        flags { "Symbols", "ExtraWarnings" }
+            defines "DEBUG"
+            flags { "Symbols", "ExtraWarnings" }
 
         configuration "Release"
             flags { "Optimize", "ExtraWarnings" }
 
+
+    -- Test Application
     project "Test"
         language "C++"
         buildoptions { "-std=c++11" }
@@ -38,21 +45,12 @@ solution "BulletLua"
         targetname "Test"
 
         ---------------------------------------
-        -- Link static libraries and config
+        -- Link libraries
         libdirs { "lib" }
         links { "sfml-graphics", "sfml-window", "sfml-system", "lua", "bulletlua" }
 
-        configuration "linux"
-            targetprefix "linux_"
-
-        configuration "windows"
-            targetprefix "windows_"
-
-        configuration { "native or x64" }
-            targetsuffix "64"
-
-        configuration "x32"
-            targetsuffix "32"
+        -- Search for shared library files in the same directory as this executable.
+        linkoptions { "-Wl,-rpath '-Wl,\$\$ORIGIN'" }
 
         ---------------------------------------
         -- Build rules

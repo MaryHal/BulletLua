@@ -22,13 +22,13 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = obj/Debug/Test
   TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test64
+  TARGET     = $(TARGETDIR)/Test
   DEFINES   += -DDEBUG
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -Llib
+  LDFLAGS   += -Wl,-rpath '-Wl,$$ORIGIN' -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -44,101 +44,13 @@ endif
 ifeq ($(config),release)
   OBJDIR     = obj/Release/Test
   TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test64
+  TARGET     = $(TARGETDIR)/Test
   DEFINES   += 
   INCLUDES  += -Iinclude -Iext/sol
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -Llib
-  LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),debug32)
-  OBJDIR     = obj/x32/Debug/Test
-  TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test32
-  DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m32 -L/usr/lib32 -Llib
-  LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),release32)
-  OBJDIR     = obj/x32/Release/Test
-  TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test32
-  DEFINES   += 
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m32 -L/usr/lib32 -Llib
-  LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),debug64)
-  OBJDIR     = obj/x64/Debug/Test
-  TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test64
-  DEFINES   += -DDEBUG
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m64 -L/usr/lib64 -Llib
-  LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
-  RESFLAGS  += $(DEFINES) $(INCLUDES) 
-  LDDEPS    += 
-  LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-endif
-
-ifeq ($(config),release64)
-  OBJDIR     = obj/x64/Release/Test
-  TARGETDIR  = example/bin
-  TARGET     = $(TARGETDIR)/linux_Test64
-  DEFINES   += 
-  INCLUDES  += -Iinclude -Iext/sol
-  CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64 -std=c++11
-  CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m64 -L/usr/lib64 -Llib
+  LDFLAGS   += -s -Wl,-rpath '-Wl,$$ORIGIN' -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
