@@ -28,8 +28,8 @@ ifeq ($(config),debug)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -fPIC -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -shared -Lext/libbulletml/lib
-  LIBS      += -llua
+  LDFLAGS   += -shared
+  LIBS      += 
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -52,8 +52,8 @@ ifeq ($(config),release)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -fPIC -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -shared -Lext/libbulletml/lib
-  LIBS      += -llua
+  LDFLAGS   += -s -shared
+  LIBS      += 
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)

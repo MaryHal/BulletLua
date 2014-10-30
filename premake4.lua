@@ -16,7 +16,11 @@ solution "BulletLua"
 
         -- Hacky workaround (combined with the linker options in the next project)
         -- so the Test application can conveniently find this shared library file.
-        postbuildcommands { "cp lib/libbulletlua.so example/bin" }
+        configuration "not windows"
+            postbuildcommands { "cp lib/libbulletlua.so example/bin" }
+
+        configuration "windows"
+            postbuildcommands { "copy lib/bulletlua.dll example/bin" }
 
         ---------------------------------------
         -- Link libraries
@@ -49,8 +53,8 @@ solution "BulletLua"
         libdirs { "lib" }
         links { "sfml-graphics", "sfml-window", "sfml-system", "lua", "bulletlua" }
 
-        -- Search for shared library files in the same directory as this executable.
-        linkoptions { "-Wl,-rpath '-Wl,\$\$ORIGIN'" }
+        configuration "not windows"
+            linkoptions { "-Wl,-rpath '-Wl,\$\$ORIGIN'" }
 
         ---------------------------------------
         -- Build rules
