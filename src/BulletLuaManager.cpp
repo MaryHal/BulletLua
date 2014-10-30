@@ -58,7 +58,7 @@ void BulletLuaManager::tick()
     // we must repopulate the containers each frame.
     collision.reset();
 
-    for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
+    for (auto iter = bullets.begin(); iter != bullets.end();)
     {
         if ((*iter)->isDead())
         {
@@ -70,11 +70,13 @@ void BulletLuaManager::tick()
         // invalid.
         if ((*iter)->isDead())
         {
-            break;
+            continue;
         }
 
         (*iter)->run(collision);
         collision.addBullet(*iter);
+
+        ++iter;
     }
 }
 

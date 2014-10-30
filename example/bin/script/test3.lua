@@ -18,7 +18,7 @@ function main()
       fire(270, 3, curve2)
    end
 
-   if (turn >= 300) then
+   if (turn >= 120) then
       vanish()
    end
 end

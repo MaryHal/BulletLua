@@ -27,7 +27,7 @@ void BulletManager::tick()
     vertices.clear();
     collision.reset();
 
-    for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
+    for (auto iter = bullets.begin(); iter != bullets.end();)
     {
         if ((*iter)->isDead())
         {
@@ -39,7 +39,7 @@ void BulletManager::tick()
         // invalid.
         if ((*iter)->isDead())
         {
-            break;
+            continue;
         }
 
         (*iter)->run(collision);
@@ -77,6 +77,8 @@ void BulletManager::tick()
         vertices.append({position[3], color, texCoords[3]});
 
         collision.addBullet(*iter);
+
+        ++iter;
     }
 }
 
