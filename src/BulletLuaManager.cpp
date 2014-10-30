@@ -60,16 +60,12 @@ void BulletLuaManager::tick()
 
     for (auto iter = bullets.begin(); iter != bullets.end();)
     {
+        // If the current bullet is dead, push it onto the free stack.
+        // Keep in mind `erase` increments our iterator and returns a valid iterator.
         if ((*iter)->isDead())
         {
             freeBullets.push(*iter);
             iter = bullets.erase(iter);
-        }
-
-        // If the next bullet is dead, we are at the end of the list, so iter will be
-        // invalid.
-        if ((*iter)->isDead())
-        {
             continue;
         }
 
