@@ -15,8 +15,7 @@ BulletLua* BulletLua::current = nullptr;
 
 BulletLua::BulletLua()
     : Bullet(0.0, 0.0, 0.0, 0.0),
-      target(nullptr),
-      turn(0)
+      target(nullptr)
 {
 }
 
@@ -95,11 +94,6 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
 
     luaState = lua;
     this->func = func;
-}
-
-int BulletLua::getTurn() const
-{
-    return turn;
 }
 
 void BulletLua::run(const SpacialPartition& collision)
@@ -183,7 +177,7 @@ void BulletLua::initLua()
                                BulletLua* c = BulletLua::current;
                                return Math::radToDeg(c->getDirection());
                            });
-    
+
     luaState->set_function("getLife",
                            []()
                            {

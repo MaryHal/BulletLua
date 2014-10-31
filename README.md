@@ -238,6 +238,7 @@ A second, perhaps more useful, example of `bind` can be found in `example/bin/sc
 Future Plans
 =========
 
+* Smooth out the C++ interface and then introduce a mechanism to convert BulletLua scripts to C++.
 * Be able to desribe collision detection area.
 * More robust collision detection.
 * Be able to agnostically define different types of bullets.

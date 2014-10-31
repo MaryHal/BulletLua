@@ -4,7 +4,12 @@
 #include "Bullet.hpp"
 #include "Utils/Rect.hpp"
 
-// Very simple collision detection
+// Very simple collision detection.
+// Cuts a region into a set amount of tiles so collision detection only
+// needs to compare against elements located in the same tile.
+// While the worst-case runtime is O(n^2) , where ALL bullets are located in
+// the same tile (O(n) to add all bullets, O(n) to check against all bullets in a tile),
+// this simple solution suits my needs for now.
 class SpacialPartition
 {
     public:

@@ -4,24 +4,17 @@
 struct Bullet
 {
     public:
-        static constexpr float zero = 0.0001;
-
-    private:
-        static constexpr float tolerance = 0.0001f;
-
-    public:
         float x, y;
         float vx, vy;
         bool dead;
 
         bool dying;
         int life;
-        int wait;
+        int turn;
 
         Bullet(float x, float y, float vx, float vy);
 
-        void setBullet(float x, float y, float vx, float vy);
-
+        // void setBullet(float x, float y, float vx, float vy);
         void setSpeedAndDirection(float speed, float dir);
 
         void setSpeed(float speed);
@@ -38,6 +31,12 @@ struct Bullet
 
         bool isDead() const;
         bool isDying() const;
+        int getTurn() const;
+
+    private:
+        // Adjust speed if near zero as setDirection depends on at least one component
+        // of our velocity vector is non-zero.
+        void fixSpeed();
 };
 
 #endif // _Bullet_hpp_

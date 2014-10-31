@@ -36,7 +36,6 @@ class BulletLua : public Bullet
                  Bullet* target,
                  BulletLuaManager* owner);
 
-        int getTurn() const;
         void run(const SpacialPartition& collision);
 
         void __debugRun(const std::string& code);
@@ -50,8 +49,6 @@ class BulletLua : public Bullet
 
         std::shared_ptr<sol::state> luaState;
         sol::function func;
-
-        int turn;
 
         BulletLuaManager* mOwner;
 };
