@@ -5,7 +5,7 @@
 #include "Utils/Rect.hpp"
 
 // Very simple collision detection.
-// Cuts a region into a set amount of tiles so collision detection only
+// Cuts a region into a fixed amount of tiles so collision detection only
 // needs to compare against elements located in the same tile.
 // While the worst-case runtime is O(n^2) , where ALL bullets are located in
 // the same tile (O(n) to add all bullets, O(n) to check against all bullets in a tile),
@@ -15,6 +15,9 @@ class SpacialPartition
     public:
         SpacialPartition(const BulletLuaUtils::Rect& area);
         // SpacialPartition(int width, int height);
+
+        SpacialPartition(const SpacialPartition&) = delete;
+        SpacialPartition& operator=(const SpacialPartition&) = delete;
 
         void addBullet(const Bullet* bullet);
         void reset();

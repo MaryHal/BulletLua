@@ -35,8 +35,9 @@ void SpacialPartition::addBullet(const Bullet* bullet)
 // Call once per frame
 void SpacialPartition::reset()
 {
-    // std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
+    // More or less "lazy-deletion" of our bullet pointers.
     std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
+    // std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
 }
 
 bool SpacialPartition::checkOutOfBounds(const Bullet& b) const

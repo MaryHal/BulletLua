@@ -53,6 +53,7 @@ solution "BulletLua"
         libdirs { "lib" }
         links { "sfml-graphics", "sfml-window", "sfml-system", "lua", "bulletlua" }
 
+        -- Executable should look for shared libraries in its own directory when run.
         configuration "not windows"
             linkoptions { "-Wl,-rpath '-Wl,\$\$ORIGIN'" }
 

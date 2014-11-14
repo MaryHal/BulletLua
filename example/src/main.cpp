@@ -68,10 +68,17 @@ int main(int argc, char* argv[])
                     manager.clear();
                     manager.createBullet(filename, &origin, &destination);
                 }
+                else if (event.key.code == sf::Keyboard::Escape)
+                {
+                    window.close();
+                }
             }
+
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
         }
 
         window.clear(sf::Color(246, 246, 246));

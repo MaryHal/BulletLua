@@ -22,6 +22,12 @@ class BulletLuaManager
         BulletLuaManager(const BulletLuaUtils::Rect& area);
         virtual ~BulletLuaManager();
 
+        // Non-copyable
+        BulletLuaManager(const BulletLuaManager&) = delete;
+        BulletLuaManager& operator=(const BulletLuaManager&) = delete;
+
+        // TODO: Explicit copy constructor?
+
         // Root Bullet
         void createBullet(const std::string& filename,
                           Bullet* origin,
