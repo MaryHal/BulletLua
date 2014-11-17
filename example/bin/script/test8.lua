@@ -1,11 +1,13 @@
-theta = 180
+theta = 0
 
 function main()
    turn = getTurn()
 
-   if (math.fmod(turn, 2) == 0) then
-      fire(theta, 10, shoot)
-      theta = theta + 27
+   fire(theta, 10, shoot)
+   theta = theta + 27
+
+   if (turn >= 600) then
+      vanish()
    end
 end
 
@@ -14,11 +16,11 @@ function shoot()
    rank = getRank()
 
    dir = getDirection()
-   fire(dir, 3.0 + 0.4 * rank, nullfunc)
-
-   for i = 1, 10 do
+   for i = 0, 10 do
       fire(dir + i * 30, 3.0 + 0.4 * rank, turnaround)
    end
+
+   -- fire(dir + 180, 6, nullfunc)
 
    kill()
 end
@@ -27,5 +29,7 @@ function turnaround()
    turn = getTurn()
    if (turn == 30) then
       setDirection(getDirection() + 180)
+   elseif (turn > 60) then
+      vanish()
    end
 end

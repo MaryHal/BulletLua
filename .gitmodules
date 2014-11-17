@@ -1,0 +1,3 @@
+[submodule "ext/sol"]
+	path = ext/sol
+	url = https://github.com/Rapptz/sol.git
