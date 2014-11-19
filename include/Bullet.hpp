@@ -8,6 +8,8 @@ struct Bullet
         float vx, vy;
         bool dead;
 
+        int r, g, b;
+
         bool dying;
         int life;
         int turn;
@@ -32,6 +34,8 @@ struct Bullet
         bool isDead() const;
         bool isDying() const;
         int getTurn() const;
+
+        void setColor(int newR, int newG, int newB);
 
     private:
         // Adjust speed if near zero as setDirection depends on at least one component

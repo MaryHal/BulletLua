@@ -27,6 +27,10 @@ void BulletLua::makeReusable(Bullet* target, BulletLuaManager* owner)
     this->dying = false;
     this->life = 255;
 
+    this->r = 255;
+    this->g = 255;
+    this->b = 255;
+
     this->turn = 0;
 
     this->mOwner = owner;
@@ -317,6 +321,20 @@ void BulletLua::initLua()
                                                            segRad * i, s,
                                                            c->target);
                                }
+                           });
+
+    luaState->set_function("setColor",
+                           [](int r, int g, int b)
+                           {
+                               BulletLua* c = BulletLua::current;
+                               c->setColor(r, g, b);
+                           });
+
+    luaState->set_function("getColor",
+                           []()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               return std::make_tuple(c->r, c->g, c->b);
                            });
 
     luaState->set_function("vanish",

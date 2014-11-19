@@ -4,7 +4,9 @@
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : x(x), y(y), vx(vx), vy(vy), dead(true), dying(true), life(0), turn(0)
+    : x(x), y(y), vx(vx), vy(vy), dead(true),
+      r(255), g(255), b(255),
+      dying(true), life(0), turn(0)
 {
     fixSpeed();
 }
@@ -87,6 +89,13 @@ bool Bullet::isDying() const
 int Bullet::getTurn() const
 {
     return turn;
+}
+
+void Bullet::setColor(int newR, int newG, int newB)
+{
+    r = newR;
+    g = newG;
+    b = newB;
 }
 
 void Bullet::fixSpeed()

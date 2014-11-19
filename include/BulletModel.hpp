@@ -4,6 +4,12 @@
 struct BulletModel
 {
     public:
+        std::string filename;
+        float texCoordX;
+        float texCoordY;
+        float texCoordWidth;
+        float texCoordHeight;
+
         float xSize;
         float ySize;
         float hitboxWidth;

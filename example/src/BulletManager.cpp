@@ -44,7 +44,8 @@ void BulletManager::tick()
         float rad = std::sqrt(8*8 + 8*8);
         float dir = b->getDirection();
 
-        sf::Color color(255, 255, 255, b->life);
+        sf::Color color(b->r, b->g, b->g, b->life);
+
         sf::Vector2f texCoords[4] = {
             {0.0f, 0.0f},
             {32.0f, 0.0f},
