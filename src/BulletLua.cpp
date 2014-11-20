@@ -161,6 +161,13 @@ void BulletLua::initLua()
                                return std::make_tuple(c->x, c->y);
                            });
 
+    luaState->set_function("getTargetPosition",
+                           []()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               return std::make_tuple(c->target->x, c->target->y);
+                           });
+
     luaState->set_function("getVelocity",
                            []()
                            {
