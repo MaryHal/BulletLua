@@ -61,6 +61,11 @@ void Bullet::setDirectionAim(float tx, float ty)
     setDirection(Math::PI - std::atan2(tx - x, ty - y));
 }
 
+float Bullet::getDirectionAim(float tx, float ty)
+{
+    return Math::PI - std::atan2(tx - x, ty - y);
+}
+
 float Bullet::getDirection() const
 {
     return Math::PI - std::atan2(vx, vy);

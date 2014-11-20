@@ -312,6 +312,22 @@ void BulletLua::initLua()
                                                        c->target);
                            });
 
+    luaState->set_function("fireAtTarget",
+                           [](float s,
+                              const sol::function& func)
+                           {
+                               BulletLua* c = BulletLua::current;
+                               if (c->dying)
+                                   return;
+
+                               c->mOwner->createBullet(c->luaState, func,
+                                                       c->x, c->y,
+                                                       c->getDirectionAim(c->target->x,
+                                                                          c->target->y),
+                                                       s,
+                                                       c->target);
+                           });
+
     luaState->set_function("fireCircle",
                            [](int segments, float s,
                               const sol::function& func)
