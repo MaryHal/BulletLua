@@ -25,8 +25,11 @@ class SpacialPartition
         // Checks if bullet is still in the testable area
         bool checkOutOfBounds(const Bullet& b) const;
 
-        // Checks collision for a bullet against all other bullets
+        // Point-to-point collision test.
         bool checkCollision(const Bullet& b) const;
+
+        // Point-to-rect collision test.
+        bool checkCollision(int x, int y, int width, int height);
 
     private:
         static constexpr unsigned int tileSize = 50;

@@ -17,6 +17,16 @@ BulletLuaManager::~BulletLuaManager()
     }
 }
 
+void BulletLuaManager::registerModel(const BulletModel& model)
+{
+    models.push_back(model);
+}
+
+const BulletModel& BulletLuaManager::getModel(int index) const
+{
+    return models.at(index);
+}
+
 void BulletLuaManager::createBullet(const std::string& filename,
                                     Bullet* origin,
                                     Bullet* target)

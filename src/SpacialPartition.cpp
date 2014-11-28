@@ -70,3 +70,21 @@ bool SpacialPartition::checkCollision(const Bullet& b) const
 
     return false;
 }
+
+bool SpacialPartition::checkCollision(int x, int y, int width, int height)
+{
+    int xMin = x / tileSize;
+    int xMax = (x + width) / tileSize;
+
+    int yMin = y / tileSize;
+    int yMax = (y + height) / tileSize;
+
+    for (int j = yMin; j < yMax; ++j)
+    {
+        for (int i = xMin; i < xMax; ++i)
+        {
+            return false;
+        }
+    }
+    return false;
+}

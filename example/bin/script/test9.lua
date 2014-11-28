@@ -19,7 +19,7 @@ function trap(offset)
 
    setPosition(x, y)
 
-   if (randIntRange(0, 400) == 0) then
+   if (randIntRange(0, 600) == 0) then
       fireAtTarget(4, launch)
    end
 
@@ -32,11 +32,10 @@ function launch()
    dx = thisX - centerX
    dy = thisY - centerY
 
+   -- Vanish when bullet leaves trapping circle. Thank you, Pythagoras.
    -- We should test a tiny bit past the bounds of our circle because on some frames,
    -- on launch, this bullet will immediately be within this boundary.
    radiusError = 8
-
-   -- Vanish when bullet leaves trapping circle. Thank you, Pythagoras.
    if (dx*dx + dy*dy > radius*radius+radiusError) then
       vanish()
    end

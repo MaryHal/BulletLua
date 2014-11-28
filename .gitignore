@@ -26,3 +26,6 @@ data/
 obj/
 
 /example/bin/Test
+/GPATH
+/GRTAGS
+/GTAGS

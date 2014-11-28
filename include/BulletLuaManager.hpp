@@ -2,6 +2,7 @@
 #define _BulletLuaManager_hpp_
 
 #include "BulletLua.hpp"
+#include "BulletModel.hpp"
 #include "SpacialPartition.hpp"
 
 #include <list>
@@ -27,6 +28,9 @@ class BulletLuaManager
         BulletLuaManager& operator=(const BulletLuaManager&) = delete;
 
         // TODO: Explicit copy constructor?
+
+        void registerModel(const BulletModel& model);
+        const BulletModel& getModel(int index) const;
 
         // Root Bullet
         void createBullet(const std::string& filename,
@@ -70,6 +74,8 @@ class BulletLuaManager
         std::stack<BulletLua*> freeBullets;
 
         std::list<BulletLua*> blocks;
+
+        std::vector<BulletModel> models;
 
         SpacialPartition collision;
 };

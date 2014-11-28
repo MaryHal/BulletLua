@@ -27,7 +27,7 @@ struct Bullet
         void setDirectionRelative(float dir);
         void setDirectionAim(float tx, float ty);
         float getDirectionAim(float tx, float ty);
-        
+
         float getDirection() const;
 
         void vanish();
