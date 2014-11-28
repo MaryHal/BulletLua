@@ -5,18 +5,18 @@ This C++ project aims to create a sane scriptable interface to define bullet pat
 
 Bullet Barrage Examples:
 
-[![Pattern1](https://www.youtube.com/watch?v=yCOYrMgnNGE/0.jpg)](http://youtu.be/yCOYrMgnNGE?t=11m39s)
+[Example 1](http://youtu.be/yCOYrMgnNGE?t=11m39s)
 
-[![Pattern2](https://www.youtube.com/watch?v=v4m08AeGFWU/0.jpg)](http://youtu.be/v4m08AeGFWU?t=33m22s)
+[Example 2](http://youtu.be/v4m08AeGFWU?t=33m22s)
 
 BulletLua is not quite mature enough at the moment to recreate the complex patterns in the videos above, but it's getting there.
 
 
-![test.lua](./result3.gif)
+![test.lua](http://zippy.gfycat.com/PeriodicUnnaturalHartebeest.gif)
 
-![test2.lua](./result4.gif)
+![test2.lua](http://giant.gfycat.com/AmbitiousSpecificAracari.gif)
 
-![test3.lua](./result5.gif)
+![test3.lua](http://giant.gfycat.com/BelatedFakeBoilweevil.gif)
 
 
 Usage
@@ -184,7 +184,7 @@ This script should produce something similar to the first gif above:
 
 Right now, BulletLua associates a bullet with a function and runs that function every frame. However, since it's difficult to dynamically save arbitrary function arguments in a single container, when you set a bullet to run a function, that function cannot have parameters. A way to bypass this is by using a `bind` function. `bind` will create a wrapper function for an existing function and forward an argument to it. So effectively, you can transform any function with parameters into a (new) function with no parameters. This example (`example/bin/script/test5.lua`) should show a simple use of `bind`.
 
-![test5.lua](./result6.gif)
+![test5.lua](http://giant.gfycat.com/IncompatibleBruisedIbisbill.gif)
 
     -- BulletLua Test Script 5
 
