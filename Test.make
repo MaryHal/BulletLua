@@ -28,7 +28,7 @@ ifeq ($(config),debug)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -Wl,-rpath '-Wl,$$ORIGIN' -Llib
+  LDFLAGS   += -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
@@ -50,7 +50,7 @@ ifeq ($(config),release)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -Wl,-rpath '-Wl,$$ORIGIN' -Llib
+  LDFLAGS   += -s -Llib
   LIBS      += -lsfml-graphics -lsfml-window -lsfml-system -llua -lbulletlua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
