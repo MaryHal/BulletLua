@@ -1,4 +1,4 @@
-BulletLua ![build](https://travis-ci.org/sanford1/BulletLua.svg)
+BulletLua [![build](https://travis-ci.org/sanford1/BulletLua.svg)](https://travis-ci.org/sanford1/BulletLua/builds)
 =========
 
 This C++ project aims to create a sane scriptable interface to define bullet patterns in shoot 'em up games. These patterns, while difficult to dodge in game and hard to appreciate while in the heat of the moment, can be beautiful to spectate.
