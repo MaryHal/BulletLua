@@ -1,6 +1,8 @@
 #ifndef _Rect_hpp_
 #define _Rect_hpp_
 
+#include <algorithm>
+
 namespace BulletLuaUtils
 {
     class Rect

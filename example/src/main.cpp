@@ -1,136 +1,115 @@
-#include <SFML/Graphics.hpp>
+// #include "Bullet.hpp"
+// #include "BulletManager.hpp"
+
+#include <iostream>
+#include <string>
 
 #include "Bullet.hpp"
 #include "BulletManager.hpp"
 
-#include <cstdio>
-#include <cstring>
-#include <string>
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    bool capture = false;
     std::string filename = "script/test.lua";
 
-    for (int i = 1; i < argc; i++)
+    if (argc > 1)
     {
-        if (strcmp(argv[i], "-c") == 0)
-            capture = true;
-        else
-            filename = argv[i];
+        filename = argv[1];
     }
 
-    sf::RenderWindow window(sf::VideoMode(640, 480), "BulletLua Example", sf::Style::Close);
-    window.setPosition({32, 32});
-    window.setVerticalSyncEnabled(true);
-    window.setFramerateLimit(60);
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        std::cout << "Error initializing SDL: " << SDL_GetError() << std::endl;
+        return 1;
+    }
 
-    sf::Font font;
-    font.loadFromFile("DroidSansFallback.ttf");
+    SDL_Window *window = SDL_CreateWindow("My Game Window",
+                                          SDL_WINDOWPOS_CENTERED,
+                                          SDL_WINDOWPOS_CENTERED,
+                                          640, 480,
+                                          SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
-    sf::Text infoText("", font, 11);
-    infoText.setColor(sf::Color(30, 30, 30, 255));
-    infoText.setPosition(8.0f, 8.0f);
+    SDL_GLContext glContext = SDL_GL_CreateContext(window);
+    if (glContext == NULL)
+    {
+        std::cout << "Error creating OpenGL context." << std::endl;
+        return 1;
+    }
+
+    const unsigned char *version = glGetString(GL_VERSION);
+    if (version == NULL)
+    {
+        std::cout << "Error creating OpenGL context." << std::endl;
+        return 1;
+    }
+
+    // SDL_GL_MakeCurrent(window, glContext);
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
+
+    //MUST make a context AND make it current BEFORE glewInit()!
+    glewExperimental = GL_TRUE;
+    GLenum glewStatus = glewInit();
+    if (glewStatus != 0)
+    {
+        std::cout << "Error initializing glew: " << glewGetErrorString(glewStatus) << std::endl;
+        return 1;
+    }
+
+    // OpenGL 2d perspective
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0f, 640.0f, 480.0f, 0.0f, -1.0f, 1.0f);
+
+    // Initialize modelview matrix
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
 
     Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
     Bullet destination(320.0f, 240.0f, 0.0f, 0.0f);
 
-    sf::Texture bulletTexture;
-    bulletTexture.loadFromFile("bullet2.png");
-
     // Create a new bullet manager and make it govern the window + 100px padding
     BulletManager manager(-100, -100, 840, 680);
-    manager.setTexture(bulletTexture);
-
-    printf("Running Script: %s\n", filename.c_str());
     manager.createBullet(filename, &origin, &destination);
 
-    // Run the program as long as the window is open
-    sf::Time updateTime;
-    std::size_t frameCount = 0;
-    unsigned int fps = 0;
-
-    sf::Clock frameClock;
-    frameClock.restart();
-
-    int frame = 0;
-
-    while (window.isOpen())
+    bool running = true;
+    while (running)
     {
-        // Check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
+        SDL_Event e;
+        if ( SDL_PollEvent(&e) )
         {
-            if (event.type == sf::Event::KeyPressed)
-            {
-                if (event.key.code == sf::Keyboard::Space)
-                {
-                    manager.clear();
-                    manager.createBullet(filename, &origin, &destination);
-                }
-                else if (event.key.code == sf::Keyboard::Escape)
-                {
-                    window.close();
-                }
-            }
-
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
+            if (e.type == SDL_QUIT)
+                running = 0;
+            else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
+                running = 0;
         }
 
-        window.clear(sf::Color(246, 246, 246));
-
-        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-        destination.x = mousePos.x;
-        destination.y = mousePos.y;
+        glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         manager.tick();
-        if (manager.checkCollision(destination))
-        {
-            manager.vanishAll();
-        }
+        manager.draw();
 
-        sf::Time elapsedTime = frameClock.restart();
-        updateTime += elapsedTime;
-        frameCount += 1;
-
-        // Calculate FPS
-        if (updateTime >= sf::seconds(1.0f))
-        {
-            fps = frameCount;
-            updateTime -= sf::seconds(1.0f);
-            frameCount = 0;
-        }
-
-        // Setup string for infoText
-        char infoBuffer[128];
-        sprintf(infoBuffer,
-                "fps: %d\nBulletCount: %d\nFreeCount: %d\nBlockCount: %d",
-                fps, manager.bulletCount(), manager.freeCount(), manager.blockCount());
-        infoText.setString(infoBuffer);
-
-        // Draw everything
-        window.draw(manager);
-        window.draw(infoText);
-
-        window.display();
-
-        // Save frame to file
-        if (capture)
-        {
-            // Build filename
-            char buffer[32];
-            sprintf(buffer, "ss/frame%03d.png", frame);
-
-            sf::Image image = window.capture();
-            image.saveToFile(buffer);
-
-            frame++;
-        }
+        SDL_GL_SwapWindow(window);
     }
 
+    SDL_GL_DeleteContext(glContext);
+    SDL_Quit();
     return 0;
 }

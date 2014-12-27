@@ -1,32 +1,57 @@
 #include "BulletManager.hpp"
 
+#include <GL/glew.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 BulletManager::BulletManager(int left, int top, int width, int height)
     : BulletLuaManager(left, top, width, height),
-      bulletTexture(nullptr),
-      vertices(),
-      vertexCount(0)
+      vbo(0),
+      bulletCount(0),
+      tex(0)
 {
     // Superclass constructor(BulletLuaManager) has no arguments, so it's called implicitly
 
-    // Calculate and create room for initial set of vertices.
-    vertices.setPrimitiveType(sf::Quads);
-    increaseVertexCount();
+    // // Calculate and create room for initial set of vertices.
+    // vertices.setPrimitiveType(sf::Quads);
+    // increaseVertexCount();
+
+    // Load image texture
+    int w, h, comp;
+    unsigned char* imageData = stbi_load("bullet2.png", &w, &h, &comp, STBI_rgb_alpha);
+
+    if(imageData == nullptr) throw(std::string("Failed to load texture"));
+
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    if(comp == 3)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+    else if(comp == 4)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    stbi_image_free(imageData);
+
+    // Generate vertex buffer object buffer.
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }
 
 BulletManager::~BulletManager()
 {
 }
 
-void BulletManager::setTexture(sf::Texture& tex)
-{
-    bulletTexture = &tex;
-}
-
 void BulletManager::tick()
 {
-    vertices.clear();
     collision.reset();
 
+    unsigned int i = 0;
     for (auto iter = bullets.begin(); iter != bullets.end();)
     {
         // If the current bullet is dead, push it onto the free stack.
@@ -43,66 +68,135 @@ void BulletManager::tick()
 
         (*iter)->run(collision);
 
+        if (i > MAX_BULLETS)
+            continue;
+
         const Bullet* b = *iter;
         float rad = std::sqrt(8*8 + 8*8);
         float dir = b->getDirection();
 
-        sf::Color color(b->r, b->g, b->g, b->life);
+        // Unrolled loops!
 
-        sf::Vector2f texCoords[4] = {
-            {0.0f, 0.0f},
-            {32.0f, 0.0f},
-            {32.0f, 32.0f},
-            {0.0f, 32.0f}
-        };
+        float red   = b->r / 256.0f;
+        float green = b->g / 256.0f;
+        float blue  = b->b / 256.0f;
+        float alpha = b->life / 256.0f;
+
+        colorArray[i * 16 + 0]  = red;
+        colorArray[i * 16 + 1]  = green;
+        colorArray[i * 16 + 2]  = blue;
+        colorArray[i * 16 + 3]  = alpha;
+
+        colorArray[i * 16 + 4]  = red;
+        colorArray[i * 16 + 5]  = green;
+        colorArray[i * 16 + 6]  = blue;
+        colorArray[i * 16 + 7]  = alpha;
+
+        colorArray[i * 16 + 8]  = red;
+        colorArray[i * 16 + 9]  = green;
+        colorArray[i * 16 + 10] = blue;
+        colorArray[i * 16 + 11] = alpha;
+
+        colorArray[i * 16 + 12] = red;
+        colorArray[i * 16 + 13] = green;
+        colorArray[i * 16 + 14] = blue;
+        colorArray[i * 16 + 15] = alpha;
+
+        textureArray[i * 8 + 0] = 0.0f;
+        textureArray[i * 8 + 1] = 0.0f;
+
+        textureArray[i * 8 + 2] = 1.0f;
+        textureArray[i * 8 + 3] = 0.0f;
+
+        textureArray[i * 8 + 4] = 1.0f;
+        textureArray[i * 8 + 5] = 1.0f;
+
+        textureArray[i * 8 + 6] = 0.0f;
+        textureArray[i * 8 + 7] = 1.0f;
 
         // Rotate coordinates around center
-        sf::Vector2f position[4] = {
-            {b->x +  rad * (float)sin(dir - 3.1415f/4),
-             b->y + -rad * (float)cos(dir - 3.1415f/4)},
+        vertexArray[i * 8 + 0] = b->x +  rad * (float)sin(dir - 3.1415f/4);
+        vertexArray[i * 8 + 1] = b->y + -rad * (float)cos(dir - 3.1415f/4);
 
-            {b->x +  rad * (float)sin(dir + 3.1415f/4),
-             b->y + -rad * (float)cos(dir + 3.1415f/4)},
+        vertexArray[i * 8 + 2] = b->x +  rad * (float)sin(dir + 3.1415f/4);
+        vertexArray[i * 8 + 3] = b->y + -rad * (float)cos(dir + 3.1415f/4);
 
-            {b->x +  rad * (float)sin(dir + 3 * 3.1415f/4),
-             b->y + -rad * (float)cos(dir + 3 * 3.1415f/4)},
+        vertexArray[i * 8 + 4] = b->x +  rad * (float)sin(dir + 3 * 3.1415f/4);
+        vertexArray[i * 8 + 5] = b->y + -rad * (float)cos(dir + 3 * 3.1415f/4);
 
-            {b->x +  rad * (float)sin(dir + 5 * 3.1415f/4),
-             b->y + -rad * (float)cos(dir + 5 * 3.1415f/4)},
-        };
-
-        vertices.append({position[0], color, texCoords[0]});
-        vertices.append({position[1], color, texCoords[1]});
-        vertices.append({position[2], color, texCoords[2]});
-        vertices.append({position[3], color, texCoords[3]});
+        vertexArray[i * 8 + 6] = b->x +  rad * (float)sin(dir + 5 * 3.1415f/4);
+        vertexArray[i * 8 + 7] = b->y + -rad * (float)cos(dir + 5 * 3.1415f/4);
 
         collision.addBullet(*iter);
 
+        ++i;
         ++iter;
     }
+
+    bulletCount = i;
+    printf("%d\n", bulletCount);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER,
+                 sizeof(vertexArray) + sizeof(colorArray) + sizeof(textureArray),
+                 NULL,
+                 GL_DYNAMIC_DRAW);
+
+    glBufferSubData(GL_ARRAY_BUFFER,
+                    0,
+                    sizeof(vertexArray),
+                    vertexArray);
+
+    glBufferSubData(GL_ARRAY_BUFFER,
+                    sizeof(vertexArray),
+                    sizeof(colorArray),
+                    colorArray);
+
+    glBufferSubData(GL_ARRAY_BUFFER,
+                    sizeof(vertexArray) + sizeof(colorArray),
+                    sizeof(textureArray),
+                    textureArray);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void BulletManager::draw() const
 {
-    if (bulletTexture != nullptr)
-        states.texture = bulletTexture;
-    target.draw(vertices, states);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    glVertexPointer(2, GL_FLOAT, 0, 0);
+    glColorPointer(4, GL_FLOAT, 0, (void*)(sizeof(vertexArray)));
+    glTexCoordPointer(2, GL_FLOAT, 0, (void*)(sizeof(vertexArray) + sizeof(colorArray)));
+    glDrawArrays(GL_QUADS, 0, bulletCount * 4);
+
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 unsigned int BulletManager::getVertexCount() const
 {
-    return vertexCount;
+    return bulletCount;
 }
 
-void BulletManager::increaseCapacity(unsigned int blockSize)
-{
-    BulletLuaManager::increaseCapacity(blockSize);
+// void BulletManager::increaseCapacity(unsigned int blockSize)
+// {
+//     BulletLuaManager::increaseCapacity(blockSize);
 
-    increaseVertexCount(blockSize);
-}
+//     increaseVertexCount(blockSize);
+// }
 
-void BulletManager::increaseVertexCount(unsigned int blockSize)
-{
-    vertexCount += blockSize * 4;
-    vertices.resize(vertexCount);
-}
+// void BulletManager::increaseVertexCount(unsigned int blockSize)
+// {
+//     vertexCount += blockSize * 4;
+//     vertices.resize(vertexCount);
+// }

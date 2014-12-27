@@ -6,13 +6,18 @@ compiler:
 branches:
     only:
         - master
+        - test
 
 before_install:
+    - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+    - sudo add-apt-repository -y ppa:saiarcot895/chromium-beta
+    - sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
     - sudo apt-get --yes update
     - sudo apt-get --yes install g++-4.8
     - if [ "$CXX" == "g++" ]; then export CXX=g++-4.8; fi
     - sudo apt-get --yes install ninja-build
     - sudo apt-get --yes install liblua5.2-dev
-    - sudo apt-get install libsfml-dev
+    - sudo apt-get --yes install libsdl2-dev
+    - sudo apt-get --yes install libglew-dev
 
-script: ./bootstrap.py --ci --cxx=$CXX && ninja
+script: python ./bootstrap.py --ci --cxx=$CXX && ninja

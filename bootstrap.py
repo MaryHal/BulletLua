@@ -25,20 +25,17 @@ executable = senpai.BuildOutput(name='bltest', target='build', type='executable'
 executable.files = senpai.files_from('example/src', '**.cpp')
 
 if sys.platform == 'win32':
-    project.libraries = ['mingw32', 'sfml-graphics', 'sfml-window', 'sfml-system']
+    project.libraries = ['mingw32', 'SDL2main', 'SDL2', 'GL', 'GLEW']
     if not args.console:
         project.link_flags = ['-mwindows']
 else:
-    project.libraries = ['sfml-graphics', 'sfml-window', 'sfml-system']
+    project.libraries = ['SDL2', 'GL', 'GLEW']
 
-# Lua
 if args.ci:
-    project.libraries.extend(libraries(['lua5.2']))
-    project.libraries.extend(library_includes(['lib']))
+    project.libraries.extend(['lua5.2'])
     project.includes.extend(['/usr/include/lua5.2', './lua-5.2.2/src', './include'])
 else:
-    project.libraries.extend(libraries(['lua']))
-
+    project.libraries.extend(['lua'])
 
 def warning(string):
     if not args.quiet:
