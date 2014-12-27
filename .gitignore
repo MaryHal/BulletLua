@@ -31,3 +31,4 @@ obj/
 /GTAGS
 
 /*.gif
+/__pycache__/

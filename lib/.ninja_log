@@ -1,0 +1,20 @@
+# ninja log v5
+1	256	0	obj/src/SpacialPartition.o	3cdef0c2a67f777e
+1	256	0	obj/src/Utils/Math.o	b4fcbb6a71f5f530
+1	302	0	obj/src/Bullet.o	ac37e8d8fd9b3bec
+1	1251	0	obj/src/Utils/Rect.o	dc6a9744a3a44d0
+256	2250	0	obj/src/Utils/Rng.o	9f2ff36dd3b483c4
+0	2918	0	obj/src/BulletLuaManager.o	6e40ebed2fee8e56
+302	3284	0	obj/example/src/BulletManager.o	681ecc57f2b4561e
+256	3334	0	obj/example/src/main.o	7770c38b7bc46de3
+1	3665	0	obj/src/BulletLua.o	8900716664c10bfa
+0	55	0	lib/libbulletlua.a	4411242f11c69df9
+0	19	0	lib/libbulletlua.a	1052ccd84abac73c
+0	3206	0	obj/src/SpacialPartition.o	3cdef0c2a67f777e
+0	3371	0	obj/src/Utils/Math.o	b4fcbb6a71f5f530
+0	3580	0	obj/src/Bullet.o	ac37e8d8fd9b3bec
+0	5363	0	obj/src/Utils/Rect.o	dc6a9744a3a44d0
+3206	5741	0	obj/src/Utils/Rng.o	9f2ff36dd3b483c4
+0	6936	0	obj/src/BulletLuaManager.o	6e40ebed2fee8e56
+0	8305	0	obj/src/BulletLua.o	8900716664c10bfa
+8305	8369	0	lib/libbulletlua.a	1052ccd84abac73c
