@@ -11,6 +11,7 @@ def directories(path):
 # command line stuff
 parser = argparse.ArgumentParser(usage='%(prog)s [options...]')
 parser.add_argument('--debug', action='store_true', help='compile with debug flags')
+parser.add_argument('--ci', action='store_true', help=argparse.SUPPRESS)
 parser.add_argument('--cxx', metavar='<compiler>', help='compiler name to use (default: g++)', default='g++')
 parser.add_argument('--quiet', '-q', action='store_true', help='suppress warning output')
 parser.add_argument('--console', action='store_true', help='shows a command prompt on Windows')
@@ -24,11 +25,20 @@ executable = senpai.BuildOutput(name='bltest', target='build', type='executable'
 executable.files = senpai.files_from('example/src', '**.cpp')
 
 if sys.platform == 'win32':
-    project.libraries = [ 'mingw32' ]
+    project.libraries = ['mingw32', 'sfml-graphics', 'sfml-window', 'sfml-system']
     if not args.console:
         project.link_flags = ['-mwindows']
 else:
-    project.libraries = [ "sfml-graphics", "sfml-window", "sfml-system", "lua" ]
+    project.libraries = ['sfml-graphics', 'sfml-window', 'sfml-system']
+
+# Lua
+if args.ci:
+    project.libraries.extend(libraries(['lua5.2']))
+    project.libraries.extend(library_includes(['lib']))
+    project.includes.extend(['/usr/include/lua5.2', './lua-5.2.2/src', './include'])
+else:
+    project.libraries.extend(libraries(['lua']))
+
 
 def warning(string):
     if not args.quiet:
