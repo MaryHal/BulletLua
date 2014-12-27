@@ -38,6 +38,9 @@ void BulletManager::tick()
             continue;
         }
 
+        // Must be set so lua knows which bullet to modify.
+        current = *iter;
+
         (*iter)->run(collision);
 
         const Bullet* b = *iter;

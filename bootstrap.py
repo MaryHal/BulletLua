@@ -16,18 +16,19 @@ parser.add_argument('--quiet', '-q', action='store_true', help='suppress warning
 parser.add_argument('--console', action='store_true', help='shows a command prompt on Windows')
 args = parser.parse_args()
 
-project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='lib', objdir='obj')
+project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='example/bin', objdir='obj')
 project.includes = ['include', 'ext/sol']
 # project.dependencies = directories('dep')
-staticLib = senpai.BuildOutput(name='libbulletlua.a', target='build', type='static_lib')
-staticLib.files = senpai.files_from('src', '**.cpp')
+
+executable = senpai.BuildOutput(name='bltest', target='build', type='executable')
+executable.files = senpai.files_from('example/src', '**.cpp')
 
 if sys.platform == 'win32':
     project.libraries = [ 'mingw32' ]
     if not args.console:
         project.link_flags = ['-mwindows']
 else:
-    project.libraries = [ "lua" ]
+    project.libraries = [ "sfml-graphics", "sfml-window", "sfml-system", "lua" ]
 
 def warning(string):
     if not args.quiet:
@@ -48,5 +49,5 @@ if args.cxx == 'clang++':
     cxxflags.extend(['-Wno-constexpr-not-const', '-Wno-unused-value', '-Wno-mismatched-tags'])
 
 project.flags = cxxflags
-project.add_executable(staticLib)
+project.add_executable(executable)
 project.dump(open('build.ninja', 'w'))

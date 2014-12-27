@@ -7,50 +7,114 @@
 #include <sol.hpp>
 
 #include "Bullet.hpp"
-
-class BulletLuaManager;
-class SpacialPartition;
+#include "SpacialPartition.hpp"
 
 class BulletLua : public Bullet
 {
-    private:
-        static BulletLua* current;
-
     public:
-        BulletLua();
+        BulletLua()
+            : Bullet(0.0, 0.0, 0.0, 0.0),
+              target(nullptr)
+        {
+        }
 
-        void makeReusable(Bullet* target, BulletLuaManager* owner);
+        void makeReusable(Bullet* target)
+        {
+            this->target = target;
 
-        void set(const std::string& filename,
-                 Bullet* origin, Bullet* target,
-                 BulletLuaManager* owner);
+            this->dead  = false;
+            this->dying = false;
+            this->life = 255;
 
-        // void set(std::shared_ptr<sol::state> lua,
-        //          const sol::function& func,
-        //          Bullet* origin, Bullet* target,
-        //          BulletLuaManager* owner);
+            this->r = 255;
+            this->g = 255;
+            this->b = 255;
+
+            this->turn = 0;
+        }
+
+        void set(std::shared_ptr<sol::state> lua,
+                 const sol::function& func,
+                 Bullet* origin, Bullet* target)
+        {
+            // Copy Movers
+            this->x = origin->x;
+            this->y = origin->y;
+            this->vx = origin->vx;
+            this->vy = origin->vy;
+
+            makeReusable(target);
+
+            luaState = lua;
+            this->func = func;
+        }
 
         void set(std::shared_ptr<sol::state> lua,
                  const sol::function& func,
                  float x, float y, float d, float s,
-                 Bullet* target,
-                 BulletLuaManager* owner);
+                 Bullet* target)
+        {
+            // Copy Movers
+            this->x = x;
+            this->y = y;
+            this->setSpeedAndDirection(s, d);
+            /* this->vx = vx; */
+            /* this->vy = vy; */
 
-        void run(const SpacialPartition& collision);
+            makeReusable(target);
 
-        void __debugRun(const std::string& code);
+            luaState = lua;
+            this->func = func;
+        }
 
-    private:
-        void setFunction(const sol::function& func);
-        void initLua();
+        void run(const SpacialPartition& collision)
+        {
+            // BulletLua::current = this;
 
-    private:
+            // Run lua function
+            if (!dead)
+            {
+                func.call();
+            }
+
+            x += vx;
+            y += vy;
+
+            if (collision.checkOutOfBounds(*this))
+            {
+                dead = true;
+            }
+
+            if (dying)
+            {
+                // Fade out over 30 frames
+                life -= 255/30;
+                if (life < 0)
+                {
+                    life = 0;
+                    dead = true;
+                }
+            }
+
+            turn++;
+        }
+
+        // void __debugRun(const std::string& code)
+        // {
+        //     BulletLua::current = this;
+        //     luaState->script(code);
+        // }
+
+        void setFunction(const sol::function& func)
+        {
+            this->func = func;
+        }
+
+    public:
         Bullet* target;
 
         std::shared_ptr<sol::state> luaState;
         sol::function func;
-
-        BulletLuaManager* mOwner;
 };
 
 #endif // _BulletLua_hpp_

@@ -17,18 +17,10 @@
 .clang_complete
 project.el
 
-example/bin/linux_Test32
-example/bin/linux_Test64
-example/bin/windows_Test32
-example/bin/windows_Test64
-example/run
-data/
+example/bin/bltest
+example/bin/.ninja_deps
+example/bin/.ninja_log
 obj/
-
-/example/bin/Test
-/GPATH
-/GRTAGS
-/GTAGS
 
 /*.gif
 /__pycache__/

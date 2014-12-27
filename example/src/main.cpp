@@ -45,92 +45,92 @@ int main(int argc, char* argv[])
     printf("Running Script: %s\n", filename.c_str());
     manager.createBullet(filename, &origin, &destination);
 
-// Run the program as long as the window is open
-sf::Time updateTime;
-std::size_t frameCount = 0;
-unsigned int fps = 0;
+    // Run the program as long as the window is open
+    sf::Time updateTime;
+    std::size_t frameCount = 0;
+    unsigned int fps = 0;
 
-sf::Clock frameClock;
-frameClock.restart();
+    sf::Clock frameClock;
+    frameClock.restart();
 
-int frame = 0;
+    int frame = 0;
 
-while (window.isOpen())
-{
-    // Check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
-    while (window.pollEvent(event))
+    while (window.isOpen())
     {
-        if (event.type == sf::Event::KeyPressed)
+        // Check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
         {
-            if (event.key.code == sf::Keyboard::Space)
+            if (event.type == sf::Event::KeyPressed)
             {
-                manager.clear();
-                manager.createBullet(filename, &origin, &destination);
+                if (event.key.code == sf::Keyboard::Space)
+                {
+                    manager.clear();
+                    manager.createBullet(filename, &origin, &destination);
+                }
+                else if (event.key.code == sf::Keyboard::Escape)
+                {
+                    window.close();
+                }
             }
-            else if (event.key.code == sf::Keyboard::Escape)
+
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
             {
                 window.close();
             }
         }
 
-        // "close requested" event: we close the window
-        if (event.type == sf::Event::Closed)
+        window.clear(sf::Color(246, 246, 246));
+
+        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+        destination.x = mousePos.x;
+        destination.y = mousePos.y;
+
+        manager.tick();
+        if (manager.checkCollision(destination))
         {
-            window.close();
+            manager.vanishAll();
+        }
+
+        sf::Time elapsedTime = frameClock.restart();
+        updateTime += elapsedTime;
+        frameCount += 1;
+
+        // Calculate FPS
+        if (updateTime >= sf::seconds(1.0f))
+        {
+            fps = frameCount;
+            updateTime -= sf::seconds(1.0f);
+            frameCount = 0;
+        }
+
+        // Setup string for infoText
+        char infoBuffer[128];
+        sprintf(infoBuffer,
+                "fps: %d\nBulletCount: %d\nFreeCount: %d\nBlockCount: %d",
+                fps, manager.bulletCount(), manager.freeCount(), manager.blockCount());
+        infoText.setString(infoBuffer);
+
+        // Draw everything
+        window.draw(manager);
+        window.draw(infoText);
+
+        window.display();
+
+        // Save frame to file
+        if (capture)
+        {
+            // Build filename
+            char buffer[32];
+            sprintf(buffer, "ss/frame%03d.png", frame);
+
+            sf::Image image = window.capture();
+            image.saveToFile(buffer);
+
+            frame++;
         }
     }
 
-    window.clear(sf::Color(246, 246, 246));
-
-    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-    destination.x = mousePos.x;
-    destination.y = mousePos.y;
-
-    manager.tick();
-    if (manager.checkCollision(destination))
-    {
-        manager.vanishAll();
-    }
-
-    sf::Time elapsedTime = frameClock.restart();
-    updateTime += elapsedTime;
-    frameCount += 1;
-
-    // Calculate FPS
-    if (updateTime >= sf::seconds(1.0f))
-    {
-        fps = frameCount;
-        updateTime -= sf::seconds(1.0f);
-        frameCount = 0;
-    }
-
-    // Setup string for infoText
-    char infoBuffer[128];
-    sprintf(infoBuffer,
-            "fps: %d\nBulletCount: %d\nFreeCount: %d\nBlockCount: %d",
-            fps, manager.bulletCount(), manager.freeCount(), manager.blockCount());
-    infoText.setString(infoBuffer);
-
-    // Draw everything
-    window.draw(manager);
-    window.draw(infoText);
-
-    window.display();
-
-    // Save frame to file
-    if (capture)
-    {
-        // Build filename
-        char buffer[32];
-        sprintf(buffer, "ss/frame%03d.png", frame);
-
-        sf::Image image = window.capture();
-        image.saveToFile(buffer);
-
-        frame++;
-    }
-}
-
-return 0;
+    return 0;
 }
