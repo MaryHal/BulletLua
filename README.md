@@ -1,4 +1,4 @@
-BulletLua
+BulletLua ![build](https://travis-ci.org/sanford1/BulletLua.svg)
 =========
 
 This C++ project aims to create a sane scriptable interface to define bullet patterns in shoot 'em up games. These patterns, while difficult to dodge in game and hard to appreciate while in the heat of the moment, can be beautiful to spectate.
@@ -31,17 +31,7 @@ after you clone this repository!
 
 Both sol and BulletLua use C++11 features, so make sure you have a C++11-capable compiler.
 
-A Makefile is provided, a simple
-
-    make
-
-(or if you want to build it without debugging symbols)
-
-    make config=release
-
-in the terminal should be enough to build the project. I use [premake](http://industriousone.com/what-premake) to generate my makefiles, though it can also be used to generate other types of project files (such as for Visual Studio). So look into that if you wish to build this outside the terminal.
-
-Link the library generated in the `lib` directory and make sure the headers in the `include` directory can be found by your project, and you're already halfway there.
+BulletLua is now a header-only library, so you just need to make sure your project can find the headers in the `include` directory.
 
 Because there are so many use cases out there, BulletLua doesn't actually draw any sprites. It simply runs lua scripts, manages the generated bullets, and provides a simple method for collision detection. As such, you'll need to produce your own code to draw the bullets. This can be as simple as creating a class to inherit from BulletLuaManager and creating a draw method. Example:
 
@@ -72,7 +62,7 @@ Then to run a script...
         manager.draw();
     }
 
-A moderately complex example (using [SFML](http://www.sfml-dev.org/)) can be found in the `example` directory.
+A moderately complex example (using [SDL2](http://libsdl.org/) and OpenGL) can be found in the `example` directory. To build it easily, use the [ninja](https://martine.github.io/ninja/) script. The source code for the older example that uses [SFML](http://www.sfml-dev.org/) still exists in the `example` directory as well.
 
 Lua Binding
 =========
