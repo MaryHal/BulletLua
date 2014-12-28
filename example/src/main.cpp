@@ -7,6 +7,9 @@
 #include "Bullet.hpp"
 #include "BulletManager.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
@@ -89,21 +92,43 @@ int main(int argc, char *argv[])
     manager.createBullet(filename, &origin, &destination);
 
     bool running = true;
+    SDL_Event e;
     while (running)
     {
-        SDL_Event e;
-        if ( SDL_PollEvent(&e) )
+        while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
-                running = 0;
-            else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
-                running = 0;
+            {
+                running = false;
+            }
+            else if (e.type == SDL_KEYUP)
+            {
+                if (e.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    running = false;
+                }
+                else if (e.key.keysym.sym == SDLK_SPACE)
+                {
+                    manager.clear();
+                    manager.createBullet(filename, &origin, &destination);
+                }
+            }
         }
 
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         manager.tick();
+
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        destination.x = x;
+        destination.y = y;
+        if (manager.checkCollision(destination))
+        {
+            manager.vanishAll();
+        }
+
         manager.draw();
 
         SDL_GL_SwapWindow(window);

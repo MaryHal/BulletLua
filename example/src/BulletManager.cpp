@@ -1,9 +1,7 @@
 #include "BulletManager.hpp"
 
-#include <GL/glew.h>
-
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include <GL/glew.h>
 
 BulletManager::BulletManager(int left, int top, int width, int height)
     : BulletLuaManager(left, top, width, height),
@@ -21,7 +19,8 @@ BulletManager::BulletManager(int left, int top, int width, int height)
     int w, h, comp;
     unsigned char* imageData = stbi_load("bullet2.png", &w, &h, &comp, STBI_rgb_alpha);
 
-    if(imageData == nullptr) throw(std::string("Failed to load texture"));
+    if(imageData == nullptr)
+        throw(std::string("Failed to load texture"));
 
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -134,7 +133,6 @@ void BulletManager::tick()
     }
 
     bulletCount = i;
-    printf("%d\n", bulletCount);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER,

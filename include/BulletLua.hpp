@@ -1,7 +1,6 @@
 #ifndef _BulletLua_hpp_
 #define _BulletLua_hpp_
 
-#include <string>
 #include <memory>
 
 #include <sol.hpp>
@@ -99,14 +98,9 @@ class BulletLua : public Bullet
             turn++;
         }
 
-        // void __debugRun(const std::string& code)
-        // {
-        //     BulletLua::current = this;
-        //     luaState->script(code);
-        // }
-
         void setFunction(const sol::function& func)
         {
+            this->turn = 0;
             this->func = func;
         }
 

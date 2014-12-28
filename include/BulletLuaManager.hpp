@@ -1,7 +1,6 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
-// #include "Bullet.hpp"
 #include "BulletLua.hpp"
 #include "BulletModel.hpp"
 #include "SpacialPartition.hpp"
@@ -18,6 +17,23 @@
 
 class BulletLuaManager
 {
+    protected:
+        // Pointer to the bullet that is to-be-processed.
+        BulletLua* current;
+
+        // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
+        float rank;
+
+        std::list<BulletLua*> bullets;
+        std::stack<BulletLua*> freeBullets;
+
+        std::list<BulletLua*> blocks;
+
+        std::vector<BulletModel> models;
+
+        SpacialPartition collision;
+        BulletLuaUtils::Random rng;
+
     public:
         // Amount of bullets to allocate at once.
         static constexpr unsigned int BLOCK_SIZE = 2048;
@@ -250,6 +266,13 @@ class BulletLuaManager
                                        return c->getTurn();
                                    });
 
+            luaState->set_function("resetTurns",
+                                   [&]()
+                                   {
+                                       BulletLua* c = this->current;
+                                       c->turn = 0;
+                                   });
+
             luaState->set_function("getRank",
                                    [&]()
                                    {
@@ -338,6 +361,14 @@ class BulletLuaManager
                                        c->setSpeedRelative(s);
                                    });
 
+            luaState->set_function("linearInterpolate",
+                                   [&](float x, float y, unsigned int steps)
+                                   {
+                                       BulletLua* c = this->current;
+                                       c->vx = (x - c->x) / steps;
+                                       c->vy = (y - c->y) / steps;
+                                   });
+
             luaState->set_function("setFunction",
                                    [&](const sol::function& func)
                                    {
@@ -347,7 +378,7 @@ class BulletLuaManager
 
             luaState->set_function("fire",
                                    [&](float d, float s,
-                                      const sol::function& func)
+                                       const sol::function& func)
                                    {
                                        BulletLua* c = this->current;
                                        if (c->dying)
@@ -361,7 +392,7 @@ class BulletLuaManager
 
             luaState->set_function("fireAtTarget",
                                    [&](float s,
-                                      const sol::function& func)
+                                       const sol::function& func)
                                    {
                                        BulletLua* c = this->current;
                                        if (c->dying)
@@ -377,7 +408,7 @@ class BulletLuaManager
 
             luaState->set_function("fireCircle",
                                    [&](int segments, float s,
-                                      const sol::function& func)
+                                       const sol::function& func)
                                    {
                                        BulletLua* c = this->current;
                                        if (c->dying)
@@ -423,23 +454,6 @@ class BulletLuaManager
 
             return luaState;
         }
-
-    protected:
-        // Pointer to the bullet that is to-be-processed.
-        BulletLua* current;
-
-        // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
-        float rank;
-
-        std::list<BulletLua*> bullets;
-        std::stack<BulletLua*> freeBullets;
-
-        std::list<BulletLua*> blocks;
-
-        std::vector<BulletModel> models;
-
-        SpacialPartition collision;
-        BulletLuaUtils::Random rng;
 };
 
 #endif /* _BulletLuaManager_hpp_ */

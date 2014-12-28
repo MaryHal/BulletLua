@@ -1,4 +1,4 @@
-BulletLua [![build](https://travis-ci.org/sanford1/BulletLua.svg)](https://travis-ci.org/sanford1/BulletLua/builds)
+BulletLua [![Build Status](https://travis-ci.org/sanford1/BulletLua.svg?branch=master)](https://travis-ci.org/sanford1/BulletLua)
 =========
 
 This C++ project aims to create a sane scriptable interface to define bullet patterns in shoot 'em up games. These patterns, while difficult to dodge in game and hard to appreciate while in the heat of the moment, can be beautiful to spectate.
@@ -69,29 +69,40 @@ Lua Binding
 
 C++ Functions visible in BulletLua scripts:
 
+    -- Do nothing.
+    nullfunc()
+
     -- Get Position (as a tuple).
     x, y = getPosition()
+
+    -- Get Target Position
+    tx, ty = getTargetPosition()
 
     -- Get Velocity Components (as a tuple).
     vx, vy = getVelocity()
 
     -- Get Bullet Speed and Direction.
     getSpeed()
-    getDir()
+    getDirection()
+
+    getLife()
 
     -- Get the amount of frames since this bullet's creation.
     getTurn()
+
+    -- Reset this bullet's frame counter
+    resetTurns()
 
     -- Get the current barrage "difficulty", From [0.0, 1.0]
     getRank()
 
     -- Generate random floating point numbers
     randFloat()
-    randFloat(float min, float max)
+    randFloatRange(float min, float max)
 
     -- Generate random integers
     randInt(int max)
-    randInt(int min, int max)
+    randIntRange(int min, int max)
 
     -- Set Bullet Position.
     setPosition(float x, float y)
@@ -115,14 +126,25 @@ C++ Functions visible in BulletLua scripts:
     setSpeed(float s)
     setSpeedRelative(float s)
 
-    -- Switch current running function
+    -- Set speed and direction of bullet such that it will reach (x, y) in 'n' steps.
+    linearInterpolate(float x, float y, unsigned int n)
+
+    -- Switch current running function. This also resets the bullet's frame counter.
     setFunction(const sol::function& funcName)
 
-    -- Shoot a bullet at (x, y) moving in direction (d) at speed (s) running function (func).
-    fire(double d, double s, const sol::function& funcName)
+    -- Shoot a bullet from current bullet moving in direction (d) at
+    -- speed (s) running function (func). fire(double d, double s, const
+    sol::function& funcName)
+
+    -- Shoot a bullet and aim it at the "player"
+    fireAtTarget(float s, const sol::function& funcName)
 
     -- Shoot (segments) bullets in a circle at speed (s) running function (func).
     fireCircle(int segments, float s, const sol::function& funcName)
+
+    -- Get/Set current bullet color. Each component ranges from [0, 255]
+    setColor(int r, int g, int b)
+    r, g, b = getColor()
 
     -- Fade out the current bullet. Kill it slowly.
     vanish()
