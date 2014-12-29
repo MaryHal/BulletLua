@@ -11,18 +11,20 @@ function main()
 end
 
 function surround()
+   setCollision(false)
    tx, ty = getTargetPosition()
 
    nx = tx + radius * math.sin(theta);
    ny = ty + radius * math.cos(theta)
    theta = theta + 0.05
 
-   linearInterpolate(nx, ny, 3)
+   linearInterpolate(nx, ny, 4)
    setFunction(freeze)
 end
 
 function freeze()
-   if (getTurn() == 3) then
+   if (getTurn() == 4) then
+      setCollision(true)
       setSpeed(0)
       aimTarget()
       setFunction(launch)

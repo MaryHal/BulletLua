@@ -91,10 +91,11 @@ int main(int argc, char *argv[])
     BulletManager manager(-100, -100, 840, 680);
     manager.createBullet(filename, &origin, &destination);
 
+    bool collision = false;
     bool running = true;
-    SDL_Event e;
     while (running)
     {
+        SDL_Event e;
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
@@ -112,6 +113,10 @@ int main(int argc, char *argv[])
                     manager.clear();
                     manager.createBullet(filename, &origin, &destination);
                 }
+                else if (e.key.keysym.sym == SDLK_c)
+                {
+                    collision = !collision;
+                }
             }
         }
 
@@ -124,9 +129,13 @@ int main(int argc, char *argv[])
         SDL_GetMouseState(&x, &y);
         destination.x = x;
         destination.y = y;
-        if (manager.checkCollision(destination))
+
+        if (collision)
         {
-            manager.vanishAll();
+            if (manager.checkCollision(destination))
+            {
+                manager.vanishAll();
+            }
         }
 
         manager.draw();

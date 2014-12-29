@@ -11,16 +11,18 @@ struct Bullet
         float vx, vy;
         bool dead;
 
-        int r, g, b;
+        unsigned char r, g, b;
 
         bool dying;
         int life;
         int turn;
 
+        bool collisionCheck;
+
         Bullet(float x, float y, float vx, float vy)
             : x(x), y(y), vx(vx), vy(vy), dead(true),
               r(255), g(255), b(255),
-              dying(true), life(0), turn(0)
+              dying(true), life(0), turn(0), collisionCheck(false)
         {
             fixSpeed();
         }
@@ -111,7 +113,7 @@ struct Bullet
             return turn;
         }
 
-        void setColor(int newR, int newG, int newB)
+        void setColor(unsigned char newR, unsigned char newG, unsigned char newB)
         {
             r = newR;
             g = newG;

@@ -132,7 +132,11 @@ class BulletLuaManager
                 current = *iter;
 
                 (*iter)->run(collision);
-                collision.addBullet(*iter);
+
+                if ((*iter)->collisionCheck)
+                {
+                    collision.addBullet(*iter);
+                }
 
                 ++iter;
             }
@@ -250,6 +254,13 @@ class BulletLuaManager
                                    {
                                        BulletLua* c = this->current;
                                        return Math::radToDeg(c->getDirection());
+                                   });
+
+            luaState->set_function("setCollision",
+                                   [&](bool collision)
+                                   {
+                                       BulletLua* c = this->current;
+                                       c->collisionCheck = collision;
                                    });
 
             luaState->set_function("getLife",
@@ -425,7 +436,7 @@ class BulletLuaManager
                                    });
 
             luaState->set_function("setColor",
-                                   [&](int r, int g, int b)
+                                   [&](unsigned char r, unsigned char g, unsigned char b)
                                    {
                                        BulletLua* c = this->current;
                                        c->setColor(r, g, b);

@@ -126,7 +126,11 @@ void BulletManager::tick()
         vertexArray[i * 8 + 6] = b->x +  rad * (float)sin(dir + 5 * 3.1415f/4);
         vertexArray[i * 8 + 7] = b->y + -rad * (float)cos(dir + 5 * 3.1415f/4);
 
-        collision.addBullet(*iter);
+
+        if ((*iter)->collisionCheck)
+        {
+            collision.addBullet(*iter);
+        }
 
         ++i;
         ++iter;

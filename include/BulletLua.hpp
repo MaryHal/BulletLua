@@ -30,6 +30,8 @@ class BulletLua : public Bullet
             this->b = 255;
 
             this->turn = 0;
+
+            this->collisionCheck = true;
         }
 
         void set(std::shared_ptr<sol::state> lua,
