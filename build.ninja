@@ -1,16 +1,16 @@
-# This file was generated automatically on 2014-12-28 23:27:32.311570 using
+# This file was generated automatically on 2014-12-29 19:21:26.957866 using
 # the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
 builddir = example/bin
 cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
-linkflags =  
-includes = -I"include" -I"ext/sol"
 libraries = -lSDL2 -lGL -lGLEW -llua
-depends =  
-libpath =  
 defines =  
+includes = -I"include" -I"ext/sol"
+depends =  
+linkflags =  
+libpath =  
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
       $in -o $out

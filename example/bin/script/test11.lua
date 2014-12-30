@@ -1,10 +1,17 @@
 theta = 0
+prevTheta = 0
 radius = 100
 
+-- Time in frames
+reactivateTime = 50
+travelTime = 4
+freezeTime = 60
+
 function main()
-   if (math.fmod(getTurn(), 50) == 0) then
-      for i = 0, 30 do
-         theta = randFloatRange(0, 6.28)
+   if (math.fmod(getTurn() + 10, reactivateTime) == 0) then
+      theta = randFloatRange(prevTheta + 1.6, prevTheta + 6.28 - 1.6)
+      prevTheta = theta
+      for i = 0, 40 do
          fire(0, 0, surround)
       end
    end
@@ -16,14 +23,14 @@ function surround()
 
    nx = tx + radius * math.sin(theta);
    ny = ty + radius * math.cos(theta)
-   theta = theta + 0.05
+   theta = theta + 0.04
 
-   linearInterpolate(nx, ny, 4)
+   linearInterpolate(nx, ny, travelTime)
    setFunction(freeze)
 end
 
 function freeze()
-   if (getTurn() == 4) then
+   if (getTurn() == travelTime) then
       setCollision(true)
       setSpeed(0)
       aimTarget()
@@ -32,7 +39,7 @@ function freeze()
 end
 
 function launch()
-   if (getTurn() == 60) then
+   if (getTurn() == freezeTime) then
       setSpeed(8)
    end
 end

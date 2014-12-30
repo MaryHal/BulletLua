@@ -17,7 +17,7 @@ import fnmatch
 try:
     import cStringIO as StringIO
 except ImportError:
-    import io.StringIO as StringIO # python 3k compat
+    import io as StringIO # python 3k compat
 
 def escape_path(word):
     return word.replace('$ ', '$$ ').replace(' ', '$ ').replace(':', '$:')
