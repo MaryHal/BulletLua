@@ -13,6 +13,9 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
+#define GLSL(version, shader)  "#version " #version "\n" #shader
+void printShaderLog( GLuint shader );
+
 int main(int argc, char *argv[])
 {
     std::string filename = "script/test.lua";
@@ -51,7 +54,8 @@ int main(int argc, char *argv[])
     // SDL_GL_MakeCurrent(window, glContext);
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -84,6 +88,100 @@ int main(int argc, char *argv[])
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
 
+    // Shader Program
+    GLuint prog = glCreateProgram();
+
+    // Create Shader program
+    {
+        GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+        // Get vertex source
+        const GLchar* vertexShaderSource =
+            GLSL(130,
+                 in vec2 vertex_position;
+                 // in vec4 vertex_color;
+
+                 // out vec4 color;
+
+                 void main () {
+                     // color = vertex_color;
+                     gl_Position = vec4(vertex_position, 0.0, 1.0);
+                 }
+                );
+
+        // Get fragment source
+        const GLchar* fragmentShaderSource =
+            GLSL(130,
+                 precision highp float;
+
+                 // in vec4 color;
+                 out vec4 frag_color;
+
+                 void main () {
+                     // frag_color = color;
+                     frag_color = vec4(1.0, 1.0, 1.0, 1.0);
+                 }
+                );
+
+        glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+        glCompileShader(vertexShader);
+
+        GLint vShaderCompiled = GL_FALSE;
+        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &vShaderCompiled);
+        if (vShaderCompiled != GL_TRUE)
+        {
+            std::cout << "Unable to compile vertex shader " << vertexShader << std::endl;
+            printShaderLog(vertexShader);
+        }
+
+        GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+        glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+        glCompileShader(fragmentShader);
+
+        // Check fragment shader for errors
+        GLint fShaderCompiled = GL_FALSE;
+        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &fShaderCompiled);
+        if (fShaderCompiled != GL_TRUE)
+        {
+            std::cout << "Unable to compile fragment shader " << fragmentShader << std::endl;
+            printShaderLog(fragmentShader);
+        }
+
+        glAttachShader(prog, vertexShader);
+        glAttachShader(prog, fragmentShader);
+
+        glBindAttribLocation(prog, 0, "vertex_position");
+        glBindAttribLocation(prog, 1, "vertex_color");
+
+        glLinkProgram(prog);
+
+        GLint programSuccess = GL_TRUE;
+        glGetProgramiv(prog, GL_LINK_STATUS, &programSuccess);
+        if (programSuccess != GL_TRUE)
+        {
+            std::cout << "Unable to link program " << prog << std::endl;
+        }
+    }
+
+    float points[] = {
+        0.0f,   0.0f,
+        10.0f,  5.0f,
+        0.0f,   10.0f
+    };
+
+    GLuint vbo = 0;
+    glGenBuffers (1, &vbo);
+    glBindBuffer (GL_ARRAY_BUFFER, vbo);
+    glBufferData (GL_ARRAY_BUFFER, 6 * sizeof(float), points, GL_STATIC_DRAW);
+
+    GLuint vao = 0;
+    glGenVertexArrays (1, &vao);
+    glBindVertexArray (vao);
+    glEnableVertexAttribArray (0);
+    glBindBuffer (GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer (0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+
     Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
     Bullet destination(320.0f, 240.0f, 0.0f, 0.0f);
 
@@ -102,7 +200,7 @@ int main(int argc, char *argv[])
             {
                 running = false;
             }
-            else if (e.type == SDL_KEYUP)
+            else if (e.type == SDL_KEYDOWN)
             {
                 if (e.key.keysym.sym == SDLK_ESCAPE)
                 {
@@ -120,25 +218,35 @@ int main(int argc, char *argv[])
             }
         }
 
-        glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        // glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        manager.tick();
+        // manager.tick();
 
-        int x, y;
-        SDL_GetMouseState(&x, &y);
-        destination.x = x;
-        destination.y = y;
+        // int x, y;
+        // SDL_GetMouseState(&x, &y);
+        // destination.x = x;
+        // destination.y = y;
 
-        if (collision)
-        {
-            if (manager.checkCollision(destination))
-            {
-                manager.vanishAll();
-            }
-        }
+        // if (collision)
+        // {
+        //     if (manager.checkCollision(destination))
+        //     {
+        //         manager.vanishAll();
+        //     }
+        // }
 
-        manager.draw();
+
+        // Drawing!
+        glUseProgram(prog);
+
+        glBindVertexArray(vao);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        // manager.draw();
+
+        glUseProgram(0);
 
         SDL_GL_SwapWindow(window);
     }
@@ -146,4 +254,36 @@ int main(int argc, char *argv[])
     SDL_GL_DeleteContext(glContext);
     SDL_Quit();
     return 0;
+}
+
+void printShaderLog(GLuint shader)
+{
+    //Make sure name is shader
+    if (glIsShader(shader))
+    {
+        //Shader log length
+        int infoLogLength = 0;
+        int maxLength = infoLogLength;
+
+        //Get info string length
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+        //Allocate string
+        char* infoLog = new char[maxLength];
+
+        //Get info log
+        glGetShaderInfoLog(shader, maxLength, &infoLogLength, infoLog);
+        if (infoLogLength > 0)
+        {
+            //  Print Log
+            std::cout << infoLog << std::endl;
+        }
+
+        //Deallocate string
+        delete[] infoLog;
+    }
+    else
+    {
+        std::cout << "Name " << shader << " is not a shader" << std::endl;
+    }
 }

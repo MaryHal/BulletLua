@@ -17,6 +17,7 @@
 .clang_complete
 project.el
 
+example/src_sfml
 example/bin/bltest
 example/bin/.ninja_deps
 example/bin/.ninja_log

@@ -5,7 +5,9 @@
 
 BulletManager::BulletManager(int left, int top, int width, int height)
     : BulletLuaManager(left, top, width, height),
-      vbo(0),
+      vao(0),
+      vertexVbo(0),
+      colorVbo(0),
       bulletCount(0),
       tex(0)
 {
@@ -38,8 +40,19 @@ BulletManager::BulletManager(int left, int top, int width, int height)
     stbi_image_free(imageData);
 
     // Generate vertex buffer object buffer.
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glGenBuffers(1, &vertexVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexVbo);
+
+    // glGenBuffers(1, &colorVbo);
+    // glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vertexVbo);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 BulletManager::~BulletManager()
@@ -53,8 +66,8 @@ void BulletManager::tick()
     unsigned int i = 0;
     for (auto iter = bullets.begin(); iter != bullets.end();)
     {
-        // If the current bullet is dead, push it onto the free stack.
-        // Keep in mind `erase` increments our iterator and returns a valid iterator.
+        // If the current bullet is dead, push it onto the free stack. Keep in mind `erase`
+        // increments our iterator and returns a valid iterator.
         if ((*iter)->isDead())
         {
             freeBullets.push(*iter);
@@ -67,53 +80,57 @@ void BulletManager::tick()
 
         (*iter)->run(collision);
 
+        // This example sadly uses simple arrays to store vertex, texture coordinate, and color data
+        // (for now). Since we aren't resizing our arrays, high danger of index-out-of-bounds
+        // errors.
         if (i > MAX_BULLETS)
             continue;
 
         const Bullet* b = *iter;
-        float rad = std::sqrt(8*8 + 8*8);
-        float dir = b->getDirection();
 
         // Unrolled loops!
 
-        float red   = b->r / 256.0f;
-        float green = b->g / 256.0f;
-        float blue  = b->b / 256.0f;
-        float alpha = b->life / 256.0f;
+        // float red   = b->r / 256.0f;
+        // float green = b->g / 256.0f;
+        // float blue  = b->b / 256.0f;
+        // float alpha = b->life / 256.0f;
 
-        colorArray[i * 16 + 0]  = red;
-        colorArray[i * 16 + 1]  = green;
-        colorArray[i * 16 + 2]  = blue;
-        colorArray[i * 16 + 3]  = alpha;
+        // colorArray[i * 16 + 0]  = red;
+        // colorArray[i * 16 + 1]  = green;
+        // colorArray[i * 16 + 2]  = blue;
+        // colorArray[i * 16 + 3]  = alpha;
 
-        colorArray[i * 16 + 4]  = red;
-        colorArray[i * 16 + 5]  = green;
-        colorArray[i * 16 + 6]  = blue;
-        colorArray[i * 16 + 7]  = alpha;
+        // colorArray[i * 16 + 4]  = red;
+        // colorArray[i * 16 + 5]  = green;
+        // colorArray[i * 16 + 6]  = blue;
+        // colorArray[i * 16 + 7]  = alpha;
 
-        colorArray[i * 16 + 8]  = red;
-        colorArray[i * 16 + 9]  = green;
-        colorArray[i * 16 + 10] = blue;
-        colorArray[i * 16 + 11] = alpha;
+        // colorArray[i * 16 + 8]  = red;
+        // colorArray[i * 16 + 9]  = green;
+        // colorArray[i * 16 + 10] = blue;
+        // colorArray[i * 16 + 11] = alpha;
 
-        colorArray[i * 16 + 12] = red;
-        colorArray[i * 16 + 13] = green;
-        colorArray[i * 16 + 14] = blue;
-        colorArray[i * 16 + 15] = alpha;
+        // colorArray[i * 16 + 12] = red;
+        // colorArray[i * 16 + 13] = green;
+        // colorArray[i * 16 + 14] = blue;
+        // colorArray[i * 16 + 15] = alpha;
 
-        textureArray[i * 8 + 0] = 0.0f;
-        textureArray[i * 8 + 1] = 0.0f;
+        // textureArray[i * 8 + 0] = 0.0f;
+        // textureArray[i * 8 + 1] = 0.0f;
 
-        textureArray[i * 8 + 2] = 1.0f;
-        textureArray[i * 8 + 3] = 0.0f;
+        // textureArray[i * 8 + 2] = 1.0f;
+        // textureArray[i * 8 + 3] = 0.0f;
 
-        textureArray[i * 8 + 4] = 1.0f;
-        textureArray[i * 8 + 5] = 1.0f;
+        // textureArray[i * 8 + 4] = 1.0f;
+        // textureArray[i * 8 + 5] = 1.0f;
 
-        textureArray[i * 8 + 6] = 0.0f;
-        textureArray[i * 8 + 7] = 1.0f;
+        // textureArray[i * 8 + 6] = 0.0f;
+        // textureArray[i * 8 + 7] = 1.0f;
 
         // Rotate coordinates around center
+        float rad = std::sqrt(8*8 + 8*8);
+        float dir = b->getDirection();
+
         vertexArray[i * 8 + 0] = b->x +  rad * (float)sin(dir - 3.1415f/4);
         vertexArray[i * 8 + 1] = b->y + -rad * (float)cos(dir - 3.1415f/4);
 
@@ -138,51 +155,39 @@ void BulletManager::tick()
 
     bulletCount = i;
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexVbo);
     glBufferData(GL_ARRAY_BUFFER,
-                 sizeof(vertexArray) + sizeof(colorArray) + sizeof(textureArray),
-                 NULL,
+                 sizeof(vertexArray),
+                 vertexArray,
                  GL_DYNAMIC_DRAW);
 
-    glBufferSubData(GL_ARRAY_BUFFER,
-                    0,
-                    sizeof(vertexArray),
-                    vertexArray);
-
-    glBufferSubData(GL_ARRAY_BUFFER,
-                    sizeof(vertexArray),
-                    sizeof(colorArray),
-                    colorArray);
-
-    glBufferSubData(GL_ARRAY_BUFFER,
-                    sizeof(vertexArray) + sizeof(colorArray),
-                    sizeof(textureArray),
-                    textureArray);
+    // glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+    // glBufferData(GL_ARRAY_BUFFER,
+    //              sizeof(colorArray),
+    //              colorArray,
+    //              GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void BulletManager::draw() const
 {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    // glEnable(GL_TEXTURE_2D);
+    // glBindTexture(GL_TEXTURE_2D, tex);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    // glEnableVertexAttribArray(1);
 
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    // glBindBuffer(GL_ARRAY_BUFFER, vertexVbo);
 
-    glVertexPointer(2, GL_FLOAT, 0, 0);
-    glColorPointer(4, GL_FLOAT, 0, (void*)(sizeof(vertexArray)));
-    glTexCoordPointer(2, GL_FLOAT, 0, (void*)(sizeof(vertexArray) + sizeof(colorArray)));
+    // glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+    // glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindVertexArray(vao);
     glDrawArrays(GL_QUADS, 0, bulletCount * 4);
 
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
+    // glDisableVertexAttribArray(1);
 
-    glDisable(GL_TEXTURE_2D);
+    // glDisable(GL_TEXTURE_2D);
 }
 
 unsigned int BulletManager::getVertexCount() const

@@ -21,10 +21,12 @@ class BulletManager : public BulletLuaManager
     private:
         static constexpr unsigned int MAX_BULLETS = 4096;
 
-        unsigned int vbo;
+        unsigned int vao;
+        unsigned int vertexVbo;
+        unsigned int colorVbo;
         float vertexArray[MAX_BULLETS * 4 * 2];
         float colorArray [MAX_BULLETS * 4 * 4];
-        float textureArray[MAX_BULLETS * 4 * 2];
+        // float textureArray[MAX_BULLETS * 4 * 2];
         unsigned int bulletCount;
 
         unsigned int tex;
