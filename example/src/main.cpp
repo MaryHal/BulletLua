@@ -1,5 +1,4 @@
-// #include "Bullet.hpp"
-// #include "BulletManager.hpp"
+// BulletLua SDL2 / Opengl(2.0) example
 
 #include <iostream>
 #include <string>
@@ -61,7 +60,7 @@ int main(int argc, char *argv[])
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
 
-    //MUST make a context AND make it current BEFORE glewInit()!
+    // MUST make a context AND make it current BEFORE glewInit()!
     glewExperimental = GL_TRUE;
     GLenum glewStatus = glewInit();
     if (glewStatus != 0)
