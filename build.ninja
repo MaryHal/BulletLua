@@ -1,16 +1,16 @@
-# This file was generated automatically on 2014-12-29 19:21:26.957866 using
+# This file was generated automatically on 2015-01-02 21:44:02.328003 using
 # the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
-builddir = example/bin
+builddir = test/bin
+libpath =  
 cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
-libraries = -lSDL2 -lGL -lGLEW -llua
 defines =  
+libraries = -llua
+linkflags =  
 includes = -I"include" -I"ext/sol"
 depends =  
-linkflags =  
-libpath =  
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
       $in -o $out
@@ -27,8 +27,6 @@ rule bootstrap
   command = python bootstrap.py
   generator = 1
 build build.ninja: bootstrap | bootstrap.py
-build obj/example/src/main.o: compile example/src/main.cpp
-build obj/example/src/BulletManager.o: compile example/src/BulletManager.cpp
-build example/bin/bltest: link obj/example/src/main.o $
-    obj/example/src/BulletManager.o
-build build: phony example/bin/bltest
+build obj/test/src/main.o: compile test/src/main.cpp
+build test/bin/bltest: link obj/test/src/main.o
+build build: phony test/bin/bltest

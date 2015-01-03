@@ -16,7 +16,5 @@ before_install:
     - if [ "$CXX" == "g++" ]; then export CXX=g++-4.8; fi
     - sudo apt-get --yes install ninja-build
     - sudo apt-get --yes install liblua5.2-dev
-    - sudo apt-get --yes install libsdl2-dev
-    - sudo apt-get --yes install libglew-dev
 
-script: python ./bootstrap.py --ci --cxx=$CXX && ninja
+script: python ./bootstrap.py --ci --cxx=$CXX && ninja && ./test/bin/bltest

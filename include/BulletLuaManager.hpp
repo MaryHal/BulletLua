@@ -15,6 +15,12 @@
 
 #include <string>
 
+namespace
+{
+    // Amount of bullets to allocate at once.
+    const unsigned int BLOCK_SIZE = 2048;
+}
+
 class BulletLuaManager
 {
     protected:
@@ -33,10 +39,6 @@ class BulletLuaManager
 
         SpacialPartition collision;
         BulletLuaUtils::Random rng;
-
-    public:
-        // Amount of bullets to allocate at once.
-        static constexpr unsigned int BLOCK_SIZE = 2048;
 
     public:
         BulletLuaManager(int left, int top, int width, int height)
@@ -182,13 +184,13 @@ class BulletLuaManager
         // Returns an unused bullet. Allocates more data blocks if there none are available
         BulletLua* getFreeBullet()
         {
+            BulletLua* bullet = freeBullets.top();
+            freeBullets.pop();
+
             if (freeBullets.empty())
             {
                 increaseCapacity();
             }
-
-            BulletLua* bullet = freeBullets.top();
-            freeBullets.pop();
 
             return bullet;
         }
