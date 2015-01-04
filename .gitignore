@@ -25,3 +25,7 @@ obj/
 /*.gif
 /__pycache__/
 /compile_commands.json
+/test/bin/.ninja_deps
+/test/bin/.ninja_log
+/example/__pycache__/
+/example/bin/sdl_test

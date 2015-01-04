@@ -68,6 +68,7 @@ TEST_CASE("Space Allocation", "[space]")
         REQUIRE(manager.blockCount() == expected_blocks);
     }
 
+    // Overflow one (default-sized) block
     SECTION("Add a metric ton")
     {
         const unsigned int a_metric_ton = 2200;
@@ -83,6 +84,7 @@ TEST_CASE("Space Allocation", "[space]")
         REQUIRE(manager.blockCount() == expected_blocks);
     }
 
+    // Overflow many (default-sized) blocks.
     SECTION("Add a lot")
     {
         const unsigned int a_lot = 1 << 16;
