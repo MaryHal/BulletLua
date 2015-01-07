@@ -18,11 +18,12 @@ parser.add_argument('--console', action='store_true', help='shows a command prom
 args = parser.parse_args()
 
 project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='bin', objdir='obj')
-project.includes = ['../include', '../ext/sol']
+project.includes = ['../bulletlua', '../ext/sol']
 # project.dependencies = directories('dep')
 
 executable = senpai.BuildOutput(name='sdl_test', target='build', type='executable')
-executable.files = senpai.files_from('src', '**.cpp')
+executable.files = senpai.files_from('../bulletlua', '**.cpp')
+executable.files.extend(senpai.files_from('src', '**.cpp'))
 
 if sys.platform == 'win32':
     project.libraries = ['mingw32', 'SDL2main', 'SDL2', 'GL', 'GLEW']

@@ -1,16 +1,16 @@
-# This file was generated automatically on 2015-01-02 21:44:02.328003 using
+# This file was generated automatically on 2015-01-06 19:50:05.553555 using
 # the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
-builddir = test/bin
-libpath =  
+builddir = .
 cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
+includes = -I"bulletlua" -I"ext/sol"
 defines =  
 libraries = -llua
-linkflags =  
-includes = -I"include" -I"ext/sol"
 depends =  
+libpath =  
+linkflags =  
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
       $in -o $out
@@ -27,6 +27,14 @@ rule bootstrap
   command = python bootstrap.py
   generator = 1
 build build.ninja: bootstrap | bootstrap.py
+build obj/src/BulletLuaManager.o: compile src/BulletLuaManager.cpp
+build obj/src/SpacialPartition.o: compile src/SpacialPartition.cpp
+build obj/src/Bullet.o: compile src/Bullet.cpp
+build obj/src/BulletLua.o: compile src/BulletLua.cpp
+build obj/src/Utils/Rect.o: compile src/Utils/Rect.cpp
+build obj/src/Utils/Rng.o: compile src/Utils/Rng.cpp
 build obj/test/src/main.o: compile test/src/main.cpp
-build test/bin/bltest: link obj/test/src/main.o
-build build: phony test/bin/bltest
+build ./test/bin/bltest: link obj/src/BulletLuaManager.o $
+    obj/src/SpacialPartition.o obj/src/Bullet.o obj/src/BulletLua.o $
+    obj/src/Utils/Rect.o obj/src/Utils/Rng.o obj/test/src/main.o
+build build: phony ./test/bin/bltest

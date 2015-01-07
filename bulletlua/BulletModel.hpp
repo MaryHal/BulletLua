@@ -14,7 +14,7 @@ struct BulletModel
         // Image filename and texture coordinates.
         // It's up to the user to write the code to draw a BulletModel since it varies
         // greatly between user to user.
-        std::string filename;
+        // std::string filename;
         float texCoordX;
         float texCoordY;
         float texCoordWidth;

@@ -31,7 +31,11 @@ after you clone this repository!
 
 Both sol and BulletLua use C++11 features, so make sure you have a C++11-capable compiler.
 
-BulletLua is now a header-only library, so you just need to make sure your project can find the headers in the `include` directory.
+To build a static library, run
+
+    python bootstrap.py --lib && ninja
+
+Link the library generated in the lib directory and make sure the headers in the `bulletlua` directory can be found by your project, and you're already halfway there. An alternative would be to just directly add the source code to your project, although I wouldn't recommend that.
 
 Because there are so many use cases out there, BulletLua doesn't actually draw any sprites. It simply runs lua scripts, manages the generated bullets, and provides a simple method for collision detection. As such, you'll need to produce your own code to draw the bullets. This can be as simple as creating a class to inherit from BulletLuaManager and creating a draw method. Example:
 

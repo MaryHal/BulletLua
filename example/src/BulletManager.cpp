@@ -1,6 +1,9 @@
 #include "BulletManager.hpp"
+#include <BulletLua.hpp>
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
 #include <GL/glew.h>
 
 BulletManager::BulletManager(int left, int top, int width, int height)

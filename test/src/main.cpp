@@ -2,6 +2,7 @@
 #include "catch.hpp"
 
 #include "BulletLuaManager.hpp"
+#include "BulletLua.hpp"
 
 #include <memory>
 #include <iostream>

@@ -10,19 +10,26 @@ def directories(path):
 
 # command line stuff
 parser = argparse.ArgumentParser(usage='%(prog)s [options...]')
+parser.add_argument('--lib', action='store_true', help='create static library')
 parser.add_argument('--debug', action='store_true', help='compile with debug flags')
 parser.add_argument('--ci', action='store_true', help=argparse.SUPPRESS)
 parser.add_argument('--cxx', metavar='<compiler>', help='compiler name to use (default: g++)', default='g++')
 parser.add_argument('--quiet', '-q', action='store_true', help='suppress warning output')
 args = parser.parse_args()
 
-project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='test/bin', objdir='obj')
-project.includes = ['include', 'ext/sol']
+project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='.', objdir='obj')
+project.includes = ['bulletlua', 'ext/sol']
 project.libraries = []
 # project.dependencies = directories('dep')
 
-executable = senpai.BuildOutput(name='bltest', target='build', type='executable')
-executable.files = senpai.files_from('test/src', '**.cpp')
+executable = senpai.BuildOutput(name='test/bin/bltest', target='build', type='executable')
+executable.files = senpai.files_from('src', '**.cpp')
+
+if args.lib:
+    executable.name = 'lib/libbulletlua.a'
+    executable.type = 'static_lib'
+else:
+    executable.files.extend(senpai.files_from('test/src', '**.cpp'))
 
 if sys.platform == 'win32':
     project.libraries = ['mingw32']
