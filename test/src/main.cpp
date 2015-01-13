@@ -15,14 +15,14 @@ class BulletTester : public BulletLuaManager
 
     public:
         BulletTester()
-            : BulletLuaManager(0, 0, 640, 480)
+            : BulletLuaManager(0.0f, 0.0f, 640.0f, 480.0f)
+            , origin(new Bullet(320.0f, 120.0f, 0.0f, 0.0f))
+            , destination(new Bullet(320.0f, 240.0f, 0.0f, 0.0f))
         {
         }
 
         // Create bullet from string.
-        void createBullet(const std::string& script,
-                          Bullet* origin,
-                          Bullet* target)
+        void createBullet(const std::string& script)
         {
             BulletLua* b = getFreeBullet();
 
@@ -31,19 +31,27 @@ class BulletTester : public BulletLuaManager
 
             b->set(luaState,
                    luaState->get<sol::function>("main"),
-                   origin, target);
+                   origin.get(), destination.get());
 
             bullets.push_back(b);
         }
 
-        void createBullet()
+        void createEmptyBullet()
         {
             BulletLua* b = getFreeBullet();
             bullets.push_back(b);
         }
+
+        void createEmptyBullets(unsigned int n)
+        {
+            for (unsigned int i = 0; i < n; ++i)
+            {
+                createEmptyBullet();
+            }
+        }
 };
 
-TEST_CASE("Space Allocation", "[space]")
+TEST_CASE("Space Allocation", "[Space]")
 {
     BulletTester manager;
 
@@ -59,10 +67,7 @@ TEST_CASE("Space Allocation", "[space]")
         const unsigned int a_handful = 100;
         const unsigned int expected_blocks = (a_handful / BLOCK_SIZE) + 1;
 
-        for (unsigned int i = 0; i < a_handful; ++i)
-        {
-            manager.createBullet();
-        }
+        manager.createEmptyBullets(a_handful);
 
         REQUIRE(manager.bulletCount() == a_handful);
         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_handful);
@@ -75,10 +80,7 @@ TEST_CASE("Space Allocation", "[space]")
         const unsigned int a_metric_ton = 2200;
         const unsigned int expected_blocks = (a_metric_ton / BLOCK_SIZE) + 1;
 
-        for (unsigned int i = 0; i < a_metric_ton; ++i)
-        {
-            manager.createBullet();
-        }
+        manager.createEmptyBullets(a_metric_ton);
 
         REQUIRE(manager.bulletCount() == a_metric_ton);
         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_metric_ton);
@@ -91,13 +93,31 @@ TEST_CASE("Space Allocation", "[space]")
         const unsigned int a_lot = 1 << 16;
         const unsigned int expected_blocks = (a_lot / BLOCK_SIZE) + 1;
 
-        for (unsigned int i = 0; i < a_lot; ++i)
-        {
-            manager.createBullet();
-        }
+        manager.createEmptyBullets(a_lot);
 
         REQUIRE(manager.bulletCount() == a_lot);
         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_lot);
         REQUIRE(manager.blockCount() == expected_blocks);
+    }
+}
+
+TEST_CASE("Out of Bounds Check", "[Boundary]")
+{
+    const char* script =
+        "function main()"
+        "    setPosition(-5, 0)"
+        "end";
+
+    BulletTester manager;
+
+    SECTION("Single Bullet")
+    {
+        manager.createBullet(script);
+        REQUIRE(manager.bulletCount() == 1);
+
+        manager.tick();
+        manager.tick();
+
+        REQUIRE(manager.bulletCount() == 0);
     }
 }

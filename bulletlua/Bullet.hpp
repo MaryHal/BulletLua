@@ -16,6 +16,7 @@ struct Bullet
 
         bool collisionCheck;
 
+    public:
         Bullet(float x, float y, float vx, float vy);
 
         // void setBullet(float x, float y, float vx, float vy);

@@ -29,3 +29,6 @@ obj/
 /test/bin/.ninja_log
 /example/__pycache__/
 /example/bin/sdl_test
+/.ninja_deps
+/.ninja_log
+/test/bin/bltest
