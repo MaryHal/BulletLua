@@ -1,16 +1,16 @@
-# This file was generated automatically on 2015-01-13 17:40:50.336647 using
+# This file was generated automatically on 2015-01-13 17:48:48.888489 using
 # the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
 builddir = .
-libraries = -llua
+cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
+defines =  
+includes = -I"bulletlua" -I"ext/sol"
 depends =  
 libpath =  
-includes = -I"bulletlua" -I"ext/sol"
-defines =  
 linkflags =  
-cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
+libraries = -llua
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
       $in -o $out

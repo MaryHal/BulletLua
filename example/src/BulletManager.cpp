@@ -56,6 +56,11 @@ void BulletManager::tick()
     unsigned int i = 0;
     for (auto iter = bullets.begin(); iter != bullets.end();)
     {
+        // Must be set so lua knows which bullet to modify.
+        current = *iter;
+
+        (*iter)->run(collision);
+
         // If the current bullet is dead, push it onto the free stack.
         // Keep in mind `erase` increments our iterator and returns a valid iterator.
         if ((*iter)->isDead())
@@ -65,11 +70,7 @@ void BulletManager::tick()
             continue;
         }
 
-        // Must be set so lua knows which bullet to modify.
-        current = *iter;
-
-        (*iter)->run(collision);
-
+        // Our vertex arrays are not dynamic (for now), so we gotta cap the number of entries.
         if (i > MAX_BULLETS)
             continue;
 

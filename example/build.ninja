@@ -1,16 +1,16 @@
-# This file was generated automatically on 2015-01-06 19:18:36.727934 using
+# This file was generated automatically on 2015-01-13 17:50:31.459024 using
 # the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
 builddir = bin
-defines =  
-linkflags =  
-cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
-libpath =  
 includes = -I"../bulletlua" -I"../ext/sol"
 depends =  
-libraries = -lSDL2 -lGL -lGLEW -llua
+libpath = -L"../lib"
+defines =  
+libraries = -lSDL2 -lGL -lGLEW -llua -lbulletlua
+cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
+linkflags =  
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
       $in -o $out
@@ -27,21 +27,10 @@ rule bootstrap
   command = python bootstrap.py
   generator = 1
 build build.ninja: bootstrap | bootstrap.py
-build obj/../bulletlua/BulletLuaManager.o: compile $
-    ../bulletlua/BulletLuaManager.cpp
-build obj/../bulletlua/SpacialPartition.o: compile $
-    ../bulletlua/SpacialPartition.cpp
-build obj/../bulletlua/Bullet.o: compile ../bulletlua/Bullet.cpp
-build obj/../bulletlua/BulletLua.o: compile ../bulletlua/BulletLua.cpp
-build obj/../bulletlua/Utils/Rect.o: compile ../bulletlua/Utils/Rect.cpp
-build obj/../bulletlua/Utils/Rng.o: compile ../bulletlua/Utils/Rng.cpp
 build obj/src/Font.o: compile src/Font.cpp
 build obj/src/Stopwatch.o: compile src/Stopwatch.cpp
 build obj/src/main.o: compile src/main.cpp
 build obj/src/BulletManager.o: compile src/BulletManager.cpp
-build bin/sdl_test: link obj/../bulletlua/BulletLuaManager.o $
-    obj/../bulletlua/SpacialPartition.o obj/../bulletlua/Bullet.o $
-    obj/../bulletlua/BulletLua.o obj/../bulletlua/Utils/Rect.o $
-    obj/../bulletlua/Utils/Rng.o obj/src/Font.o obj/src/Stopwatch.o $
-    obj/src/main.o obj/src/BulletManager.o
+build bin/sdl_test: link obj/src/Font.o obj/src/Stopwatch.o obj/src/main.o $
+    obj/src/BulletManager.o
 build build: phony bin/sdl_test
