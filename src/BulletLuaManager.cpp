@@ -75,6 +75,11 @@ void BulletLuaManager::tick()
 
     for (auto iter = bullets.begin(); iter != bullets.end();)
     {
+        // Must be set so lua knows which bullet to modify.
+        current = *iter;
+
+        (*iter)->run(collision);
+
         // If the current bullet is dead, push it onto the free stack.
         // Keep in mind `erase` increments our iterator and returns a valid iterator.
         if ((*iter)->isDead())
@@ -83,11 +88,6 @@ void BulletLuaManager::tick()
             iter = bullets.erase(iter);
             continue;
         }
-
-        // Must be set so lua knows which bullet to modify.
-        current = *iter;
-
-        (*iter)->run(collision);
 
         if ((*iter)->collisionCheck)
         {

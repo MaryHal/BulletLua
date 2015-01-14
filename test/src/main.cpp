@@ -1,4 +1,3 @@
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
 #include "BulletLuaManager.hpp"
@@ -116,8 +115,32 @@ TEST_CASE("Out of Bounds Check", "[Boundary]")
         REQUIRE(manager.bulletCount() == 1);
 
         manager.tick();
-        manager.tick();
 
         REQUIRE(manager.bulletCount() == 0);
     }
+}
+
+TEST_CASE("Collision Check", "[Collision]")
+{
+    const char* script =
+        "function main()"
+        "    setPosition(100, 100)"
+        "end";
+
+    BulletTester manager;
+
+    SECTION("Single Bullet")
+    {
+        // Create a bullet, script will move it to (100, 100)
+        manager.createBullet(script);
+        manager.tick();
+
+        // Move our "ship" to (100, 100) as well.
+        manager.destination->x = 100;
+        manager.destination->y = 100;
+
+        // Is there a collision?
+        REQUIRE(manager.checkCollision(*manager.destination) == true);
+    }
+
 }
