@@ -1,36 +1,30 @@
-# This file was generated automatically on 2015-01-13 17:50:31.459024 using
-# the sen.py meta build system. Do not modify this.
 ninja_required_version = 1.3
 ar = ar
 cxx = g++
-builddir = bin
-includes = -I"../bulletlua" -I"../ext/sol"
-depends =  
-libpath = -L"../lib"
-defines =  
-libraries = -lSDL2 -lGL -lGLEW -llua -lbulletlua
-cxxflags = -Wall -Wextra -pedantic -std=c++11 -Wno-switch -DNDEBUG -O3
-linkflags =  
+cxxflags = -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 $
+    -I../bulletlua -I../ext/sol -L../lib
+ldflags = -lSDL2 -lGL -lGLEW -lbulletlua -llua
+
+rule bootstrap
+  command = python bootstrap.py
+  generator = 1
 rule compile
-  command = $cxx -MMD -MF $out.d -c $cxxflags $includes $depends $defines $
-      $in -o $out
+  command = $cxx -MMD -MF $out.d -c $cxxflags $in -o $out
   description = Compiling $in to $out
   depfile = $out.d
   deps = gcc
 rule link
-  command = $cxx $cxxflags $in -o $out $linkflags $libpath $libraries
+  command = $cxx $cxxflags $in -o $out $ldflags
   description = Creating $out
 rule ar
   command = rm -f $out && $ar crs $out $in
   description = AR $out
-rule bootstrap
-  command = python bootstrap.py
-  generator = 1
+
 build build.ninja: bootstrap | bootstrap.py
 build obj/src/Font.o: compile src/Font.cpp
 build obj/src/Stopwatch.o: compile src/Stopwatch.cpp
 build obj/src/main.o: compile src/main.cpp
 build obj/src/BulletManager.o: compile src/BulletManager.cpp
-build bin/sdl_test: link obj/src/Font.o obj/src/Stopwatch.o obj/src/main.o $
-    obj/src/BulletManager.o
-build build: phony bin/sdl_test
+
+build ./bin/sdl_test: link obj/src/Font.o obj/src/Stopwatch.o $
+    obj/src/main.o obj/src/BulletManager.o

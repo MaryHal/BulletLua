@@ -31,9 +31,9 @@ after you clone this repository!
 
 Both sol and BulletLua use C++11 features, so make sure you have a C++11-capable compiler.
 
-To build a static library, run
+To build the static library and unit tests, run
 
-    python bootstrap.py --lib && ninja
+    python bootstrap.py && ninja
 
 Link the library generated in the lib directory and make sure the headers in the `bulletlua` directory can be found by your project, and you're already halfway there. An alternative would be to just directly add the source code to your project, although I wouldn't recommend that.
 
