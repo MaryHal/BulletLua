@@ -1,54 +1,63 @@
 #!/usr/bin/env python
 
-import sen as senpai
-import os, sys
-import argparse
+import os
+import sys
+import fnmatch
 
-# some utilities
-def directories(path):
-    return [os.path.join(path, p) for p in os.listdir(path) if os.path.isdir(os.path.join(path, p))]
+import argparse
+import itertools
+
+import ninja_syntax
+
+objdir = 'obj'
+
+def flags(*args):
+    return ' '.join(itertools.chain(*args))
+
+def object_file(f):
+    (root, ext) = os.path.splitext(f)
+    return os.path.join(objdir, root + '.o')
+
+def generate_files_from(directory, glob):
+    for root, directories, files in os.walk(directory):
+        for f in files:
+            if fnmatch.fnmatch(f, glob):
+                yield os.path.join(root, f)
+
+def files_from(directory, glob):
+    return list(generate_files_from(directory, glob))
 
 # command line stuff
 parser = argparse.ArgumentParser(usage='%(prog)s [options...]')
-parser.add_argument('--lib', action='store_true', help='create static library')
 parser.add_argument('--debug', action='store_true', help='compile with debug flags')
 parser.add_argument('--ci', action='store_true', help=argparse.SUPPRESS)
 parser.add_argument('--cxx', metavar='<compiler>', help='compiler name to use (default: g++)', default='g++')
-parser.add_argument('--quiet', '-q', action='store_true', help='suppress warning output')
 args = parser.parse_args()
 
-project = senpai.Project(name='BulletLua', compiler=senpai.compiler(args.cxx), builddir='.', objdir='obj')
-project.includes = ['bulletlua', 'ext/sol']
-project.libraries = []
-# project.dependencies = directories('dep')
+BUILD_FILENAME = 'build.ninja'
 
-executable = senpai.BuildOutput(name='test/bin/bltest', target='build', type='executable')
-executable.files = senpai.files_from('src', '**.cpp')
-
-if args.lib:
-    executable.name = 'lib/libbulletlua.a'
-    executable.type = 'static_lib'
-else:
-    executable.files.extend(senpai.files_from('test/src', '**.cpp'))
+compiler = args.cxx
+include = ['-Ibulletlua', '-Iext/sol']
+depends = []
+libdirs = []
+ldflags = []
+cxxflags = ['-Wall', '-Wextra', '-pedantic', '-pedantic-errors', '-std=c++11']
 
 if sys.platform == 'win32':
     project.libraries = ['mingw32']
 
 if args.ci:
-    project.libraries.extend(['lua5.2'])
-    project.includes.extend(['/usr/include/lua5.2', './lua-5.2.2/src', './include'])
+    ldflags.extend(['-llua5.2'])
+    include.extend(['-I/usr/include/lua5.2', '-I./lua-5.2.2/src'])
 else:
-    project.libraries.extend(['lua'])
+    ldflags.extend(['-llua'])
 
 def warning(string):
-    if not args.quiet:
-        print('warning: {}'.format(string))
+    print('warning: {}'.format(string))
 
 # configuration
 if 'g++' not in args.cxx:
     warning('compiler not explicitly supported: {}'.format(args.cxx))
-
-cxxflags = ['-Wall', '-Wextra', '-pedantic', '-std=c++11', '-Wno-switch']
 
 if args.debug:
     cxxflags.extend(['-g', '-O0', '-DDEBUG'])
@@ -58,6 +67,44 @@ else:
 if args.cxx == 'clang++':
     cxxflags.extend(['-Wno-constexpr-not-const', '-Wno-unused-value', '-Wno-mismatched-tags'])
 
-project.flags = cxxflags
-project.add_executable(executable)
-project.dump(open('build.ninja', 'w'))
+### Build our ninja file
+ninja = ninja_syntax.Writer(open('build.ninja', 'w'))
+
+# Variables
+ninja.variable('ninja_required_version', '1.3')
+ninja.variable('ar', 'ar')
+ninja.variable('cxx', compiler)
+ninja.variable('cxxflags', flags(cxxflags + include + depends))
+ninja.variable('ldflags', flags(ldflags))
+ninja.newline()
+
+# Rules
+ninja.rule('bootstrap', command = ' '.join(['python'] + sys.argv), generator = True)
+ninja.rule('compile', command = '$cxx -MMD -MF $out.d -c $cxxflags -Werror $in -o $out',
+deps = 'gcc', depfile = '$out.d',
+description = 'Compiling $in to $out')
+ninja.rule('link', command = '$cxx $cxxflags $in -o $out $ldflags', description = 'Creating $out')
+ninja.rule('ar', command = 'rm -f $out && $ar crs $out $in', description = 'AR $out')
+ninja.newline()
+
+# Builds
+
+ninja.build('build.ninja', 'bootstrap', implicit = 'bootstrap.py')
+
+libobjs = []
+for f in files_from('src/', '**.cpp'):
+    obj = object_file(f)
+    libobjs.append(obj)
+    ninja.build(obj, 'compile', inputs = f)
+
+testobjs = []
+for f in files_from('test/src/', '*.cpp'):
+    obj = object_file(f)
+    testobjs.append(obj)
+    ninja.build(obj, 'compile', inputs = f)
+
+ninja.newline()
+
+ninja.build('./lib/libbulletlua.a', 'ar', inputs = libobjs)
+ninja.newline()
+ninja.build('./test/bin/bltest', 'link', inputs = libobjs + testobjs)

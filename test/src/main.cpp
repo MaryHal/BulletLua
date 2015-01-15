@@ -104,7 +104,7 @@ TEST_CASE("Out of Bounds Check", "[Boundary]")
 {
     const char* script =
         "function main()"
-        "    setPosition(-5, 0)"
+        "    setPosition(-4, 0)"
         "end";
 
     BulletTester manager;
@@ -139,8 +139,7 @@ TEST_CASE("Collision Check", "[Collision]")
         manager.destination->x = 100;
         manager.destination->y = 100;
 
-        // Is there a collision?
+        // Is there a collision? There better be.
         REQUIRE(manager.checkCollision(*manager.destination) == true);
     }
-
 }
