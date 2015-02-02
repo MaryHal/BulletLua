@@ -145,7 +145,7 @@ void BulletManager::tick()
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER,
                  sizeof(vertexArray) + sizeof(colorArray) + sizeof(textureArray),
-                 NULL,
+                 nullptr,
                  GL_DYNAMIC_DRAW);
 
     glBufferSubData(GL_ARRAY_BUFFER,
@@ -177,7 +177,7 @@ void BulletManager::draw() const
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-    glVertexPointer(2, GL_FLOAT, 0, 0);
+    glVertexPointer(2, GL_FLOAT, 0, nullptr);
     glColorPointer(4, GL_FLOAT, 0, (void*)(sizeof(vertexArray)));
     glTexCoordPointer(2, GL_FLOAT, 0, (void*)(sizeof(vertexArray) + sizeof(colorArray)));
     glDrawArrays(GL_QUADS, 0, bulletCount * 4);

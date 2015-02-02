@@ -67,7 +67,7 @@ void Font::loadFont(const std::string& filename)
 
     stbtt_pack_context pc;
     stbtt_pack_range pr[1];
-    stbtt_PackBegin(&pc, temp_bitmap[0], BITMAP_W, BITMAP_H, 0, 1, NULL);
+    stbtt_PackBegin(&pc, temp_bitmap[0], BITMAP_W, BITMAP_H, 0, 1, nullptr);
 
     pr[0].chardata_for_range = pdata;
     pr[0].first_unicode_char_in_range = 32;
@@ -141,7 +141,7 @@ void Text::draw(const Font& font)
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
 
-    glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 2, 0);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 2, nullptr);
     glVertexPointer(2, GL_FLOAT, sizeof(float) * 2, (GLvoid*)(sizeof(float) * 2));
     glDrawArrays(GL_QUADS, 0, buffer.size());
 

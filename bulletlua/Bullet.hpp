@@ -1,7 +1,7 @@
 #ifndef _Bullet_hpp_
 #define _Bullet_hpp_
 
-struct Bullet
+class Bullet
 {
     public:
         float x, y;

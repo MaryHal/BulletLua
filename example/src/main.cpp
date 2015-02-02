@@ -49,14 +49,14 @@ int main(int argc, char *argv[])
                                           SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
-    if (glContext == NULL)
+    if (glContext == nullptr)
     {
         std::cout << "Error creating OpenGL context." << std::endl;
         return 1;
     }
 
     const unsigned char *version = glGetString(GL_VERSION);
-    if (version == NULL)
+    if (version == nullptr)
     {
         std::cout << "Error creating OpenGL context." << std::endl;
         return 1;

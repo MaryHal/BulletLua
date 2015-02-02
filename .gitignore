@@ -32,3 +32,5 @@ obj/
 /.ninja_deps
 /.ninja_log
 /test/bin/bltest
+/example/.ninja_deps
+/example/.ninja_log
