@@ -1,7 +1,7 @@
 #include "catch.hpp"
 
-#include "BulletLuaManager.hpp"
-#include "BulletLua.hpp"
+#include <bulletlua/BulletLuaManager.hpp>
+#include <bulletlua/BulletLua.hpp>
 
 #include <memory>
 #include <iostream>
@@ -14,9 +14,9 @@ class BulletTester : public BulletLuaManager
 
     public:
         BulletTester()
-            : BulletLuaManager(0.0f, 0.0f, 640.0f, 480.0f)
-            , origin(new Bullet(320.0f, 120.0f, 0.0f, 0.0f))
-            , destination(new Bullet(320.0f, 240.0f, 0.0f, 0.0f))
+            : BulletLuaManager{0, 0, 640, 480}
+            , origin{new Bullet{320.0f, 120.0f, 0.0f, 0.0f}}
+            , destination{new Bullet{320.0f, 240.0f, 0.0f, 0.0f}}
         {
         }
 

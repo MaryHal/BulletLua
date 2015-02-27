@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "Bullet.hpp"
+#include <bulletlua/Bullet.hpp>
 #include "BulletManager.hpp"
 
 #include "Stopwatch.hpp"

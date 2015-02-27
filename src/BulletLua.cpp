@@ -1,10 +1,10 @@
-#include <BulletLua.hpp>
+#include <bulletlua/BulletLua.hpp>
 
-#include <SpacialPartition.hpp>
+#include <bulletlua/SpacialPartition.hpp>
 
 BulletLua::BulletLua()
-    : Bullet(0.0, 0.0, 0.0, 0.0),
-      target(nullptr)
+    : Bullet{0.0, 0.0, 0.0, 0.0},
+      target{nullptr}
 {
 }
 

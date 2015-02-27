@@ -2,7 +2,7 @@ ninja_required_version = 1.3
 ar = ar
 cxx = g++
 cxxflags = -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 $
-    -I../bulletlua -I../ext/sol -L../lib
+    -I../include -I../ext/sol -L../lib
 ldflags = -lSDL2 -lGL -lGLEW -lbulletlua -llua
 
 rule bootstrap

@@ -1,17 +1,17 @@
-#include <Utils/Rect.hpp>
+#include <bulletlua/Utils/Rect.hpp>
 
 #include <algorithm>
 
 namespace BulletLuaUtils
 {
     Rect::Rect()
-        : left(0.0f), top(0.0f),
-          width(0.0f), height(0.0f)
+        : left{0.0f}, top{0.0f},
+          width{0.0f}, height{0.0f}
     {
     }
 
     Rect::Rect(float left, float top, float width, float height)
-        : left(left), top(top), width(width), height(height)
+        : left{left}, top{top}, width{width}, height{height}
     {
     }
 

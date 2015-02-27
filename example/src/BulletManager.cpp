@@ -1,5 +1,5 @@
 #include "BulletManager.hpp"
-#include <BulletLua.hpp>
+#include <bulletlua/BulletLua.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

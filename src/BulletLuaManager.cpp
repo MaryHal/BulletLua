@@ -1,13 +1,13 @@
-#include <BulletLuaManager.hpp>
-#include <BulletLua.hpp>
+#include <bulletlua/BulletLuaManager.hpp>
+#include <bulletlua/BulletLua.hpp>
 
-#include <Utils/Rng.hpp>
-#include <Utils/Math.hpp>
+#include <bulletlua/Utils/Rng.hpp>
+#include <bulletlua/Utils/Math.hpp>
 
 BulletLuaManager::BulletLuaManager(int left, int top, int width, int height)
-    : current(nullptr),
-      rank(0.8),
-      collision(BulletLuaUtils::Rect(left, top, width, height)),
+    : current{nullptr},
+      rank{0.8},
+      collision{BulletLuaUtils::Rect{float(left), float(top), float(width), float(height)}},
       rng{}
 
 {

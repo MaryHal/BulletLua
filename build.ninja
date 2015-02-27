@@ -3,7 +3,7 @@ ar = ar
 cxx = clang++
 cxxflags = -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 $
     -Wno-constexpr-not-const -Wno-unused-value -Wno-mismatched-tags $
-    -Ibulletlua -Iext/sol
+    -Iinclude -Iext/sol
 ldflags = -llua
 
 rule bootstrap

@@ -1,12 +1,13 @@
-#include <Bullet.hpp>
+#include <bulletlua/Bullet.hpp>
 
-#include <Utils/Math.hpp>
+#include <bulletlua/Utils/Math.hpp>
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : x(x), y(y), vx(vx), vy(vy), dead(true),
-      r(255), g(255), b(255),
-      dying(true), life(0), turn(0), collisionCheck(false)
+    : x{x}, y{y}, vx{vx}, vy{vy},
+      dead{true},
+      r{255}, g{255}, b{255},
+      dying{true}, life{0}, turn{0}, collisionCheck{false}
 {
     fixSpeed();
 }

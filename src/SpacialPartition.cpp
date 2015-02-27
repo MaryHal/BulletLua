@@ -1,10 +1,10 @@
-#include "SpacialPartition.hpp"
-#include "Bullet.hpp"
+#include <bulletlua/SpacialPartition.hpp>
+#include <bulletlua/Bullet.hpp>
 
 #include <cstring>
 
 SpacialPartition::SpacialPartition(const BulletLuaUtils::Rect& area)
-    : screenArea(area)
+    : screenArea{area}
 {
     reset();
 }

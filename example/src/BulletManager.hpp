@@ -1,7 +1,7 @@
 #ifndef _BulletManager_hpp_
 #define _BulletManager_hpp_
 
-#include <BulletLuaManager.hpp>
+#include <bulletlua/BulletLuaManager.hpp>
 
 class BulletManager : public BulletLuaManager
 {

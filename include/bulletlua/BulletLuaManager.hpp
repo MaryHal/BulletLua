@@ -1,8 +1,8 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
-// #include "BulletModel.hpp"
-#include "SpacialPartition.hpp"
+// #include <bulletlua/BulletModel.hpp>
+#include <bulletlua/SpacialPartition.hpp>
 
 #include <list>
 #include <stack>
@@ -12,7 +12,7 @@
 
 #include <sol.hpp>
 
-#include <Utils/Rng.hpp>
+#include <bulletlua/Utils/Rng.hpp>
 
 namespace
 {
