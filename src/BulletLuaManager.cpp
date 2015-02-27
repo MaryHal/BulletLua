@@ -8,7 +8,8 @@ BulletLuaManager::BulletLuaManager(int left, int top, int width, int height)
     : current(nullptr),
       rank(0.8),
       collision(BulletLuaUtils::Rect(left, top, width, height)),
-      rng(new BulletLuaUtils::Random)
+      rng{}
+
 {
     // This only calls this class' version of this function, not any subclass'.
     increaseCapacity();
@@ -245,25 +246,25 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
     luaState->set_function("randFloat",
                            [&]()
                            {
-                               return rng->genFloat();
+                               return rng.float_01();
                            });
 
     luaState->set_function("randFloatRange",
                            [&](float min, float max)
                            {
-                               return rng->genFloat(min, max);
+                               return rng.floatRange(min, max);
                            });
 
     luaState->set_function("randInt",
                            [&](int max)
                            {
-                               return rng->genInt(max);
+                               return rng.int_64(0, max);
                            });
 
     luaState->set_function("randIntRange",
                            [&](int min, int max)
                            {
-                               return rng->genInt(min, max);
+                               return rng.int_64(min, max);
                            });
 
     luaState->set_function("setPosition",

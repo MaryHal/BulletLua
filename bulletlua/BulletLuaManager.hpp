@@ -12,15 +12,12 @@
 
 #include <sol.hpp>
 
+#include <Utils/Rng.hpp>
+
 namespace
 {
     // Amount of bullets to allocate at once.
     const unsigned int BLOCK_SIZE = 2048;
-}
-
-namespace BulletLuaUtils
-{
-    class Random;
 }
 
 class Bullet;
@@ -43,7 +40,7 @@ class BulletLuaManager
         // std::vector<BulletModel> models;
 
         SpacialPartition collision;
-        std::unique_ptr<BulletLuaUtils::Random> rng;
+        BulletLuaUtils::MTRandom rng;
 
     public:
         BulletLuaManager(int left, int top, int width, int height);

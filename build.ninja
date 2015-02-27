@@ -1,12 +1,13 @@
 ninja_required_version = 1.3
 ar = ar
-cxx = g++
+cxx = clang++
 cxxflags = -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 $
+    -Wno-constexpr-not-const -Wno-unused-value -Wno-mismatched-tags $
     -Ibulletlua -Iext/sol
 ldflags = -llua
 
 rule bootstrap
-  command = python bootstrap.py
+  command = python bootstrap.py --cxx=clang++
   generator = 1
 rule compile
   command = $cxx -MMD -MF $out.d -c $cxxflags -Werror $in -o $out
@@ -26,15 +27,13 @@ build obj/src/SpacialPartition.o: compile src/SpacialPartition.cpp
 build obj/src/Bullet.o: compile src/Bullet.cpp
 build obj/src/BulletLua.o: compile src/BulletLua.cpp
 build obj/src/Utils/Rect.o: compile src/Utils/Rect.cpp
-build obj/src/Utils/Rng.o: compile src/Utils/Rng.cpp
 build obj/test/src/catchdef.o: compile test/src/catchdef.cpp
 build obj/test/src/main.o: compile test/src/main.cpp
 
 build ./lib/libbulletlua.a: ar obj/src/BulletLuaManager.o $
     obj/src/SpacialPartition.o obj/src/Bullet.o obj/src/BulletLua.o $
-    obj/src/Utils/Rect.o obj/src/Utils/Rng.o
+    obj/src/Utils/Rect.o
 
 build ./test/bin/bltest: link obj/src/BulletLuaManager.o $
     obj/src/SpacialPartition.o obj/src/Bullet.o obj/src/BulletLua.o $
-    obj/src/Utils/Rect.o obj/src/Utils/Rng.o obj/test/src/catchdef.o $
-    obj/test/src/main.o
+    obj/src/Utils/Rect.o obj/test/src/catchdef.o obj/test/src/main.o
