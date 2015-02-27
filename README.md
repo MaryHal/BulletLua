@@ -53,11 +53,14 @@ Because there are so many use cases out there, BulletLua doesn't actually draw a
 
 Then to run a script...
 
-    BulletManager manager;
-    Bullet origin(x, y, vx, vy);
-    Bullet destination(x, y, vx, vy);
+    // Create a bullet manager that governs a 640x480 rectangle.
+    BulletManager manager{0, 0, 640, 480};
 
-    manager.createBullet("MyFile.lua", &origin, &destination);
+    Bullet origin(x, y, vx, vy);
+    Bullet target(x, y, vx, vy);
+
+    // Fire a bullet that runs MyFile.lua from origin at target.
+    manager.createBullet("MyFile.lua", &origin, &target);
 
     // Game Loop
     while (running)
@@ -258,3 +261,4 @@ Future Plans
 * Be able to desribe collision detection area.
 * More robust collision detection.
 * Be able to agnostically define different types of bullets.
+* Design a new method to manage the initial "bullets" (i.e. the "origin" bullet and the player "target"))
