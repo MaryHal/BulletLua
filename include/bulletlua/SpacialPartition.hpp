@@ -44,7 +44,7 @@ class SpacialPartition
         bool checkCollision(const Bullet& b) const;
 
         // Point-to-rect collision test.
-        bool checkCollision(int x, int y, int width, int height);
+        bool checkCollision(int x, int y, int width, int height) = delete;
 };
 
 #endif // _SpacialPartition_hpp_

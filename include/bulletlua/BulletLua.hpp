@@ -4,7 +4,7 @@
 #include <memory>
 #include <sol.hpp>
 
-#include "Bullet.hpp"
+#include <bulletlua/Bullet.hpp>
 
 class SpacialPartition;
 

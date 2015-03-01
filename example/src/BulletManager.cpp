@@ -118,17 +118,17 @@ void BulletManager::tick()
         textureArray[i * 8 + 7] = 1.0f;
 
         // Rotate coordinates around center
-        vertexArray[i * 8 + 0] = b->x +  rad * (float)sin(dir - 3.1415f/4);
-        vertexArray[i * 8 + 1] = b->y + -rad * (float)cos(dir - 3.1415f/4);
+        vertexArray[i * 8 + 0] = b->position.x +  rad * (float)sin(dir - 3.1415f/4);
+        vertexArray[i * 8 + 1] = b->position.y + -rad * (float)cos(dir - 3.1415f/4);
 
-        vertexArray[i * 8 + 2] = b->x +  rad * (float)sin(dir + 3.1415f/4);
-        vertexArray[i * 8 + 3] = b->y + -rad * (float)cos(dir + 3.1415f/4);
+        vertexArray[i * 8 + 2] = b->position.x +  rad * (float)sin(dir + 3.1415f/4);
+        vertexArray[i * 8 + 3] = b->position.y + -rad * (float)cos(dir + 3.1415f/4);
 
-        vertexArray[i * 8 + 4] = b->x +  rad * (float)sin(dir + 3 * 3.1415f/4);
-        vertexArray[i * 8 + 5] = b->y + -rad * (float)cos(dir + 3 * 3.1415f/4);
+        vertexArray[i * 8 + 4] = b->position.x +  rad * (float)sin(dir + 3 * 3.1415f/4);
+        vertexArray[i * 8 + 5] = b->position.y + -rad * (float)cos(dir + 3 * 3.1415f/4);
 
-        vertexArray[i * 8 + 6] = b->x +  rad * (float)sin(dir + 5 * 3.1415f/4);
-        vertexArray[i * 8 + 7] = b->y + -rad * (float)cos(dir + 5 * 3.1415f/4);
+        vertexArray[i * 8 + 6] = b->position.x +  rad * (float)sin(dir + 5 * 3.1415f/4);
+        vertexArray[i * 8 + 7] = b->position.y + -rad * (float)cos(dir + 5 * 3.1415f/4);
 
 
         if ((*iter)->collisionCheck)

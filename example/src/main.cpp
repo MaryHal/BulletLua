@@ -143,8 +143,8 @@ int main(int argc, char *argv[])
 
         int x, y;
         SDL_GetMouseState(&x, &y);
-        destination.x = x;
-        destination.y = y;
+        destination.position.x = x;
+        destination.position.y = y;
 
         if (manager.checkCollision(destination))
         {

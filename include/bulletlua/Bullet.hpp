@@ -1,10 +1,12 @@
 #ifndef _Bullet_hpp_
 #define _Bullet_hpp_
 
+#include <bulletlua/Utils/Rect.hpp>
+
 class Bullet
 {
     public:
-        float x, y;
+        BulletLuaUtils::Rect position;
         float vx, vy;
         bool dead;
 

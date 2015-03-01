@@ -37,7 +37,7 @@ args = parser.parse_args()
 BUILD_FILENAME = 'build.ninja'
 
 compiler = args.cxx
-include = ['-Iinclude', '-Iext/sol']
+include = ['-Iinclude', '-isystem./ext/sol']
 depends = []
 libdirs = []
 ldflags = []

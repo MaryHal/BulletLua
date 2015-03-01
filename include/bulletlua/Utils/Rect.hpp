@@ -6,10 +6,10 @@ namespace BulletLuaUtils
     class Rect
     {
         public:
-            float left;
-            float top;
-            float width;
-            float height;
+            float x;
+            float y;
+            float w;
+            float h;
 
             Rect();
             Rect(float left, float top, float width, float height);

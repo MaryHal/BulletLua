@@ -178,14 +178,14 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&]()
                            {
                                BulletLua* c = this->current;
-                               return std::make_tuple(c->x, c->y);
+                               return std::make_tuple(c->position.x, c->position.y);
                            });
 
     luaState->set_function("getTargetPosition",
                            [&]()
                            {
                                BulletLua* c = this->current;
-                               return std::make_tuple(c->target->x, c->target->y);
+                               return std::make_tuple(c->target->position.x, c->target->position.y);
                            });
 
     luaState->set_function("getVelocity",
@@ -271,8 +271,8 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&](float x, float y)
                            {
                                BulletLua* c = this->current;
-                               c->x = x;
-                               c->y = y;
+                               c->position.x = x;
+                               c->position.y = y;
                            });
 
     luaState->set_function("setVelocity",
@@ -301,7 +301,7 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&]()
                            {
                                BulletLua* c = this->current;
-                               c->setDirectionAim(c->target->x, c->target->y);
+                               c->setDirectionAim(c->target->position.x, c->target->position.y);
                            });
 
     luaState->set_function("aimPoint",
@@ -329,8 +329,8 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&](float x, float y, unsigned int steps)
                            {
                                BulletLua* c = this->current;
-                               c->vx = (x - c->x) / steps;
-                               c->vy = (y - c->y) / steps;
+                               c->vx = (x - c->position.x) / steps;
+                               c->vy = (y - c->position.y) / steps;
                            });
 
     luaState->set_function("setFunction",
@@ -349,7 +349,7 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                    return;
 
                                this->createBullet(c->luaState, func,
-                                                  c->x, c->y,
+                                                  c->position.x, c->position.y,
                                                   Math::degToRad(d), s,
                                                   c->target);
                            });
@@ -363,9 +363,9 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                    return;
 
                                this->createBullet(c->luaState, func,
-                                                  c->x, c->y,
-                                                  c->getDirectionAim(c->target->x,
-                                                                     c->target->y),
+                                                  c->position.x, c->position.y,
+                                                  c->getDirectionAim(c->target->position.x,
+                                                                     c->target->position.y),
                                                   s,
                                                   c->target);
                            });
@@ -382,7 +382,7 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                for (int i = 0; i < segments; ++i)
                                {
                                    this->createBullet(c->luaState, func,
-                                                      c->x, c->y,
+                                                      c->position.x, c->position.y,
                                                       segRad * i, s,
                                                       c->target);
                                }

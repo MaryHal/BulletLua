@@ -30,8 +30,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
          Bullet* origin, Bullet* target)
 {
     // Copy Movers
-    this->x = origin->x;
-    this->y = origin->y;
+    this->position = origin->position;
     this->vx = origin->vx;
     this->vy = origin->vy;
 
@@ -47,8 +46,8 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
          Bullet* target)
 {
     // Copy Movers
-    this->x = x;
-    this->y = y;
+    this->position.x = x;
+    this->position.y = y;
     this->setSpeedAndDirection(s, d);
     /* this->vx = vx; */
     /* this->vy = vy; */
@@ -69,8 +68,8 @@ void BulletLua::run(const SpacialPartition& collision)
         func.call();
     }
 
-    x += vx;
-    y += vy;
+    position.x += vx;
+    position.y += vy;
 
     if (collision.checkOutOfBounds(*this))
     {

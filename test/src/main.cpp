@@ -136,8 +136,8 @@ TEST_CASE("Collision Check", "[Collision]")
         manager.tick();
 
         // Move our "ship" to (100, 100) as well.
-        manager.destination->x = 100;
-        manager.destination->y = 100;
+        manager.destination->position.x = 100;
+        manager.destination->position.y = 100;
 
         // Is there a collision? There better be.
         REQUIRE(manager.checkCollision(*manager.destination) == true);

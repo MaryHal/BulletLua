@@ -4,7 +4,8 @@
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : x{x}, y{y}, vx{vx}, vy{vy},
+    : position{x, y, 4.0f, 4.0f},
+      vx{vx}, vy{vy},
       dead{true},
       r{255}, g{255}, b{255},
       dying{true}, life{0}, turn{0}, collisionCheck{false}
@@ -65,12 +66,15 @@ void Bullet::setDirectionRelative(float dir)
 
 void Bullet::setDirectionAim(float tx, float ty)
 {
-    setDirection(Math::PI - std::atan2(tx - x, ty - y));
+    // TODO: use getDirectionAim
+    setDirection(Math::PI -
+                 std::atan2(tx - position.x,
+                            ty - position.y));
 }
 
 float Bullet::getDirectionAim(float tx, float ty)
 {
-    return Math::PI - std::atan2(tx - x, ty - y);
+    return Math::PI - std::atan2(tx - position.x, ty - position.y);
 }
 
 

@@ -2,6 +2,7 @@
 #include <bulletlua/Bullet.hpp>
 
 #include <cstring>
+#include <iostream>
 
 SpacialPartition::SpacialPartition(const BulletLuaUtils::Rect& area)
     : screenArea{area}
@@ -15,8 +16,8 @@ void SpacialPartition::addBullet(const Bullet* bullet)
         return;
 
     // Abuse integer division to determine which array cell this bullet belongs to.
-    int x = bullet->x / tileSize;
-    int y = bullet->y / tileSize;
+    int x = bullet->position.x / tileSize;
+    int y = bullet->position.y / tileSize;
 
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return;
@@ -38,28 +39,28 @@ void SpacialPartition::reset()
 // Checks if bullet is still in the testable area
 bool SpacialPartition::checkOutOfBounds(const Bullet& b) const
 {
-    BulletLuaUtils::Rect thisBullet(b.x, b.y, 4, 4);
-    return !screenArea.intersects(thisBullet);
+    // BulletLuaUtils::Rect thisBullet(b.position.x, b.position.y, 4.0f, 4.0f);
+    return !screenArea.intersects(b.position);
 }
 
 // Point-to-point collision test.
 bool SpacialPartition::checkCollision(const Bullet& b) const
 {
-    int x = b.x / tileSize;
-    int y = b.y / tileSize;
+    int x = b.position.x / tileSize;
+    int y = b.position.y / tileSize;
 
-    // If the position of the bullet passed as an argument is outside our defined space,
-    // don't bother
+    // If the position of the bullet passed as an argument is outside our defined space, don't
+    // bother.
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return false;
 
-    BulletLuaUtils::Rect thisBullet(b.x - 2, b.y - 2, 4, 4);
-    BulletLuaUtils::Rect thatBullet(0.0f, 0.0f, 4, 4);
+    BulletLuaUtils::Rect thisBullet{b.position};
 
     for (int i = 0; i < bulletCount[x][y]; i++)
     {
-        thatBullet.left = space[x][y][i]->x - 2;
-        thatBullet.top  = space[x][y][i]->y - 2;
+        BulletLuaUtils::Rect thatBullet{space[x][y][i]->position};
+        // thatBullet.x = space[x][y][i]->position.x;
+        // thatBullet.x = space[x][y][i]->position.y;
 
         if (thisBullet.intersects(thatBullet))
             return true;
@@ -68,21 +69,21 @@ bool SpacialPartition::checkCollision(const Bullet& b) const
     return false;
 }
 
-// Point-to-rect collision test.
-bool SpacialPartition::checkCollision(int x, int y, int width, int height)
-{
-    int xMin = x / tileSize;
-    int xMax = (x + width) / tileSize;
-
-    int yMin = y / tileSize;
-    int yMax = (y + height) / tileSize;
-
-    for (int j = yMin; j < yMax; ++j)
-    {
-        for (int i = xMin; i < xMax; ++i)
-        {
-            return false;
-        }
-    }
-    return false;
-}
+// // Point-to-rect collision test.
+// bool SpacialPartition::checkCollision(int x, int y, int width, int height)
+// {
+//     int xMin = x / tileSize;
+//     int xMax = (x + width) / tileSize;
+//
+//     int yMin = y / tileSize;
+//     int yMax = (y + height) / tileSize;
+//
+//     for (int j = yMin; j < yMax; ++j)
+//     {
+//         for (int i = xMin; i < xMax; ++i)
+//         {
+//             return false;
+//         }
+//     }
+//     return false;
+// }
