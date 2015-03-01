@@ -4,6 +4,7 @@
 #include <string>
 
 #include <bulletlua/Bullet.hpp>
+#include <bulletlua/Utils/Rect.hpp>
 #include "BulletManager.hpp"
 
 #include "Stopwatch.hpp"
@@ -99,10 +100,10 @@ int main(int argc, char *argv[])
     glDisable(GL_DEPTH_TEST);
 
     Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
-    Bullet destination(320.0f, 240.0f, 0.0f, 0.0f);
+    BulletLuaUtils::Rect player(320.0f, 240.0f, 4.0f, 4.0f);
 
     // Create a new bullet manager and make it govern the window + 100px padding
-    BulletManager manager(-100, -100, 840, 680);
+    BulletManager manager(-100, -100, 840, 680, player);
 
     float bestTime = 0.0f;
     Stopwatch timer;
@@ -131,7 +132,7 @@ int main(int argc, char *argv[])
                 {
                     timer.start();
                     manager.clear();
-                    manager.createBullet(filename, &origin, &destination);
+                    manager.createBulletFromFile(filename, &origin);
                 }
             }
         }
@@ -143,10 +144,10 @@ int main(int argc, char *argv[])
 
         int x, y;
         SDL_GetMouseState(&x, &y);
-        destination.position.x = x;
-        destination.position.y = y;
+        player.x = x;
+        player.y = y;
 
-        if (manager.checkCollision(destination))
+        if (manager.checkCollision())
         {
             manager.vanishAll();
 

@@ -13,23 +13,20 @@ class BulletLua : public Bullet
     public:
         BulletLua();
 
-        void makeReusable(Bullet* target);
+        void makeReusable();
 
         void set(std::shared_ptr<sol::state> lua,
                  const sol::function& func,
-                 Bullet* origin, Bullet* target);
+                 Bullet* origin);
 
         void set(std::shared_ptr<sol::state> lua,
                  const sol::function& func,
-                 float x, float y, float d, float s,
-                 Bullet* target);
+                 float x, float y, float d, float s);
 
         void run(const SpacialPartition& collision);
         void setFunction(const sol::function& func);
 
     public:
-        Bullet* target;
-
         std::shared_ptr<sol::state> luaState;
         sol::function func;
 };

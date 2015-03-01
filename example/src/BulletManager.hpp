@@ -2,11 +2,13 @@
 #define _BulletManager_hpp_
 
 #include <bulletlua/BulletLuaManager.hpp>
+#include <bulletlua/Utils/Rect.hpp>
 
 class BulletManager : public BulletLuaManager
 {
     public:
-        BulletManager(int left, int top, int width, int height);
+        BulletManager(int left, int top, int width, int height,
+                      const BulletLuaUtils::Rect& player);
         ~BulletManager() final;
 
         void tick() final;

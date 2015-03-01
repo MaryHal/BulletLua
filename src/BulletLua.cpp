@@ -3,15 +3,12 @@
 #include <bulletlua/SpacialPartition.hpp>
 
 BulletLua::BulletLua()
-    : Bullet{0.0, 0.0, 0.0, 0.0},
-      target{nullptr}
+    : Bullet{0.0, 0.0, 0.0, 0.0}
 {
 }
 
-void BulletLua::makeReusable(Bullet* target)
+void BulletLua::makeReusable()
 {
-    this->target = target;
-
     this->dead  = false;
     this->dying = false;
     this->life = 255;
@@ -27,14 +24,14 @@ void BulletLua::makeReusable(Bullet* target)
 
 void BulletLua::set(std::shared_ptr<sol::state> lua,
          const sol::function& func,
-         Bullet* origin, Bullet* target)
+         Bullet* origin)
 {
     // Copy Movers
     this->position = origin->position;
     this->vx = origin->vx;
     this->vy = origin->vy;
 
-    makeReusable(target);
+    makeReusable();
 
     luaState = lua;
     this->func = func;
@@ -42,8 +39,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
 
 void BulletLua::set(std::shared_ptr<sol::state> lua,
          const sol::function& func,
-         float x, float y, float d, float s,
-         Bullet* target)
+         float x, float y, float d, float s)
 {
     // Copy Movers
     this->position.x = x;
@@ -52,7 +48,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     /* this->vx = vx; */
     /* this->vy = vy; */
 
-    makeReusable(target);
+    makeReusable();
 
     luaState = lua;
     this->func = func;
@@ -60,8 +56,6 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
 
 void BulletLua::run(const SpacialPartition& collision)
 {
-    // BulletLua::current = this;
-
     // Run lua function
     if (!dead)
     {
@@ -71,7 +65,7 @@ void BulletLua::run(const SpacialPartition& collision)
     position.x += vx;
     position.y += vy;
 
-    if (collision.checkOutOfBounds(*this))
+    if (collision.checkOutOfBounds(this->position))
     {
         dead = true;
     }

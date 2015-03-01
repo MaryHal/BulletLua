@@ -1,7 +1,7 @@
 #ifndef _SpacialPartition_hpp_
 #define _SpacialPartition_hpp_
 
-#include "Utils/Rect.hpp"
+#include <bulletlua/Utils/Rect.hpp>
 
 class Bullet;
 
@@ -38,10 +38,10 @@ class SpacialPartition
         void reset();
 
         // Checks if bullet is still in the testable area
-        bool checkOutOfBounds(const Bullet& b) const;
+        bool checkOutOfBounds(const BulletLuaUtils::Rect& b) const;
 
         // Point-to-point collision test.
-        bool checkCollision(const Bullet& b) const;
+        bool checkCollision(const BulletLuaUtils::Rect& b) const;
 
         // Point-to-rect collision test.
         bool checkCollision(int x, int y, int width, int height) = delete;

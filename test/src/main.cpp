@@ -2,6 +2,7 @@
 
 #include <bulletlua/BulletLuaManager.hpp>
 #include <bulletlua/BulletLua.hpp>
+#include <bulletlua/Utils/Rect.hpp>
 
 #include <memory>
 #include <iostream>
@@ -10,29 +11,12 @@ class BulletTester : public BulletLuaManager
 {
     public:
         std::unique_ptr<Bullet> origin;
-        std::unique_ptr<Bullet> destination;
 
     public:
-        BulletTester()
-            : BulletLuaManager{0, 0, 640, 480}
+        BulletTester(BulletLuaUtils::Rect& player)
+            : BulletLuaManager{0, 0, 640, 480, player}
             , origin{new Bullet{320.0f, 120.0f, 0.0f, 0.0f}}
-            , destination{new Bullet{320.0f, 240.0f, 0.0f, 0.0f}}
         {
-        }
-
-        // Create bullet from string.
-        void createBullet(const std::string& script)
-        {
-            BulletLua* b = getFreeBullet();
-
-            std::shared_ptr<sol::state> luaState = initLua();
-            luaState->script(script);
-
-            b->set(luaState,
-                   luaState->get<sol::function>("main"),
-                   origin.get(), destination.get());
-
-            bullets.push_back(b);
         }
 
         void createEmptyBullet()
@@ -52,7 +36,8 @@ class BulletTester : public BulletLuaManager
 
 TEST_CASE("Space Allocation", "[Space]")
 {
-    BulletTester manager;
+    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
+    BulletTester manager{player};
 
     SECTION("Initial Size")
     {
@@ -73,7 +58,7 @@ TEST_CASE("Space Allocation", "[Space]")
         REQUIRE(manager.blockCount() == expected_blocks);
     }
 
-    // Overflow one (default-sized) block
+    // Overflow one (default-size) block.
     SECTION("Add a metric ton")
     {
         const unsigned int a_metric_ton = 2200;
@@ -86,7 +71,7 @@ TEST_CASE("Space Allocation", "[Space]")
         REQUIRE(manager.blockCount() == expected_blocks);
     }
 
-    // Overflow many (default-sized) blocks.
+    // Overflow many (default-size) blocks.
     SECTION("Add a lot")
     {
         const unsigned int a_lot = 1 << 16;
@@ -102,16 +87,17 @@ TEST_CASE("Space Allocation", "[Space]")
 
 TEST_CASE("Out of Bounds Check", "[Boundary]")
 {
+    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
+    BulletTester manager{player};
+
     const char* script =
         "function main()"
         "    setPosition(-4, 0)"
         "end";
 
-    BulletTester manager;
-
     SECTION("Single Bullet")
     {
-        manager.createBullet(script);
+        manager.createBulletFromScript(script, manager.origin.get());
         REQUIRE(manager.bulletCount() == 1);
 
         manager.tick();
@@ -122,24 +108,25 @@ TEST_CASE("Out of Bounds Check", "[Boundary]")
 
 TEST_CASE("Collision Check", "[Collision]")
 {
+    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
+    BulletTester manager{player};
+
     const char* script =
         "function main()"
         "    setPosition(100, 100)"
         "end";
 
-    BulletTester manager;
-
     SECTION("Single Bullet")
     {
         // Create a bullet, script will move it to (100, 100)
-        manager.createBullet(script);
+        manager.createBulletFromScript(script, manager.origin.get());
         manager.tick();
 
         // Move our "ship" to (100, 100) as well.
-        manager.destination->position.x = 100;
-        manager.destination->position.y = 100;
+        player.x = 100;
+        player.y = 100;
 
         // Is there a collision? There better be.
-        REQUIRE(manager.checkCollision(*manager.destination) == true);
+        REQUIRE(manager.checkCollision() == true);
     }
 }

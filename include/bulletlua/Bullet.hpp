@@ -29,8 +29,10 @@ class Bullet
 
         void setDirection(float dir);
         void setDirectionRelative(float dir);
-        void setDirectionAim(float tx, float ty);
-        float getDirectionAim(float tx, float ty);
+
+        void aimAtPoint(float tx, float ty);
+        float getAimDirection(float tx, float ty);
+
         float getDirection() const;
 
         void vanish();
@@ -41,6 +43,8 @@ class Bullet
 
         int getTurn() const;
         void setColor(unsigned char newR, unsigned char newG, unsigned char newB);
+
+        void update();
 
     private:
         // Adjust speed if near zero as setDirection depends on at least one component

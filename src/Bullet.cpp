@@ -64,7 +64,7 @@ void Bullet::setDirectionRelative(float dir)
 }
 
 
-void Bullet::setDirectionAim(float tx, float ty)
+void Bullet::aimAtPoint(float tx, float ty)
 {
     // TODO: use getDirectionAim
     setDirection(Math::PI -
@@ -72,7 +72,7 @@ void Bullet::setDirectionAim(float tx, float ty)
                             ty - position.y));
 }
 
-float Bullet::getDirectionAim(float tx, float ty)
+float Bullet::getAimDirection(float tx, float ty)
 {
     return Math::PI - std::atan2(tx - position.x, ty - position.y);
 }
@@ -119,6 +119,12 @@ void Bullet::setColor(unsigned char newR, unsigned char newG, unsigned char newB
     r = newR;
     g = newG;
     b = newB;
+}
+
+void Bullet::update()
+{
+    position.x += vx;
+    position.y += vy;
 }
 
 void Bullet::fixSpeed()

@@ -6,8 +6,9 @@
 
 #include <GL/glew.h>
 
-BulletManager::BulletManager(int left, int top, int width, int height)
-    : BulletLuaManager(left, top, width, height),
+BulletManager::BulletManager(int left, int top, int width, int height,
+                             const BulletLuaUtils::Rect& player)
+    : BulletLuaManager(left, top, width, height, player),
       vbo(0),
       bulletCount(0),
       tex(0)
@@ -129,7 +130,6 @@ void BulletManager::tick()
 
         vertexArray[i * 8 + 6] = b->position.x +  rad * (float)sin(dir + 5 * 3.1415f/4);
         vertexArray[i * 8 + 7] = b->position.y + -rad * (float)cos(dir + 5 * 3.1415f/4);
-
 
         if ((*iter)->collisionCheck)
         {

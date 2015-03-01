@@ -1,9 +1,6 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
-// #include <bulletlua/BulletModel.hpp>
-#include <bulletlua/SpacialPartition.hpp>
-
 #include <list>
 #include <stack>
 
@@ -12,7 +9,10 @@
 
 #include <sol.hpp>
 
+// #include <bulletlua/BulletModel.hpp>
+#include <bulletlua/SpacialPartition.hpp>
 #include <bulletlua/Utils/Rng.hpp>
+#include <bulletlua/Utils/Rect.hpp>
 
 namespace
 {
@@ -29,6 +29,9 @@ class BulletLuaManager
         // Pointer to the bullet that is to-be-processed.
         BulletLua* current;
 
+        // Collision object that bullets can "aim" at (i.e. the player).
+        const BulletLuaUtils::Rect& player;
+
         // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         float rank;
 
@@ -43,37 +46,31 @@ class BulletLuaManager
         BulletLuaUtils::MTRandom rng;
 
     public:
-        BulletLuaManager(int left, int top, int width, int height);
+        BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& player);
         virtual ~BulletLuaManager();
 
         // Non-copyable
         BulletLuaManager(const BulletLuaManager&) = delete;
         BulletLuaManager& operator=(const BulletLuaManager&) = delete;
 
-        // TODO: Explicit copy constructor?
-
         // // TODO: Finish bullet model methods.
         // void registerModel(const BulletModel& model);
         // const BulletModel& getModel(int index) const;
 
-        // Root Bullet
-        void createBullet(const std::string& filename,
-                          Bullet* origin,
-                          Bullet* target);
+        // Create a root bullet from an external script.
+        void createBulletFromFile(const std::string& filename,
+                                  Bullet* origin);
 
-        // // Create Child Bullet
-        // void createBullet(std::shared_ptr<sol::state> lua,
-        //                   const sol::function& func,
-        //                   Bullet* origin,
-        //                   Bullet* target);
+        // Create a root bullet from an embedded script.
+        void createBulletFromScript(const std::string& script,
+                                    Bullet* origin);
 
-        // Create Child Bullet
+        // Create child bullet
         void createBullet(std::shared_ptr<sol::state> lua,
                           const sol::function& func,
-                          float x, float y, float d, float s,
-                          Bullet* target);
+                          float x, float y, float d, float s);
 
-        bool checkCollision(Bullet& b);
+        bool checkCollision();
         virtual void tick();
 
         // Draw function.
