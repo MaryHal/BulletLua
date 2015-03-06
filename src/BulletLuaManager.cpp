@@ -6,7 +6,8 @@
 
 BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp)
     : current{nullptr},
-      player{playerp},
+      // player{playerp},
+      player(playerp),
       rank{0.8},
       collision{BulletLuaUtils::Rect{float(left), float(top), float(width), float(height)}},
       rng{}
