@@ -4,9 +4,9 @@
 #include <bulletlua/Utils/Rng.hpp>
 #include <bulletlua/Utils/Math.hpp>
 
-BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& player)
+BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp)
     : current{nullptr},
-      player{player},
+      player{playerp},
       rank{0.8},
       collision{BulletLuaUtils::Rect{float(left), float(top), float(width), float(height)}},
       rng{}

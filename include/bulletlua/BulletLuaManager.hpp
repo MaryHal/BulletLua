@@ -46,7 +46,7 @@ class BulletLuaManager
         BulletLuaUtils::MTRandom rng;
 
     public:
-        BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& player);
+        BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp);
         virtual ~BulletLuaManager();
 
         // Non-copyable
