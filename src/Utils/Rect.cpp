@@ -48,4 +48,3 @@ namespace BulletLuaUtils
         return !(r1 == r2);
     }
 } // namespace BulletLuaUtils
-
