@@ -14,6 +14,9 @@ class BulletManager : public BulletLuaManager
         void tick() final;
         void draw() const;
 
+        // View collision box for bullets (debug). Uses OpenGL immediate mode.
+        void drawCollision() const;
+
         unsigned int getVertexCount() const;
 
     private:

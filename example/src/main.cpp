@@ -99,17 +99,19 @@ int main(int argc, char *argv[])
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
 
-    Bullet origin(320.0f, 120.0f, 0.0f, 0.0f);
-    BulletLuaUtils::Rect player(320.0f, 240.0f, 4.0f, 4.0f);
+    Bullet origin{320.0f, 120.0f, 0.0f, 0.0f};
+    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
 
     // Create a new bullet manager and make it govern the window + 100px padding
-    BulletManager manager(-100, -100, 840, 680, player);
+    BulletManager manager{-100, -100, 840, 680, player};
+    bool collision{false};
+    bool frameAdvanceMode{false};
 
-    float bestTime = 0.0f;
+    float bestTime{0.0f};
     Stopwatch timer;
 
     // Create Font
-    Font font("DroidSansFallback.ttf");
+    Font font{"DroidSansFallback.ttf"};
 
     bool running = true;
     while (running)
@@ -120,9 +122,8 @@ int main(int argc, char *argv[])
             if (e.type == SDL_QUIT)
             {
                 running = false;
-
             }
-            else if (e.type == SDL_KEYUP)
+            else if (e.type == SDL_KEYDOWN)
             {
                 if (e.key.keysym.sym == SDLK_ESCAPE)
                 {
@@ -134,13 +135,27 @@ int main(int argc, char *argv[])
                     manager.clear();
                     manager.createBulletFromFile(filename, &origin);
                 }
+                else if (e.key.keysym.sym == SDLK_c)
+                {
+                    collision = !collision;
+                }
+                else if (e.key.keysym.sym == SDLK_f)
+                {
+                    frameAdvanceMode = !frameAdvanceMode;
+                }
+                else if (e.key.keysym.sym == SDLK_a)
+                {
+                    if (frameAdvanceMode)
+                        manager.tick();
+                }
             }
         }
 
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        manager.tick();
+        if (!frameAdvanceMode)
+            manager.tick();
 
         int x, y;
         SDL_GetMouseState(&x, &y);
@@ -158,10 +173,16 @@ int main(int argc, char *argv[])
 
         manager.draw();
 
+        if (collision)
+            manager.drawCollision();
+
         glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
         font.draw(10.0f, 20.0f, format("Current %.3f", timer.getFloatTime()));
         font.draw(10.0f, 40.0f, format("Best %.3f", bestTime));
         font.draw(10.0f, 470.0f, "Press Space to Begin");
+        font.draw(460.0f, 430.0f, "c = toggle collision boxes");
+        font.draw(460.0f, 450.0f, "f = frame advance mode");
+        font.draw(460.0f, 470.0f, "a = advance frame");
 
         SDL_GL_SwapWindow(window);
     }

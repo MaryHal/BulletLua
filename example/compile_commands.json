@@ -1,22 +1,22 @@
 [
   {
     "directory": "/home/sanford/code/current/BulletLua/example",
-    "command": "g++ -MMD -MF obj/src/Font.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../bulletlua -I../ext/sol -L../lib src/Font.cpp -o obj/src/Font.o",
+    "command": "g++ -MMD -MF obj/src/Font.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../include -I../ext/sol -L../lib src/Font.cpp -o obj/src/Font.o",
     "file": "src/Font.cpp"
   },
   {
     "directory": "/home/sanford/code/current/BulletLua/example",
-    "command": "g++ -MMD -MF obj/src/Stopwatch.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../bulletlua -I../ext/sol -L../lib src/Stopwatch.cpp -o obj/src/Stopwatch.o",
+    "command": "g++ -MMD -MF obj/src/Stopwatch.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../include -I../ext/sol -L../lib src/Stopwatch.cpp -o obj/src/Stopwatch.o",
     "file": "src/Stopwatch.cpp"
   },
   {
     "directory": "/home/sanford/code/current/BulletLua/example",
-    "command": "g++ -MMD -MF obj/src/main.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../bulletlua -I../ext/sol -L../lib src/main.cpp -o obj/src/main.o",
+    "command": "g++ -MMD -MF obj/src/main.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../include -I../ext/sol -L../lib src/main.cpp -o obj/src/main.o",
     "file": "src/main.cpp"
   },
   {
     "directory": "/home/sanford/code/current/BulletLua/example",
-    "command": "g++ -MMD -MF obj/src/BulletManager.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../bulletlua -I../ext/sol -L../lib src/BulletManager.cpp -o obj/src/BulletManager.o",
+    "command": "g++ -MMD -MF obj/src/BulletManager.o.d -c -Wall -Wextra -pedantic -pedantic-errors -std=c++11 -DNDEBUG -O3 -I../include -I../ext/sol -L../lib src/BulletManager.cpp -o obj/src/BulletManager.o",
     "file": "src/BulletManager.cpp"
   }
 ]

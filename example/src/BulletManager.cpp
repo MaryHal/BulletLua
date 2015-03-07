@@ -189,6 +189,30 @@ void BulletManager::draw() const
     glDisable(GL_TEXTURE_2D);
 }
 
+void BulletManager::drawCollision() const
+{
+    for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
+    {
+        if (!(*iter)->isDying())
+        {
+            float x = (*iter)->position.x;
+            float y = (*iter)->position.y;
+            float w = (*iter)->position.w;
+            float h = (*iter)->position.h;
+
+            glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+            glBegin(GL_QUADS);
+            {
+                glVertex2f(x    , y);
+                glVertex2f(x + w, y);
+                glVertex2f(x + w, y + h);
+                glVertex2f(x    , y + h);
+            }
+            glEnd();
+        }
+    }
+}
+
 unsigned int BulletManager::getVertexCount() const
 {
     return bulletCount;
