@@ -1,3 +1,6 @@
 [submodule "ext/sol"]
 	path = ext/sol
 	url = https://github.com/Rapptz/sol.git
+[submodule "ext/Catch"]
+	path = ext/Catch
+	url = https://github.com/philsquared/Catch.git
