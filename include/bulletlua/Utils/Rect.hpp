@@ -15,6 +15,9 @@ namespace BulletLuaUtils
             Rect(float left, float top, float width, float height);
 
             bool intersects(const Rect& that) const;
+
+            float getCenterX() const;
+            float getCenterY() const;
     };
 
     bool operator==(const Rect& r1, const Rect& r2);

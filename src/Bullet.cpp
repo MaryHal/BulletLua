@@ -4,7 +4,7 @@
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : position{x, y, 4.0f, 4.0f},
+    : position{x - 2.0f, y - 2.0f, 4.0f, 4.0f},
       vx{vx}, vy{vy},
       dead{true},
       r{255}, g{255}, b{255},
@@ -21,7 +21,6 @@ void Bullet::setSpeedAndDirection(float speed, float dir)
     fixSpeed();
 }
 
-
 void Bullet::setSpeed(float speed)
 {
     float mag = getSpeed();
@@ -32,7 +31,6 @@ void Bullet::setSpeed(float speed)
     fixSpeed();
 }
 
-
 void Bullet::setSpeedRelative(float speed)
 {
     float mag = getSpeed();
@@ -42,7 +40,6 @@ void Bullet::setSpeedRelative(float speed)
 
     fixSpeed();
 }
-
 
 float Bullet::getSpeed() const
 {

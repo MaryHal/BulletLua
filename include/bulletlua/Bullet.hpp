@@ -6,6 +6,8 @@
 class Bullet
 {
     public:
+        // We are assuming position.x and position.y are the center of the bullet, not the top-left
+        // corner of the collision bounding box.
         BulletLuaUtils::Rect position;
         float vx, vy;
         bool dead;

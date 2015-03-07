@@ -37,6 +37,16 @@ namespace BulletLuaUtils
         return (interLeft < interRight) && (interTop < interBottom);
     }
 
+    float Rect::getCenterX() const
+    {
+        return x + (w / 2);
+    }
+
+    float Rect::getCenterY() const
+    {
+        return y + (h / 2);
+    }
+
     bool operator==(const Rect& r1, const Rect& r2)
     {
         return (r1.x == r2.x && r1.y == r2.y) &&
