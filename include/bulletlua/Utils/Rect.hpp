@@ -16,6 +16,7 @@ namespace BulletLuaUtils
 
             bool intersects(const Rect& that) const;
 
+            void setCenter(float cx, float cy);
             float getCenterX() const;
             float getCenterY() const;
     };

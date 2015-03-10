@@ -171,6 +171,16 @@ int main(int argc, char *argv[])
             timer.stop();
         }
 
+        glBegin(GL_QUADS);
+        {
+            glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+            glVertex2f(player.x           , player.y);
+            glVertex2f(player.x + player.w, player.y);
+            glVertex2f(player.x + player.w, player.y  + player.h);
+            glVertex2f(player.x           , player.y  + player.h);
+        }
+        glEnd();
+
         manager.draw();
 
         if (collision)

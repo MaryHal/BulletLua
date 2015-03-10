@@ -37,6 +37,12 @@ namespace BulletLuaUtils
         return (interLeft < interRight) && (interTop < interBottom);
     }
 
+    void Rect::setCenter(float cx, float cy)
+    {
+        x = cx - (w / 2);
+        y = cy - (h / 2);
+    }
+
     float Rect::getCenterX() const
     {
         return x + (w / 2);

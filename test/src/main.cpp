@@ -123,10 +123,29 @@ TEST_CASE("Collision Check", "[Collision]")
         manager.tick();
 
         // Move our "ship" to (100, 100) as well.
-        player.x = 100;
-        player.y = 100;
+        player.setCenter(100.0f, 100.0f);
+
+        // std::cout << player.x << " " << player.y << " " << player.w << " " << player.h << std::endl;
 
         // Is there a collision? There better be.
         REQUIRE(manager.checkCollision() == true);
+
+        // Offset by one. Since our "ship" is 4 units wide and 4 units tall, this should still be
+        // considered a collision.
+        player.setCenter(99.0f, 99.0f);
+        REQUIRE(manager.checkCollision() == true);
+
+        player.setCenter(101.0f, 99.0f);
+        REQUIRE(manager.checkCollision() == true);
+
+        player.setCenter(101.0f, 101.0f);
+        REQUIRE(manager.checkCollision() == true);
+
+        player.setCenter(99.0f, 101.0f);
+        REQUIRE(manager.checkCollision() == true);
+
+        // // No longer a collision.
+        // player.setCenter(102.0f, 102.0f);
+        // REQUIRE(manager.checkCollision() == false);
     }
 }

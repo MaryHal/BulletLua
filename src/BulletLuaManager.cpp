@@ -286,16 +286,14 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&](float x, float y)
                            {
                                BulletLua* c = this->current;
-                               c->position.x = x;
-                               c->position.y = y;
+                               c->setPosition(x, y);
                            });
 
     luaState->set_function("setVelocity",
                            [&](float vx, float vy)
                            {
                                BulletLua* c = this->current;
-                               c->vx = vx;
-                               c->vy = vy;
+                               c->setVelocity(vx, vy);
                            });
 
     luaState->set_function("setDirection",

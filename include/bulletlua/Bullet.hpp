@@ -24,6 +24,10 @@ class Bullet
         Bullet(float x, float y, float vx, float vy);
 
         // void setBullet(float x, float y, float vx, float vy);
+
+        void setPosition(float cx, float cy);
+        void setVelocity(float nvx, float nvy);
+
         void setSpeedAndDirection(float speed, float dir);
         void setSpeed(float speed);
         void setSpeedRelative(float speed);

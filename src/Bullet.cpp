@@ -4,13 +4,24 @@
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : position{x - 2.0f, y - 2.0f, 4.0f, 4.0f},
+    : position{x - 2.0f, y - 2.0f, 4.0f, 4.0f}, // TODO: Un-hard-code bullet metrics.
       vx{vx}, vy{vy},
       dead{true},
       r{255}, g{255}, b{255},
       dying{true}, life{0}, turn{0}, collisionCheck{false}
 {
     fixSpeed();
+}
+
+void Bullet::setPosition(float cx, float cy)
+{
+    position.setCenter(cx, cy);
+}
+
+void Bullet::setVelocity(float nvx, float nvy)
+{
+    vx = nvx;
+    vy = nvy;
 }
 
 void Bullet::setSpeedAndDirection(float speed, float dir)
