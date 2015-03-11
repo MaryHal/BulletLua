@@ -1,0 +1,2911 @@
+desc: I1 cache:         32768 B, 64 B, 8-way associative
+desc: D1 cache:         32768 B, 64 B, 8-way associative
+desc: LL cache:         3145728 B, 64 B, 12-way associative
+cmd: ./sdl_test
+events: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw 
+fl=/build/gcc/src/gcc-4.9-20150304/libgcc/config/i386/cpuinfo.c
+fn=__cpu_indicator_init
+172 2 0 0 0 0 0 0 0 0
+180 7 0 0 1 1 1 0 0 0
+213 2 1 1 1 0 0 1 0 0
+214 2 0 0 0 0 0 1 0 0
+337 7 1 1 0 0 0 6 0 0
+346 4 0 0 2 1 0 0 0 0
+347 1 0 0 0 0 0 0 0 0
+350 14 1 1 1 0 0 2 0 0
+356 1 0 0 1 0 0 0 0 0
+357 1 0 0 1 0 0 0 0 0
+359 2 0 0 0 0 0 0 0 0
+365 8 1 1 0 0 0 1 0 0
+371 4 0 0 1 0 0 0 0 0
+372 3 0 0 0 0 0 0 0 0
+373 2 0 0 1 0 0 0 0 0
+374 3 0 0 0 0 0 0 0 0
+375 2 0 0 0 0 0 0 0 0
+377 2 1 1 0 0 0 0 0 0
+380 2 1 1 0 0 0 0 0 0
+385 2 0 0 0 0 0 0 0 0
+386 1 1 1 0 0 0 0 0 0
+391 4 0 0 2 0 0 1 0 0
+392 3 0 0 1 0 0 1 0 0
+416 1 0 0 0 0 0 0 0 0
+417 9 0 0 7 0 0 0 0 0
+fn=__get_cpuid_output
+324 6 0 0 0 0 0 2 0 0
+326 4 0 0 4 0 0 0 0 0
+fn=get_available_features
+260 1 0 0 0 0 0 1 0 0
+263 3 1 1 0 0 0 0 0 0
+266 4 1 1 0 0 0 0 0 0
+268 4 0 0 0 0 0 0 0 0
+270 4 0 0 0 0 0 0 0 0
+272 4 0 0 0 0 0 0 0 0
+274 4 1 1 0 0 0 0 0 0
+276 4 0 0 0 0 0 0 0 0
+278 4 0 0 0 0 0 0 0 0
+280 4 0 0 0 0 0 0 0 0
+282 4 1 1 0 0 0 0 0 0
+284 4 0 0 0 0 0 0 0 0
+287 2 0 0 0 0 0 0 0 0
+290 3 0 0 0 0 0 0 0 0
+292 4 0 0 0 0 0 0 0 0
+298 2 0 0 0 0 0 0 0 0
+300 2 1 1 0 0 0 0 0 0
+302 2 0 0 0 0 0 0 0 0
+305 4 0 0 0 0 0 0 0 0
+307 4 0 0 0 0 0 0 0 0
+309 4 0 0 0 0 0 0 0 0
+312 2 0 0 1 0 0 1 0 0
+313 2 0 0 2 0 0 0 0 0
+fl=/build/gcc/src/gcc-4.9-20150304/libgcc/libgcc2.c
+fn=__popcountdi2
+846 38280 6362 4 0 0 0 0 0 0
+847 45936 0 0 0 0 0 0 0 0
+848 38280 6362 4 0 0 0 0 0 0
+849 30624 0 0 0 0 0 0 0 0
+858 7656 0 0 7656 0 0 0 0 0
+fl=/build/gcc/src/gcc-build/gcc/include/cpuid.h
+fn=__get_cpuid_output
+252 6 0 0 0 0 0 0 0 0
+270 4 1 1 0 0 0 0 0 0
+272 4 0 0 0 0 0 0 0 0
+273 2 0 0 0 0 0 0 0 0
+275 12 0 0 0 0 0 8 0 0
+276 2 0 0 0 0 0 0 0 0
+fl=/build/gcc/src/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/libsupc++/cp-demangle.c
+fn=__cxa_demangle
+3718 32 0 0 0 0 0 32 0 0
+3719 32 0 0 0 0 0 32 0 0
+3720 32 1 1 0 0 0 32 0 0
+3721 32 0 0 0 0 0 32 0 0
+5865 96 1 1 0 0 0 32 0 0
+5867 64 0 0 0 0 0 0 0 0
+5874 128 0 0 64 0 0 0 0 0
+5875 32 0 0 32 0 0 0 0 0
+5911 320 2 2 32 0 0 192 0 0
+5915 64 0 0 0 0 0 0 0 0
+5922 128 0 0 0 0 0 0 0 0
+5931 64 0 0 0 0 0 0 0 0
+5943 64 0 0 0 0 0 0 0 0
+5945 96 1 1 0 0 0 0 0 0
+5963 64 1 1 0 0 0 0 0 0
+5964 32 0 0 0 0 0 32 0 0
+5966 64 0 0 0 0 0 0 0 0
+5967 320 0 0 256 0 0 0 0 0
+fn=d_bare_function_type
+2737 128 1 1 0 0 0 64 0 0
+2744 32 0 0 32 0 0 0 0 0
+2745 64 0 0 32 0 0 0 0 0
+2751 64 0 0 0 0 0 0 0 0
+2758 32 0 0 0 0 0 0 0 0
+2760 64 0 0 0 0 0 32 0 0
+2761 64 0 0 0 0 0 0 0 0
+2764 160 0 0 0 0 0 0 0 0
+2766 96 0 0 64 0 0 0 0 0
+fn=d_count_templates_scopes
+3799 1536 1 1 0 0 0 768 0 0
+3800 832 0 0 0 0 0 0 0 0
+3803 1728 0 0 768 3 2 0 0 0
+3823 160 1 1 160 0 0 0 0 0
+3884 480 0 0 0 0 0 160 0 0
+3887 160 1 1 160 0 0 0 0 0
+3888 160 0 0 0 0 0 0 0 0
+3917 1152 0 0 960 0 0 0 0 0
+fn=d_cv_qualifiers
+2565 224 2 2 0 0 0 128 1 0
+2570 64 0 0 64 0 0 0 0 0
+2571 352 1 1 0 0 0 0 0 0
+2606 64 1 1 0 0 0 0 0 0
+2628 32 0 0 0 0 0 0 0 0
+2629 160 2 1 160 0 0 0 0 0
+fn=d_demangle_callback.constprop.16
+3925 64 0 0 0 0 0 32 0 0
+3926 32 0 0 0 0 0 32 0 0
+3927 32 0 0 0 0 0 32 0 0
+3928 32 1 1 0 0 0 32 0 0
+3929 32 0 0 0 0 0 32 0 0
+3930 32 0 0 0 0 0 32 0 0
+3932 32 1 1 0 0 0 32 0 0
+3933 32 0 0 0 0 0 32 0 0
+3935 32 0 0 0 0 0 32 0 0
+3937 32 0 0 0 0 0 32 0 0
+3938 32 0 0 0 0 0 32 0 0
+3939 32 0 0 0 0 0 32 0 0
+3941 32 0 0 0 0 0 32 0 0
+3942 32 1 1 0 0 0 32 0 0
+3943 32 0 0 0 0 0 32 0 0
+3945 160 0 0 0 0 0 32 0 0
+3947 128 0 0 64 0 0 32 0 0
+3949 32 0 0 0 0 0 32 0 0
+3971 64 0 0 32 0 0 32 0 0
+3972 128 0 0 64 0 0 32 0 0
+4039 128 0 0 0 0 0 0 0 0
+4040 128 0 0 0 0 0 0 0 0
+4042 32 1 1 0 0 0 32 0 0
+4043 32 0 0 0 0 0 32 0 0
+4051 128 0 0 0 0 0 32 0 0
+4056 160 1 1 32 0 0 0 0 0
+5734 32 1 1 0 0 0 32 0 0
+5735 64 0 0 0 0 0 32 0 0
+5736 32 0 0 0 0 0 32 0 0
+5738 32 0 0 0 0 0 32 0 0
+5743 64 0 0 0 0 0 32 0 0
+5744 32 0 0 0 0 0 32 0 0
+5748 32 0 0 0 0 0 32 0 0
+5749 32 0 0 0 0 0 32 0 0
+5750 32 0 0 0 0 0 32 0 0
+5752 32 0 0 0 0 0 32 0 0
+5754 32 0 0 0 0 0 32 0 0
+5755 32 0 0 0 0 0 32 0 0
+5756 32 1 1 0 0 0 32 0 0
+5765 448 2 2 32 0 0 224 0 0
+5780 96 0 0 32 0 0 0 0 0
+5782 256 1 1 64 1 1 0 0 0
+5791 32 0 0 0 0 0 0 0 0
+5794 64 0 0 0 0 0 32 0 0
+5798 160 1 1 0 0 0 0 0 0
+5799 128 0 0 0 0 0 0 0 0
+5801 32 0 0 0 0 0 32 0 0
+5802 32 0 0 0 0 0 32 0 0
+5808 96 0 0 0 0 0 0 0 0
+5811 192 1 1 64 0 0 32 1 0
+5844 128 1 1 0 0 0 0 0 0
+5848 352 0 0 288 0 0 0 0 0
+fn=d_discriminator
+3440 96 1 1 64 0 0 0 0 0
+3441 32 0 0 0 0 0 0 0 0
+3447 32 0 0 32 0 0 0 0 0
+fn=d_encoding
+1180 128 0 0 32 0 0 0 0 0
+1183 64 1 1 0 0 0 0 0 0
+1228 192 1 1 0 0 0 160 2 0
+1229 64 0 0 64 0 0 0 0 0
+1231 160 0 0 0 0 0 0 0 0
+1237 64 1 1 0 0 0 32 0 0
+1239 128 0 0 0 0 0 0 0 0
+1272 64 0 0 64 0 0 0 0 0
+1273 288 0 0 0 0 0 0 0 0
+1275 224 1 1 0 0 0 32 0 0
+1278 160 0 0 160 0 0 0 0 0
+fn=d_growable_string_callback_adapter
+3735 96 1 1 32 0 0 0 0 0
+3741 128 0 0 0 0 0 0 0 0
+3742 384 0 0 0 0 0 0 0 0
+3743 160 1 1 0 0 0 0 0 0
+3745 96 0 0 32 0 0 32 0 0
+3746 64 0 0 0 0 0 0 0 0
+3755 32 0 0 0 0 0 32 0 0
+3756 64 0 0 0 0 0 32 0 0
+3767 32 0 0 0 0 0 0 0 0
+3768 96 0 0 32 0 0 0 0 0
+3771 96 0 0 32 0 0 0 0 0
+3774 192 0 0 64 0 0 32 0 0
+3775 128 0 0 64 0 0 32 0 0
+3776 32 0 0 32 0 0 0 0 0
+3783 288 2 2 32 0 0 128 0 0
+3787 192 0 0 160 0 0 0 0 0
+fn=d_make_comp
+853 576 0 0 320 0 0 0 0 0
+855 640 0 0 160 0 0 0 0 0
+856 320 0 0 0 0 0 160 0 0
+872 1120 1 1 160 3 2 0 0 0
+893 192 1 1 0 0 0 0 0 0
+894 160 0 0 0 0 0 0 0 0
+936 192 0 0 0 0 0 0 0 0
+961 320 0 0 0 0 0 0 0 0
+963 160 0 0 0 0 0 160 1 0
+964 160 0 0 0 0 0 160 0 0
+965 480 0 0 160 0 0 160 1 0
+fn=d_make_name
+785 768 0 0 0 0 0 0 0 0
+787 96 0 0 0 0 0 96 2 0
+788 96 0 0 0 0 0 96 1 0
+789 96 0 0 0 0 0 96 0 0
+853 288 1 1 192 0 0 0 0 0
+855 384 0 0 96 0 0 0 0 0
+856 192 0 0 0 0 0 96 0 0
+992 96 0 0 96 0 0 0 0 0
+fn=d_name
+1311 960 1 1 96 0 0 576 3 0
+1312 96 0 0 96 0 0 0 0 0
+1315 640 1 1 96 0 0 0 0 0
+1318 32 0 0 0 0 0 0 0 0
+1371 96 1 1 0 0 0 32 0 0
+1372 96 0 0 64 0 0 0 0 0
+1384 1056 0 0 768 0 0 0 0 0
+1397 64 0 0 0 0 0 32 0 0
+1400 128 0 0 0 0 0 32 0 0
+1401 64 0 0 0 0 0 0 0 0
+1406 224 1 1 64 0 0 32 0 0
+1408 32 0 0 0 0 0 32 0 0
+1409 64 1 1 0 0 0 0 0 0
+1412 64 0 0 0 0 0 0 0 0
+1418 160 1 1 64 0 0 32 0 0
+1421 32 0 0 32 0 0 0 0 0
+1439 32 0 0 0 0 0 0 0 0
+1448 128 0 0 0 0 0 0 0 0
+1456 128 0 0 0 0 0 0 0 0
+1466 352 1 1 0 0 0 0 0 0
+1467 32 0 0 0 0 0 0 0 0
+1468 64 0 0 0 0 0 0 0 0
+1469 64 0 0 0 0 0 0 0 0
+1470 128 0 0 0 0 0 0 0 0
+1471 192 2 2 0 0 0 64 0 0
+1472 64 0 0 0 0 0 0 0 0
+1474 64 0 0 0 0 0 0 0 0
+1481 64 0 0 0 0 0 0 0 0
+1483 64 1 1 0 0 0 0 0 0
+1498 160 1 1 0 0 0 0 0 0
+1501 160 0 0 0 0 0 32 0 0
+1503 384 0 0 128 0 0 0 0 0
+3381 64 1 1 0 0 0 32 0 0
+3384 96 0 0 0 0 0 32 0 0
+3386 160 1 1 64 0 0 32 0 0
+3389 96 0 0 32 0 0 0 0 0
+3403 64 0 0 0 0 0 0 0 0
+3412 96 0 0 0 0 0 32 0 0
+3413 64 0 0 0 0 0 0 0 0
+3414 160 0 0 32 0 0 0 0 0
+3421 192 1 1 32 0 0 64 0 0
+3426 192 1 1 0 0 0 32 0 0
+3550 64 0 0 0 0 0 0 0 0
+3552 96 0 0 64 0 0 0 0 0
+3554 96 1 1 32 0 0 32 0 0
+3555 160 0 0 64 0 0 32 0 0
+fn=d_number.isra.0
+1599 192 1 1 192 0 0 0 0 0
+1600 384 0 0 0 0 0 0 0 0
+1607 96 0 0 0 0 0 0 0 0
+1610 1248 0 0 96 0 0 0 0 0
+1616 256 0 0 0 0 0 0 0 0
+1617 256 1 1 0 0 0 128 0 0
+1618 128 0 0 128 0 0 0 0 0
+1620 96 0 0 96 0 0 0 0 0
+fn=d_parmlist
+2689 224 1 1 32 0 0 96 0 0
+2693 32 0 0 0 0 0 32 0 0
+2699 128 0 0 128 0 0 0 0 0
+2700 512 1 1 0 0 0 0 0 0
+2702 128 1 1 0 0 0 0 0 0
+2706 64 0 0 0 0 0 32 0 0
+2707 64 0 0 0 0 0 0 0 0
+2709 192 0 0 0 0 0 64 0 0
+2710 64 0 0 0 0 0 0 0 0
+2712 32 0 0 0 0 0 0 0 0
+2718 96 1 1 32 0 0 0 0 0
+2722 64 0 0 32 0 0 0 0 0
+2723 96 0 0 64 0 0 0 0 0
+2724 96 0 0 64 0 0 0 0 0
+2726 64 0 0 64 0 0 0 0 0
+2727 64 0 0 0 0 0 32 0 0
+2731 224 0 0 160 0 0 0 0 0
+fn=d_print_comp
+3982 4056 1 1 0 0 0 0 0 0
+3985 1964 0 0 0 0 0 1964 0 0
+3986 982 0 0 0 0 0 982 0 0
+3994 3298 0 0 96 0 0 0 0 0
+3995 982 0 0 982 1 1 0 0 0
+4274 3072 1 1 256 0 0 1792 6 0
+4286 512 0 0 0 0 0 0 0 0
+4291 768 1 1 256 0 0 0 0 0
+4294 2304 0 0 512 3 3 0 0 0
+4297 192 3 2 0 0 0 0 0 0
+4298 192 0 0 192 0 0 0 0 0
+4312 128 1 1 64 0 0 64 0 0
+4313 384 1 1 64 0 0 0 0 0
+4318 64 1 1 64 0 0 0 0 0
+4319 128 0 0 64 0 0 0 0 0
+4326 256 1 1 0 0 0 64 0 0
+4328 64 0 0 0 0 0 0 0 0
+4341 32 1 1 32 0 0 0 0 0
+4342 32 0 0 0 0 0 32 0 0
+4344 32 0 0 32 0 0 0 0 0
+4345 224 1 1 32 0 0 0 0 0
+4353 32 0 0 0 0 0 32 1 0
+4354 32 0 0 0 0 0 32 0 0
+4355 32 0 0 0 0 0 32 0 0
+4356 32 0 0 0 0 0 32 1 0
+4357 32 0 0 0 0 0 32 0 0
+4358 64 0 0 0 0 0 0 0 0
+4360 32 0 0 32 0 0 0 0 0
+4363 32 0 0 0 0 0 0 0 0
+4364 64 0 0 0 0 0 0 0 0
+4378 64 1 1 0 0 0 0 0 0
+4389 64 0 0 0 0 0 0 0 0
+4422 128 2 2 32 0 0 32 2 0
+4424 64 0 0 32 0 0 0 0 0
+4429 64 0 0 0 0 0 0 0 0
+4431 64 1 1 0 0 0 0 0 0
+4432 128 1 1 32 0 0 0 0 0
+4439 32 0 0 0 0 0 32 0 0
+4441 32 0 0 0 0 0 0 0 0
+4760 64 1 1 0 0 0 0 0 0
+4766 64 0 0 32 0 0 0 0 0
+4796 224 0 0 32 0 0 32 1 0
+4910 96 2 2 32 0 0 0 0 0
+4912 64 0 0 32 0 0 0 0 0
+5317 2816 2 2 2304 0 0 0 0 0
+fn=d_print_function_type.isra.11
+3982 192 0 0 0 0 0 0 0 0
+3985 128 0 0 0 0 0 128 0 0
+3986 64 0 0 0 0 0 64 0 0
+5535 288 1 1 0 0 0 160 0 0
+5546 160 1 1 32 0 0 0 0 0
+5548 192 0 0 32 0 0 0 0 0
+5551 160 1 1 64 0 0 0 0 0
+5594 32 1 1 32 0 0 0 0 0
+5595 32 0 0 0 0 0 32 0 0
+5597 192 1 1 32 0 0 32 0 0
+5604 96 0 0 32 0 0 0 0 0
+5605 128 1 1 32 0 0 32 0 0
+5609 160 0 0 0 0 0 32 0 0
+5611 32 0 0 0 0 0 32 0 0
+5612 192 1 1 192 0 0 0 0 0
+fn=d_print_mod
+5469 128 2 1 32 0 0 0 0 0
+5527 32 1 1 0 0 0 0 0 0
+fn=d_print_mod_list
+5377 704 2 2 64 0 0 448 1 0
+5380 640 0 0 64 0 0 0 0 0
+5383 192 0 0 64 0 0 0 0 0
+5384 64 0 0 0 0 0 0 0 0
+5385 128 1 1 64 0 0 0 0 0
+5389 32 0 0 0 0 0 0 0 0
+5396 32 0 0 0 0 0 32 0 0
+5398 32 0 0 32 0 0 0 0 0
+5399 64 0 0 32 0 0 32 0 0
+5401 64 0 0 0 0 0 0 0 0
+5407 64 0 0 0 0 0 0 0 0
+5413 64 0 0 0 0 0 0 0 0
+5456 96 0 0 0 0 0 32 0 0
+5458 32 0 0 0 0 0 32 0 0
+5460 64 1 1 64 0 0 0 0 0
+5461 704 0 0 576 0 0 0 0 0
+fn=d_ref_qualifier
+2636 32 0 0 0 0 0 0 0 0
+2640 64 0 0 64 0 0 0 0 0
+2641 192 0 0 0 0 0 0 0 0
+2660 64 0 0 32 0 0 0 0 0
+fn=d_source_name
+1577 480 1 1 0 0 0 288 0 0
+1581 192 0 0 0 0 0 96 0 0
+1582 192 0 0 0 0 0 0 0 0
+1585 96 0 0 0 0 0 96 0 0
+1587 384 0 0 384 0 0 0 0 0
+1643 96 0 0 96 0 0 0 0 0
+1645 480 0 0 96 0 0 0 0 0
+1648 192 0 0 0 0 0 96 0 0
+1653 192 0 0 96 0 0 0 0 0
+1660 192 1 1 0 0 0 0 0 0
+1661 192 0 0 0 0 0 32 0 0
+1676 384 0 0 0 0 0 96 0 0
+fn=d_type
+853 96 0 0 64 0 0 0 0 0
+855 128 0 0 32 0 0 0 0 0
+856 64 0 0 0 0 0 32 0 0
+1005 64 0 0 0 0 0 0 0 0
+1007 32 0 0 0 0 0 32 0 0
+1008 32 0 0 0 0 0 32 0 0
+2231 704 1 1 64 0 0 448 1 0
+2251 128 0 0 128 0 0 0 0 0
+2252 512 1 1 0 0 0 0 0 0
+2287 512 0 0 64 4 2 0 0 0
+2293 128 0 0 0 0 0 0 0 0
+2294 32 1 1 0 0 0 0 0 0
+2295 64 0 0 64 1 0 0 0 0
+2297 64 2 1 0 0 0 32 0 0
+2298 32 0 0 0 0 0 0 0 0
+2314 32 0 0 0 0 0 32 0 0
+2315 32 0 0 0 0 0 0 0 0
+2557 32 0 0 0 0 0 0 0 0
+2558 704 2 2 576 0 0 0 0 0
+2773 32 1 1 0 0 0 32 0 0
+3550 64 1 1 0 0 0 0 0 0
+3552 96 0 0 64 0 0 0 0 0
+3554 96 0 0 32 0 0 32 0 0
+3555 96 0 0 32 0 0 32 0 0
+fn=d_unqualified_name
+1521 384 1 1 0 0 0 288 0 0
+1525 192 0 0 192 0 0 0 0 0
+1526 288 0 0 0 0 0 0 0 0
+1527 384 1 1 192 0 0 96 0 0
+1568 288 0 0 0 0 0 0 0 0
+1571 384 0 0 384 0 0 0 0 0
+fl=???
+fn=(anonymous namespace)::future_error_category::~future_error_category()
+0 3 1 1 0 0 0 1 0 0
+fn=(anonymous namespace)::generic_error_category::~generic_error_category()
+0 3 1 1 0 0 0 1 0 0
+fn=(anonymous namespace)::system_error_category::~system_error_category()
+0 3 1 1 0 0 0 1 1 1
+fn=(below main)
+0 58 7 6 16 9 0 17 0 0
+fn=???
+0 365556452 5393855 23877 98954392 1241718 17655 44216485 402595 12940
+fn=Bullet::Bullet(float, float, float, float)
+0 65568 4 4 16392 2 1 30735 1024 1024
+fn=Bullet::aimAtPoint(float, float)
+0 38080 68 2 14960 337 0 10880 0 0
+fn=Bullet::getDirection() const
+0 884898 1182 2 491610 552 0 196644 0 0
+fn=Bullet::getTurn() const
+0 199164 590 1 199164 0 0 0 0 0
+fn=Bullet::isDead() const
+0 199164 0 0 199164 0 0 0 0 0
+fn=Bullet::kill()
+0 72 0 0 36 0 0 36 2 0
+fn=Bullet::setSpeed(float)
+0 65280 136 1 13600 107 0 5440 0 0
+fn=Bullet::setSpeedAndDirection(float, float)
+0 37000 141 4 11840 41 0 10360 362 58
+fn=Bullet::vanish()
+0 2560 32 0 1280 0 0 1280 0 0
+fn=BulletLua::BulletLua()
+0 28672 2 2 4096 0 0 12288 1280 1279
+fn=BulletLua::run(SpacialPartition const&)
+0 3599989 1806 3 1322852 155115 0 826417 0 0
+fn=BulletLua::set(std::shared_ptr<sol::state>, sol::function const&, Bullet*)
+0 58 5 5 19 1 0 22 3 1
+fn=BulletLua::set(std::shared_ptr<sol::state>, sol::function const&, float, float, float, float)
+0 67135 130 4 18692 99 0 30066 1884 262
+fn=BulletLuaManager::BulletLuaManager(int, int, int, int, BulletLuaUtils::Rect const&)
+0 119 8 8 28 2 1 51 3 3
+fn=BulletLuaManager::checkCollision()
+0 1917 639 1 639 639 0 0 0 0
+fn=BulletLuaManager::clear()
+0 16 2 2 6 1 0 5 0 0
+fn=BulletLuaManager::createBullet(std::shared_ptr<sol::state>, sol::function const&, float, float, float, float)
+0 123130 467 8 32676 295 30 28236 0 0
+fn=BulletLuaManager::createBulletFromFile(std::string const&, Bullet*)
+0 132 12 11 34 9 3 28 0 0
+fn=BulletLuaManager::increaseCapacity(unsigned int)
+0 51709 7 7 8393 3 0 6320 224 204
+fn=BulletLuaManager::initLua()
+0 2631 191 189 457 7 5 656 4 0
+fn=BulletLuaManager::~BulletLuaManager()
+0 24153 8 8 7122 867 716 4594 2049 1864
+fn=BulletLuaUtils::Random<std::mersenne_twister_engine<unsigned long, 64ul, 312ul, 156ul, 31ul, 13043109905998158313ul, 29ul, 6148914691236517205ul, 17ul, 8202884508482404352ul, 37ul, 18444473444759240704ul, 43ul, 6364136223846793005ul> >::Random()
+0 3192 8 8 11 0 0 331 40 40
+fn=BulletLuaUtils::Rect::Rect(float, float, float, float)
+0 10255 1 1 2051 0 0 8204 514 514
+fn=BulletLuaUtils::Rect::getCenterX() const
+0 1573152 592 1 1573152 87 0 0 0 0
+fn=BulletLuaUtils::Rect::getCenterY() const
+0 1573152 0 0 1573152 0 0 0 0 0
+fn=BulletLuaUtils::Rect::intersects(BulletLuaUtils::Rect const&) const
+0 3286206 1184 2 896238 594 1 0 0 0
+fn=BulletManager::BulletManager(int, int, int, int, BulletLuaUtils::Rect const&)
+0 111 14 10 18 5 1 36 6 1
+fn=BulletManager::draw() const
+0 28755 3786 4 3195 1440 0 8946 0 0
+fn=BulletManager::tick()
+0 20424194 112551 25 5426684 69930 1 6506353 199845 4
+fn=BulletManager::~BulletManager()
+0 2 1 1 0 0 0 1 1 0
+fn=Font::Font(std::string const&)
+0 2 1 1 0 0 0 1 1 1
+fn=Font::draw(float, float, std::string const&)
+0 6744678 42271 9 2511522 27978 9 1487739 2 0
+fn=Font::loadFont(std::string const&)
+0 72 7 5 8 2 0 23 4 1
+fn=Font::~Font()
+0 1 1 1 1 0 0 0 0 0
+fn=SDL_CreateWindow
+0 2 1 1 1 1 1 0 0 0
+fn=SDL_DYNAPI_entry
+0 1074 117 117 2 0 0 531 66 0
+fn=SDL_GL_CreateContext
+0 2 1 1 1 1 1 0 0 0
+fn=SDL_GL_DeleteContext
+0 2 1 0 1 0 0 0 0 0
+fn=SDL_GL_SetAttribute
+0 18 1 1 9 1 1 0 0 0
+fn=SDL_GL_SwapWindow
+0 1278 639 1 639 639 1 0 0 0
+fn=SDL_GetMouseState
+0 1278 639 1 639 639 1 0 0 0
+fn=SDL_Init
+0 2 1 1 1 1 0 0 0 0
+fn=SDL_PollEvent
+0 1530 640 1 765 641 1 0 0 0
+fn=SDL_Quit
+0 2 1 1 1 1 1 0 0 0
+fn=SpacialPartition::SpacialPartition(BulletLuaUtils::Rect const&)
+0 9 2 2 3 0 0 3 1 1
+fn=SpacialPartition::addBullet(Bullet const*)
+0 2346162 72663 1 622038 819 0 70177 20759 202
+fn=SpacialPartition::checkCollision(BulletLuaUtils::Rect const&) const
+0 17253 1327 2 5751 639 0 3195 0 0
+fn=SpacialPartition::checkOutOfBounds(BulletLuaUtils::Rect const&) const
+0 597492 1186 1 199164 0 0 199164 0 0
+fn=SpacialPartition::reset()
+0 4473 639 0 1278 0 0 1278 0 0
+fn=Stopwatch::getFloatTime()
+0 10816 1229 2 3048 1229 0 1180 0 0
+fn=Stopwatch::start()
+0 7 1 1 2 0 0 4 1 0
+fn=XAddExtension
+0 33 2 2 10 1 0 10 0 0
+fn=XAllocClassHint
+0 6 0 0 0 0 0 0 0 0
+fn=XAllocSizeHints
+0 6 2 2 0 0 0 0 0 0
+fn=XAllocWMHints
+0 6 0 0 0 0 0 0 0 0
+fn=XAutoRepeatOn
+0 14 2 2 4 0 0 3 1 0
+fn=XChangeKeyboardControl
+0 64 6 6 14 0 0 10 0 0
+fn=XChangeProperty
+0 2106 40 19 618 2 0 494 3 2
+fn=XCloseDisplay
+0 176 10 10 52 18 4 24 0 0
+fn=XCloseIM
+0 20 2 2 8 2 0 6 0 0
+fn=XCreateColormap
+0 208 16 12 56 7 0 60 1 0
+fn=XCreateGC
+0 179 18 9 26 2 0 87 3 1
+fn=XCreateIC
+0 112 11 10 26 6 4 46 0 0
+fn=XCreateWindow
+0 280 20 20 88 0 0 92 0 0
+fn=XDeleteProperty
+0 58 6 6 18 0 0 16 0 0
+fn=XDestroyIC
+0 48 4 4 14 4 3 8 0 0
+fn=XDestroyWindow
+0 108 8 8 32 4 0 24 0 0
+fn=XDisplayKeycodes
+0 6 1 1 3 0 0 2 0 0
+fn=XESetCloseDisplay
+0 221 5 1 90 2 0 48 0 0
+fn=XESetCopyEventCookie
+0 27 2 2 9 1 0 6 0 0
+fn=XESetError
+0 27 2 2 11 0 0 6 0 0
+fn=XESetErrorString
+0 54 4 2 22 0 0 12 0 0
+fn=XESetEventToWire
+0 1014 6 2 351 9 0 234 0 0
+fn=XESetWireToEvent
+0 1059 11 3 366 11 0 244 0 0
+fn=XESetWireToEventCookie
+0 27 3 2 9 0 0 6 0 0
+fn=XEventsQueued
+0 30376 1285 6 11799 0 0 6555 0 0
+fn=XF86VidModeQueryExtension
+0 20 2 2 6 0 0 5 1 1
+fn=XF86VidModeQueryVersion
+0 65 4 4 19 0 0 15 0 0
+fn=XF86VidModeSetClientVersion
+0 42 3 3 11 0 0 10 0 0
+fn=XFilterEvent
+0 22286 20 7 9728 28 13 3264 0 0
+fn=XFlush
+0 21168 1296 10 7938 6 0 5292 0 0
+fn=XForceScreenSaver
+0 27 2 2 8 0 0 6 0 0
+fn=XFree
+0 3175 24 10 635 0 0 635 0 0
+fn=XFreeEventData
+0 5135 5 3 1185 0 0 1975 0 0
+fn=XFreeGC
+0 129 8 7 42 18 13 16 0 0
+fn=XGetEventData
+0 9085 8 6 3160 0 0 2370 0 0
+fn=XGetICValues
+0 106 12 12 24 2 2 40 0 0
+fn=XGetInputFocus
+0 88 6 6 28 0 0 20 0 0
+fn=XGetVisualInfo
+0 2802 102 68 882 94 51 234 4 3
+fn=XGetWindowAttributes
+0 308 11 5 110 0 0 77 0 0
+fn=XGetWindowProperty
+0 704 37 30 224 0 0 262 0 0
+fn=XGetXCBConnection
+0 1944 647 5 1944 1281 1 0 0 0
+fn=XIFreeDeviceInfo
+0 27 2 2 9 0 0 6 0 0
+fn=XIQueryDevice
+0 192 10 9 45 1 0 51 1 1
+fn=XIQueryVersion
+0 36 2 2 10 0 0 8 0 0
+fn=XISelectEvents
+0 501 39 39 105 1 1 93 0 0
+fn=XIfEvent
+0 245 10 9 99 2 0 81 3 0
+fn=XInitExtension
+0 525 22 5 140 6 0 147 0 0
+fn=XInitThreads
+0 58 5 5 15 8 0 18 2 0
+fn=XInternAtom
+0 2961 28 18 854 2 0 448 2 0
+fn=XKeysymToKeycode
+0 5126 5 4 1597 5 0 13 0 0
+fn=XListPixmapFormats
+0 392 6 3 108 4 0 104 0 0
+fn=XLookupString
+0 360 18 12 110 0 0 55 0 0
+fn=XML_GetBuffer
+0 940 42 35 169 0 0 142 0 0
+fn=XML_Parse
+0 86 10 5 14 1 0 18 0 0
+fn=XML_ParseBuffer
+0 593 39 25 155 3 0 147 1 0
+fn=XML_ParserCreate
+0 36 6 4 0 0 0 0 0 0
+fn=XML_ParserCreate_MM
+0 24 0 0 0 0 0 0 0 0
+fn=XML_ParserFree
+0 4154 57 45 1020 5 0 329 0 0
+fn=XML_SetElementHandler
+0 36 12 5 12 0 0 24 0 0
+fn=XML_SetUserData
+0 72 6 5 36 0 0 24 0 0
+fn=XMapRaised
+0 35 3 3 8 0 0 10 0 0
+fn=XMatchVisualInfo
+0 170 12 6 58 6 0 40 2 0
+fn=XNextEvent
+0 31552 14 6 17408 1899 785 16864 1 0
+fn=XOpenDisplay
+0 3414 97 47 596 52 8 1175 90 0
+fn=XOpenIM
+0 26 3 2 6 1 0 5 0 0
+fn=XPanoramiXQueryExtension
+0 21 2 2 7 0 0 5 2 0
+fn=XPanoramiXQueryVersion
+0 58 3 3 15 0 0 15 1 0
+fn=XPending
+0 26 2 2 8 0 0 5 0 0
+fn=XQueryExtension
+0 963 30 10 278 2 0 236 2 1
+fn=XRRFreeCrtcInfo
+0 5 1 1 0 0 0 0 0 0
+fn=XRRFreeOutputInfo
+0 5 1 1 0 0 0 0 0 0
+fn=XRRFreeScreenResources
+0 2 1 1 0 0 0 0 0 0
+fn=XRRGetCrtcInfo
+0 540 13 7 155 0 0 160 0 0
+fn=XRRGetOutputInfo
+0 700 16 10 210 0 0 205 0 0
+fn=XRRGetOutputProperty
+0 242 14 9 74 0 0 68 0 0
+fn=XRRGetScreenResources
+0 4 1 1 0 0 0 0 0 0
+fn=XRRListOutputProperties
+0 132 9 5 30 0 0 30 0 0
+fn=XRRQueryVersion
+0 79 6 6 20 0 0 19 0 0
+fn=XRaiseWindow
+0 30 2 2 8 0 0 8 0 0
+fn=XResetScreenSaver
+0 6 2 2 1 0 0 1 0 0
+fn=XSelectInput
+0 60 6 6 18 0 0 18 0 0
+fn=XSendEvent
+0 146 10 9 42 4 3 44 0 0
+fn=XSetClassHint
+0 132 10 10 24 0 0 34 0 0
+fn=XSetErrorHandler
+0 238 15 8 102 29 10 38 0 0
+fn=XSetICFocus
+0 7 2 2 3 2 2 0 0 0
+fn=XSetIOErrorHandler
+0 28 2 2 11 1 0 3 0 0
+fn=XSetTextProperty
+0 72 8 4 30 0 0 18 0 0
+fn=XSetWMClientMachine
+0 4 2 2 0 0 0 0 0 0
+fn=XSetWMHints
+0 106 8 8 16 1 0 30 0 0
+fn=XSetWMNormalHints
+0 4 2 2 0 0 0 0 0 0
+fn=XSetWMProperties
+0 198 14 14 38 3 0 54 0 0
+fn=XSetWMProtocols
+0 68 6 6 12 0 0 16 0 0
+fn=XSetWMSizeHints
+0 150 10 10 24 0 0 58 0 0
+fn=XStoreColors
+0 11362 10 10 5148 0 0 3602 96 94
+fn=XStringListToTextProperty
+0 122 10 10 20 0 0 30 1 0
+fn=XStringToKeysym
+0 209276 9 7 53389 387 128 22581 0 0
+fn=XSync
+0 23524 2595 25 6532 11 0 4579 12 0
+fn=XSynchronize
+0 52 4 2 17 0 0 10 0 0
+fn=XUndefineCursor
+0 29 3 3 8 0 0 8 0 0
+fn=XUngrabKeyboard
+0 54 4 4 16 0 0 12 0 0
+fn=XUngrabPointer
+0 54 4 4 16 0 0 12 0 0
+fn=XUnmapWindow
+0 27 2 2 8 0 0 6 0 0
+fn=XVisualIDFromVisual
+0 4 2 2 4 0 0 0 0 0
+fn=XWithdrawWindow
+0 32 3 3 9 0 0 10 0 0
+fn=XauDisposeAuth
+0 54 4 1 14 0 0 12 0 0
+fn=XauFileName
+0 26 4 2 8 0 0 8 0 0
+fn=XauGetBestAuthByAddr
+0 244 16 8 70 3 0 52 0 0
+fn=XauReadAuth
+0 144 12 6 28 0 0 38 0 0
+fn=XextAddDisplay
+0 915 25 9 316 17 1 179 0 0
+fn=XextCreateExtension
+0 30 6 2 3 0 0 12 0 0
+fn=XextDestroyExtension
+0 8 1 1 0 0 0 6 0 0
+fn=XextFindDisplay
+0 35789 1364 9 14324 1986 25 7148 0 0
+fn=XextRemoveDisplay
+0 280 2 2 119 13 7 56 0 0
+fn=XineramaIsActive
+0 45 3 3 12 0 0 9 0 0
+fn=XineramaQueryExtension
+0 1 1 1 0 0 0 0 0 0
+fn=XineramaQueryScreens
+0 1890 44 26 468 6 4 486 0 0
+fn=XineramaQueryVersion
+0 1 1 0 0 0 0 0 0 0
+fn=XkbAllocClientMap
+0 104 7 7 19 0 0 17 0 0
+fn=XkbFreeClientMap
+0 518 6 6 120 18 16 105 0 0
+fn=XkbFreeCompatMap
+0 13 2 2 5 0 0 3 0 0
+fn=XkbFreeControls
+0 8 1 1 2 0 0 0 0 0
+fn=XkbFreeIndicatorMaps
+0 7 2 2 2 0 0 0 0 0
+fn=XkbFreeKeyboard
+0 75 6 6 10 2 0 15 0 0
+fn=XkbFreeNames
+0 20 2 2 8 0 0 6 0 0
+fn=XkbFreeServerMap
+0 20 4 4 8 0 0 6 0 0
+fn=XkbGetMap
+0 38 3 3 5 1 0 10 0 0
+fn=XkbGetUpdatedMap
+0 39 2 2 11 1 0 8 0 0
+fn=XkbGetXlibControls
+0 10 2 2 6 0 0 0 0 0
+fn=XkbKeycodeToKeysym
+0 10980 5 5 3712 12 0 810 0 0
+fn=XkbLookupKeyBinding
+0 70 9 5 20 0 0 0 0 0
+fn=XkbLookupKeySym
+0 140 6 4 40 3 1 15 1 0
+fn=XkbSelectEventDetails
+0 176 11 11 44 2 1 39 0 0
+fn=XkbSetXlibControls
+0 92 4 4 40 0 0 12 0 0
+fn=XkbTranslateKeyCode
+0 335 15 10 105 21 12 30 0 0
+fn=XkbTranslateKeySym
+0 353 20 12 96 4 1 54 4 1
+fn=XkbUseExtension
+0 295 31 14 74 3 1 60 1 0
+fn=XmlGetUtf8InternalEncoding
+0 24 6 3 12 0 0 0 0 0
+fn=XmlInitEncoding
+0 399 18 6 57 0 0 171 14 12
+fn=XmlPrologStateInit
+0 72 6 4 12 0 0 48 0 0
+fn=XrmStringToQuark
+0 214711 9 4 38073 307 48 0 0 0
+fn=Xutf8LookupString
+0 14 4 2 6 2 2 0 0 0
+fn=Xutf8TextListToTextProperty
+0 54 4 4 14 2 2 12 0 0
+fn=_Exit
+0 8 1 1 1 1 0 0 0 0
+fn=_GLOBAL__sub_I_BulletLua.cpp
+0 99 8 8 3 0 0 25 0 0
+fn=_GLOBAL__sub_I_BulletLuaManager.cpp
+0 99 9 9 3 0 0 25 0 0
+fn=_GLOBAL__sub_I_SpacialPartition.cpp
+0 8 1 1 1 0 0 2 0 0
+fn=_GLOBAL__sub_I__Z6formatPKcz
+0 103 9 9 2 0 0 26 0 0
+fn=_GLOBAL__sub_I_bitmap_allocator.cc
+0 73 4 4 7 2 2 38 4 4
+fn=_GLOBAL__sub_I_compatibility_thread_c__0x.cc
+0 6 1 1 2 1 0 2 1 0
+fn=_GLOBAL__sub_I_eh_alloc.cc
+0 6 1 1 1 0 0 5 1 0
+fn=_GLOBAL__sub_I_locale_inst.cc
+0 49 3 3 25 15 3 12 0 0
+fn=_GLOBAL__sub_I_parallel_settings.cc
+0 54 9 9 2 1 1 52 6 6
+fn=_GLOBAL__sub_I_stbi_failure_reason
+0 97 8 8 2 0 0 24 0 0
+fn=_GLOBAL__sub_I_system_error.cc
+0 10 1 1 0 0 0 1 0 0
+fn=_GLOBAL__sub_I_wlocale_inst.cc
+0 49 3 3 25 13 3 12 0 0
+fn=_IO_cleanup
+0 61 4 4 16 1 0 9 0 0
+fn=_IO_default_finish
+0 315 23 8 126 0 0 21 0 0
+fn=_IO_default_uflow
+0 924 6 3 462 0 0 231 2 0
+fn=_IO_default_xsputn
+0 380104 3992 15 94924 11 1 77131 93 37
+fn=_IO_doallocbuf
+0 247 19 8 114 8 1 38 0 0
+fn=_IO_file_close
+0 42 17 4 21 0 0 0 0 0
+fn=_IO_file_close_it@@GLIBC_2.2.5
+0 1008 63 20 210 4 1 336 0 0
+fn=_IO_file_doallocate
+0 798 41 12 171 17 3 114 10 4
+fn=_IO_file_finish@@GLIBC_2.2.5
+0 168 14 4 42 0 0 21 0 0
+fn=_IO_file_fopen@@GLIBC_2.2.5
+0 1384 65 30 240 11 8 176 0 0
+fn=_IO_file_init@@GLIBC_2.2.5
+0 286 13 4 88 0 0 110 0 0
+fn=_IO_file_open
+0 724 27 8 132 0 0 154 0 0
+fn=_IO_file_read
+0 472 11 6 220 0 0 16 0 0
+fn=_IO_file_seek
+0 2 1 1 1 0 0 0 0 0
+fn=_IO_file_seekoff@@GLIBC_2.2.5
+0 60 6 6 19 1 0 14 0 0
+fn=_IO_file_stat
+0 76 13 4 19 0 0 0 0 0
+fn=_IO_file_sync@@GLIBC_2.2.5
+0 78 2 2 36 0 0 12 0 0
+fn=_IO_file_underflow@@GLIBC_2.2.5
+0 4081 70 26 1494 42 4 1027 0 0
+fn=_IO_file_xsgetn
+0 1018 32 21 287 0 0 171 0 0
+fn=_IO_flush_all_lockp
+0 108 9 9 31 14 9 14 0 0
+fn=_IO_getline
+0 15654 6 2 0 0 0 0 0 0
+fn=_IO_getline_info
+0 487049 29 12 109819 0 0 101930 4 2
+fn=_IO_link_in
+0 2156 111 40 770 48 8 352 0 0
+fn=_IO_list_lock
+0 12 2 2 6 1 0 1 0 0
+fn=_IO_list_unlock
+0 8 2 2 4 0 0 1 0 0
+fn=_IO_no_init
+0 67166 2695 14 15210 0 0 24600 1413 22
+fn=_IO_old_init
+0 66990 4009 15 6084 0 0 48738 1348 19
+fn=_IO_padn
+0 1280 44 4 280 0 0 200 1 0
+fn=_IO_seekoff_unlocked
+0 18 3 3 5 0 0 1 0 0
+fn=_IO_setb
+0 61272 2655 10 16062 0 0 16044 23 0
+fn=_IO_sgetn
+0 75 5 3 50 4 1 0 0 0
+fn=_IO_sputbackc
+0 6006 3 2 2574 0 0 858 0 0
+fn=_IO_str_init_static_internal
+0 105562 4016 17 15100 0 0 36380 10 0
+fn=_IO_str_underflow
+0 13 3 2 5 0 0 0 0 0
+fn=_IO_strn_overflow
+0 19340 66 2 5766 0 0 6456 31 1
+fn=_IO_switch_to_get_mode
+0 2000 27 8 700 0 0 600 0 0
+fn=_IO_un_link
+0 126 14 4 63 0 0 0 0 0
+fn=_IO_unsave_markers
+0 110 22 8 66 0 0 0 0 0
+fn=_IO_vfscanf
+0 2011 112 112 513 21 15 230 9 8
+fn=_Utf8GetConvByName
+0 268 2 2 55 22 22 3 0 0
+fn=_XAllocID
+0 140 7 4 56 0 0 42 0 0
+fn=_XAllocIDs
+0 591 30 15 178 23 12 109 0 0
+fn=_XCloseLC
+0 21001 11 8 6391 0 0 2741 0 0
+fn=_XConnectXCB
+0 178 19 8 50 12 0 48 5 0
+fn=_XData32
+0 1297 22 12 241 0 0 195 6 6
+fn=_XDeq
+0 10785 18 6 2730 0 0 3679 0 0
+fn=_XEnq
+0 63089 3924 23 18112 1728 206 16878 419 255
+fn=_XEventToWire
+0 51 9 9 18 2 1 13 0 0
+fn=_XEventsQueued
+0 59599 1318 10 19730 2 0 8980 0 0
+fn=_XFetchEventCookie
+0 17775 12 9 6320 1 0 4740 0 0
+fn=_XFlush
+0 21692 1319 6 1972 0 0 5916 1 0
+fn=_XFreeAtomTable
+0 433 2 2 69 8 7 38 0 0
+fn=_XFreeDisplayStructure
+0 4228 35 35 1135 229 19 648 0 0
+fn=_XFreeEventCookies
+0 6476 15 3 3003 35 3 1822 0 0
+fn=_XFreeExtData
+0 624 7 4 156 0 0 104 0 0
+fn=_XFreeX11XCBStructure
+0 50 5 3 24 3 0 12 0 0
+fn=_XGetAsyncReply
+0 330 10 6 99 0 0 55 0 0
+fn=_XGetHostname
+0 82 4 4 16 0 0 18 1 0
+fn=_XGetRequest
+0 39365 2612 15 14843 2 0 9679 671 5
+fn=_XGetWindowAttributes
+0 913 42 23 264 0 0 297 5 0
+fn=_XIMCompileResourceList
+0 280 2 2 48 0 0 88 0 0
+fn=_XInitIM
+0 26 2 1 14 3 0 6 1 0
+fn=_XInitOM
+0 10 2 1 6 1 0 2 0 0
+fn=_XIsEventCookie
+0 17586 15 7 7910 239 191 0 0 0
+fn=_XOpenLC
+0 59433 34 25 20110 64 13 10975 7 0
+fn=_XPollfdCacheInit
+0 28 4 2 6 0 0 10 0 0
+fn=_XProcessWindowAttributes
+0 230 20 20 34 2 0 22 2 0
+fn=_XRead
+0 25389 1311 10 7371 0 0 3276 0 0
+fn=_XRead32
+0 1058 1 1 180 0 0 175 2 1
+fn=_XReadEvents
+0 248 16 14 58 0 0 52 0 0
+fn=_XReadPad
+0 11216 647 6 2804 0 0 2103 0 0
+fn=_XRegisterFilterByType
+0 245 9 9 65 1 0 90 4 1
+fn=_XReply
+0 299574 11168 70 99339 54 4 55068 2 0
+fn=_XSend
+0 206568 5962 40 75143 1910 5 51078 653 2
+fn=_XSetLastRequestRead
+0 12385 49 14 3381 0 0 1686 0 0
+fn=_XStoreEventCookie
+0 20632 30 13 6097 47 43 7865 1 0
+fn=_XUnregisterFilter
+0 135 8 8 52 4 2 29 1 0
+fn=_XUpdateAtomCache
+0 1540 15 8 350 2 0 385 0 0
+fn=_XUpdateGCCache
+0 112 20 10 12 0 0 2 0 0
+fn=_XVIDtoVisual
+0 721 28 11 185 19 4 0 0 0
+fn=_XWireToEvent
+0 8383 71 37 2912 15 10 2915 227 167
+fn=_XcmsAddCmapRec
+0 120 12 12 28 3 0 48 4 3
+fn=_XimCheckICMode
+0 1540 22 16 196 1 0 10 0 0
+fn=_XimCheckIMMode
+0 77 1 1 14 0 0 0 0 0
+fn=_XimCheckIfLocalProcessing
+0 27 3 3 6 0 0 6 0 0
+fn=_XimCheckLocalInputStyle
+0 158 10 10 34 5 4 26 0 0
+fn=_XimDecodeLocalICAttr
+0 34 2 2 0 0 0 0 0 0
+fn=_XimDestroyIMStructureList
+0 8 2 2 4 1 0 1 0 0
+fn=_XimEncodeLocalICAttr
+0 192 4 4 12 0 0 0 0 0
+fn=_XimGetCharCode
+0 60 3 1 12 0 0 15 0 0
+fn=_XimGetCurrentICValues
+0 334 16 16 116 0 0 234 1 0
+fn=_XimGetCurrentIMValues
+0 35 3 3 9 1 0 17 1 0
+fn=_XimGetICValueData
+0 144 12 12 28 0 0 36 0 0
+fn=_XimGetLocaleCode
+0 43 3 3 9 0 0 11 0 0
+fn=_XimGetResourceListRec
+0 196 2 2 28 0 0 42 0 0
+fn=_XimGetResourceListRecByQuark
+0 21094 4 4 3174 7 0 0 0 0
+fn=_XimInitialResourceInfo
+0 728 6 6 100 45 12 193 3 2
+fn=_XimLocalCreateIC
+0 356 20 16 54 8 8 188 2 0
+fn=_XimLocalFilter
+0 656 31 14 139 35 14 32 2 1
+fn=_XimLocalGetICValues
+0 52 6 6 18 3 0 12 0 0
+fn=_XimLocalIMFree
+0 117 10 10 23 4 3 50 0 0
+fn=_XimLocalOpenIM
+0 314 29 28 64 5 1 101 2 0
+fn=_XimLocalUtf8LookupString
+0 84 12 6 24 0 0 16 0 0
+fn=_XimLookupUTF8Text
+0 104 8 4 26 0 0 18 1 0
+fn=_XimOpenIM
+0 93 12 10 15 4 0 26 0 0
+fn=_XimParseStringFile
+0 2 1 1 0 0 0 0 0 0
+fn=_XimSetCurrentICValues
+0 404 20 16 232 2 0 228 3 0
+fn=_XimSetCurrentIMValues
+0 17 1 1 9 0 0 8 0 0
+fn=_XimSetICDefaults
+0 2380 14 14 356 52 50 294 0 0
+fn=_XimSetICMode
+0 1224 8 8 294 28 28 158 0 0
+fn=_XimSetICResourceList
+0 4 0 0 0 0 0 0 0 0
+fn=_XimSetICValueData
+0 624 20 20 162 4 2 110 0 0
+fn=_XimSetIMMode
+0 100 2 2 19 0 0 18 0 0
+fn=_XimSetIMResourceList
+0 4 1 1 0 0 0 0 0 0
+fn=_XimSetLocalIMDefaults
+0 179 3 3 20 2 0 23 0 0
+fn=_XkbFreeReadBuffer
+0 22 1 1 6 0 0 6 0 0
+fn=_XkbGetCharset
+0 15 2 2 4 1 1 3 0 0
+fn=_XkbGetConverters
+0 34 1 1 4 0 0 14 1 1
+fn=_XkbGetReadBufferPtr
+0 5472 2 2 1520 0 0 304 0 0
+fn=_XkbInitReadBuffer
+0 31 3 3 4 0 0 9 0 0
+fn=_XkbReadBufferCopyKeySyms
+0 5060 2 2 1540 0 0 660 0 0
+fn=_XkbReadCopyKeySyms
+0 3570 1 1 582 5 0 362 3 0
+fn=_XkbReadGetMapReply
+0 14922 40 40 4894 8 0 3502 6 0
+fn=_XlcAddCT
+0 5228 13 13 754 1 1 1416 0 0
+fn=_XlcAddCharSet
+0 850 2 2 200 0 0 300 0 0
+fn=_XlcAddLoader
+0 63 3 3 12 0 0 21 0 0
+fn=_XlcAddUtf8Converters
+0 44 5 5 1 0 0 7 0 0
+fn=_XlcCloseConverter
+0 2760 1 1 1840 5 5 0 0 0
+fn=_XlcCompareISOLatin1
+0 896 4 2 118 0 0 0 0 0
+fn=_XlcConvert
+0 2736 3 3 1824 4 2 0 0 0
+fn=_XlcCreateDefaultCharSet
+0 4630 6 6 598 0 0 1394 0 0
+fn=_XlcCreateLC
+0 82 6 3 24 2 0 20 0 0
+fn=_XlcCreateLocaleDataBase
+0 12164 28 16 2392 6 2 1390 19 0
+fn=_XlcCurrentLC
+0 10955 4 4 2739 0 0 3651 0 0
+fn=_XlcDbg_printValue
+0 4 0 0 4 0 0 0 0 0
+fn=_XlcDeInitLoader
+0 8 2 1 3 2 0 2 0 0
+fn=_XlcDefaultLoader
+0 81 8 8 6 2 0 14 0 0
+fn=_XlcDestroyLC
+0 3 1 0 2 0 0 0 0 0
+fn=_XlcDestroyLocaleDataBase
+0 39 3 2 12 1 0 9 0 0
+fn=_XlcFileName
+0 672 23 8 110 1 1 102 5 1
+fn=_XlcGetCharSet
+0 17778 7 2 8626 309 0 108 0 0
+fn=_XlcGetCharSetWithSide
+0 628 4 4 308 194 194 4 0 0
+fn=_XlcGetLocaleDataBase
+0 9318 4 2 3450 11 0 648 2 0
+fn=_XlcGetResource
+0 216 2 1 144 1 0 0 0 0
+fn=_XlcInitCTInfo
+0 1193 5 4 275 2 1 111 0 0
+fn=_XlcInitLoader
+0 11 2 2 3 3 0 2 0 0
+fn=_XlcMapOSLocaleName
+0 14656 12 8 3664 0 0 3664 0 0
+fn=_XlcNCompareISOLatin1
+0 276 4 2 32 2 0 0 0 0
+fn=_XlcOpenConverter
+0 59371 27 24 9663 4 2 13809 1 0
+fn=_XlcParseCharSet
+0 2023 6 6 381 0 0 450 0 0
+fn=_XlcRemoveLoader
+0 72 3 1 27 2 0 3 0 0
+fn=_XlcResolveLocaleName
+0 180 17 9 28 2 0 38 3 1
+fn=_XlcSetConverter
+0 2885 8 4 1020 9 0 440 1 1
+fn=_XlcUtf8Loader
+0 16 3 2 6 2 0 3 0 0
+fn=_Xlcmbstoutf8
+0 29575 4 4 5005 0 0 7280 0 0
+fn=_Xlcmbstowcs
+0 29575 5 5 5005 0 0 7280 0 0
+fn=_Xmbstoutf8
+0 2275 1 1 0 0 0 0 0 0
+fn=_Xmbstowcs
+0 2275 1 1 0 0 0 0 0 0
+fn=_XrmInternalStringToQuark
+0 504344 64 43 154965 344 77 38524 77 5
+fn=_Xutf8TextListToTextProperty
+0 18 2 2 2 0 0 4 0 0
+fn=__GI__IO_un_link.part.1
+0 2002 137 43 686 15 0 309 0 0
+fn=__GI_memcmp
+0 58586 8 8 8816 158 1 0 0 0
+fn=__GI_memcpy
+0 906152 607 31 159959 733 39 140009 3268 2541
+fn=__GI_mempcpy
+0 354741 3914 21 48881 140 8 34134 218 109
+fn=__GI_memset
+0 2272292 19877 22 30240 12 3 1111973 222115 177756
+fn=__GI_stpcpy
+0 35637 408 15 2740 0 0 4700 0 0
+fn=__GI_strchr
+0 84020 63 24 10791 19 15 0 0 0
+fn=__GI_strcmp
+0 4440102 54 54 983880 34795 8 0 0 0
+fn=__GI_strncmp
+0 643 45 24 83 4 2 0 0 0
+fn=__GI_strncpy
+0 121 3 3 23 0 0 22 0 0
+fn=__GI_strstr
+0 610 38 11 212 16 4 132 0 0
+fn=____strtod_l_internal
+0 3229 116 99 559 17 9 329 8 6
+fn=____strtol_l_internal
+0 65646 57 41 11499 314 6 6151 1 1
+fn=____strtoul_l_internal
+0 944 50 16 142 15 3 74 0 0
+fn=__acos_finite
+0 7 1 1 2 0 0 1 0 0
+fn=__asin_finite
+0 7 1 1 2 0 0 1 0 0
+fn=__asprintf_chk
+0 48 6 3 3 0 0 24 0 0
+fn=__atan2_finite
+0 10 1 1 2 0 0 1 0 0
+fn=__atan2f_finite
+0 4677235 4083 7 332541 1266 2 197499 0 0
+fn=__call_tls_dtors
+0 12 2 2 5 1 0 4 0 0
+fn=__close_nocancel
+0 175 14 2 35 0 0 0 0 0
+fn=__connect_nocancel
+0 15 0 0 3 0 0 0 0 0
+fn=__correctly_grouped_prefixmb
+0 40 2 2 14 0 0 14 1 0
+fn=__ctype_b_loc
+0 43251 3 1 43251 4 0 0 0 0
+fn=__ctype_init
+0 16 2 2 10 5 0 3 1 0
+fn=__current_locale_name
+0 3910 7 5 3128 17 5 0 0 0
+fn=__cxa_atexit
+0 1210 13 8 275 1 0 440 18 8
+fn=__cxa_finalize
+0 7082 11 10 1321 90 32 321 0 0
+fn=__cxa_guard_acquire
+0 259 18 9 84 6 1 49 0 0
+fn=__cxa_guard_release
+0 105 10 6 49 0 0 7 0 0
+fn=__cxx_global_var_init54
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init56
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init57
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init58
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init59
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init60
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init61
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init62
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init63
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init64
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init65
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init66
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init67
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init68
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init69
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init70
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init71
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init72
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init73
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init74
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init75
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init76
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init77
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init78
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init79
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init80
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init81
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init82
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init83
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init84
+0 57 5 5 10 0 0 9 0 0
+fn=__cxx_global_var_init85
+0 57 4 4 10 0 0 9 0 0
+fn=__cxx_global_var_init86
+0 57 4 4 10 0 0 9 0 0
+fn=__cxxabiv1::__si_class_type_info::__do_dyncast(long, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+0 1400 3 3 440 0 0 360 0 0
+fn=__cxxabiv1::__vmi_class_type_info::__do_dyncast(long, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+0 528 5 5 208 2 1 144 0 0
+fn=__dcigettext
+0 78982 2074 89 19159 67 22 17986 0 0
+fn=__default_morecore
+0 217 14 2 31 0 0 31 2 1
+fn=__driDriverGetExtensions_i965
+0 10 2 2 2 0 0 2 0 0
+fn=__dynamic_cast
+0 2352 4 4 816 17 0 624 0 0
+fn=__errno_location
+0 12618 664 4 12618 0 0 0 0 0
+fn=__exp_finite
+0 10 2 2 2 1 0 1 0 0
+fn=__expf_finite
+0 10216 4 4 2811 11 11 0 0 0
+fn=__fdelt_chk
+0 3835 642 3 767 0 0 0 0 0
+fn=__fopen_internal
+0 858 32 9 88 0 0 220 20 11
+fn=__fopen_maybe_mmap
+0 88 8 3 44 0 0 0 0 0
+fn=__gconv
+0 176 12 12 56 0 0 34 0 0
+fn=__gconv_alias_compare
+0 42477 1 1 28318 3046 18 0 0 0
+fn=__gconv_btwoc_ascii
+0 640 1 1 128 0 0 0 0 0
+fn=__gconv_close
+0 64 4 4 20 0 0 12 0 0
+fn=__gconv_close_transform
+0 88 7 7 18 0 0 14 0 0
+fn=__gconv_find_transform
+0 146 16 16 34 1 1 24 0 0
+fn=__gconv_get_builtin_trans
+0 208 3 3 40 5 5 48 1 0
+fn=__gconv_get_path
+0 208 14 14 36 0 0 27 0 0
+fn=__gconv_load_cache
+0 23 3 3 4 0 0 6 1 0
+fn=__gconv_lookup_cache
+0 40 4 4 16 0 0 12 0 0
+fn=__gconv_open
+0 298 23 22 64 8 5 70 1 0
+fn=__gconv_read_conf
+0 319908 18 18 95269 815 15 31743 53 0
+fn=__gconv_release_cache
+0 6 4 4 4 0 0 0 0 0
+fn=__gconv_release_step
+0 52 4 4 20 0 0 8 0 0
+fn=__gconv_transform_ascii_internal
+0 36894 10 9 8645 0 0 6409 1 0
+fn=__gconv_transform_internal_ascii
+0 648 28 14 125 0 0 121 0 0
+fn=__gconv_transform_utf8_internal
+0 516 28 26 118 1 0 73 2 1
+fn=__get_cpu_features
+0 121 9 4 48 6 1 1 0 0
+fn=__gnu_cxx::stdio_sync_filebuf<char, std::char_traits<char> >::sync()
+0 6 1 1 3 2 2 0 0 0
+fn=__gnu_cxx::stdio_sync_filebuf<wchar_t, std::char_traits<wchar_t> >::sync()
+0 6 0 0 3 2 2 0 0 0
+fn=__init_cpu_features
+0 154 16 16 18 4 4 26 0 0
+fn=__init_misc
+0 24 2 2 7 2 0 5 1 0
+fn=__libc_csu_init
+0 293 2 2 45 7 4 45 0 0
+fn=__libc_dl_error_tsd
+0 7026 10 3 7026 28 0 0 0 0
+fn=__libc_memalign
+0 4826 4 4 955 3 0 941 8 0
+fn=__libc_pthread_init
+0 393 2 2 110 7 0 58 7 7
+fn=__libc_sigaction
+0 750 28 22 234 0 0 228 0 0
+fn=__linkin_atfork
+0 9 1 1 4 2 0 1 0 0
+fn=__lll_lock_elision
+0 1833547 11315 13 410469 12886 25 109399 0 0
+fn=__lll_unlock_elision
+0 875192 8121 8 437596 1 0 0 0 0
+fn=__log_finite
+0 10 2 2 2 0 0 1 0 0
+fn=__longjmp
+0 13932 3 1 8514 1 0 0 0 0
+fn=__lseek_nocancel
+0 5 0 0 1 0 0 0 0 0
+fn=__memcmp_sse4_1
+0 1916577 98716 71 526531 65706 15 0 0 0
+fn=__memcpy_sse2_unaligned
+0 58146306 26381 36 21043493 5223875 8699 21015455 5245592 17689
+fn=__memmove_ssse3_back
+0 350681 2973 158 111336 3220 203 95262 12 10
+fn=__mempcpy_ssse3_back
+0 541 28 28 141 10 10 79 4 4
+fn=__memset_chk
+0 6 2 2 3 2 0 0 0 0
+fn=__mpn_cmp
+0 1446 127 1 395 0 0 0 0 0
+fn=__mpn_construct_double
+0 168 4 4 36 0 0 12 0 0
+fn=__mpn_divrem
+0 1545 28 4 397 0 0 313 7 0
+fn=__mpn_extract_double
+0 25560 3834 3 1278 0 0 5112 0 0
+fn=__mpn_lshift
+0 19410 3840 6 2588 0 0 1294 530 0
+fn=__mpn_mul_1
+0 128480 3969 6 19236 0 0 12839 45 0
+fn=__mpn_rshift
+0 1003 156 3 177 0 0 118 0 0
+fn=__new_exitfn
+0 2477 38 25 605 52 11 224 5 2
+fn=__open_nocancel
+0 173 1 0 29 0 0 0 0 0
+fn=__overflow
+0 102 4 1 51 0 0 0 0 0
+fn=__poll_nocancel
+0 19890 0 0 3978 0 0 0 0 0
+fn=__pow_finite
+0 7 1 1 2 0 0 1 0 0
+fn=__printf_fp
+0 705810 75765 89 157303 5981 5 116311 7188 0
+fn=__pthread_initialize_minimal
+0 161 15 15 25 7 0 60 10 3
+fn=__pthread_mutex_unlock_usercnt
+0 2156313 16818 12 270617 79 0 20151 0 0
+fn=__pthread_once_slow
+0 220 12 6 45 5 1 40 1 0
+fn=__read_nocancel
+0 600 1 0 120 0 0 0 0 0
+fn=__recvmsg_nocancel
+0 27336 0 0 2112 0 0 0 0 0
+fn=__register_atfork
+0 51 5 5 12 3 3 10 0 0
+fn=__run_exit_handlers
+0 1230 4 4 270 31 1 117 2 0
+fn=__select_nocancel
+0 4602 0 0 767 0 0 0 0 0
+fn=__sendmsg_nocancel
+0 20 0 0 4 0 0 0 0 0
+fn=__sigjmp_save
+0 324 0 0 72 0 0 72 0 0
+fn=__sigsetjmp
+0 32701 423 15 8579 19 2 13784 56 2
+fn=__snprintf_chk
+0 3766 59 4 269 0 0 1614 20 1
+fn=__sprintf_chk
+0 420 20 3 28 0 0 196 12 0
+fn=__stpcpy_sse2_unaligned
+0 25 5 5 5 1 1 2 0 0
+fn=__strcat_sse2_unaligned
+0 370374 118 118 124082 12 12 2168 0 0
+fn=__strcmp_sse2_unaligned
+0 12154876 197 16 2821287 24285 1992 0 0 0
+fn=__strcpy_chk
+0 1520 19 5 100 0 0 178 0 0
+fn=__strcpy_sse2_unaligned
+0 11750 83 35 2833 13 6 663 1 0
+fn=__strncmp_sse42
+0 3766 82 61 472 31 14 0 0 0
+fn=__strncpy_chk
+0 3 1 1 0 0 0 0 0 0
+fn=__strncpy_sse2_unaligned
+0 31159 96 39 4205 22 8 1651 138 71
+fn=__strspn_sse42
+0 3733 8 4 637 4 2 0 0 0
+fn=__strstr_sse2_unaligned
+0 63102 109 62 12064 95 19 0 0 0
+fn=__strtol_internal
+0 3 1 1 2 0 0 0 0 0
+fn=__strtoul_internal
+0 6 0 0 4 0 0 0 0 0
+fn=__syscall_clock_gettime
+0 6987 1927 5 2329 0 0 0 0 0
+fn=__tls_get_addr
+0 11 2 2 7 4 3 0 0 0
+fn=__uflow
+0 1838 13 6 800 17 0 82 0 0
+fn=__underflow
+0 479 12 9 210 55 1 25 0 0
+fn=__unregister_atfork
+0 1007 5 3 371 18 2 53 0 0
+fn=__vasprintf_chk
+0 240 10 5 48 3 0 57 1 0
+fn=__vsnprintf_chk
+0 68520 555 13 13092 0 0 17061 146 5
+fn=__vsprintf_chk
+0 1316 19 3 252 0 0 364 17 0
+fn=__writev_nocancel
+0 10440 672 1 2088 0 0 0 0 0
+fn=_dl_add_to_namespace_list
+0 7398 14 2 1904 7 0 439 0 0
+fn=_dl_add_to_slotinfo
+0 80 3 3 32 12 0 20 3 0
+fn=_dl_addr
+0 56485 17 9 13758 1047 803 33 2 0
+fn=_dl_allocate_tls_init
+0 216 7 7 67 11 0 26 1 1
+fn=_dl_allocate_tls_storage
+0 316 2 2 5 0 0 293 36 36
+fn=_dl_cache_libcmp
+0 48335 36 4 7462 357 184 0 0 0
+fn=_dl_catch_error
+0 65932 42 12 17009 130 2 31418 152 10
+fn=_dl_check_all_versions
+0 523 3 3 77 16 0 40 0 0
+fn=_dl_check_caller
+0 4246 93 16 1826 324 17 176 3 0
+fn=_dl_check_map_versions
+0 28019 139 14 8104 395 130 3543 162 113
+fn=_dl_close
+0 225 6 4 75 14 3 45 0 0
+fn=_dl_close_worker
+0 42704 83 81 12788 651 237 3041 123 46
+fn=_dl_count_modids
+0 4 1 1 3 0 0 0 0 0
+fn=_dl_debug_initialize
+0 1041 31 9 388 23 2 4 0 0
+fn=_dl_debug_state
+0 46 0 0 46 0 0 0 0 0
+fn=_dl_determine_tlsoffset
+0 166 5 5 27 1 0 13 0 0
+fn=_dl_discover_osversion
+0 88 4 4 15 1 1 7 1 1
+fn=_dl_find_dso_for_object
+0 57964 51 6 22776 230 1 6025 1 0
+fn=_dl_fini
+0 2541 12 12 886 376 227 243 44 0
+fn=_dl_fixup
+0 62308 275 26 23420 3594 1322 7368 45 5
+fn=_dl_get_tls_static_info
+0 5 1 1 3 0 0 2 1 1
+fn=_dl_higher_prime_number
+0 144 1 1 14 2 1 0 0 0
+fn=_dl_important_hwcaps
+0 254 17 17 45 0 0 43 2 2
+fn=_dl_init
+0 2352 26 4 767 47 0 159 0 0
+fn=_dl_init_paths
+0 91 9 9 14 0 0 28 1 1
+fn=_dl_initial_error_catch_tsd
+0 244 0 0 122 0 0 0 0 0
+fn=_dl_load_cache_lookup
+0 15290 112 16 2993 332 145 1478 35 3
+fn=_dl_lookup_symbol_x
+0 2330588 2289 53 427788 8679 3444 215575 226 39
+fn=_dl_map_object
+0 277862 214 34 68099 12505 5 23302 92 13
+fn=_dl_map_object_deps
+0 122024 363 41 25222 2068 1 6563 150 24
+fn=_dl_map_object_from_fd
+0 55667 392 50 14336 1443 423 5321 317 290
+fn=_dl_mcount_wrapper_check
+0 2348 4 2 1761 2 0 0 0 0
+fn=_dl_name_match_p
+0 527673 119 11 136677 4370 29 78353 71 8
+fn=_dl_new_object
+0 11041 98 14 2240 37 36 1900 244 207
+fn=_dl_next_ld_env_entry
+0 371 2 2 129 21 21 1 0 0
+fn=_dl_next_tls_modid
+0 32 1 1 12 0 0 4 0 0
+fn=_dl_open
+0 1433 45 15 372 35 1 490 3 0
+fn=_dl_protect_relro
+0 1040 20 2 312 10 0 104 0 0
+fn=_dl_receive_error
+0 28 2 2 10 1 0 12 1 0
+fn=_dl_relocate_object
+0 918706 251 53 226030 19910 13478 90626 5386 4613
+fn=_dl_runtime_resolve
+0 21228 90 12 6588 13 0 5856 42 8
+fn=_dl_setup_hash
+0 1288 14 2 392 60 55 336 0 0
+fn=_dl_signal_cerror
+0 14668 4 2 1544 7 0 3860 0 0
+fn=_dl_signal_error
+0 48762 18 5 9288 2 0 15480 7 0
+fn=_dl_sort_fini
+0 60685 19 18 14667 119 8 1480 7 0
+fn=_dl_start
+0 679 20 18 149 23 21 55 18 17
+fn=_dl_sym
+0 3543 0 0 0 0 0 0 0 0
+fn=_dl_sysdep_read_whole_file
+0 533 21 3 78 10 2 117 18 2
+fn=_dl_sysdep_start
+0 447 12 11 124 18 16 29 6 6
+fn=_dl_sysdep_start_cleanup
+0 1 1 1 1 0 0 0 0 0
+fn=_dl_unload_cache
+0 180 17 2 59 17 1 26 4 0
+fn=_dl_unmap
+0 150 6 6 70 5 0 40 0 0
+fn=_dl_vdso_vsym
+0 42 8 4 21 8 1 0 0 0
+fn=_fxstat
+0 890 18 5 89 0 0 0 0 0
+fn=_glapi_add_dispatch
+0 77626 6 6 14013 0 0 15100 2 0
+fn=_glapi_check_multithread
+0 8 8 5 0 0 0 0 0 0
+fn=_glapi_get_context
+0 24 0 0 24 12 0 0 0 0
+fn=_glapi_get_dispatch_table_size
+0 64 8 4 32 0 0 0 0 0
+fn=_glapi_get_proc_address
+0 18960 2 2 852 0 0 2370 0 0
+fn=_glapi_set_context
+0 30 5 0 0 0 0 0 0 0
+fn=_glapi_set_dispatch
+0 8976 4482 0 0 0 0 0 0 0
+fn=_init
+0 103 7 7 17 5 0 18 4 3
+fn=_int_free
+0 5550704 42026 77 1432232 23082 4729 658016 1932 712
+fn=_int_malloc
+0 8691027 66493 211 1377145 22921 1034 1517737 43164 16107
+fn=_int_memalign
+0 8073 40 32 1070 0 0 1166 112 81
+fn=_int_realloc
+0 417421 595 38 95727 1160 6 72276 552 491
+fn=_itoa_word
+0 21101 347 16 2215 70 5 1628 0 0
+fn=_mid_memalign
+0 63025 49 22 19077 0 0 10956 0 0
+fn=_pthread_cleanup_pop
+0 25 0 0 10 2 0 5 2 0
+fn=_pthread_cleanup_pop_restore
+0 360 29 8 135 0 0 45 0 0
+fn=_pthread_cleanup_push
+0 30 8 4 10 3 1 20 0 0
+fn=_pthread_cleanup_push_defer
+0 630 12 3 135 28 1 225 0 0
+fn=_setjmp
+0 72 5 3 0 0 0 0 0 0
+fn=_start
+0 11 2 2 1 0 0 3 0 0
+fn=_wordcopy_bwd_aligned
+0 44 6 3 10 2 1 6 0 0
+fn=_wordcopy_fwd_aligned
+0 1931 48 12 627 28 3 533 0 0
+fn=_wordcopy_fwd_dest_aligned
+0 1173 13 9 147 0 0 109 0 0
+fn=_xstat
+0 82 4 2 10 0 0 3 0 0
+fn=access
+0 39 7 2 7 0 0 1 0 0
+fn=add_alias2.isra.2.part.3
+0 32292 2 2 5382 0 0 8073 0 0
+fn=add_module.isra.1
+0 216499 12 12 58100 350 0 35076 0 0
+fn=add_to_global
+0 979 17 7 335 12 0 37 2 0
+fn=allocate_dtv
+0 19 2 2 4 0 0 5 1 1
+fn=asprintf
+0 6562 6 3 386 0 0 3474 0 0
+fn=atan2f
+0 2297406 1180 2 200544 0 0 398728 0 0
+fn=atanf
+0 4855003 5748 10 1335159 4446 7 0 0 0
+fn=bcmp
+0 19074 110 16 4574 98 9 1308 15 5
+fn=bool std::has_facet<std::ctype<char> >(std::locale const&)
+0 84 2 2 36 2 0 12 0 0
+fn=bool std::has_facet<std::ctype<wchar_t> >(std::locale const&)
+0 84 2 2 36 2 0 12 0 0
+fn=bool std::has_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+0 84 1 1 36 0 0 12 0 0
+fn=bool std::has_facet<std::num_get<wchar_t, std::istreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > >(std::locale const&)
+0 84 2 2 36 1 0 12 0 0
+fn=bool std::has_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+0 84 2 2 36 1 0 12 0 0
+fn=bool std::has_facet<std::num_put<wchar_t, std::ostreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > >(std::locale const&)
+0 84 2 2 36 1 0 12 0 0
+fn=brk
+0 405 15 4 62 0 0 32 2 1
+fn=btowc
+0 7552 4 4 2176 4 0 1024 0 0
+fn=cache_rpath.part.7
+0 144 9 1 36 0 0 18 0 0
+fn=call_init.part.0
+0 3196 28 4 1079 288 0 477 0 0
+fn=calloc
+0 2660811 523 48 577279 618 5 272198 610 95
+fn=ceil
+0 6 1 1 2 0 0 1 0 0
+fn=ceilf
+0 18 3 2 6 0 0 3 0 0
+fn=char* std::string::_S_construct<char const*>(char const*, char const*, std::allocator<char> const&, std::forward_iterator_tag)
+0 132724 11515 6 20111 2852 1 32176 2 1
+fn=check_match
+0 360669 206 29 106025 4503 1029 39152 365 24
+fn=clock_getres
+0 6 1 1 1 0 0 0 0 0
+fn=clock_gettime
+0 23294 3222 12 9320 2554 4 2329 0 0
+fn=close
+0 363 9 5 81 0 0 0 0 0
+fn=connect
+0 6 3 1 3 0 0 0 0 0
+fn=cos
+0 20 4 2 4 0 0 2 0 0
+fn=cosf
+0 120405 505 9 32521 405 6 0 0 0
+fn=dbus_address_entries_free
+0 38 2 1 8 0 0 6 0 0
+fn=dbus_address_entry_get_method
+0 10 0 0 10 0 0 0 0 0
+fn=dbus_address_entry_get_value
+0 223 3 3 61 0 0 43 0 0
+fn=dbus_bus_get_private
+0 3 1 1 0 0 0 0 0 0
+fn=dbus_bus_register
+0 88 10 8 11 0 0 18 0 0
+fn=dbus_connection_allocate_data_slot
+0 6 2 1 0 0 0 0 0 0
+fn=dbus_connection_close
+0 21 3 3 5 3 3 3 0 0
+fn=dbus_connection_flush
+0 26 4 4 6 0 0 6 0 0
+fn=dbus_connection_free_data_slot
+0 12 1 1 2 1 1 0 0 0
+fn=dbus_connection_get_data
+0 46 4 2 10 0 0 10 0 0
+fn=dbus_connection_open_private
+0 20 2 2 2 0 0 3 0 0
+fn=dbus_connection_send
+0 48 6 6 12 3 3 10 0 0
+fn=dbus_connection_send_with_reply
+0 213 14 14 27 1 1 50 0 0
+fn=dbus_connection_send_with_reply_and_block
+0 135 14 11 29 3 3 28 0 0
+fn=dbus_connection_set_data
+0 50 4 4 13 0 0 9 0 0
+fn=dbus_connection_set_dispatch_status_function
+0 33 3 3 11 0 0 11 0 0
+fn=dbus_connection_set_exit_on_disconnect
+0 44 2 2 8 0 0 8 0 0
+fn=dbus_connection_set_unix_user_function
+0 40 4 4 12 0 0 10 0 0
+fn=dbus_connection_set_wakeup_main_function
+0 33 3 3 11 0 0 11 0 0
+fn=dbus_connection_set_windows_user_function
+0 40 3 3 12 0 0 10 0 0
+fn=dbus_connection_unref
+0 213 18 12 52 0 0 27 0 0
+fn=dbus_error_free
+0 9 1 1 2 0 0 1 0 0
+fn=dbus_error_init
+0 12 4 2 4 1 0 4 1 0
+fn=dbus_error_is_set
+0 54 3 1 18 0 0 0 0 0
+fn=dbus_free
+0 411 5 5 40 0 0 0 0 0
+fn=dbus_free_string_array
+0 3 1 1 1 0 0 0 0 0
+fn=dbus_malloc
+0 267 4 3 0 0 0 0 0 0
+fn=dbus_malloc0
+0 148 0 0 0 0 0 0 0 0
+fn=dbus_message_append_args
+0 25 4 4 4 0 0 10 0 0
+fn=dbus_message_append_args_valist
+0 94 6 6 24 0 0 18 0 0
+fn=dbus_message_get_args
+0 86 10 10 14 0 0 25 0 0
+fn=dbus_message_get_args_valist
+0 74 6 6 18 0 0 17 0 0
+fn=dbus_message_get_error_name
+0 18 2 2 5 0 0 3 0 0
+fn=dbus_message_get_reply_serial
+0 144 4 4 40 0 0 16 0 0
+fn=dbus_message_get_sender
+0 36 4 4 10 0 0 6 0 0
+fn=dbus_message_get_serial
+0 32 4 3 0 0 0 0 0 0
+fn=dbus_message_get_type
+0 12 2 2 0 0 0 0 0 0
+fn=dbus_message_iter_append_basic
+0 336 16 16 48 0 0 48 0 0
+fn=dbus_message_iter_get_arg_type
+0 30 2 2 4 0 0 4 0 0
+fn=dbus_message_iter_init
+0 128 10 10 26 0 0 30 0 0
+fn=dbus_message_iter_init_append
+0 105 5 4 18 0 0 27 0 0
+fn=dbus_message_lock
+0 52 4 3 28 0 0 8 0 0
+fn=dbus_message_new_error
+0 148 10 10 22 0 0 34 0 0
+fn=dbus_message_new_method_call
+0 276 16 11 32 0 0 52 0 0
+fn=dbus_message_new_signal
+0 61 5 5 7 0 0 12 0 0
+fn=dbus_message_ref
+0 102 7 4 30 0 0 12 0 0
+fn=dbus_message_set_no_reply
+0 33 3 2 3 0 0 0 0 0
+fn=dbus_message_set_reply_serial
+0 46 6 6 8 0 0 6 0 0
+fn=dbus_message_set_serial
+0 36 4 3 4 0 0 0 0 0
+fn=dbus_message_unref
+0 782 29 21 179 6 6 115 1 0
+fn=dbus_parse_address
+0 405 18 15 82 0 0 86 0 0
+fn=dbus_pending_call_allocate_data_slot
+0 10 4 4 0 0 0 0 0 0
+fn=dbus_pending_call_block
+0 6 2 2 0 0 0 0 0 0
+fn=dbus_pending_call_free_data_slot
+0 22 2 2 2 0 0 0 0 0
+fn=dbus_pending_call_get_completed
+0 36 4 4 12 0 0 8 0 0
+fn=dbus_pending_call_ref
+0 16 2 2 4 0 0 4 0 0
+fn=dbus_pending_call_steal_reply
+0 44 4 4 16 0 0 10 0 0
+fn=dbus_pending_call_unref
+0 56 2 2 10 0 0 12 0 0
+fn=dbus_realloc
+0 159 2 2 0 0 0 0 0 0
+fn=dbus_set_error
+0 27 4 4 8 0 0 8 0 0
+fn=dbus_set_error_from_message
+0 125 8 8 25 0 0 24 0 0
+fn=dbus_threads_init
+0 249 5 4 52 0 0 73 2 0
+fn=dbus_threads_init_default
+0 14 1 1 0 0 0 0 0 0
+fn=dbus_timeout_get_interval
+0 4 2 2 4 0 0 0 0 0
+fn=dbus_timeout_set_data
+0 30 1 0 10 0 0 10 0 0
+fn=dbus_type_is_basic
+0 176 8 4 24 0 0 24 0 0
+fn=dbus_type_is_container
+0 264 1 1 42 0 0 42 2 0
+fn=dbus_type_is_fixed
+0 64 4 4 8 0 0 8 0 0
+fn=dbus_type_is_valid
+0 360 4 2 36 0 0 0 0 0
+fn=dbus_watch_get_enabled
+0 20 2 2 8 0 0 0 0 0
+fn=dbus_watch_set_data
+0 34 1 1 10 0 0 10 0 0
+fn=dcgettext
+0 1955 7 4 0 0 0 0 0 0
+fn=derivation_compare
+0 16 0 0 6 1 0 3 0 0
+fn=detect_conflict
+0 84346 2 2 19550 1682 0 9775 0 0
+fn=dl_main
+0 2241 75 75 588 161 20 179 19 16
+fn=dl_open_worker
+0 9651 242 37 3370 225 0 646 20 0
+fn=dladdr
+0 6 1 1 1 1 0 0 0 0
+fn=dlclose
+0 195 5 3 30 3 1 15 0 0
+fn=dlerror
+0 23610 528 8 6712 30 0 4321 0 0
+fn=dlopen
+0 374 17 4 88 8 1 88 1 0
+fn=dlsym
+0 29525 16 4 10629 4 0 9448 2 0
+fn=do_fcntl
+0 72 3 1 8 0 0 0 0 0
+fn=do_lookup_alias
+0 48 3 3 8 0 0 8 0 0
+fn=do_lookup_x
+0 4623660 1280 103 1726376 104995 3753 499705 479 32
+fn=do_preload
+0 28 3 3 7 0 0 8 0 0
+fn=do_sym
+0 51610 904 10 9270 33 0 14172 3 0
+fn=drmCommandWriteRead
+0 12 2 2 1 0 0 1 0 0
+fn=drmFree
+0 24 0 0 0 0 0 0 0 0
+fn=drmFreeVersion
+0 13 1 1 4 0 0 4 0 0
+fn=drmGetMagic
+0 20 2 2 6 0 0 5 0 0
+fn=drmGetVersion
+0 93 7 7 21 0 0 34 0 0
+fn=drmIoctl
+0 223614 4003 10 46586 0 0 46586 533 0
+fn=drmMalloc
+0 90 2 2 15 0 0 20 0 0
+fn=drm_intel_bo_alloc
+0 4026 1993 3 2013 1993 0 0 0 0
+fn=drm_intel_bo_alloc_tiled
+0 30 7 5 15 5 0 0 0 0
+fn=drm_intel_bo_emit_reloc
+0 119595 1924 4 79730 9217 4 0 0 0
+fn=drm_intel_bo_flink
+0 3190 638 0 1276 662 0 0 0 0
+fn=drm_intel_bo_gem_create_from_name
+0 384 36 36 80 4 0 156 0 0
+fn=drm_intel_bo_get_tiling
+0 25 5 5 10 4 0 0 0 0
+fn=drm_intel_bo_map
+0 1971 6 4 1314 6 4 0 0 0
+fn=drm_intel_bo_reference
+0 36117 1284 0 24078 1261 0 0 0 0
+fn=drm_intel_bo_references
+0 6 2 1 4 2 0 0 0 0
+fn=drm_intel_bo_subdata
+0 1917 639 0 1278 1 0 0 0 0
+fn=drm_intel_bo_unmap
+0 23115 4506 4 15410 3925 0 0 0 0
+fn=drm_intel_bo_unreference
+0 87554 3136 1 33875 3558 4 0 0 0
+fn=drm_intel_bo_wait_rendering
+0 1914 638 1 1276 333 0 0 0 0
+fn=drm_intel_bufmgr_check_aperture_space
+0 22888 0 0 17166 2290 1 0 0 0
+fn=drm_intel_bufmgr_destroy
+0 2 1 0 1 1 0 0 0 0
+fn=drm_intel_bufmgr_gem_enable_fenced_relocs
+0 5 1 1 2 0 0 1 0 0
+fn=drm_intel_bufmgr_gem_enable_reuse
+0 8 4 4 8 4 1 0 0 0
+fn=drm_intel_bufmgr_gem_get_devid
+0 2 0 0 2 0 0 0 0 0
+fn=drm_intel_bufmgr_gem_init
+0 1222 41 41 39 1 0 315 0 0
+fn=drm_intel_gem_bo_context_exec
+0 7073 643 5 643 0 0 1286 0 0
+fn=drm_intel_gem_bo_get_reloc_count
+0 11444 5722 1 11444 1087 0 0 0 0
+fn=drm_intel_gem_bo_map_unsynchronized
+0 324392 25642 20 84624 3855 1 105780 0 0
+fn=drm_intel_gem_bo_start_gtt_access
+0 18502 1914 2 5742 638 0 4466 0 0
+fn=drm_intel_gem_context_create
+0 124 8 8 32 0 0 32 0 0
+fn=drm_intel_gem_context_destroy
+0 100 12 12 28 4 0 20 0 0
+fn=drm_intel_reg_read
+0 84 8 8 28 0 0 24 0 0
+fn=elision_init
+0 17 2 2 4 0 0 3 0 0
+fn=entry_generate
+0 9690 2 2 1020 0 0 4845 67 64
+fn=entry_get_public
+0 6315 2 2 1263 0 0 0 0 0
+fn=entry_patch
+0 765 0 0 255 0 0 255 0 0
+fn=entry_patch_public
+0 1 1 1 1 0 0 0 0 0
+fn=exit
+0 4 2 2 0 0 0 1 0 0
+fn=expand_dynamic_string_token
+0 60 4 2 15 0 0 18 1 1
+fn=expf
+0 4608 2 2 512 0 0 512 0 0
+fn=fclose@@GLIBC_2.2.5
+0 1386 82 26 545 17 3 185 0 0
+fn=fcntl
+0 128 6 2 24 0 0 56 1 0
+fn=feof
+0 72 8 4 26 2 0 8 0 0
+fn=ferror
+0 36 4 4 13 0 0 4 0 0
+fn=fflush
+0 252 4 4 108 8 7 24 0 0
+fn=fgets
+0 508662 20 6 156513 0 0 70427 3 1
+fn=fgets_unlocked
+0 36 3 3 7 0 0 7 0 0
+fn=fileno
+0 18 2 2 9 0 0 0 0 0
+fn=find_derivation
+0 374808 35 35 95247 7061 3 47385 273 228
+fn=floor
+0 18 3 2 6 0 0 3 0 0
+fn=floorf
+0 18 3 2 6 0 0 3 0 0
+fn=fopen@@GLIBC_2.2.5
+0 44 9 3 0 0 0 0 0 0
+fn=fork
+0 106 7 7 31 2 0 15 0 0
+fn=format(char const*, ...) [clone .constprop.10]
+0 22365 2556 3 1278 0 0 12141 0 0
+fn=format(char const*, ...) [clone .constprop.11]
+0 22365 2556 3 1278 0 0 12141 0 0
+fn=fread
+0 1387 25 11 475 0 0 175 0 0
+fn=free
+0 1027670 4988 2 212848 10607 1418 4 0 0
+fn=fseek
+0 44 5 5 17 1 0 5 0 0
+fn=get_phys_pages
+0 2 1 1 0 0 0 0 0 0
+fn=getc
+0 774344 10 10 397624 184 0 83712 0 0
+fn=getdelim
+0 161498 9 9 41342 0 0 23621 0 0
+fn=getegid
+0 3 0 0 1 0 0 0 0 0
+fn=getenv
+0 49372 144 15 16669 1687 36 1030 5 0
+fn=geteuid
+0 12 4 1 4 0 0 0 0 0
+fn=getgid
+0 6 0 0 2 0 0 0 0 0
+fn=gethostname
+0 68 6 3 12 0 0 16 0 0
+fn=getpagesize
+0 10155 3995 2 6093 2576 2 0 0 0
+fn=getpeername
+0 10 2 1 2 0 0 0 0 0
+fn=getpid
+0 10 1 1 4 1 0 0 0 0
+fn=getresgid
+0 5 1 1 1 0 0 0 0 0
+fn=getresuid
+0 5 1 1 1 0 0 0 0 0
+fn=getrlimit
+0 5 1 1 1 0 0 0 0 0
+fn=getsockname
+0 15 3 1 3 0 0 0 0 0
+fn=gettimeofday
+0 120 6 3 10 1 0 10 0 0
+fn=getuid
+0 12 3 1 4 0 0 0 0 0
+fn=glXChooseVisual
+0 1184 37 36 160 1 0 388 4 0
+fn=glXCreateContext
+0 208 20 14 60 10 3 40 0 0
+fn=glXDestroyContext
+0 212 24 16 64 10 0 56 0 0
+fn=glXGetClientString
+0 5 2 2 0 0 0 0 0 0
+fn=glXGetCurrentDisplay
+0 12 2 2 8 1 0 0 0 0
+fn=glXGetProcAddress
+0 1930814 20 17 227412 4243 77 218898 0 0
+fn=glXMakeContextCurrent
+0 500 45 34 140 41 19 116 12 0
+fn=glXMakeCurrent
+0 24 8 5 0 0 0 0 0 0
+fn=glXQueryExtension
+0 60 4 4 16 0 0 12 0 0
+fn=glXQueryExtensionsString
+0 68 5 5 24 1 1 11 0 0
+fn=glXQueryVersion
+0 21 2 2 5 0 0 5 0 0
+fn=glXSwapBuffers
+0 19170 1278 2 6390 3834 5 3195 0 0
+fn=glewInit
+0 34389 892 868 6657 1426 158 3282 180 124
+fn=glxewContextInit
+0 4747 111 111 932 150 0 410 16 15
+fn=hack_digit
+0 161210 3841 6 51564 0 0 25724 0 0
+fn=handle_intel
+0 98 4 4 14 0 0 26 0 0
+fn=iconv
+0 98 10 7 34 2 2 14 0 0
+fn=iconv_close
+0 22 3 1 2 0 0 2 0 0
+fn=iconv_open
+0 128 11 8 22 1 0 22 0 0
+fn=index
+0 14424 53 13 1884 206 71 0 0 0
+fn=init_cacheinfo
+0 145 8 8 9 1 0 13 2 2
+fn=init_tls
+0 274 5 5 79 41 1 16 1 1
+fn=initstate_r
+0 44 4 3 9 1 1 11 0 0
+fn=insert_module
+0 619645 4 4 173544 22981 1 85105 0 0
+fn=int sol::functor_function<BulletLuaManager::initLua()::$_25>::operator()<float, float, sol::function const&>(sol::types<void>, sol::types<float, float, sol::function const&>, lua_State*)
+0 3120 280 7 920 120 0 680 0 0
+fn=int sol::functor_function<BulletLuaManager::initLua()::$_27>::operator()<int, float, sol::function const&>(sol::types<void>, sol::types<int, float, sol::function const&>, lua_State*)
+0 61056 288 8 19260 20 0 9216 1 0
+fn=intel_check_word
+0 868 11 11 74 6 6 16 0 0
+fn=ioctl
+0 46644 2013 2 9329 0 0 1 1 0
+fn=isinf
+0 16614 1278 1 1278 0 0 0 0 0
+fn=isnan
+0 8946 2556 2 1278 0 0 0 0 0
+fn=lseek
+0 2 1 1 1 0 0 0 0 0
+fn=luaL_checknumber
+0 16520 1180 2 4720 0 0 3540 0 0
+fn=luaL_checkstack
+0 39 2 2 9 0 0 9 0 0
+fn=luaL_checkversion_
+0 111 3 3 15 1 1 24 0 0
+fn=luaL_getsubtable
+0 73 2 2 12 0 0 20 0 0
+fn=luaL_loadfilex
+0 75 6 5 12 2 0 19 2 0
+fn=luaL_newmetatable
+0 1088 2 2 96 0 0 256 0 0
+fn=luaL_newstate
+0 13 1 1 2 0 0 3 0 0
+fn=luaL_ref
+0 70680 128 3 7810 2 0 17260 0 0
+fn=luaL_requiref
+0 129 5 4 9 0 0 33 0 0
+fn=luaL_setfuncs
+0 856 3 3 198 18 17 140 0 0
+fn=luaL_unref
+0 26645 97 2 8201 0 0 7647 0 0
+fn=lua_absindex
+0 9390 121 1 1878 0 0 0 0 0
+fn=lua_atpanic
+0 8 1 1 6 0 0 2 0 0
+fn=lua_callk
+0 2190870 1183 2 398340 0 0 298755 0 0
+fn=lua_checkstack
+0 81 4 4 24 0 0 15 0 0
+fn=lua_close
+0 3 1 1 2 1 1 0 0 0
+fn=lua_createtable
+0 817 2 2 278 0 0 214 0 0
+fn=lua_getfield
+0 2040 1 1 476 0 0 612 0 0
+fn=lua_gettable
+0 20 2 1 4 0 0 4 0 0
+fn=lua_gettop
+0 231 1 0 132 0 0 0 0 0
+fn=lua_load
+0 49 5 4 17 2 0 9 0 0
+fn=lua_newstate
+0 143 12 12 9 1 1 75 9 0
+fn=lua_newuserdata
+0 544 2 2 192 0 0 128 0 0
+fn=lua_pcallk
+0 37 3 3 9 0 0 6 0 0
+fn=lua_pushcclosure
+0 2768 3 3 878 0 0 785 0 0
+fn=lua_pushfstring
+0 24 3 3 4 0 0 10 0 0
+fn=lua_pushinteger
+0 599388 1186 2 299694 0 0 199796 0 0
+fn=lua_pushlstring
+0 43 3 1 16 0 0 11 0 0
+fn=lua_pushnumber
+0 5925 0 0 3555 0 0 2370 0 0
+fn=lua_pushstring
+0 747 2 2 249 0 0 148 0 0
+fn=lua_pushvalue
+0 1416 41 1 590 0 0 590 0 0
+fn=lua_rawgeti
+0 2061120 1186 2 721392 26590 1 721392 593 0
+fn=lua_rawlen
+0 16324 126 3 4452 0 0 2968 0 0
+fn=lua_rawseti
+0 56312 86 3 22407 57 0 13621 0 0
+fn=lua_remove
+0 22 2 1 5 0 0 5 1 0
+fn=lua_setfield
+0 4290 2 2 1170 0 0 1300 0 0
+fn=lua_setglobal
+0 144 3 3 44 0 0 40 0 0
+fn=lua_setmetatable
+0 1148 3 3 382 0 0 160 0 0
+fn=lua_settable
+0 384 0 0 128 0 0 96 0 0
+fn=lua_settop
+0 965871 98915 2 429276 2 0 0 0 0
+fn=lua_tointegerx
+0 27765 84 2 4776 0 0 4614 0 0
+fn=lua_tolstring
+0 19 2 2 6 0 0 4 0 0
+fn=lua_tonumberx
+0 49372 590 1 16064 0 0 9212 0 0
+fn=lua_tounsignedx
+0 585 74 2 234 36 0 117 15 0
+fn=lua_touserdata
+0 1056760 591 1 317028 0 0 105676 0 0
+fn=lua_type
+0 11746 65 1 3356 0 0 1678 0 0
+fn=lua_version
+0 31 1 1 13 0 0 0 0 0
+fn=luaopen_base
+0 28 2 2 2 0 0 7 0 0
+fn=luaopen_math
+0 26 2 2 4 0 0 7 0 0
+fn=luaopen_table
+0 19 2 2 2 0 0 5 0 0
+fn=main
+0 112618 20511 39 23790 4483 3 23817 642 2
+fn=malloc
+0 1487046 23706 21 435077 10091 11 108770 1146 5
+fn=malloc_consolidate
+0 1671000 10466 19 495240 46544 224 313089 487 6
+fn=malloc_hook_ini
+0 11 2 2 3 1 1 3 0 0
+fn=malloc_init_state
+0 648 2 2 2 0 0 257 32 31
+fn=map_doit
+0 14 1 1 5 0 0 3 0 0
+fn=match_symbol
+0 22393 47 5 8596 232 46 2043 0 0
+fn=maybe_split_for_insert.isra.0
+0 126139 4 4 45815 3090 0 2583 0 0
+fn=mbrtowc
+0 33215 8 8 7813 7 0 7696 0 0
+fn=mbtowc
+0 5460 2 2 1365 0 0 910 0 0
+fn=memalign_hook_ini
+0 9 2 2 3 1 0 1 0 0
+fn=memchr
+0 348291 93 30 37183 1099 126 0 0 0
+fn=memcpy
+0 33074 48 5 5340 22 8 4289 124 116
+fn=memcpy@@GLIBC_2.14
+0 230 23 5 92 29 0 0 0 0
+fn=memcpy@GLIBC_2.2.5
+0 255 16 3 60 14 0 0 0 0
+fn=memmove
+0 6887 41 10 1038 0 0 988 0 0
+fn=mempcpy
+0 35670 50 5 5590 4 1 4751 29 22
+fn=memset
+0 56312 24 4 697 16 2 52298 529 512
+fn=mmap
+0 1062 28 4 177 0 0 0 0 0
+fn=mprotect
+0 525 6 1 105 0 0 0 0 0
+fn=msort_with_tmp.part.0
+0 359703 57 35 85297 0 0 54455 96 13
+fn=munmap
+0 315 8 1 63 0 0 0 0 0
+fn=munmap_chunk
+0 63 2 2 24 3 0 0 0 0
+fn=newlocale
+0 82 9 5 24 1 1 17 0 0
+fn=nl_langinfo
+0 3 1 1 2 2 0 0 0 0
+fn=nl_langinfo_l
+0 16 1 1 4 3 0 0 0 0
+fn=open
+0 410 25 7 101 0 0 1 0 0
+fn=open_verify
+0 10875 112 14 2271 92 6 1100 8 1
+fn=openaux
+0 7582 8 1 3568 28 0 1338 18 0
+fn=operator delete(void*)
+0 8265 4288 2 0 0 0 0 0 0
+fn=operator delete[](void*)
+0 52 18 0 0 0 0 0 0 0
+fn=operator new(unsigned long)
+0 90915 7949 4 16530 0 0 16530 0 0
+fn=operator new[](unsigned long)
+0 208 27 1 52 0 0 52 0 0
+fn=phys_pages_info
+0 54 4 4 8 0 0 12 1 1
+fn=pipe
+0 10 1 1 2 0 0 0 0 0
+fn=poll
+0 7956 662 3 3978 0 0 0 0 0
+fn=posix_memalign
+0 93808 49 16 10824 0 0 10824 0 0
+fn=pow
+0 3200 4 2 480 0 0 480 0 0
+fn=pthread_cond_broadcast@@GLIBC_2.3.2
+0 106248 3286 20 50328 1974 10 0 0 0
+fn=pthread_cond_destroy@@GLIBC_2.3.2
+0 126216 4683 18 52590 6 2 24542 0 0
+fn=pthread_cond_init@@GLIBC_2.3.2
+0 290 14 5 60 3 0 112 0 0
+fn=pthread_cond_signal@@GLIBC_2.3.2
+0 177560 1988 15 79902 665 6 0 0 0
+fn=pthread_condattr_destroy
+0 18 1 1 8 0 0 0 0 0
+fn=pthread_condattr_init
+0 20 2 2 8 1 0 2 0 0
+fn=pthread_condattr_setclock
+0 20 1 1 4 0 0 2 0 0
+fn=pthread_getspecific
+0 51835 1325 8 15244 1336 4 0 0 0
+fn=pthread_key_create
+0 45 2 2 7 1 0 4 0 0
+fn=pthread_mutex_destroy
+0 4320 27 16 1620 43 10 270 0 0
+fn=pthread_mutex_init
+0 11818 99 26 2177 18 1 1866 22 12
+fn=pthread_mutex_lock
+0 3443984 30358 30 655704 28338 159 40482 0 0
+fn=pthread_mutex_unlock
+0 1157225 7099 9 384909 17 0 0 0 0
+fn=pthread_mutexattr_destroy
+0 592 0 0 296 0 0 0 0 0
+fn=pthread_mutexattr_init
+0 891 15 5 297 0 0 297 0 0
+fn=pthread_mutexattr_settype
+0 240 13 8 40 0 0 20 0 0
+fn=pthread_once
+0 53140 4494 8 21253 1400 6 0 0 0
+fn=pthread_rwlock_rdlock
+0 46662 27 19 13788 108 24 2346 0 0
+fn=pthread_rwlock_unlock
+0 36363 1184 25 14076 0 0 1173 0 0
+fn=pthread_self
+0 234 18 10 130 0 0 0 0 0
+fn=pthread_setspecific
+0 68 3 3 14 0 0 14 1 0
+fn=ptmalloc_init.part.8
+0 405 9 9 133 38 1 15 4 2
+fn=ptmalloc_lock_all
+0 43 6 5 15 1 0 7 0 0
+fn=ptmalloc_unlock_all
+0 29 4 4 14 0 0 3 0 0
+fn=qsort
+0 230 9 0 0 0 0 0 0 0
+fn=qsort_r
+0 7083 119 36 1097 8 1 1773 23 0
+fn=rand
+0 28 6 5 7 0 0 7 0 0
+fn=random
+0 119 20 13 42 0 0 7 0 0
+fn=random_r
+0 79554 16 10 24504 0 0 12252 0 0
+fn=rawmemchr
+0 3710 99 11 452 14 14 0 0 0
+fn=read
+0 478 20 6 158 0 0 0 0 0
+fn=read_int
+0 16464 2578 2 6860 0 0 1372 0 0
+fn=readlink
+0 33 2 1 7 0 0 2 0 0
+fn=realloc
+0 419109 514 31 83038 104 2 39825 14 1
+fn=realloc_hook_ini
+0 8 0 0 3 0 0 2 0 0
+fn=rect_height_compare(void const*, void const*)
+0 4188 2 2 1884 1 0 0 0 0
+fn=rect_original_order(void const*, void const*)
+0 3416 1 1 1464 0 0 0 0 0
+fn=recv
+0 160 20 5 27 0 0 1 0 0
+fn=recvmsg
+0 12612 1307 3 6306 1 0 0 0 0
+fn=rindex
+0 974 25 6 87 2 1 0 0 0
+fn=rint
+0 6 2 2 2 0 0 1 0 0
+fn=rintf
+0 12 2 1 4 0 0 2 0 0
+fn=round_and_return
+0 749 19 18 108 0 0 108 0 0
+fn=round_away
+0 156 4 4 12 0 0 0 0 0
+fn=rtld_lock_default_lock_recursive
+0 170 1 1 170 4 1 0 0 0
+fn=rtld_lock_default_unlock_recursive
+0 170 0 0 170 0 0 0 0 0
+fn=sbrk
+0 782 32 8 222 38 2 125 3 0
+fn=select
+0 1534 642 3 767 0 0 0 0 0
+fn=send
+0 48 2 1 8 0 0 0 0 0
+fn=sendmsg
+0 8 3 3 4 0 0 0 0 0
+fn=setlocale
+0 21984 35 20 7328 7 1 5496 230 0
+fn=shutdown
+0 10 2 2 2 0 0 0 0 0
+fn=sigaction
+0 40 3 2 0 0 0 0 0 0
+fn=sigaddset
+0 10 1 1 2 0 0 0 0 0
+fn=sigemptyset
+0 28 1 1 1 0 0 17 0 0
+fn=sigprocmask
+0 14 1 1 2 0 0 0 0 0
+fn=sin
+0 20 2 1 4 1 0 2 0 0
+fn=sincos
+0 8652336 1770 3 1573152 0 0 2753016 6 0
+fn=sinf
+0 131356 643 13 31122 406 6 0 0 0
+fn=socket
+0 15 3 1 3 0 0 0 0 0
+fn=sol::base_function::base_call(lua_State*, void*)
+0 1690304 1180 2 528220 2856 9 316932 0 0
+fn=sol::base_function::base_gc(lua_State*, void*)
+0 480 1 1 192 61 37 128 0 0
+fn=sol::base_function::call(lua_State*)
+0 845152 98386 2 211288 736 0 211288 0 0
+fn=sol::base_function::gc(lua_State*)
+0 320 1 1 96 7 5 96 0 0
+fn=sol::detail::demangle(std::type_info const&)
+0 3204 8 8 832 35 35 426 0 0
+fn=sol::function::function(lua_State*, int)
+0 2387 127 3 385 0 0 1001 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_0>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_10>::operator()(lua_State*)
+0 10030 1180 2 2950 0 0 2360 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_10>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_11>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_12>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_13>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_14>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_15>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_16>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_17>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_18>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_19>::operator()(lua_State*)
+0 19040 34 1 9520 34 0 4080 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_19>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_1>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_20>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_21>::operator()(lua_State*)
+0 57120 136 2 13600 0 0 16320 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_21>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_22>::~functor_function()
+0 1 1 0 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_23>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_24>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_25>::operator()(lua_State*)
+0 200 40 1 80 0 0 80 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_25>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_26>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_27>::operator()(lua_State*)
+0 180 36 1 72 0 0 72 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_27>::~functor_function()
+0 1 1 0 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_28>::~functor_function()
+0 1 1 0 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_29>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_2>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_30>::operator()(lua_State*)
+0 14080 64 2 5120 0 0 3840 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_30>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_31>::operator()(lua_State*)
+0 396 72 2 144 1 0 108 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_31>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_3>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_4>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_5>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_6>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_7>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_8>::operator()(lua_State*)
+0 1892058 69501 2 497910 0 0 597492 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_8>::~functor_function()
+0 1 1 1 0 0 0 0 0 0
+fn=sol::functor_function<BulletLuaManager::initLua()::$_9>::~functor_function()
+0 1 1 0 0 0 0 0 0 0
+fn=sol::stack::get_return<sol::function>::type sol::table::single_get<sol::function, char const*&>(char const*&) const
+0 69 6 5 16 1 0 22 0 0
+fn=sol::stack::get_return<sol::table>::type sol::table::single_get<sol::table, int&>(int&) const
+0 64 6 6 16 0 0 21 0 0
+fn=sol::state::state()
+0 26 2 2 5 0 0 10 0 0
+fn=sol::table::table(lua_State*, int)
+0 62 3 3 10 0 0 26 0 0
+fn=srand
+0 119 20 12 35 6 4 7 0 0
+fn=srandom_r
+0 22288 31 15 64 6 3 3120 13 10
+fn=sscanf
+0 34 6 6 2 0 0 18 0 0
+fn=stbi__compute_huffman_codes(stbi__zbuf*)
+0 12059 32 32 1017 0 0 1846 28 28
+fn=stbi__create_png_image_raw(stbi__png*, unsigned char*, unsigned int, int, unsigned int, unsigned int, int, int) [clone .isra.18]
+0 53205 47 47 8643 3 3 2687 27 26
+fn=stbi__get16be(stbi__context*)
+0 552 2 2 168 0 0 96 0 0
+fn=stbi__get32be(stbi__context*)
+0 264 5 5 74 0 0 51 0 0
+fn=stbi__get8(stbi__context*)
+0 70 3 3 30 0 0 15 0 0
+fn=stbi__getn(stbi__context*, unsigned char*, int)
+0 37 3 3 11 0 0 7 0 0
+fn=stbi__jpeg_test(stbi__context*)
+0 21 3 3 7 0 0 5 1 1
+fn=stbi__parse_png_file(stbi__png*, int, int)
+0 488 25 25 73 1 0 93 5 0
+fn=stbi__parse_zlib(stbi__zbuf*, int)
+0 124176 45 45 16972 13 8 15919 61 61
+fn=stbi__skip(stbi__context*, int)
+0 36 2 2 12 0 0 3 0 0
+fn=stbi__stdio_read(void*, char*, int)
+0 24 1 1 3 0 0 3 0 0
+fn=stbi__zbuild_huffman(stbi__zhuffman*, unsigned char*, int)
+0 18742 9 9 1603 0 0 2073 50 24
+fn=stbi_load_main(stbi__context*, int*, int*, int*, int)
+0 156 9 9 36 1 1 29 0 0
+fn=stbi_zlib_decode_malloc_guesssize_headerflag
+0 41 3 3 8 0 0 14 2 2
+fn=stbrp_pack_rects
+0 150748 18 18 24343 3 0 2784 11 0
+fn=stbtt_FindGlyphIndex
+0 56620 8 7 15580 11 8 950 0 0
+fn=stbtt_FlattenCurves(stbtt_vertex*, int, float, int**, int*, void*)
+0 178061 18 18 33392 0 0 19784 2 0
+fn=stbtt_GetFontOffsetForIndex
+0 21 4 4 5 1 0 0 0 0
+fn=stbtt_GetGlyphBitmapBoxSubpixel.constprop.34
+0 25138 12 9 7560 106 85 3780 0 0
+fn=stbtt_GetGlyphHMetrics
+0 3515 3 3 1045 8 7 190 0 0
+fn=stbtt_GetGlyphShape
+0 135182 26 26 17375 71 15 15648 12 0
+fn=stbtt_InitFont
+0 250 11 11 50 5 5 30 0 0
+fn=stbtt_MakeGlyphBitmapSubpixel.constprop.31
+0 11075 9 9 3123 0 0 1802 0 0
+fn=stbtt_PackBegin
+0 2637 7 7 11 1 0 546 112 1
+fn=stbtt_PackFontRanges
+0 1103799 42 42 136752 86 0 125350 147 42
+fn=stbtt_Rasterize.constprop.32
+0 88063 15 15 8192 1 1 10575 64 0
+fn=stbtt__edge_compare(void const*, void const*)
+0 34444 1 1 14355 0 0 0 0 0
+fn=stbtt__find_table(unsigned char*, unsigned int, char const*)
+0 919 3 3 190 3 2 0 0 0
+fn=stbtt__rasterize_sorted_edges(stbtt__bitmap*, stbtt__edge*, int, int, int, int, void*) [clone .isra.5]
+0 2019276 29 29 479079 0 0 64133 1 0
+fn=stbtt__tesselate_curve(stbtt__point*, int*, float, float, float, float, float, float, float, int)
+0 74796 7 7 8240 0 0 4312 5 0
+fn=std::_Deque_base<BulletLua*, std::allocator<BulletLua*> >::_M_initialize_map(unsigned long)
+0 134 5 5 24 0 0 42 0 0
+fn=std::_Sp_counted_ptr<sol::state*, (__gnu_cxx::_Lock_policy)2>::_M_destroy()
+0 4 1 1 2 0 0 0 0 0
+fn=std::_Sp_counted_ptr<sol::state*, (__gnu_cxx::_Lock_policy)2>::_M_dispose()
+0 22 2 2 8 0 0 6 2 0
+fn=std::_Sp_counted_ptr<sol::state*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr()
+0 1 0 0 0 0 0 0 0 0
+fn=std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
+0 10374 42 2 4446 4 0 5928 35 0
+fn=std::__detail::_List_node_base::_M_unhook()
+0 6300 378 0 3780 0 0 2520 707 0
+fn=std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<sol::state*>(sol::state*)
+0 17 2 2 3 0 0 10 0 0
+fn=std::__timepunct<char>::_M_initialize_timepunct(__locale_struct*)
+0 107 12 12 6 0 0 52 0 0
+fn=std::__timepunct<char>::__timepunct(std::__timepunct_cache<char>*, unsigned long)
+0 22 2 2 4 0 0 9 0 0
+fn=std::__timepunct<wchar_t>::_M_initialize_timepunct(__locale_struct*)
+0 105 11 11 5 0 0 51 0 0
+fn=std::__timepunct<wchar_t>::__timepunct(std::__timepunct_cache<wchar_t>*, unsigned long)
+0 22 2 2 4 0 0 9 1 1
+fn=std::array<std::string, 19ul>::~array()
+0 1048 3 3 240 32 32 84 0 0
+fn=std::array<std::string, 2ul>::~array()
+0 246 2 2 54 3 3 24 0 0
+fn=std::basic_ios<char, std::char_traits<char> >::_M_cache_locale(std::locale const&)
+0 120 2 2 12 0 0 44 0 0
+fn=std::basic_ios<char, std::char_traits<char> >::init(std::basic_streambuf<char, std::char_traits<char> >*)
+0 88 3 3 12 0 0 40 0 0
+fn=std::basic_ios<wchar_t, std::char_traits<wchar_t> >::_M_cache_locale(std::locale const&)
+0 120 3 3 12 0 0 44 0 0
+fn=std::basic_ios<wchar_t, std::char_traits<wchar_t> >::init(std::basic_streambuf<wchar_t, std::char_traits<wchar_t> >*)
+0 88 2 2 12 0 0 40 0 0
+fn=std::basic_ostream<wchar_t, std::char_traits<wchar_t> >::flush()
+0 42 1 1 21 10 10 6 0 0
+fn=std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
+0 96528 7676 5 24132 1 0 28154 1305 15
+fn=std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)
+0 768 3 3 352 0 0 96 4 4
+fn=std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
+0 384 2 2 160 30 26 0 0 0
+fn=std::chrono::_V2::system_clock::now()
+0 8274 591 1 3546 0 0 1182 0 0
+fn=std::codecvt<char, char, __mbstate_t>::codecvt(unsigned long)
+0 17 2 2 4 0 0 6 1 1
+fn=std::codecvt<wchar_t, char, __mbstate_t>::codecvt(unsigned long)
+0 17 1 1 4 0 0 6 2 2
+fn=std::ctype<char> const& std::use_facet<std::ctype<char> >(std::locale const&)
+0 76 2 2 36 0 0 12 0 0
+fn=std::ctype<char>::ctype(unsigned short const*, bool, unsigned long)
+0 116 5 5 8 1 0 79 9 9
+fn=std::ctype<wchar_t> const& std::use_facet<std::ctype<wchar_t> >(std::locale const&)
+0 76 2 2 36 0 0 12 0 0
+fn=std::ctype<wchar_t>::_M_convert_to_wmask(unsigned short) const
+0 129 5 5 12 0 0 0 0 0
+fn=std::ctype<wchar_t>::_M_initialize_ctype()
+0 2757 5 5 5 0 0 810 20 20
+fn=std::ctype<wchar_t>::ctype(unsigned long)
+0 19 2 2 3 0 0 7 1 1
+fn=std::deque<BulletLua*, std::allocator<BulletLua*> >::_M_reallocate_map(unsigned long, bool)
+0 207 6 6 45 0 0 54 0 0
+fn=std::error_category::~error_category()
+0 3 0 0 3 0 0 0 0 0
+fn=std::future_category()
+0 16 2 2 2 1 0 3 0 0
+fn=std::ios_base::Init::Init()
+0 289 32 31 53 15 1 173 21 18
+fn=std::ios_base::Init::~Init()
+0 30 3 3 14 8 8 6 0 0
+fn=std::ios_base::_M_init()
+0 192 3 3 48 0 0 72 0 0
+fn=std::ios_base::ios_base()
+0 472 3 3 8 0 0 216 32 28
+fn=std::locale::_Impl::_Impl(unsigned long)
+0 819 66 66 132 28 1 406 47 47
+fn=std::locale::_Impl::_M_install_facet(std::locale::id const*, std::locale::facet const*)
+0 7392 6 6 2744 3 0 224 0 0
+fn=std::locale::_S_initialize()
+0 242 1 1 66 0 0 22 0 0
+fn=std::locale::_S_initialize_once()
+0 11 1 1 1 0 0 3 0 0
+fn=std::locale::facet::_S_create_c_locale(__locale_struct*&, char const*, __locale_struct*)
+0 9 2 2 2 0 0 3 0 0
+fn=std::locale::facet::_S_get_c_locale()
+0 100 2 2 40 0 0 20 0 0
+fn=std::locale::facet::_S_get_c_name()
+0 10 1 1 5 0 0 0 0 0
+fn=std::locale::facet::_S_initialize_once()
+0 4 1 1 0 0 0 0 0 0
+fn=std::locale::id::_M_id() const
+0 644 1 1 252 5 2 28 0 0
+fn=std::locale::locale()
+0 440 3 3 198 1 0 132 0 0
+fn=std::locale::operator=(std::locale const&)
+0 136 2 2 80 0 0 16 0 0
+fn=std::locale::~locale()
+0 80 1 1 48 0 0 8 0 0
+fn=std::messages<char>::messages(unsigned long)
+0 19 2 2 4 0 0 8 0 0
+fn=std::messages<wchar_t>::messages(unsigned long)
+0 19 2 2 4 0 0 8 0 0
+fn=std::moneypunct<char, false>::_M_initialize_moneypunct(__locale_struct*, char const*)
+0 112 6 6 37 1 1 31 0 0
+fn=std::moneypunct<char, true>::_M_initialize_moneypunct(__locale_struct*, char const*)
+0 112 4 4 37 0 0 31 0 0
+fn=std::moneypunct<wchar_t, false>::_M_initialize_moneypunct(__locale_struct*, char const*)
+0 108 6 6 29 0 0 32 0 0
+fn=std::moneypunct<wchar_t, true>::_M_initialize_moneypunct(__locale_struct*, char const*)
+0 108 6 6 29 0 0 32 0 0
+fn=std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+0 76 1 1 36 0 0 12 0 0
+fn=std::num_get<wchar_t, std::istreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > const& std::use_facet<std::num_get<wchar_t, std::istreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > >(std::locale const&)
+0 76 1 1 36 0 0 12 0 0
+fn=std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > const& std::use_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >(std::locale const&)
+0 76 2 2 36 0 0 12 0 0
+fn=std::num_put<wchar_t, std::ostreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > const& std::use_facet<std::num_put<wchar_t, std::ostreambuf_iterator<wchar_t, std::char_traits<wchar_t> > > >(std::locale const&)
+0 76 2 2 36 0 0 12 0 0
+fn=std::numpunct<char>::_M_initialize_numpunct(__locale_struct*)
+0 413 6 6 136 4 1 75 0 0
+fn=std::numpunct<wchar_t>::_M_initialize_numpunct(__locale_struct*)
+0 349 6 6 73 2 0 75 3 3
+fn=std::ostream::flush()
+0 42 2 2 21 10 10 6 0 0
+fn=std::random_device::_M_fini()
+0 8 1 1 2 0 0 0 0 0
+fn=std::random_device::_M_getval()
+0 36 2 2 12 0 0 6 0 0
+fn=std::random_device::_M_init(std::string const&)
+0 62 4 4 10 0 0 12 0 0
+fn=std::string::_M_mutate(unsigned long, unsigned long, unsigned long)
+0 3904 6 6 1024 0 0 704 0 0
+fn=std::string::_M_replace_safe(unsigned long, unsigned long, char const*, unsigned long)
+0 1664 3 3 448 0 0 384 0 0
+fn=std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long)
+0 960 2 2 256 0 0 224 0 0
+fn=std::string::_Rep::_M_destroy(std::allocator<char> const&)
+0 3990 3839 2 0 0 0 0 0 0
+fn=std::string::_Rep::_M_dispose(std::allocator<char> const&) [clone .part.1]
+0 30688 7581 2 7672 462 0 0 0 0
+fn=std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&)
+0 81080 11514 7 8108 1 0 16216 21 10
+fn=std::string::append(std::string const&)
+0 1344 4 4 480 0 0 288 0 0
+fn=std::string::compare(char const*) const
+0 66 2 2 14 0 0 12 0 0
+fn=std::string::find(char const*, unsigned long, unsigned long) const
+0 27600 4 4 4418 0 0 1184 0 0
+fn=std::string::replace(unsigned long, unsigned long, char const*, unsigned long)
+0 2694 4 3 704 0 0 448 0 0
+fn=std::string::reserve(unsigned long)
+0 1248 4 4 448 0 0 192 0 0
+fn=stpcpy
+0 143790 12 5 12512 9 2 17056 0 0
+fn=str_to_mpn.isra.0
+0 842 10 10 192 2 2 140 2 1
+fn=strcasecmp
+0 13 4 2 6 1 1 1 0 0
+fn=strcat
+0 12 2 2 6 1 0 0 0 0
+fn=strchrnul
+0 148016 2720 18 14830 912 22 0 0 0
+fn=strcmp
+0 1271766 82 8 412559 5764 727 0 0 0
+fn=strcpy
+0 24 8 2 12 2 0 0 0 0
+fn=strdup
+0 48756 80 8 5736 0 0 11472 6 1
+fn=strerror
+0 65 5 5 20 0 0 20 0 0
+fn=strerror_r
+0 150 10 10 45 10 9 35 0 0
+fn=strip
+0 250 6 6 40 14 14 22 0 0
+fn=strlen
+0 636046 10683 40 85219 6926 1647 0 0 0
+fn=strncasecmp
+0 6 3 3 3 0 0 0 0 0
+fn=strncmp
+0 40 9 1 20 6 0 0 0 0
+fn=strncpy
+0 48 10 1 24 15 0 0 0 0
+fn=strnlen
+0 23564 10 8 3836 1 0 548 64 0
+fn=strsep
+0 915 3 3 148 0 0 1 0 0
+fn=strspn
+0 7 1 1 3 0 0 0 0 0
+fn=strstr
+0 50 10 3 15 4 0 0 0 0
+fn=strtod
+0 56 2 2 28 5 0 0 0 0
+fn=strtol
+0 2240 3 2 1120 130 0 0 0 0
+fn=strtoul
+0 20 3 1 10 5 0 0 0 0
+fn=stub_find_dynamic
+0 2296097 5 5 258501 8654 0 260883 98 96
+fn=stub_find_public
+0 740733 7 7 127362 6596 1112 79900 245 0
+fn=stub_get_addr
+0 9861 2 2 3036 73 36 0 0 0
+fn=stub_get_slot
+0 4628 1 1 4628 31 24 0 0 0
+fn=stub_init_once
+0 26928 4498 5 8976 1248 0 0 0 0
+fn=sysconf
+0 84 9 9 15 3 3 12 0 0
+fn=systrim.isra.1
+0 145 4 2 55 3 0 30 0 0
+fn=tfind
+0 79584 17 4 15652 1220 20 8305 0 0
+fn=time
+0 180 9 8 15 3 2 15 0 0
+fn=tsearch
+0 295078 9 6 72708 1278 0 39626 0 0
+fn=u_current_init
+0 9014 4487 5 9014 0 0 0 0 0
+fn=u_current_set_context
+0 210 10 4 90 8 4 90 0 0
+fn=u_current_set_table
+0 89777 4496 5 26945 0 0 35904 0 0
+fn=u_execmem_alloc
+0 6130 4 4 1275 0 0 1277 0 0
+fn=udev_device_get_devlinks_list_entry
+0 15 2 2 4 0 0 2 0 0
+fn=udev_device_get_devnum
+0 11 2 2 5 0 0 1 0 0
+fn=udev_device_get_parent
+0 12 1 1 4 0 0 4 0 0
+fn=udev_device_get_properties_list_entry
+0 44 6 6 11 0 0 11 0 0
+fn=udev_device_get_property_value
+0 13 2 1 1 0 0 3 0 0
+fn=udev_device_get_subsystem
+0 38 4 4 12 0 0 7 1 1
+fn=udev_device_get_tags_list_entry
+0 15 2 2 4 0 0 2 0 0
+fn=udev_device_new_from_devnum
+0 39 3 3 5 0 0 6 0 0
+fn=udev_device_new_from_syspath
+0 347 9 9 118 2 1 45 2 0
+fn=udev_device_unref
+0 99 4 4 30 1 0 39 0 0
+fn=udev_list_entry_get_by_name
+0 23 2 2 8 0 0 3 0 0
+fn=udev_list_entry_get_next
+0 175 0 0 55 0 0 0 0 0
+fn=udev_list_entry_get_value
+0 4 1 1 2 0 0 0 0 0
+fn=udev_new
+0 102 5 5 24 2 0 21 2 2
+fn=udev_unref
+0 12 1 1 2 1 0 2 0 0
+fn=uname
+0 25 5 4 5 0 0 0 0 0
+fn=ungetc
+0 17384 4 4 6784 0 0 2120 0 0
+fn=uselocale
+0 42 3 3 18 6 0 8 1 0
+fn=vasprintf
+0 24704 10 5 5018 2 0 6176 0 0
+fn=version_check_doit
+0 10 1 1 4 0 0 2 0 0
+fn=vfprintf
+0 977202 44889 311 296849 8757 36 217312 8309 57
+fn=void sol::state::open_libraries<sol::lib>(sol::lib&&)
+0 108 5 5 24 3 1 21 0 0
+fn=void std::deque<BulletLua*, std::allocator<BulletLua*> >::_M_push_back_aux<BulletLua* const&>(BulletLua* const&)
+0 1118 52 2 364 0 0 338 30 0
+fn=vsprintf
+0 48564 3834 2 8946 0 0 12780 1353 0
+fn=vsscanf
+0 66 6 6 10 0 0 18 1 1
+fn=waitpid
+0 11 1 1 2 0 0 0 0 0
+fn=wctob
+0 768 1 1 128 0 0 0 0 0
+fn=wctype_l
+0 876 3 3 139 4 0 153 0 0
+fn=writev
+0 4176 660 5 2088 0 0 0 0 0
+fn=xcb_big_requests_enable
+0 34 4 2 8 0 0 12 0 0
+fn=xcb_big_requests_enable_reply
+0 2 2 1 0 0 0 0 0 0
+fn=xcb_connect
+0 6 2 1 0 0 0 0 0 0
+fn=xcb_connect_to_display_with_auth_info
+0 282 24 11 48 2 0 86 0 0
+fn=xcb_connect_to_fd
+0 298 20 10 32 1 0 82 2 0
+fn=xcb_connection_has_error
+0 3954 661 5 3954 0 0 0 0 0
+fn=xcb_disconnect
+0 80 6 4 8 1 0 18 0 0
+fn=xcb_dri2_swap_buffers_reply
+0 639 639 1 0 0 0 0 0 0
+fn=xcb_dri2_swap_buffers_unchecked
+0 16614 1917 3 3834 0 0 8307 0 0
+fn=xcb_dri2_swap_interval
+0 76 8 8 16 1 0 32 0 0
+fn=xcb_generate_id
+0 488 30 8 148 7 4 96 0 0
+fn=xcb_get_extension_data
+0 20899 1300 12 5221 0 0 4579 0 0
+fn=xcb_get_file_descriptor
+0 10 2 1 6 0 0 0 0 0
+fn=xcb_get_maximum_request_length
+0 66 6 3 16 0 0 18 0 0
+fn=xcb_get_setup
+0 10 0 0 6 1 0 0 0 0
+fn=xcb_glx_query_server_string
+0 38 3 3 8 0 0 16 0 0
+fn=xcb_glx_query_server_string_reply
+0 2 1 1 0 0 0 0 0 0
+fn=xcb_glx_query_server_string_string
+0 4 0 0 2 0 0 0 0 0
+fn=xcb_glx_query_server_string_string_length
+0 4 1 1 4 1 0 0 0 0
+fn=xcb_glx_query_version
+0 19 3 3 4 0 0 8 0 0
+fn=xcb_glx_query_version_reply
+0 1 1 1 0 0 0 0 0 0
+fn=xcb_glx_set_client_info_2arb
+0 45 5 5 7 0 0 23 0 0
+fn=xcb_parse_display
+0 8 2 1 0 0 0 0 0 0
+fn=xcb_poll_for_event
+0 12068 659 3 0 0 0 0 0 0
+fn=xcb_poll_for_reply
+0 70200 1961 10 14040 4 0 14040 0 0
+fn=xcb_prefetch_extension_data
+0 38 1 0 8 1 0 10 0 0
+fn=xcb_prefetch_maximum_request_length
+0 60 4 2 12 4 0 14 0 0
+fn=xcb_query_extension
+0 168 12 6 24 0 0 78 1 0
+fn=xcb_query_extension_reply
+0 5 4 2 0 0 0 0 0 0
+fn=xcb_send_request
+0 115141 8427 82 32192 4516 17 15777 643 0
+fn=xcb_take_socket
+0 32450 1945 18 7788 0 0 9086 1 0
+fn=xcb_wait_for_event
+0 86 6 6 12 0 0 20 0 0
+fn=xcb_wait_for_reply
+0 135773 1975 15 24486 0 0 27335 0 0
+fn=xcb_writev
+0 44392 1968 7 11456 42 4 11456 3 1
+fn=xlocaledir
+0 216 9 3 54 0 0 54 3 0
+summary: 588511430 6762213 34896 162888437 7384295 69656 89372941 6188713 241988

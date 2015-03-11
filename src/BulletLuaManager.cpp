@@ -4,25 +4,24 @@
 #include <bulletlua/Utils/Rng.hpp>
 #include <bulletlua/Utils/Math.hpp>
 
+#include <cassert>
+
 BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp)
     : current{nullptr},
-      // player{playerp},
       player(playerp),
       rank{0.8},
       collision{BulletLuaUtils::Rect{float(left), float(top), float(width), float(height)}},
       rng{}
-
 {
-    // This only calls this class' version of this function, not any subclass'.
-    increaseCapacity();
+    // Initialize our vector like an array. Ensure we have at least BLOCK_SIZE elements.
+    bullets.resize(BLOCK_SIZE);
+
+    // Setup our linked list.
+    clear();
 }
 
 BulletLuaManager::~BulletLuaManager()
 {
-    for (auto iter = blocks.begin(); iter != blocks.end(); ++iter)
-    {
-        delete [] *iter;
-    }
 }
 
 // Create a root bullet from an external script.
@@ -38,7 +37,7 @@ void BulletLuaManager::createBulletFromFile(const std::string& filename,
            luaState->get<sol::function>("main"),
            origin);
 
-    bullets.push_back(b);
+    // bullets.push_back(b);
 }
 
 // Create a root bullet from an embedded script.
@@ -54,18 +53,8 @@ void BulletLuaManager::createBulletFromScript(const std::string& script,
            luaState->get<sol::function>("main"),
            origin);
 
-    bullets.push_back(b);
+    // bullets.push_back(b);
 }
-
-// // Create Child Bullet
-// void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
-//                   const sol::function& func,
-//                   Bullet* origin)
-// {
-//     BulletLua* b = getFreeBullet();
-//     b->set(lua, func, origin, this);
-//     bullets.push_back(b);
-// }
 
 // Create Child Bullet
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
@@ -73,8 +62,9 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
                                     float x, float y, float d, float s)
 {
     BulletLua* b = getFreeBullet();
+
     b->set(lua, func, x, y, d, s);
-    bullets.push_back(b);
+    // bullets.push_back(b);
 }
 
 bool BulletLuaManager::checkCollision()
@@ -89,91 +79,77 @@ void BulletLuaManager::tick()
     // we must repopulate the containers each frame.
     collision.reset();
 
-    for (auto iter = bullets.begin(); iter != bullets.end();)
+    for (unsigned int i = 0; i < BLOCK_SIZE; ++i)
     {
         // Must be set so lua knows which bullet to modify.
-        current = *iter;
+        current = &bullets[i];
+        current->run(collision);
 
-        (*iter)->run(collision);
-
-        // If the current bullet is dead, push it onto the free stack.
-        // Keep in mind `erase` increments our iterator and returns a valid iterator.
-        if ((*iter)->isDead())
+        if (current->isDead())
         {
-            freeBullets.push(*iter);
-            iter = bullets.erase(iter);
+            current->setNext(firstAvailable);
+            firstAvailable = current;
             continue;
         }
 
-        if ((*iter)->collisionCheck)
-        {
-            collision.addBullet(*iter);
-        }
+        collision.addBullet(current);
 
-        ++iter;
+        // if ((*iter)->collisionCheck)
+        // {
+        //     collision.addBullet(*iter);
+        // }
     }
 }
 
 // Move all bullets to the free stack
 void BulletLuaManager::clear()
 {
-    while (!bullets.empty())
+    // Setup our linked list.
+    firstAvailable = bullets.data();
+    for (unsigned int i = 0; i < BLOCK_SIZE - 1; ++i)
     {
-        freeBullets.push(bullets.front());
-        bullets.pop_front();
+        bullets[i].setNext(&bullets[i + 1]);
     }
+
+    // Terminate our list
+    bullets[BLOCK_SIZE - 1].setNext(nullptr);
 }
 
 void BulletLuaManager::vanishAll()
 {
-    for (BulletLua* b : bullets)
+    for (auto b : bullets)
     {
-        b->vanish();
+        b.vanish();
     }
 }
 
-unsigned int BulletLuaManager::bulletCount() const
-{
-    return bullets.size();
-}
+// unsigned int BulletLuaManager::bulletCount() const
+// {
+//     return bullets.size();
+// }
 
-unsigned int BulletLuaManager::freeCount() const
-{
-    return freeBullets.size();
-}
+// unsigned int BulletLuaManager::freeCount() const
+// {
+//     return freeBullets.size();
+// }
 
-unsigned int BulletLuaManager::blockCount() const
-{
-    return blocks.size();
-}
+// unsigned int BulletLuaManager::blockCount() const
+// {
+//     return blocks.size();
+// }
 
 // Returns an unused bullet. Allocates more data blocks if there none are available
 BulletLua* BulletLuaManager::getFreeBullet()
 {
-    BulletLua* bullet = freeBullets.top();
-    freeBullets.pop();
-
-    if (freeBullets.empty())
+    if (firstAvailable == nullptr)
     {
-        increaseCapacity();
+        bullets.resize(bullets.capacity() + BLOCK_SIZE);
     }
 
-    return bullet;
-}
+    BulletLua* b = firstAvailable;
+    firstAvailable = (BulletLua*)b->getNext();
 
-void BulletLuaManager::increaseCapacity(unsigned int blockSize)
-{
-    blocks.push_back(new BulletLua[blockSize]);
-
-    // Throw all bullets into free stack
-    for (unsigned int i = 0; i < blockSize; ++i)
-    {
-        freeBullets.push(&blocks.back()[i]);
-    }
-
-    // Subclasses should override this method if their extensions depends on block size.
-    // E.g. allocation of vertices or bookkeeping of vertices in a VBO.
-    // Keep in mind that this original version will be called in the default constructor.
+    return b;
 }
 
 std::shared_ptr<sol::state> BulletLuaManager::initLua()
@@ -193,7 +169,7 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&]()
                            {
                                BulletLua* c = this->current;
-                               return std::make_tuple(c->position.x, c->position.y);
+                               return std::make_tuple(c->state.live.x, c->state.live.y);
                            });
 
     luaState->set_function("getTargetPosition",
@@ -207,7 +183,7 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&]()
                            {
                                BulletLua* c = this->current;
-                               return std::make_tuple(c->vx, c->vy);
+                               return std::make_tuple(c->state.live.vx, c->state.live.vy);
                            });
 
     luaState->set_function("getSpeed",
@@ -224,12 +200,12 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                return Math::radToDeg(c->getDirection());
                            });
 
-    luaState->set_function("setCollision",
-                           [&](bool collision)
-                           {
-                               BulletLua* c = this->current;
-                               c->collisionCheck = collision;
-                           });
+    // luaState->set_function("setCollision",
+    //                        [&](bool collision)
+    //                        {
+    //                            BulletLua* c = this->current;
+    //                            c->collisionCheck = collision;
+    //                        });
 
     luaState->set_function("getLife",
                            [&]()
@@ -342,8 +318,8 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                            [&](float x, float y, unsigned int steps)
                            {
                                BulletLua* c = this->current;
-                               c->vx = (x - c->position.x) / steps;
-                               c->vy = (y - c->position.y) / steps;
+                               c->state.live.vx = (x - c->state.live.x) / steps;
+                               c->state.live.vy = (y - c->state.live.y) / steps;
                            });
 
     luaState->set_function("setFunction",
@@ -358,11 +334,11 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                const sol::function& func)
                            {
                                BulletLua* c = this->current;
-                               if (c->dying)
+                               if (c->isDying())
                                    return;
 
                                this->createBullet(c->luaState, func,
-                                                  c->position.x, c->position.y,
+                                                  c->state.live.x, c->state.live.y,
                                                   Math::degToRad(d), s);
                            });
 
@@ -371,11 +347,11 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                const sol::function& func)
                            {
                                BulletLua* c = this->current;
-                               if (c->dying)
+                               if (c->isDying())
                                    return;
 
                                this->createBullet(c->luaState, func,
-                                                  c->position.x, c->position.y,
+                                                  c->state.live.x, c->state.live.y,
                                                   c->getAimDirection(player.x,
                                                                      player.y),
                                                   s);
@@ -386,31 +362,31 @@ std::shared_ptr<sol::state> BulletLuaManager::initLua()
                                const sol::function& func)
                            {
                                BulletLua* c = this->current;
-                               if (c->dying)
+                               if (c->isDying())
                                    return;
 
                                float segRad = Math::PI * 2 / segments;
                                for (int i = 0; i < segments; ++i)
                                {
                                    this->createBullet(c->luaState, func,
-                                                      c->position.x, c->position.y,
+                                                      c->state.live.x, c->state.live.y,
                                                       segRad * i, s);
                                }
                            });
 
-    luaState->set_function("setColor",
-                           [&](unsigned char r, unsigned char g, unsigned char b)
-                           {
-                               BulletLua* c = this->current;
-                               c->setColor(r, g, b);
-                           });
+    // luaState->set_function("setColor",
+    //                        [&](unsigned char r, unsigned char g, unsigned char b)
+    //                        {
+    //                            BulletLua* c = this->current;
+    //                            c->setColor(r, g, b);
+    //                        });
 
-    luaState->set_function("getColor",
-                           [&]()
-                           {
-                               BulletLua* c = this->current;
-                               return std::make_tuple(c->r, c->g, c->b);
-                           });
+    // luaState->set_function("getColor",
+    //                        [&]()
+    //                        {
+    //                            BulletLua* c = this->current;
+    //                            return std::make_tuple(c->r, c->g, c->b);
+    //                        });
 
     luaState->set_function("vanish",
                            [&]()

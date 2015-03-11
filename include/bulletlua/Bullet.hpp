@@ -6,22 +6,41 @@
 class Bullet
 {
     public:
-        // We are assuming position.x and position.y are the center of the bullet, not the top-left
-        // corner of the collision bounding box.
-        BulletLuaUtils::Rect position;
-        float vx, vy;
-        bool dead;
+        enum State
+        {
+            DYING = -1,
+            DEAD  = -2
+        };
 
-        unsigned char r, g, b;
+    public:
+        union
+        {
+                struct
+                {
+                    public:
+                        // Centered (x, y) position.
+                        float x, y;
+                        float vx, vy;
+                } live;
 
-        bool dying;
+                Bullet* next;
+        } state;
+
+        // bool dead;
+        // unsigned char r, g, b;
+        // bool dying;
+
         int life;
         int turn;
 
-        bool collisionCheck;
+        // bool collisionCheck;
 
     public:
+        Bullet();
         Bullet(float x, float y, float vx, float vy);
+
+        void setNext(Bullet* next);
+        Bullet* getNext() const;
 
         // void setBullet(float x, float y, float vx, float vy);
 
@@ -48,7 +67,7 @@ class Bullet
         bool isDying() const;
 
         int getTurn() const;
-        void setColor(unsigned char newR, unsigned char newG, unsigned char newB);
+        // void setColor(unsigned char newR, unsigned char newG, unsigned char newB);
 
         void update();
 

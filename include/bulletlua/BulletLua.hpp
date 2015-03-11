@@ -23,7 +23,7 @@ class BulletLua : public Bullet
                  const sol::function& func,
                  float x, float y, float d, float s);
 
-        void run(const SpacialPartition& collision);
+        bool run(const SpacialPartition& collision);
         void setFunction(const sol::function& func);
 
     public:

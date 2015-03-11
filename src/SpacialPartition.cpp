@@ -12,12 +12,12 @@ SpacialPartition::SpacialPartition(const BulletLuaUtils::Rect& area)
 
 void SpacialPartition::addBullet(const Bullet* bullet)
 {
-    if (bullet->dying || bullet->dead)
+    if (bullet->isDying()|| bullet->isDead())
         return;
 
     // Abuse integer division to determine which array cell this bullet belongs to.
-    int x = bullet->position.x / tileSize;
-    int y = bullet->position.y / tileSize;
+    int x = bullet->state.live.x / tileSize;
+    int y = bullet->state.live.y / tileSize;
 
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return;
@@ -55,12 +55,12 @@ bool SpacialPartition::checkCollision(const BulletLuaUtils::Rect& b) const
         return false;
 
     BulletLuaUtils::Rect thisBullet{b};
+    BulletLuaUtils::Rect thatBullet{0.0f, 0.0f, 4.0f, 4.0f};
 
     for (int i = 0; i < bulletCount[x][y]; i++)
     {
-        BulletLuaUtils::Rect thatBullet{space[x][y][i]->position};
-        // thatBullet.x = space[x][y][i]->position.x;
-        // thatBullet.x = space[x][y][i]->position.y;
+        thatBullet.x = space[x][y][i]->state.live.x;
+        thatBullet.x = space[x][y][i]->state.live.y;
 
         if (thisBullet.intersects(thatBullet))
             return true;

@@ -19,92 +19,92 @@ class BulletTester : public BulletLuaManager
         {
         }
 
-        void createEmptyBullet()
-        {
-            BulletLua* b = getFreeBullet();
-            bullets.push_back(b);
-        }
+        // void createEmptyBullet()
+        // {
+        //     BulletLua* b = getFreeBullet();
+        //     bullets.push_back(b);
+        // }
 
-        void createEmptyBullets(unsigned int n)
-        {
-            for (unsigned int i = 0; i < n; ++i)
-            {
-                createEmptyBullet();
-            }
-        }
+        // void createEmptyBullets(unsigned int n)
+        // {
+        //     for (unsigned int i = 0; i < n; ++i)
+        //     {
+        //         createEmptyBullet();
+        //     }
+        // }
 };
 
-TEST_CASE("Space Allocation", "[Space]")
-{
-    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
-    BulletTester manager{player};
+// TEST_CASE("Space Allocation", "[Space]")
+// {
+//     BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
+//     BulletTester manager{player};
 
-    SECTION("Initial Size")
-    {
-        REQUIRE(manager.bulletCount() == 0);
-        REQUIRE(manager.freeCount() == BLOCK_SIZE);
-        REQUIRE(manager.blockCount() == 1);
-    }
+//     SECTION("Initial Size")
+//     {
+//         REQUIRE(manager.bulletCount() == 0);
+//         REQUIRE(manager.freeCount() == BLOCK_SIZE);
+//         REQUIRE(manager.blockCount() == 1);
+//     }
 
-    SECTION("Add a handful")
-    {
-        const unsigned int a_handful = 100;
-        const unsigned int expected_blocks = (a_handful / BLOCK_SIZE) + 1;
+//     SECTION("Add a handful")
+//     {
+//         const unsigned int a_handful = 100;
+//         const unsigned int expected_blocks = (a_handful / BLOCK_SIZE) + 1;
 
-        manager.createEmptyBullets(a_handful);
+//         manager.createEmptyBullets(a_handful);
 
-        REQUIRE(manager.bulletCount() == a_handful);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_handful);
-        REQUIRE(manager.blockCount() == expected_blocks);
-    }
+//         REQUIRE(manager.bulletCount() == a_handful);
+//         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_handful);
+//         REQUIRE(manager.blockCount() == expected_blocks);
+//     }
 
-    // Overflow one (default-size) block.
-    SECTION("Add a metric ton")
-    {
-        const unsigned int a_metric_ton = 2200;
-        const unsigned int expected_blocks = (a_metric_ton / BLOCK_SIZE) + 1;
+//     // Overflow one (default-size) block.
+//     SECTION("Add a metric ton")
+//     {
+//         const unsigned int a_metric_ton = 2200;
+//         const unsigned int expected_blocks = (a_metric_ton / BLOCK_SIZE) + 1;
 
-        manager.createEmptyBullets(a_metric_ton);
+//         manager.createEmptyBullets(a_metric_ton);
 
-        REQUIRE(manager.bulletCount() == a_metric_ton);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_metric_ton);
-        REQUIRE(manager.blockCount() == expected_blocks);
-    }
+//         REQUIRE(manager.bulletCount() == a_metric_ton);
+//         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_metric_ton);
+//         REQUIRE(manager.blockCount() == expected_blocks);
+//     }
 
-    // Overflow many (default-size) blocks.
-    SECTION("Add a lot")
-    {
-        const unsigned int a_lot = 1 << 16;
-        const unsigned int expected_blocks = (a_lot / BLOCK_SIZE) + 1;
+//     // Overflow many (default-size) blocks.
+//     SECTION("Add a lot")
+//     {
+//         const unsigned int a_lot = 1 << 16;
+//         const unsigned int expected_blocks = (a_lot / BLOCK_SIZE) + 1;
 
-        manager.createEmptyBullets(a_lot);
+//         manager.createEmptyBullets(a_lot);
 
-        REQUIRE(manager.bulletCount() == a_lot);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_lot);
-        REQUIRE(manager.blockCount() == expected_blocks);
-    }
-}
+//         REQUIRE(manager.bulletCount() == a_lot);
+//         REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_lot);
+//         REQUIRE(manager.blockCount() == expected_blocks);
+//     }
+// }
 
-TEST_CASE("Out of Bounds Check", "[Boundary]")
-{
-    BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
-    BulletTester manager{player};
+// TEST_CASE("Out of Bounds Check", "[Boundary]")
+// {
+//     BulletLuaUtils::Rect player{320.0f, 240.0f, 4.0f, 4.0f};
+//     BulletTester manager{player};
 
-    const char* script =
-        "function main()"
-        "    setPosition(-4, 0)"
-        "end";
+//     const char* script =
+//         "function main()"
+//         "    setPosition(-4, 0)"
+//         "end";
 
-    SECTION("Single Bullet")
-    {
-        manager.createBulletFromScript(script, manager.origin.get());
-        REQUIRE(manager.bulletCount() == 1);
+//     SECTION("Single Bullet")
+//     {
+//         manager.createBulletFromScript(script, manager.origin.get());
+//         REQUIRE(manager.bulletCount() == 1);
 
-        manager.tick();
+//         manager.tick();
 
-        REQUIRE(manager.bulletCount() == 0);
-    }
-}
+//         REQUIRE(manager.bulletCount() == 0);
+//     }
+// }
 
 TEST_CASE("Collision Check", "[Collision]")
 {

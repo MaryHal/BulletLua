@@ -1,6 +1,7 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
+#include <vector>
 #include <list>
 #include <stack>
 
@@ -35,11 +36,11 @@ class BulletLuaManager
         // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         float rank;
 
-        std::list<BulletLua*> bullets;
-        std::stack<BulletLua*> freeBullets;
+        BulletLua* firstAvailable;
+        unsigned int bulletCount;
+        std::vector<BulletLua> bullets;
 
-        std::list<BulletLua*> blocks;
-
+        // // TODO: Something along the lines of instanced rendering.
         // std::vector<BulletModel> models;
 
         SpacialPartition collision;
@@ -80,16 +81,16 @@ class BulletLuaManager
         void clear();
         void vanishAll();
 
-        unsigned int bulletCount() const;
-        unsigned int freeCount() const;
-        unsigned int blockCount() const;
+        // unsigned int bulletCount() const;
+        // unsigned int freeCount() const;
+        // unsigned int blockCount() const;
 
     protected:
         // Returns an unused bullet. Allocates more data blocks if there none are available
         BulletLua* getFreeBullet();
 
-        // Allocate a new block of Bullet data.
-        virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+        // // Allocate a new block of Bullet data.
+        // virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
 
         // Create a BulletLua lua state with the necessary functions.
         std::shared_ptr<sol::state> initLua();
