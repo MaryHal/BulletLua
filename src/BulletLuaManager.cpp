@@ -5,176 +5,130 @@
 #include <bulletlua/Utils/Math.hpp>
 
 BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp)
-    : current{nullptr},
-      // player{playerp},
+    : current{0},
       player(playerp),
       rank{0.8},
-      collision{BulletLuaUtils::Rect{float(left), float(top), float(width), float(height)}},
       rng{}
-
 {
-    // This only calls this class' version of this function, not any subclass'.
-    increaseCapacity();
-}
-
-BulletLuaManager::~BulletLuaManager()
-{
-    for (auto iter = blocks.begin(); iter != blocks.end(); ++iter)
-    {
-        delete [] *iter;
-    }
+    position.reserve(BLOCK_SIZE);
+    attributes.reserve(BLOCK_SIZE);
+    lifeData.reserve(BLOCK_SIZE);
+    functions.reserve(BLOCK_SIZE);
 }
 
 // Create a root bullet from an external script.
-void BulletLuaManager::createBulletFromFile(const std::string& filename,
-                                            Bullet* origin)
+void BulletLuaManager::createBulletFromFile(const std::string& filename)
 {
-    BulletLua* b = getFreeBullet();
-
-    std::shared_ptr<sol::state> luaState = initLua();
+    std::shared_ptr<sol::state> luaState{initLua()};
     luaState->open_file(filename);
 
-    b->set(luaState,
-           luaState->get<sol::function>("main"),
-           origin);
-
-    bullets.push_back(b);
+    positions.emplace_back({320.0f, 120.0f});
+    attributes.emplace_back({0.0f, 0.0f});
+    lifeData.emplace_back({1.0f, 0});
+    functions.emplace_back({luaState, luaState->get<sol::function>("main")});
 }
 
 // Create a root bullet from an embedded script.
 void BulletLuaManager::createBulletFromScript(const std::string& script,
                                               Bullet* origin)
 {
-    BulletLua* b = getFreeBullet();
-
-    std::shared_ptr<sol::state> luaState = initLua();
+    std::shared_ptr<sol::state> luaState{initLua()};
     luaState->script(script);
 
-    b->set(luaState,
-           luaState->get<sol::function>("main"),
-           origin);
-
-    bullets.push_back(b);
+    positions.emplace_back({320.0f, 120.0f});
+    attributes.emplace_back({0.0f, 0.0f});
+    lifeData.emplace_back({1.0f, 0});
+    functions.emplace_back({luaState, luaState->get<sol::function>("main")});
 }
-
-// // Create Child Bullet
-// void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
-//                   const sol::function& func,
-//                   Bullet* origin)
-// {
-//     BulletLua* b = getFreeBullet();
-//     b->set(lua, func, origin, this);
-//     bullets.push_back(b);
-// }
 
 // Create Child Bullet
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua,
                                     const sol::function& func,
-                                    float x, float y, float d, float s)
+                                    float x, float y, float vx, float vy)
 {
-    BulletLua* b = getFreeBullet();
-    b->set(lua, func, x, y, d, s);
-    bullets.push_back(b);
-}
-
-bool BulletLuaManager::checkCollision()
-{
-    return collision.checkCollision(player);
+    positions.emplace_back({x, y});
+    attributes.emplace_back({vx, vy});
+    lifeData.emplace_back({1.0f, 0});
+    functions.emplace_back({lua, luaState->get<sol::function>("main")});
 }
 
 void BulletLuaManager::tick()
 {
-    // Reset containers inside collision detection object.
-    // Since bullets are dynamic and are most likely unpredictable,
-    // we must repopulate the containers each frame.
-    collision.reset();
+    float numDead{0.0f};
+    std::size_t size = lifeData.size();
 
-    for (auto iter = bullets.begin(); iter != bullets.end();)
+    for (std::size_t i = 0; i < size; ++i)
     {
-        // Must be set so lua knows which bullet to modify.
-        current = *iter;
+        BulletLifeData& life = lifeData[i];
+        BulletPosition& pos  = positions[i];
+        BulletFunction& func = functions[i];
 
-        (*iter)->run(collision);
+        current = i;
 
-        // If the current bullet is dead, push it onto the free stack.
-        // Keep in mind `erase` increments our iterator and returns a valid iterator.
-        if ((*iter)->isDead())
-        {
-            freeBullets.push(*iter);
-            iter = bullets.erase(iter);
-            continue;
-        }
-
-        if ((*iter)->collisionCheck)
-        {
-            collision.addBullet(*iter);
-        }
-
-        ++iter;
+        
     }
 }
 
 // Move all bullets to the free stack
 void BulletLuaManager::clear()
 {
-    while (!bullets.empty())
-    {
-        freeBullets.push(bullets.front());
-        bullets.pop_front();
-    }
+    position.resize(0);
+    attributes.resize(0);
+    lifeData.resize(0);
+    functions.resize(0);
 }
 
-void BulletLuaManager::vanishAll()
-{
-    for (BulletLua* b : bullets)
-    {
-        b->vanish();
-    }
-}
+// void BulletLuaManager::vanishAll()
+// {
+//     for (BulletLua* b : bullets)
+//     {
+//         b->vanish();
+//     }
+// }
 
-unsigned int BulletLuaManager::bulletCount() const
-{
-    return bullets.size();
-}
+// unsigned int BulletLuaManager::bulletCount() const
+// {
+//     return bullets.size();
+// }
 
-unsigned int BulletLuaManager::freeCount() const
-{
-    return freeBullets.size();
-}
+// unsigned int BulletLuaManager::freeCount() const
+// {
+//     return freeBullets.size();
+// }
 
-unsigned int BulletLuaManager::blockCount() const
-{
-    return blocks.size();
-}
+// unsigned int BulletLuaManager::blockCount() const
+// {
+//     return blocks.size();
+// }
 
-// Returns an unused bullet. Allocates more data blocks if there none are available
-BulletLua* BulletLuaManager::getFreeBullet()
-{
-    BulletLua* bullet = freeBullets.top();
-    freeBullets.pop();
+// // Returns an unused bullet. Allocates more data blocks if there none are available
+// BulletLua* BulletLuaManager::getFreeBullet()
+// {
+//     BulletLua* bullet = freeBullets.top();
+//     freeBullets.pop();
 
-    if (freeBullets.empty())
-    {
-        increaseCapacity();
-    }
+//     if (freeBullets.empty())
+//     {
+//         increaseCapacity();
+//     }
 
-    return bullet;
-}
+//     return bullet;
+// }
 
-void BulletLuaManager::increaseCapacity(unsigned int blockSize)
-{
-    blocks.push_back(new BulletLua[blockSize]);
+// void BulletLuaManager::increaseCapacity(unsigned int blockSize)
+// {
+//     blocks.push_back(new BulletLua[blockSize]);
 
-    // Throw all bullets into free stack
-    for (unsigned int i = 0; i < blockSize; ++i)
-    {
-        freeBullets.push(&blocks.back()[i]);
-    }
+//     // Throw all bullets into free stack
+//     for (unsigned int i = 0; i < blockSize; ++i)
+//     {
+//         freeBullets.push(&blocks.back()[i]);
+//     }
 
-    // Subclasses should override this method if their extensions depends on block size.
-    // E.g. allocation of vertices or bookkeeping of vertices in a VBO.
-    // Keep in mind that this original version will be called in the default constructor.
-}
+//     // Subclasses should override this method if their extensions depends on block size.
+//     // E.g. allocation of vertices or bookkeeping of vertices in a VBO.
+//     // Keep in mind that this original version will be called in the default constructor.
+// }
 
 std::shared_ptr<sol::state> BulletLuaManager::initLua()
 {

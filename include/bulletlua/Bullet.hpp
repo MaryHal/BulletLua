@@ -3,6 +3,26 @@
 
 #include <bulletlua/Utils/Rect.hpp>
 
+struct BulletPosition
+{
+    public:
+        float x, y;
+        float vx, vy;
+};
+
+struct BulletAttribute
+{
+    public:
+        float r, g, b;
+};
+
+struct BulletLifeData
+{
+    public:
+        float life;
+        int turn;
+};
+
 class Bullet
 {
     public:

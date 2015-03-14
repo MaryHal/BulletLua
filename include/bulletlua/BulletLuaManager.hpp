@@ -1,8 +1,7 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
-#include <list>
-#include <stack>
+#include <vector>
 
 #include <string>
 #include <memory>
@@ -26,8 +25,8 @@ class BulletLua;
 class BulletLuaManager
 {
     protected:
-        // Pointer to the bullet that is to-be-processed.
-        BulletLua* current;
+        // Index of current-processed bullet.
+        std::size_t current;
 
         // Collision object that bullets can "aim" at (i.e. the player).
         const BulletLuaUtils::Rect& player;
@@ -35,31 +34,33 @@ class BulletLuaManager
         // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         float rank;
 
-        std::list<BulletLua*> bullets;
-        std::stack<BulletLua*> freeBullets;
-
-        std::list<BulletLua*> blocks;
-
-        // std::vector<BulletModel> models;
-
-        SpacialPartition collision;
         BulletLuaUtils::MTRandom rng;
 
-    public:
-        BulletLuaManager(int left, int top, int width, int height, const BulletLuaUtils::Rect& playerp);
-        virtual ~BulletLuaManager();
+        struct BulletFunction
+        {
+            public:
+                std::shared_ptr<sol::state> luaState;
+                sol::function func;
+        };
 
-        // Non-copyable
-        BulletLuaManager(const BulletLuaManager&) = delete;
-        BulletLuaManager& operator=(const BulletLuaManager&) = delete;
+        std::vector<BulletPosition>  position;
+        std::vector<BulletAttribute> attributes;
+        std::vector<BulletLifeData>  lifeData;
+        std::vector<BulletFunction>  functions;
+
+    public:
+        BulletLuaManager(const BulletLuaUtils::Rect& playerp);
+
+        // // Non-copyable
+        // BulletLuaManager(const BulletLuaManager&) = delete;
+        // BulletLuaManager& operator=(const BulletLuaManager&) = delete;
 
         // // TODO: Finish bullet model methods.
         // void registerModel(const BulletModel& model);
         // const BulletModel& getModel(int index) const;
 
         // Create a root bullet from an external script.
-        void createBulletFromFile(const std::string& filename,
-                                  Bullet* origin);
+        void createBulletFromFile(const std::string& filename);
 
         // Create a root bullet from an embedded script.
         void createBulletFromScript(const std::string& script,
@@ -70,7 +71,7 @@ class BulletLuaManager
                           const sol::function& func,
                           float x, float y, float d, float s);
 
-        bool checkCollision();
+        // bool checkCollision();
         virtual void tick();
 
         // Draw function.
@@ -80,16 +81,16 @@ class BulletLuaManager
         void clear();
         void vanishAll();
 
-        unsigned int bulletCount() const;
-        unsigned int freeCount() const;
-        unsigned int blockCount() const;
+        // unsigned int bulletCount() const;
+        // unsigned int freeCount() const;
+        // unsigned int blockCount() const;
 
     protected:
-        // Returns an unused bullet. Allocates more data blocks if there none are available
-        BulletLua* getFreeBullet();
+        // // Returns an unused bullet. Allocates more data blocks if there none are available
+        // BulletLua* getFreeBullet();
 
-        // Allocate a new block of Bullet data.
-        virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+        // // Allocate a new block of Bullet data.
+        // virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
 
         // Create a BulletLua lua state with the necessary functions.
         std::shared_ptr<sol::state> initLua();
