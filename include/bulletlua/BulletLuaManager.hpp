@@ -9,6 +9,7 @@
 #include <sol.hpp>
 
 // #include <bulletlua/BulletModel.hpp>
+#include <bulletlua/Bullet.hpp>
 #include <bulletlua/SpacialPartition.hpp>
 #include <bulletlua/Utils/Rng.hpp>
 #include <bulletlua/Utils/Rect.hpp>
@@ -43,7 +44,7 @@ class BulletLuaManager
                 sol::function func;
         };
 
-        std::vector<BulletPosition>  position;
+        std::vector<BulletPosition>  positions;
         std::vector<BulletAttribute> attributes;
         std::vector<BulletLifeData>  lifeData;
         std::vector<BulletFunction>  functions;

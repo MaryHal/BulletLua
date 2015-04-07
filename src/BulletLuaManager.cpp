@@ -10,7 +10,7 @@ BulletLuaManager::BulletLuaManager(int left, int top, int width, int height, con
       rank{0.8},
       rng{}
 {
-    position.reserve(BLOCK_SIZE);
+    positions.reserve(BLOCK_SIZE);
     attributes.reserve(BLOCK_SIZE);
     lifeData.reserve(BLOCK_SIZE);
     functions.reserve(BLOCK_SIZE);
@@ -65,7 +65,10 @@ void BulletLuaManager::tick()
 
         current = i;
 
-        
+        func.func.call();
+
+        pos.x += pos.vx;
+        pos.y += pos.vy;
     }
 }
 
