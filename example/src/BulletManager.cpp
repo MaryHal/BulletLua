@@ -81,9 +81,9 @@ void BulletManager::tick()
 
         // Unrolled loops!
 
-        float red   = b->r / 256.0f;
-        float green = b->g / 256.0f;
-        float blue  = b->b / 256.0f;
+        float red   = 1.0f;
+        float green = 1.0f;
+        float blue  = 1.0f;
         float alpha = b->life / 256.0f;
 
         colorArray[i * 16 + 0]  = red;
@@ -119,17 +119,17 @@ void BulletManager::tick()
         textureArray[i * 8 + 7] = 1.0f;
 
         // Rotate coordinates around center
-        vertexArray[i * 8 + 0] = b->position.getCenterX() +  rad * (float)sin(dir - 3.1415f/4);
-        vertexArray[i * 8 + 1] = b->position.getCenterY() + -rad * (float)cos(dir - 3.1415f/4);
+        vertexArray[i * 8 + 0] = b->x - 2.0f +  rad * (float)sin(dir - 3.1415f/4);
+        vertexArray[i * 8 + 1] = b->y - 2.0f + -rad * (float)cos(dir - 3.1415f/4);
 
-        vertexArray[i * 8 + 2] = b->position.getCenterX() +  rad * (float)sin(dir + 3.1415f/4);
-        vertexArray[i * 8 + 3] = b->position.getCenterY() + -rad * (float)cos(dir + 3.1415f/4);
+        vertexArray[i * 8 + 2] = b->x - 2.0f +  rad * (float)sin(dir + 3.1415f/4);
+        vertexArray[i * 8 + 3] = b->y - 2.0f + -rad * (float)cos(dir + 3.1415f/4);
 
-        vertexArray[i * 8 + 4] = b->position.getCenterX() +  rad * (float)sin(dir + 3 * 3.1415f/4);
-        vertexArray[i * 8 + 5] = b->position.getCenterY() + -rad * (float)cos(dir + 3 * 3.1415f/4);
+        vertexArray[i * 8 + 4] = b->x - 2.0f +  rad * (float)sin(dir + 3 * 3.1415f/4);
+        vertexArray[i * 8 + 5] = b->y - 2.0f + -rad * (float)cos(dir + 3 * 3.1415f/4);
 
-        vertexArray[i * 8 + 6] = b->position.getCenterX() +  rad * (float)sin(dir + 5 * 3.1415f/4);
-        vertexArray[i * 8 + 7] = b->position.getCenterY() + -rad * (float)cos(dir + 5 * 3.1415f/4);
+        vertexArray[i * 8 + 6] = b->x - 2.0f +  rad * (float)sin(dir + 5 * 3.1415f/4);
+        vertexArray[i * 8 + 7] = b->y - 2.0f + -rad * (float)cos(dir + 5 * 3.1415f/4);
 
         if ((*iter)->collisionCheck)
         {
@@ -195,12 +195,12 @@ void BulletManager::drawCollision() const
     {
         if (!(*iter)->isDying())
         {
-            float x = (*iter)->position.x;
-            float y = (*iter)->position.y;
-            float w = (*iter)->position.w;
-            float h = (*iter)->position.h;
+            float x = (*iter)->x - 2.0f;
+            float y = (*iter)->y - 2.0f;
+            float w = 4.0f;
+            float h = 4.0f;
 
-            glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+            glColor4f(1.0f, 0.0f, 0.0f, 0.5f);
             glBegin(GL_QUADS);
             {
                 glVertex2f(x    , y);

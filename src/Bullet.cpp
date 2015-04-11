@@ -4,30 +4,42 @@
 #include <cfloat>
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : position{x - 2.0f, y - 2.0f, 4.0f, 4.0f}, // TODO: Un-hard-code bullet metrics.
-      vx{vx}, vy{vy},
-      dead{true},
-      r{255}, g{255}, b{255},
-      dying{true}, life{0}, turn{0}, collisionCheck{false}
+    : life{0}, turn{0}
 {
+    state.live.x  = x;
+    state.live.y  = y;
+    state.live.vx = vx;
+    state.live.vy = vy;
+
     fixSpeed();
+}
+
+Bullet* Bullet::getnext() const
+{
+    return state.next;
+}
+
+void Bullet::setNext(Bullet* next)
+{
+    state.next = next;
 }
 
 void Bullet::setPosition(float cx, float cy)
 {
-    position.setCenter(cx, cy);
+    state.live.x = cx;
+    state.live.y = cy;
 }
 
 void Bullet::setVelocity(float nvx, float nvy)
 {
-    vx = nvx;
-    vy = nvy;
+    state.live.vx = nvx;
+    state.live.vy = nvy;
 }
 
 void Bullet::setSpeedAndDirection(float speed, float dir)
 {
-    vx = speed * std::sin(dir);
-    vy = -speed * std::cos(dir);
+    state.live.vx = speed * std::sin(dir);
+    state.live.vy = -speed * std::cos(dir);
 
     fixSpeed();
 }
@@ -36,8 +48,8 @@ void Bullet::setSpeed(float speed)
 {
     float mag = getSpeed();
 
-    vx = (vx * speed) / mag;
-    vy = (vy * speed) / mag;
+    state.live.vx = (state.live.vx * speed) / mag;
+    state.live.vy = (state.live.vy * speed) / mag;
 
     fixSpeed();
 }
@@ -46,23 +58,24 @@ void Bullet::setSpeedRelative(float speed)
 {
     float mag = getSpeed();
 
-    vx = (vx * (speed + mag)) / mag;
-    vy = (vy * (speed + mag)) / mag;
+    state.live.vx = (state.live.vx * (speed + mag)) / mag;
+    state.live.vy = (state.live.vy * (speed + mag)) / mag;
 
     fixSpeed();
 }
 
 float Bullet::getSpeed() const
 {
-    return std::sqrt(vx * vx + vy * vy);
+    return std::sqrt(state.live.vx * state.live.vx +
+                     state.live.vy * state.live.vy);
 }
 
 
 void Bullet::setDirection(float dir)
 {
     float speed = getSpeed();
-    vx = speed * std::sin(dir);
-    vy = -speed * std::cos(dir);
+    state.live.vx = speed * std::sin(dir);
+    state.live.vy = -speed * std::cos(dir);
 }
 
 
@@ -76,43 +89,43 @@ void Bullet::aimAtPoint(float tx, float ty)
 {
     // TODO: use getDirectionAim
     setDirection(Math::PI -
-                 std::atan2(tx - position.x,
-                            ty - position.y));
+                 std::atan2(tx - state.live.x,
+                            ty - state.live.y));
 }
 
 float Bullet::getAimDirection(float tx, float ty)
 {
-    return Math::PI - std::atan2(tx - position.x, ty - position.y);
+    return Math::PI - std::atan2(tx - state.live.x, ty - state.live.y);
 }
 
 
 float Bullet::getDirection() const
 {
-    return Math::PI - std::atan2(vx, vy);
+    return Math::PI - std::atan2(state.live.vx, state.live.vy);
 }
 
 
 void Bullet::vanish()
 {
-    dying = true;
+    turn = DYING;
 }
 
 
 void Bullet::kill()
 {
-    dead = true;
+    turn = DEAD;
 }
 
 
 bool Bullet::isDead() const
 {
-    return dead;
+    return turn == DEAD;
 }
 
 
 bool Bullet::isDying() const
 {
-    return dying;
+    return turn == DYING;
 }
 
 
@@ -122,17 +135,17 @@ int Bullet::getTurn() const
 }
 
 
-void Bullet::setColor(unsigned char newR, unsigned char newG, unsigned char newB)
-{
-    r = newR;
-    g = newG;
-    b = newB;
-}
+// void Bullet::setColor(unsigned char newR, unsigned char newG, unsigned char newB)
+// {
+//     r = newR;
+//     g = newG;
+//     b = newB;
+// }
 
 void Bullet::update()
 {
-    position.x += vx;
-    position.y += vy;
+    state.live.x += state.live.vx;
+    state.live.y += state.live.vy;
 }
 
 void Bullet::fixSpeed()
@@ -140,8 +153,8 @@ void Bullet::fixSpeed()
     // See https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
     // Setting direction (alone) is dependent on components, so if speed is set to 0.0f,
     // setting a direction will not do anything.
-    if (std::abs(vy) < FLT_EPSILON)
+    if (std::abs(state.live.vy) < FLT_EPSILON)
     {
-        vy = FLT_EPSILON;
+        state.live.vy = FLT_EPSILON;
     }
 }

@@ -29,8 +29,8 @@ class BulletLuaManager
         // Index of current-processed bullet.
         std::size_t current;
 
-        // Collision object that bullets can "aim" at (i.e. the player).
-        const BulletLuaUtils::Rect& player;
+        float playerX;
+        float playerY;
 
         // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         float rank;
@@ -50,7 +50,8 @@ class BulletLuaManager
         std::vector<BulletFunction>  functions;
 
     public:
-        BulletLuaManager(const BulletLuaUtils::Rect& playerp);
+        BulletLuaManager(int left, int top, int width, int height);
+        virtual ~BulletLuaManager();
 
         // // Non-copyable
         // BulletLuaManager(const BulletLuaManager&) = delete;
@@ -61,11 +62,12 @@ class BulletLuaManager
         // const BulletModel& getModel(int index) const;
 
         // Create a root bullet from an external script.
-        void createBulletFromFile(const std::string& filename);
+        void createBulletFromFile(const std::string& filename,
+                                  float originX, float originY);
 
         // Create a root bullet from an embedded script.
         void createBulletFromScript(const std::string& script,
-                                    Bullet* origin);
+                                    float originX, float originY);
 
         // Create child bullet
         void createBullet(std::shared_ptr<sol::state> lua,
@@ -74,6 +76,8 @@ class BulletLuaManager
 
         // bool checkCollision();
         virtual void tick();
+
+        void setPlayerPosition(float x, float y);
 
         // Draw function.
         // void draw()

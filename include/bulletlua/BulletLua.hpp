@@ -17,6 +17,10 @@ class BulletLua : public Bullet
 
         void set(std::shared_ptr<sol::state> lua,
                  const sol::function& func,
+                 float originX, float originY);
+
+        void set(std::shared_ptr<sol::state> lua,
+                 const sol::function& func,
                  Bullet* origin);
 
         void set(std::shared_ptr<sol::state> lua,

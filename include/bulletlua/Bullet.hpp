@@ -26,22 +26,31 @@ struct BulletLifeData
 class Bullet
 {
     public:
-        // We are assuming position.x and position.y are the center of the bullet, not the top-left
-        // corner of the collision bounding box.
-        BulletLuaUtils::Rect position;
-        float vx, vy;
-        bool dead;
+        const int DYING = -1;
+        const int DEAD  = -2;
+        union
+        {
+                struct
+                {
+                        float x, y;
+                        float vx, vy;
+                } live;
 
-        unsigned char r, g, b;
+                Bullet* next;
+        } state;
 
-        bool dying;
+        // unsigned char r, g, b;
+
         int life;
         int turn;
 
-        bool collisionCheck;
+        // bool collisionCheck;
 
     public:
         Bullet(float x, float y, float vx, float vy);
+
+        Bullet* getnext() const;
+        void setNext(Bullet* next);
 
         // void setBullet(float x, float y, float vx, float vy);
 
@@ -68,7 +77,7 @@ class Bullet
         bool isDying() const;
 
         int getTurn() const;
-        void setColor(unsigned char newR, unsigned char newG, unsigned char newB);
+        // void setColor(unsigned char newR, unsigned char newG, unsigned char newB);
 
         void update();
 
