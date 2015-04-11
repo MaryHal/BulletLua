@@ -1,33 +1,15 @@
 #ifndef _Bullet_hpp_
 #define _Bullet_hpp_
 
-#include <bulletlua/Utils/Rect.hpp>
-
-struct BulletPosition
-{
-    public:
-        float x, y;
-        float vx, vy;
-};
-
-struct BulletAttribute
-{
-    public:
-        float r, g, b;
-};
-
-struct BulletLifeData
-{
-    public:
-        float life;
-        int turn;
-};
+#include <memory>
+#include <sol.hpp>
 
 class Bullet
 {
     public:
-        const int DYING = -1;
-        const int DEAD  = -2;
+        static const int DYING = -1;
+        static const int DEAD  = -2;
+
         union
         {
                 struct
@@ -39,17 +21,17 @@ class Bullet
                 Bullet* next;
         } state;
 
-        // unsigned char r, g, b;
-
         int life;
         int turn;
 
-        // bool collisionCheck;
+        std::shared_ptr<sol::state> luaState;
+        sol::function func;
 
     public:
+        Bullet();
         Bullet(float x, float y, float vx, float vy);
 
-        Bullet* getnext() const;
+        Bullet* getNext() const;
         void setNext(Bullet* next);
 
         // void setBullet(float x, float y, float vx, float vy);

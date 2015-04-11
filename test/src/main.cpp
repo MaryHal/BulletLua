@@ -1,10 +1,7 @@
 #include <catch.hpp>
 
 #include <bulletlua/BulletLuaManager.hpp>
-#include <bulletlua/BulletLua.hpp>
-#include <bulletlua/Utils/Rect.hpp>
 
-#include <memory>
 #include <iostream>
 
 class BulletTester : public BulletLuaManager
@@ -14,15 +11,12 @@ class BulletTester : public BulletLuaManager
 
     public:
         BulletTester()
-            : BulletLuaManager{0, 0, 640, 480}
-            // , origin{new Bullet{320.0f, 120.0f, 0.0f, 0.0f}}
         {
         }
 
         void createEmptyBullet()
         {
-            BulletLua* b = getFreeBullet();
-            bullets.push_back(b);
+            getFreeBullet();
         }
 
         void createEmptyBullets(unsigned int n)
@@ -41,47 +35,43 @@ TEST_CASE("Space Allocation", "[Space]")
 
     SECTION("Initial Size")
     {
-        REQUIRE(manager.bulletCount() == 0);
-        REQUIRE(manager.freeCount() == BLOCK_SIZE);
-        REQUIRE(manager.blockCount() == 1);
+        REQUIRE(manager.getContainerSize() == BulletTester::MAX_BULLETS);
+        REQUIRE(manager.getActiveBulletCount() == 0);
     }
 
     SECTION("Add a handful")
     {
         const unsigned int a_handful = 100;
-        const unsigned int expected_blocks = (a_handful / BLOCK_SIZE) + 1;
+        // const unsigned int expected_blocks = (a_handful / BLOCK_SIZE) + 1;
 
         manager.createEmptyBullets(a_handful);
 
-        REQUIRE(manager.bulletCount() == a_handful);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_handful);
-        REQUIRE(manager.blockCount() == expected_blocks);
+        REQUIRE(manager.getContainerSize() == BulletTester::MAX_BULLETS);
+        REQUIRE(manager.getActiveBulletCount() == a_handful);
     }
 
     // Overflow one (default-size) block.
     SECTION("Add a metric ton")
     {
         const unsigned int a_metric_ton = 2200;
-        const unsigned int expected_blocks = (a_metric_ton / BLOCK_SIZE) + 1;
+        // const unsigned int expected_blocks = (a_metric_ton / BLOCK_SIZE) + 1;
 
         manager.createEmptyBullets(a_metric_ton);
 
-        REQUIRE(manager.bulletCount() == a_metric_ton);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_metric_ton);
-        REQUIRE(manager.blockCount() == expected_blocks);
+        REQUIRE(manager.getContainerSize() == BulletTester::MAX_BULLETS);
+        REQUIRE(manager.getActiveBulletCount() == a_metric_ton);
     }
 
     // Overflow many (default-size) blocks.
     SECTION("Add a lot")
     {
-        const unsigned int a_lot = 1 << 16;
-        const unsigned int expected_blocks = (a_lot / BLOCK_SIZE) + 1;
+        const unsigned int a_lot = 8000;
+        // const unsigned int expected_blocks = (a_lot / BLOCK_SIZE) + 1;
 
         manager.createEmptyBullets(a_lot);
 
-        REQUIRE(manager.bulletCount() == a_lot);
-        REQUIRE(manager.freeCount() == expected_blocks * BLOCK_SIZE - a_lot);
-        REQUIRE(manager.blockCount() == expected_blocks);
+        REQUIRE(manager.getContainerSize() == BulletTester::MAX_BULLETS * 2);
+        REQUIRE(manager.getActiveBulletCount() == a_lot);
     }
 }
 
@@ -92,17 +82,17 @@ TEST_CASE("Out of Bounds Check", "[Boundary]")
 
     const char* script =
         "function main()"
-        "    setPosition(-4, 0)"
+        "    setPosition(-10, -10)"
         "end";
 
     SECTION("Single Bullet")
     {
         manager.createBulletFromScript(script, 320.0f, 120.0f);
-        REQUIRE(manager.bulletCount() == 1);
+        REQUIRE(manager.getActiveBulletCount() == 1);
 
         manager.tick();
 
-        REQUIRE(manager.bulletCount() == 0);
+        REQUIRE(manager.getActiveBulletCount() == 0);
     }
 }
 
@@ -119,13 +109,11 @@ TEST_CASE("Out of Bounds Check", "[Boundary]")
 //     SECTION("Single Bullet")
 //     {
 //         // Create a bullet, script will move it to (100, 100)
-//         manager.createBulletFromScript(script, manager.origin.get());
+//         manager.createBulletFromScript(script, 320.0f, 120.0f);
 //         manager.tick();
 
 //         // Move our "ship" to (100, 100) as well.
 //         manager.setPlayerPosition(100.0f, 100.0f);
-
-//         // std::cout << player.x << " " << player.y << " " << player.w << " " << player.h << std::endl;
 
 //         // Is there a collision? There better be.
 //         REQUIRE(manager.checkCollision() == true);

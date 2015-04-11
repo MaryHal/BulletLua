@@ -3,8 +3,14 @@
 #include <bulletlua/Utils/Math.hpp>
 #include <cfloat>
 
+Bullet::Bullet()
+    : life{0}, turn{0}, luaState{nullptr}
+{
+    state.next = nullptr;
+}
+
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : life{0}, turn{0}
+    : life{0}, turn{0}, luaState{nullptr}
 {
     state.live.x  = x;
     state.live.y  = y;
@@ -14,7 +20,7 @@ Bullet::Bullet(float x, float y, float vx, float vy)
     fixSpeed();
 }
 
-Bullet* Bullet::getnext() const
+Bullet* Bullet::getNext() const
 {
     return state.next;
 }
@@ -146,6 +152,17 @@ void Bullet::update()
 {
     state.live.x += state.live.vx;
     state.live.y += state.live.vy;
+
+    if (isDying())
+    {
+        // Fade out over 30 frames
+        life -= 255/30;
+        if (life < 0)
+        {
+            life = 0;
+            kill();
+        }
+    }
 }
 
 void Bullet::fixSpeed()

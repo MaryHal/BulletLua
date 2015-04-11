@@ -12,20 +12,17 @@
 #include <bulletlua/Bullet.hpp>
 #include <bulletlua/SpacialPartition.hpp>
 #include <bulletlua/Utils/Rng.hpp>
-#include <bulletlua/Utils/Rect.hpp>
-
-namespace
-{
-    // Amount of bullets to allocate at once.
-    const unsigned int BLOCK_SIZE = 2048;
-}
-
-class Bullet;
-class BulletLua;
 
 class BulletLuaManager
 {
+    public:
+        static const std::size_t MAX_BULLETS = 1 << 12;
+
     protected:
+        Bullet* firstAvailable;
+        std::size_t activeCount;
+        std::vector<Bullet> bullets;
+
         // Index of current-processed bullet.
         std::size_t current;
 
@@ -35,27 +32,15 @@ class BulletLuaManager
         // Rank [0.0, 1.0] represents the requested difficulty of a bullet pattern.
         float rank;
 
+        SpacialPartition collision;
         BulletLuaUtils::MTRandom rng;
 
-        struct BulletFunction
-        {
-            public:
-                std::shared_ptr<sol::state> luaState;
-                sol::function func;
-        };
-
-        std::vector<BulletPosition>  positions;
-        std::vector<BulletAttribute> attributes;
-        std::vector<BulletLifeData>  lifeData;
-        std::vector<BulletFunction>  functions;
-
     public:
-        BulletLuaManager(int left, int top, int width, int height);
-        virtual ~BulletLuaManager();
+        BulletLuaManager();
 
-        // // Non-copyable
-        // BulletLuaManager(const BulletLuaManager&) = delete;
-        // BulletLuaManager& operator=(const BulletLuaManager&) = delete;
+        // Non-copyable
+        BulletLuaManager(const BulletLuaManager&) = delete;
+        BulletLuaManager& operator=(const BulletLuaManager&) = delete;
 
         // // TODO: Finish bullet model methods.
         // void registerModel(const BulletModel& model);
@@ -70,12 +55,13 @@ class BulletLuaManager
                                     float originX, float originY);
 
         // Create child bullet
-        void createBullet(std::shared_ptr<sol::state> lua,
+        void createBullet(std::shared_ptr<sol::state> luaState,
                           const sol::function& func,
                           float x, float y, float d, float s);
 
-        // bool checkCollision();
-        virtual void tick();
+        bool checkCollision();
+        void tick();
+        const Bullet* yield();
 
         void setPlayerPosition(float x, float y);
 
@@ -84,18 +70,14 @@ class BulletLuaManager
 
         // Move all bullets to the free stack
         void clear();
-        void vanishAll();
+        // void vanishAll();
 
-        // unsigned int bulletCount() const;
-        // unsigned int freeCount() const;
-        // unsigned int blockCount() const;
+        std::size_t getContainerSize() const;
+        std::size_t getActiveBulletCount() const;
 
     protected:
-        // // Returns an unused bullet. Allocates more data blocks if there none are available
-        // BulletLua* getFreeBullet();
-
-        // // Allocate a new block of Bullet data.
-        // virtual void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+        // Returns an unused bullet. Allocates more data blocks if there none are available
+        Bullet* getFreeBullet();
 
         // Create a BulletLua lua state with the necessary functions.
         std::shared_ptr<sol::state> initLua();
